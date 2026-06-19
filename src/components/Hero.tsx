@@ -163,7 +163,7 @@ export default function Hero() {
             title="Open Blueprints DB"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>BLUEPRINTS_DB</span>
+            <span>EXPLORE WORK</span>
           </button>
 
           <div className="hidden md:flex items-center gap-6">
@@ -176,7 +176,7 @@ export default function Hero() {
               title="Open Blueprints Manual"
             >
               <BookOpen className="w-3.5 h-3.5 text-[#D4A843] group-hover:scale-110 transition-transform" />
-              <span className="underline decoration-neutral-800 hover:decoration-[#D4A843] transition-ui">BLUEPRINTS_DB</span>
+              <span className="underline decoration-neutral-800 hover:decoration-[#D4A843] transition-ui">EXPLORE WORK</span>
             </button>
             <div className="flex items-center gap-1.5">
               <Shield className="w-3 h-3 text-cyber animate-pulse" />
@@ -372,7 +372,7 @@ export default function Hero() {
                   }}
                   className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-culture text-black py-2.5 px-3 rounded-lg hover:bg-white transition-colors duration-300 active:scale-95"
                 >
-                  hero.cta1
+                  START A BUILD
                 </button>
                 <button
                   onClick={() => {
@@ -381,7 +381,7 @@ export default function Hero() {
                   }}
                   className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase border border-neutral-700 hover:border-white text-white py-2.5 px-3 rounded-lg transition-colors duration-300 active:scale-95"
                 >
-                  hero.cta2
+                  VIEW WORK
                 </button>
               </div>
             </div>

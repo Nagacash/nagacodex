@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Shield, Film, Shirt, Github, Instagram, Linkedin, ArrowUpRight, CheckCircle2, Code } from 'lucide-react';
+import { Shield, Film, Shirt, Github, Instagram, Linkedin, ArrowUpRight, CheckCircle2, Code, ChevronUp } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import SoundToggle from './SoundToggle';
 import sound from '../lib/sound';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -37,7 +41,7 @@ export default function Contact() {
   };
 
   const handleEmailCopy = () => {
-    navigator.clipboard.writeText('maurice@nagacodex.cloud');
+    navigator.clipboard.writeText('chosenfewrecords@hotmail.de');
     setCopied(true);
     sound.playBeep();
     setTimeout(() => setCopied(false), 2000);
@@ -56,31 +60,31 @@ export default function Contact() {
           <div className="flex flex-col max-w-lg">
             <span className="font-mono text-[9px] text-cyber tracking-[0.3em] uppercase mb-1.5 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse" />
-              <span>TERMINAL_ESTABLISHMENT_COMM</span>
+              <span>GET IN TOUCH</span>
             </span>
             <h2 className="font-display font-black text-4xl md:text-6xl tracking-tight text-white uppercase leading-none mb-4">
-              SECURE <span className="text-neutral-500">THE CONNECTION</span>
+              LET'S <span className="text-neutral-500">WORK TOGETHER</span>
             </h2>
             <p className="text-xs text-neutral-400 font-mono tracking-wide leading-relaxed uppercase">
-              RESERVED FOR SYSTEM HARDENING, PROCEDURAL CINEMATOGRAPHY PIXEL COMMISSIONS, AND HIGH-CONSTRUCT TECHNICAL DISTRIBUTION CODES.
+              Security audits, AI films, web builds, and streetwear. Pick what you need — I'll handle the rest.
             </p>
           </div>
 
           {/* Core Interactive Copy Banner */}
           <div className="flex flex-col font-mono text-sm p-6 rounded-xl w-full md:w-auto min-w-[300px] glass border-neutral-800/40 hover:border-neutral-700/60 transition-colors duration-300">
-            <span className="text-[9px] text-neutral-500 uppercase tracking-widest mb-2">DIRECT FEED CHANNEL</span>
+            <span className="text-[9px] text-neutral-500 uppercase tracking-widest mb-2">EMAIL ME DIRECTLY</span>
             <div className="flex items-center justify-between gap-4">
-              <span className="font-bold text-white tracking-wide">maurice@nagacodex.cloud</span>
+              <span className="font-bold text-white tracking-wide">chosenfewrecords@hotmail.de</span>
               <button
                 onClick={handleEmailCopy}
                 className="px-3 py-1 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-[9px] text-cyber rounded-sm font-bold uppercase tracking-wider transition-colors hover:border-neutral-700 active:scale-95 cursor-pointer"
               >
-                {copied ? 'CON_COPIED' : 'COPY_ADDR'}
+                {copied ? 'COPIED' : 'COPY'}
               </button>
             </div>
             {copied && (
               <span className="text-[8px] text-neutral-400 flex items-center gap-1 mt-2 tracking-widest font-sans">
-                <CheckCircle2 className="w-3 h-3 text-cyber inline" /> COP_ADDRESS_LINKED_TO_CLIPBOARD
+                <CheckCircle2 className="w-3 h-3 text-cyber inline" /> Email copied to clipboard
               </span>
             )}
           </div>
@@ -91,7 +95,7 @@ export default function Contact() {
           
           {/* CTA 1: Cyber */}
           <motion.a
-            href="mailto:maurice@nagacodex.cloud?subject=Naga%20Codex%20-%20Cybersecurity%20Auditing"
+            href="mailto:chosenfewrecords@hotmail.de?subject=Naga%20Codex%20-%20Cybersecurity%20Auditing"
             onClick={() => sound.playClick()}
             onMouseMove={(e) => handleMagneticMove(1, e)}
             onMouseLeave={() => handleMagneticLeave(1)}
@@ -100,8 +104,8 @@ export default function Contact() {
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Shield className="w-5 h-5 text-cyber mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">INITIATE AUDIT</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">SECURE SENSITIVE ECOSYSTEMS</span>
+              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">SECURITY AUDIT</span>
+              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Harden your systems</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-cyber group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -109,7 +113,7 @@ export default function Contact() {
 
           {/* CTA 2: Film */}
           <motion.a
-            href="mailto:maurice@nagacodex.cloud?subject=Naga%20Codex%20-%20AI%20Cinema%20Commission"
+            href="mailto:chosenfewrecords@hotmail.de?subject=Naga%20Codex%20-%20AI%20Cinema%20Commission"
             onClick={() => sound.playClick()}
             onMouseMove={(e) => handleMagneticMove(2, e)}
             onMouseLeave={() => handleMagneticLeave(2)}
@@ -118,8 +122,8 @@ export default function Contact() {
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Film className="w-5 h-5 text-film mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">COMMISSION DIRECT</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">PROCEDURAL CINEMATIC RENDERS</span>
+              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">AI CINEMA</span>
+              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Commission a film</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-film group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-film/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -127,7 +131,7 @@ export default function Contact() {
 
           {/* CTA 4: Web Dev */}
           <motion.a
-            href="mailto:maurice@nagacodex.cloud?subject=Naga%20Codex%20-%20Web%20Development%20Project"
+            href="mailto:chosenfewrecords@hotmail.de?subject=Naga%20Codex%20-%20Web%20Development%20Project"
             onClick={() => sound.playClick()}
             onMouseMove={(e) => handleMagneticMove(4, e)}
             onMouseLeave={() => handleMagneticLeave(4)}
@@ -136,8 +140,8 @@ export default function Contact() {
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Code className="w-5 h-5 text-dev mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">DEVELOP APP</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">BESPOKE REACT ARCHITECTURES</span>
+              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">WEB DEVELOPMENT</span>
+              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Build something custom</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-dev group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-dev/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -156,8 +160,8 @@ export default function Contact() {
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Shirt className="w-5 h-5 text-culture mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">ACQUIRE WEAR</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">BRUTALIST TECHNICAL APPAREL</span>
+              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">SHOP WEAR</span>
+              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Browse the collection</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-culture group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-culture/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -210,6 +214,22 @@ export default function Contact() {
           <div className="flex items-center">
             <SoundToggle />
           </div>
+
+          <button
+            onClick={() => {
+              sound.playClick();
+              gsap.to(window, {
+                scrollTo: { y: 0 },
+                duration: 1.3,
+                ease: 'power3.inOut',
+                overwrite: 'auto',
+              });
+            }}
+            className="p-2 bg-neutral-950 border border-neutral-800 hover:border-cyber rounded-full text-neutral-500 hover:text-cyber transition-ui hover:scale-105 cursor-pointer"
+            aria-label="Scroll to top"
+          >
+            <ChevronUp className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </footer>

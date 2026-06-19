@@ -45,6 +45,7 @@ export default function WhoSection() {
     } else {
       setActivePillar(theme);
       sound.playTransition();
+      if (theme === 'film') sound.pauseForContent();
     }
   };
 

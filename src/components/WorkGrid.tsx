@@ -158,6 +158,7 @@ export default function WorkGrid() {
                 onClick={() => {
                   sound.playClick();
                   if (proj.videoSrc) {
+                    sound.pauseForContent();
                     setFilmPreview(proj);
                   } else {
                     setSelectedProject(proj);
@@ -337,7 +338,10 @@ export default function WorkGrid() {
 
       <FilmPreviewModal
         project={filmPreview}
-        onClose={() => setFilmPreview(null)}
+        onClose={() => {
+          sound.resumeFromContent();
+          setFilmPreview(null);
+        }}
       />
 
       <ProjectDetailModal

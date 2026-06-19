@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import CookieBanner from './components/CookieBanner';
 import ScrollTransitionManager from './components/ScrollTransitionManager';
 import TransitionSection from './components/TransitionSection';
+import FixedNavbar from './components/FixedNavbar';
 import { heroIntro } from './lib/films';
 
 export default function App() {
@@ -38,6 +39,9 @@ export default function App() {
 
           {/* Background Noise/Texture */}
           <div className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] z-chrome"></div>
+
+          {/* Fixed navbar - visible across all sections */}
+          <FixedNavbar />
 
           {/* 3. Main structured layout streams */}
           <div id="main-content" className="relative flex flex-col w-full">

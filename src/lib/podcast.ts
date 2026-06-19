@@ -1,5 +1,5 @@
 /** Replace with your featured Woodland360 YouTube video ID (from youtube.com/watch?v=THIS_PART) */
-export const woodland360FeaturedVideoId = '';
+export const woodland360FeaturedVideoId = 'kFymYp734yk';
 
 export const woodland360 = {
   name: 'Woodland360',
@@ -12,5 +12,5 @@ export const woodland360 = {
 } as const;
 
 export function woodland360EmbedUrl(videoId: string) {
-  return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1`;
+  return `https://www.youtube.com/embed/${videoId}?si=ut8vcCCun6XdawtQ`;
 }

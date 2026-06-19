@@ -41,6 +41,10 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 48px;
+  }
+
   body {
     background-color: var(--color-bg-dark);
     color: var(--color-text-main);

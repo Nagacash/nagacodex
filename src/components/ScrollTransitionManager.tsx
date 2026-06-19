@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ChevronDown, Sparkles, AlertCircle, BookOpen } from 'lucide-react';
 import sound from '../lib/sound';
+import { scrollOffsets } from '../lib/sections';
 import SkillsManualModal from './SkillsManualModal';
 import { TransitionSectionProps } from './TransitionSection';
 
@@ -34,7 +35,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
   // Scroll distance mapped 1:1 to the GSAP timeline (pin starts at scroll 0)
   const scrollDistance = 4800;
-  const scrollOffsets = [0, 800, 1400, 2100, 2800, 3500, 4200];
   const maxWindowScroll = scrollDistance;
 
   // Find active index based on scroll position
@@ -759,7 +759,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
           >
             {/* Tooltip */}
             <span className="absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-ui bg-neutral-950 border border-neutral-800 text-[8px] font-mono text-culture tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase">
-              BLUEPRINTS_BOOK
+              BOOK A CALL
             </span>
             <BookOpen className="w-4 h-4 group-hover:rotate-6 transition-transform duration-300" />
           </button>

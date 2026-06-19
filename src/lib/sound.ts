@@ -1,8 +1,14 @@
-// Self-contained Web Audio API synthesizer for clean sound design without asset dependencies
+const BG_MUSIC_URL = new URL(
+  '../assets/music/SHORTLORD - GANJA FLOW (Instrumental).mp3',
+  import.meta.url
+).href;
 
 class SoundManager {
   private ctx: AudioContext | null = null;
   private isEnabled: boolean = false;
+  private musicAudio: HTMLAudioElement | null = null;
+  private contentPaused: boolean = false;
+  private wasEnabledBeforeContent: boolean = false;
   private droneOscs: OscillatorNode[] = [];
   private droneGain: GainNode | null = null;
   private filter: BiquadFilterNode | null = null;
@@ -29,8 +35,10 @@ class SoundManager {
       if (this.ctx.state === 'suspended') {
         this.ctx.resume();
       }
+      this.startMusic();
       this.startDrone();
     } else {
+      this.stopMusic();
       this.stopDrone();
     }
 
@@ -41,21 +49,54 @@ class SoundManager {
     return this.isEnabled;
   }
 
+  pauseForContent() {
+    this.wasEnabledBeforeContent = this.isEnabled;
+    if (this.musicAudio && !this.musicAudio.paused) {
+      this.musicAudio.pause();
+      this.contentPaused = true;
+    }
+  }
+
+  resumeFromContent() {
+    if (this.wasEnabledBeforeContent && this.musicAudio && this.contentPaused) {
+      this.musicAudio.play().catch(() => {});
+    }
+    this.contentPaused = false;
+  }
+
+  private startMusic() {
+    if (this.musicAudio && !this.musicAudio.paused) return;
+    try {
+      if (!this.musicAudio) {
+        this.musicAudio = new Audio(BG_MUSIC_URL);
+        this.musicAudio.loop = true;
+        this.musicAudio.volume = 0.4;
+      }
+      this.musicAudio.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  private stopMusic() {
+    if (this.musicAudio) {
+      this.musicAudio.pause();
+      this.musicAudio.currentTime = 0;
+    }
+    this.contentPaused = false;
+  }
+
   private startDrone() {
     if (!this.ctx) return;
 
-    // Create deep low drone
     this.droneGain = this.ctx.createGain();
     this.droneGain.gain.setValueAtTime(0, this.ctx.currentTime);
-    this.droneGain.gain.linearRampToValueAtTime(0.08, this.ctx.currentTime + 3.0); // Slow fade in
+    this.droneGain.gain.linearRampToValueAtTime(0.08, this.ctx.currentTime + 3.0);
 
-    // Low pass filter to damp highs
     this.filter = this.ctx.createBiquadFilter();
     this.filter.type = 'lowpass';
     this.filter.frequency.setValueAtTime(120, this.ctx.currentTime);
     this.filter.Q.setValueAtTime(1.0, this.ctx.currentTime);
 
-    const fundamental = 55; // A1 frequency
+    const fundamental = 55;
     const harmonics = [1.0, 1.5, 2.0, 3.01];
 
     harmonics.forEach((h, index) => {
@@ -63,16 +104,14 @@ class SoundManager {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
 
-      // Mix Sawtooth & Triangle
       osc.type = index % 2 === 0 ? 'sine' : 'sawtooth';
       osc.frequency.setValueAtTime(fundamental * h + (Math.random() * 0.4 - 0.2), this.ctx.currentTime);
 
-      // Low frequency modulation for movement
       const lfo = this.ctx.createOscillator();
       const lfoGain = this.ctx.createGain();
       lfo.type = 'sine';
       lfo.frequency.setValueAtTime(0.1 + index * 0.05, this.ctx.currentTime);
-      lfoGain.gain.setValueAtTime(10, this.ctx.currentTime); // mod amplitude (Hz)
+      lfoGain.gain.setValueAtTime(10, this.ctx.currentTime);
 
       lfo.connect(lfoGain);
       lfoGain.connect(osc.frequency);
@@ -86,7 +125,7 @@ class SoundManager {
       osc.start();
 
       this.droneOscs.push(osc);
-      this.droneOscs.push(lfo); // store to stop later
+      this.droneOscs.push(lfo);
     });
 
     this.filter.connect(this.droneGain);
@@ -97,7 +136,7 @@ class SoundManager {
     if (this.droneGain && this.ctx) {
       const currentGain = this.droneGain.gain.value;
       this.droneGain.gain.setValueAtTime(currentGain, this.ctx.currentTime);
-      this.droneGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 1.2); // Smooth fade out
+      this.droneGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 1.2);
     }
     setTimeout(() => {
       this.droneOscs.forEach(o => {
@@ -118,7 +157,6 @@ class SoundManager {
       const termOsc = this.ctx.createOscillator();
       const termGain = this.ctx.createGain();
 
-      // Highpass frequency with exponential pitch envelope
       termOsc.type = 'triangle';
       termOsc.frequency.setValueAtTime(800, this.ctx.currentTime);
       termOsc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.06);
@@ -145,14 +183,14 @@ class SoundManager {
       const gain = this.ctx.createGain();
 
       osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(65, this.ctx.currentTime); // Sub-bass hum
+      osc.frequency.setValueAtTime(65, this.ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(180, this.ctx.currentTime + 0.35);
 
       filter.type = 'lowpass';
       filter.frequency.setValueAtTime(100, this.ctx.currentTime);
       filter.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.15);
       filter.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.45);
-      filter.Q.setValueAtTime(8, this.ctx.currentTime); // resonant spike!
+      filter.Q.setValueAtTime(8, this.ctx.currentTime);
 
       gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
       gain.gain.linearRampToValueAtTime(0.12, this.ctx.currentTime + 0.1);

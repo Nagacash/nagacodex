@@ -13,6 +13,7 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
   const hasVideo = Boolean(woodland360.youtubeVideoId);
 
   const openChannel = () => {
+    sound.pauseForContent();
     sound.playClick();
     window.open(woodland360.youtubeChannelUrl, '_blank', 'noopener,noreferrer');
   };
@@ -27,7 +28,7 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
       <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,168,67,0.12),transparent_55%)]" />
       <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none opacity-40" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-6 shrink-0">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between md:justify-start md:gap-8 border-b border-white/5 pb-6 shrink-0">
         <div className="flex flex-col">
           <div className="flex items-center gap-2 text-culture font-mono text-[9px] tracking-[0.3em] uppercase mb-1.5">
             <Radio className="w-3.5 h-3.5 text-culture animate-pulse" />
@@ -40,7 +41,7 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
             {woodland360.tagline}
           </p>
         </div>
-        <div className="mt-3 md:mt-0 flex items-center gap-2 text-[8px] font-mono text-neutral-500 uppercase tracking-widest">
+        <div className="mt-3 md:mt-0 md:self-end flex items-center gap-2 text-[8px] font-mono text-neutral-500 uppercase tracking-widest">
           <MapPin className="w-3 h-3 text-culture" />
           <span>Hamburg // ON_AIR</span>
         </div>
@@ -130,6 +131,7 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
                   onLoad={() => setPlayerReady(true)}
                 />
               )}
