@@ -1,19 +1,22 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import ClickBurst from './components/ClickBurst';
-import Hero from './components/Hero';
-import WhoSection from './components/WhoSection';
-import WorkGrid from './components/WorkGrid';
-import Philosophy from './components/Philosophy';
-import ShowcaseCarousel from './components/ShowcaseCarousel';
-import Woodland360Section from './components/Woodland360Section';
-import Contact from './components/Contact';
-import CookieBanner from './components/CookieBanner';
 import ScrollTransitionManager from './components/ScrollTransitionManager';
 import TransitionSection from './components/TransitionSection';
 import FixedNavbar from './components/FixedNavbar';
 import { heroIntro } from './lib/films';
+
+const Hero = lazy(() => import('./components/Hero'));
+const WhoSection = lazy(() => import('./components/WhoSection'));
+const WorkGrid = lazy(() => import('./components/WorkGrid'));
+const Philosophy = lazy(() => import('./components/Philosophy'));
+const ShowcaseCarousel = lazy(() => import('./components/ShowcaseCarousel'));
+const Woodland360Section = lazy(() => import('./components/Woodland360Section'));
+const Contact = lazy(() => import('./components/Contact'));
+const CookieBanner = lazy(() => import('./components/CookieBanner'));
+
+const SectionFallback = () => <div className="absolute inset-0 bg-bg-dark" />;
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -49,51 +52,67 @@ export default function App() {
               <ScrollTransitionManager>
                 
                 {/* 01. HERO */}
-                <TransitionSection
-                  id="hero"
-                  transitionType="push-fade"
-                  accentColor="#00FF88"
-                  index={0}
-                  bgVideoWebm={heroIntro.webm}
-                  bgVideoMp4={heroIntro.h264}
-                >
-                  <Hero />
-                </TransitionSection>
+                  <TransitionSection
+                    id="hero"
+                    transitionType="push-fade"
+                    accentColor="#00FF88"
+                    index={0}
+                    bgVideoWebm={heroIntro.webm}
+                    bgVideoMp4={heroIntro.h264}
+                  >
+                    <Suspense fallback={<SectionFallback />}>
+                      <Hero />
+                    </Suspense>
+                  </TransitionSection>
 
                 {/* 02. WHO */}
                 <TransitionSection id="who" transitionType="horizontal-slide" accentColor="#FF6B35" index={1}>
-                  <WhoSection />
+                  <Suspense fallback={<SectionFallback />}>
+                    <WhoSection />
+                  </Suspense>
                 </TransitionSection>
 
                 {/* 03. WORK */}
                 <TransitionSection id="work" transitionType="scale-blur" accentColor="#BD00FF" index={2}>
-                  <WorkGrid />
+                  <Suspense fallback={<SectionFallback />}>
+                    <WorkGrid />
+                  </Suspense>
                 </TransitionSection>
 
                 {/* 04. PHILOSOPHY */}
                 <TransitionSection id="philosophy" transitionType="split-reveal" accentColor="#D4A843" index={3}>
-                  <Philosophy />
+                  <Suspense fallback={<SectionFallback />}>
+                    <Philosophy />
+                  </Suspense>
                 </TransitionSection>
 
                 {/* 05. WOODLAND360 PODCAST */}
                 <TransitionSection id="woodland360" transitionType="horizontal-slide" accentColor="#D4A843" index={4}>
-                  <Woodland360Section />
+                  <Suspense fallback={<SectionFallback />}>
+                    <Woodland360Section />
+                  </Suspense>
                 </TransitionSection>
 
                 {/* 06. SHOWCASE CAROUSEL */}
                 <TransitionSection id="showcase" transitionType="scale-blur" accentColor="#D4A843" index={5}>
-                  <ShowcaseCarousel />
+                  <Suspense fallback={<SectionFallback />}>
+                    <ShowcaseCarousel />
+                  </Suspense>
                 </TransitionSection>
 
                 {/* 07. CONTACT */}
                 <TransitionSection id="contact" transitionType="push-fade" accentColor="#3B82F6" index={6}>
-                  <Contact />
+                  <Suspense fallback={<SectionFallback />}>
+                    <Contact />
+                  </Suspense>
                 </TransitionSection>
 
               </ScrollTransitionManager>
             </main>
 
-            <CookieBanner />
+            <Suspense fallback={null}>
+              <CookieBanner />
+            </Suspense>
           </div>
         </div>
       )}
