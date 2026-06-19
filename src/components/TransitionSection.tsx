@@ -1,6 +1,20 @@
-import React, { useRef, useEffect } from 'react';
+import React, { Suspense, useRef } from 'react';
 import VideoBackground from './VideoBackground';
 import { SectionTheme } from '../types';
+
+function cloneWithIsActive(children: React.ReactNode, isActive: boolean): React.ReactNode {
+  if (!React.isValidElement(children)) return children;
+
+  if (children.type === Suspense) {
+    return React.cloneElement(
+      children,
+      {},
+      cloneWithIsActive(children.props.children, isActive),
+    );
+  }
+
+  return React.cloneElement(children, { isActive } as { isActive: boolean });
+}
 
 export interface TransitionSectionProps {
   id: string;
@@ -64,16 +78,14 @@ export default function TransitionSection({
 
       {/* Render the actual interactive child overlay */}
       <div
-        className={`relative z-10 w-full h-full flex flex-col content-wrapper overflow-y-auto overscroll-contain ${
+        className={`relative z-10 w-full h-full flex flex-col content-wrapper overflow-y-auto overflow-x-hidden overscroll-contain ${
           index === 5 || index === 4 || index === 2 || index === 6
-            ? 'justify-start py-6 md:py-8'
+            ? 'justify-start py-4 sm:py-6 md:py-8'
             : 'justify-center'
         }`}
         style={{ opacity: 1, pointerEvents: isActive ? 'auto' : 'none' }}
       >
-        {React.isValidElement(children)
-          ? React.cloneElement(children, { isActive } as { isActive: boolean })
-          : children}
+        {cloneWithIsActive(children, isActive)}
       </div>
     </div>
   );

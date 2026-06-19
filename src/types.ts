@@ -6,8 +6,10 @@ export interface ProjectItem {
   category: string;
   tags: string[];
   thumbnail: string;
+  thumbnailWebp?: string;
   videoSrc?: string;
   videoFallbackSrc?: string;
+  externalUrl?: string;
   aspectClass: string;
 }
 

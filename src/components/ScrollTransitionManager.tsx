@@ -565,7 +565,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const currentAccent = getSectionColor(activeIndex);
 
   return (
-    <div ref={containerRef} className="relative w-full bg-[#070707]">
+    <div ref={containerRef} className="relative w-full overflow-x-hidden bg-[#070707]">
       
       {/* 1. GSAP-pinned viewport (replaces CSS sticky + spacer) */}
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden bg-black">
@@ -704,7 +704,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
         </div>
 
         {/* 3. Section Dots Progress Indicator (Navigation Overlay) */}
-        <div className="fixed right-6 top-1/2 -translate-y-1/2 z-fixed flex flex-col gap-4 items-center p-3 bg-black/40 backdrop-blur-md rounded-full border border-neutral-900/60 shadow-lg">
+        <div className="fixed right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-fixed flex flex-col gap-2 sm:gap-3 md:gap-4 items-center p-2 sm:p-2.5 md:p-3 bg-black/40 backdrop-blur-md rounded-full border border-neutral-900/60 shadow-lg">
           {sections.map((_, idx) => {
             const isActive = activeIndex === idx;
             const dotColor = getSectionColor(idx);
@@ -713,11 +713,11 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
               <button
                 key={idx}
                 onClick={() => handleDotClick(idx)}
-                className="group relative flex items-center justify-center w-8 h-8 cursor-pointer active:scale-90 transition-transform"
+                className="group relative flex items-center justify-center w-9 h-9 sm:w-8 sm:h-8 cursor-pointer active:scale-90 transition-transform"
                 title={`Navigate to Section ${idx + 1}`}
               >
                 {/* Floating tooltip labels on hover */}
-                <span className="absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-ui bg-neutral-950 border border-neutral-800 text-[8.5px] font-mono text-white tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase">
+                <span className="hidden md:block absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-ui bg-neutral-950 border border-neutral-800 text-[8.5px] font-mono text-white tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase">
                   {idx === 0 && '01 // HERO'}
                   {idx === 1 && '02 // WHO'}
                   {idx === 2 && '03 // WORK'}
@@ -754,11 +754,11 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
               sound.playClick();
               setIsManualOpen(true);
             }}
-            className="group relative flex items-center justify-center w-11 h-11 rounded-lg bg-neutral-950/40 border border-neutral-900 hover:border-culture text-neutral-500 hover:text-culture cursor-pointer active:scale-95 transition-ui"
+            className="group relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-neutral-950/40 border border-neutral-900 hover:border-culture text-neutral-500 hover:text-culture cursor-pointer active:scale-95 transition-ui"
             title="Open Developer Blueprints Support manual"
           >
             {/* Tooltip */}
-            <span className="absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-ui bg-neutral-950 border border-neutral-800 text-[8px] font-mono text-culture tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase">
+            <span className="hidden md:block absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-ui bg-neutral-950 border border-neutral-800 text-[8px] font-mono text-culture tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase">
               BOOK A CALL
             </span>
             <BookOpen className="w-4 h-4 group-hover:rotate-6 transition-transform duration-300" />
@@ -768,7 +768,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
         {/* 4. Scroll idle indicator HUD (Fades in on rest) */}
         <div
           ref={scrollIndicatorRef}
-          className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-fixed flex flex-col items-center gap-1.5 transition-ui transform ${
+          className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-fixed safe-bottom flex flex-col items-center gap-1.5 transition-ui transform ${
             showIndicator ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
           }`}
         >

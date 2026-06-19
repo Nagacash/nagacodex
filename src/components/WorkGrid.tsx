@@ -4,6 +4,8 @@ import { Eye, ExternalLink, ShieldCheck, Play, ArrowRight, Grid, Monitor, Tag } 
 import { ProjectItem } from '../types';
 import sound from '../lib/sound';
 import { mandeFilm } from '../lib/films';
+import baggyJpg from '../assets/images/baggy.jpg';
+import baggyWebp from '../assets/images/baggy.webp';
 import ProjectDetailModal from './ProjectDetailModal';
 import FilmPreviewModal from './FilmPreviewModal';
 
@@ -23,7 +25,9 @@ const projects: ProjectItem[] = [
     title: 'NAGA_DECR_01 HEAVY OUTERWEAR',
     category: 'STREETWEAR CAPSULE',
     tags: ['Technical Apparel', 'Brutalist Design', '450 GSM'],
-    thumbnail: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=800&q=80',
+    thumbnail: baggyJpg,
+    thumbnailWebp: baggyWebp,
+    externalUrl: 'https://www.naga-apparel.com',
     aspectClass: 'md:col-span-1 md:row-span-2 min-h-[380px]',
   },
   {
@@ -120,7 +124,7 @@ export default function WorkGrid() {
     <section
       id="work-section"
       data-section="culture"
-      className="relative w-full min-h-dvh py-20 px-6 md:px-12 bg-transparent border-t border-neutral-900"
+      className="relative w-full min-h-dvh py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-transparent border-t border-neutral-900"
     >
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-12">
         
@@ -173,12 +177,16 @@ export default function WorkGrid() {
                 {/* Background image & active video hover crossfades */}
                 <div className="absolute inset-0 z-0">
                   {!proj.videoSrc && (
-                    <img
-                      src={proj.thumbnail}
-                      className="w-full h-full object-cover opacity-35 filter grayscale contrast-125 transition-ui-slow ease-in-out group-hover/card:scale-105 group-hover/card:brightness-50"
-                      alt={proj.title}
-                      referrerPolicy="no-referrer"
-                    />
+                    <picture>
+                      {proj.thumbnailWebp && (
+                        <source srcSet={proj.thumbnailWebp} type="image/webp" />
+                      )}
+                      <img
+                        src={proj.thumbnail}
+                        className="w-full h-full object-cover opacity-35 filter grayscale contrast-125 transition-ui-slow ease-in-out group-hover/card:scale-105 group-hover/card:brightness-50"
+                        alt={proj.title}
+                      />
+                    </picture>
                   )}
 
                   {proj.videoSrc && (

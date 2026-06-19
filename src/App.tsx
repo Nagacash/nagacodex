@@ -5,7 +5,7 @@ import ClickBurst from './components/ClickBurst';
 import ScrollTransitionManager from './components/ScrollTransitionManager';
 import TransitionSection from './components/TransitionSection';
 import FixedNavbar from './components/FixedNavbar';
-import { heroIntro } from './lib/films';
+import { heroIntro, philosophyAmbient, whoAmbient } from './lib/films';
 
 const Hero = lazy(() => import('./components/Hero'));
 const WhoSection = lazy(() => import('./components/WhoSection'));
@@ -66,7 +66,14 @@ export default function App() {
                   </TransitionSection>
 
                 {/* 02. WHO */}
-                <TransitionSection id="who" transitionType="horizontal-slide" accentColor="#FF6B35" index={1}>
+                <TransitionSection
+                  id="who"
+                  transitionType="horizontal-slide"
+                  accentColor="#FF6B35"
+                  index={1}
+                  bgVideoWebm={whoAmbient.webm}
+                  bgVideoMp4={whoAmbient.h264}
+                >
                   <Suspense fallback={<SectionFallback />}>
                     <WhoSection />
                   </Suspense>
@@ -80,7 +87,14 @@ export default function App() {
                 </TransitionSection>
 
                 {/* 04. PHILOSOPHY */}
-                <TransitionSection id="philosophy" transitionType="split-reveal" accentColor="#D4A843" index={3}>
+                <TransitionSection
+                  id="philosophy"
+                  transitionType="split-reveal"
+                  accentColor="#D4A843"
+                  index={3}
+                  bgVideoWebm={philosophyAmbient.webm}
+                  bgVideoMp4={philosophyAmbient.h264}
+                >
                   <Suspense fallback={<SectionFallback />}>
                     <Philosophy />
                   </Suspense>

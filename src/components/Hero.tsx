@@ -131,7 +131,7 @@ export default function Hero() {
       ref={containerRef}
       id="hero-section"
       data-section="none"
-      className="relative w-full min-h-dvh flex flex-col justify-between py-12 px-6 md:px-12 bg-transparent select-none pointer-events-none overflow-x-hidden"
+      className="relative w-full min-h-dvh flex flex-col justify-between py-10 sm:py-12 px-4 sm:px-6 md:px-12 bg-transparent select-none pointer-events-none overflow-x-hidden"
     >
       {/* Decorative vector background */}
       <FloatingClips theme="cyber" />
@@ -145,7 +145,7 @@ export default function Hero() {
             className="w-10 h-10 object-contain shrink-0"
           />
           <div className="flex flex-col">
-          <span className="font-display font-extrabold tracking-tight text-xl text-white">
+          <span className="font-display font-extrabold tracking-tight text-lg sm:text-xl text-white">
             NAGA <span className="text-culture">CODEX</span>
           </span>
           <span className="font-mono text-[8px] text-cyber uppercase tracking-widest mt-0.5">HAMBURG // HQ</span>
@@ -153,13 +153,13 @@ export default function Hero() {
         </div>
         
         {/* Subtle coordinate & system status panel with embedded Sound Toggle */}
-        <div className="flex items-center gap-4 font-mono text-[9px] text-neutral-400">
+        <div className="flex items-center gap-2 sm:gap-4 font-mono text-[9px] text-neutral-400 shrink-0">
           <button
             onClick={() => {
               sound.playClick();
               setIsManualOpen(true);
             }}
-            className="flex md:hidden items-center gap-1.5 px-2.5 py-1 rounded border border-neutral-800 bg-neutral-950 text-[#D4A843] active:scale-95 transition-transform cursor-pointer"
+            className="flex md:hidden items-center gap-1.5 px-2 py-1.5 rounded border border-neutral-800 bg-neutral-950 text-[#D4A843] active:scale-95 transition-transform cursor-pointer text-[8px] shrink-0"
             title="Open Blueprints DB"
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -196,19 +196,17 @@ export default function Hero() {
         
         {/* Giant Title Headers */}
         <div className="w-full text-center flex flex-col justify-center items-center pointer-events-none gap-2">
-          
-          {/* Headline Row 1 */}
-          <h1 className="font-display font-extrabold text-[12vw] md:text-[8vw] xl:text-[7.5rem] tracking-tighter text-white leading-[0.85] uppercase text-glitch">
-            {titleLine1.map((w, idx) => (
-              <RepellingWord key={`t1-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
-            ))}
-          </h1>
-
-          {/* Headline Row 2 */}
-          <h1 className="font-display font-extrabold text-[12vw] md:text-[8vw] xl:text-[7.5rem] tracking-tighter text-culture leading-[0.85] uppercase">
-            {titleLine2.map((w, idx) => (
-              <RepellingWord key={`t2-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
-            ))}
+          <h1 className="font-display font-extrabold text-[12vw] md:text-[8vw] xl:text-[7.5rem] tracking-tighter leading-[0.85] uppercase">
+            <span className="block text-white text-glitch">
+              {titleLine1.map((w, idx) => (
+                <RepellingWord key={`t1-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
+              ))}
+            </span>
+            <span className="block text-culture">
+              {titleLine2.map((w, idx) => (
+                <RepellingWord key={`t2-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
+              ))}
+            </span>
           </h1>
         </div>
 

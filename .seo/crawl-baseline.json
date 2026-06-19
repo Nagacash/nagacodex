@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-06-19T21:27:53.095501+00:00",
+  "base_url": "https://nagacodex.cloud",
+  "robots": {
+    "url": "https://nagacodex.cloud/robots.txt",
+    "status": 200,
+    "body": "User-agent: *\nDisallow: /\n"
+  },
+  "sitemap": {
+    "url": "https://nagacodex.cloud/sitemap.xml",
+    "status": 200
+  },
+  "pages": {
+    "https://nagacodex.cloud/": {
+      "url": "https://nagacodex.cloud/",
+      "status": 200,
+      "content_type": "text/html",
+      "title": "Parked Domain name on Hostinger DNS system",
+      "meta_robots": "noindex, nofollow, noarchive, nosnippet",
+      "canonical": "",
+      "h1": [],
+      "has_json_ld": false,
+      "internal_links": 0
+    }
+  },
+  "issues": [
+    {
+      "severity": "high",
+      "axis": "indexation",
+      "issue": "noindex",
+      "url": "https://nagacodex.cloud/"
+    },
+    {
+      "severity": "medium",
+      "axis": "titles",
+      "issue": "missing H1",
+      "url": "https://nagacodex.cloud/"
+    },
+    {
+      "severity": "low",
+      "axis": "structured_data",
+      "issue": "no JSON-LD",
+      "url": "https://nagacodex.cloud/"
+    }
+  ],
+  "summary": {
+    "pages_crawled": 1,
+    "critical": 0,
+    "high": 1,
+    "medium": 1,
+    "low": 1,
+    "note": "crawled 1 pages (max 200)"
+  }
+}

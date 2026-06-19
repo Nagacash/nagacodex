@@ -150,7 +150,7 @@ export default function WhoSection() {
     <section
       id="who-section"
       data-section={hoveredPillar !== 'none' ? hoveredPillar : activePillar}
-      className="relative w-full min-h-dvh flex flex-col justify-center py-20 px-6 md:px-12 bg-transparent border-t border-neutral-900 transition-colors duration-700"
+      className="relative w-full min-h-dvh flex flex-col justify-center py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-transparent border-t border-neutral-900 transition-colors duration-700"
     >
       {/* 1. Backdrop Video Controllers (Morphs as cards are active or hovered) */}
       <AnimatePresence mode="popLayout">

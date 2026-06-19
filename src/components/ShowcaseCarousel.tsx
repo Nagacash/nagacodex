@@ -294,7 +294,7 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
         </div>
 
         <div className="lg:col-span-7 flex flex-col items-center justify-center order-1 lg:order-2 w-full">
-          <div className="relative w-full max-w-xl h-[330px] sm:h-[420px] bg-neutral-950/70 border border-neutral-900 rounded-2xl overflow-hidden glass p-4 flex flex-col justify-between shadow-[0_45px_100px_rgba(0,0,0,0.8)]">
+          <div className="relative w-full max-w-xl h-[280px] sm:h-[420px] bg-neutral-950/70 border border-neutral-900 rounded-2xl overflow-hidden glass p-3 sm:p-4 flex flex-col justify-between shadow-[0_45px_100px_rgba(0,0,0,0.8)]">
             <div className="w-full h-8 flex justify-between items-center px-4 bg-neutral-900/60 border border-neutral-800 rounded-lg text-[8px] font-mono text-neutral-500 z-20 shrink-0">
               <div className="flex gap-1.5 items-center">
                 <span className="w-2 h-2 rounded-full bg-rose-500/70" />

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X } from 'lucide-react';
+import { X, ArrowUpRight } from 'lucide-react';
 import sound from '../lib/sound';
 import { ProjectItem } from '../types';
 
@@ -72,12 +72,16 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
                       )}
                     </video>
                   ) : (
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover grayscale opacity-40 group-hover/img:scale-103 group-hover/img:grayscale-0 transition-ui-slow block"
-                    />
+                    <picture>
+                      {project.thumbnailWebp && (
+                        <source srcSet={project.thumbnailWebp} type="image/webp" />
+                      )}
+                      <img
+                        src={project.thumbnail}
+                        alt={project.title}
+                        className="w-full h-full object-cover grayscale opacity-40 group-hover/img:scale-103 group-hover/img:grayscale-0 transition-ui-slow block"
+                      />
+                    </picture>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
 
@@ -175,15 +179,29 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
               <span>Naga Codex secure playground. No client logs stored.</span>
             </div>
 
-            <button
-              onClick={() => {
-                sound.playClick();
-                onClose();
-              }}
-              className="px-5 py-2 text-xs font-mono border border-neutral-800 hover:border-white text-white hover:bg-white hover:text-black rounded-md transition-ui active:scale-95 cursor-pointer"
-            >
-              DISMISS_SPEC_VIEW
-            </button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+              {project.externalUrl && (
+                <a
+                  href={project.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playClick()}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2 text-xs font-mono border border-culture/40 hover:border-culture text-culture hover:bg-culture hover:text-black rounded-md transition-ui active:scale-95 cursor-pointer"
+                >
+                  SHOP_AT_NAGA_APPAREL
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              )}
+              <button
+                onClick={() => {
+                  sound.playClick();
+                  onClose();
+                }}
+                className="px-5 py-2 text-xs font-mono border border-neutral-800 hover:border-white text-white hover:bg-white hover:text-black rounded-md transition-ui active:scale-95 cursor-pointer"
+              >
+                DISMISS_SPEC_VIEW
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>

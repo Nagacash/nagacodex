@@ -22,7 +22,7 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
     <section
       id="woodland360-section"
       data-section="culture"
-      className="relative w-full min-h-dvh py-12 px-6 md:px-12 flex flex-col justify-between overflow-x-hidden select-text"
+      className="relative w-full min-h-dvh py-10 sm:py-12 px-4 sm:px-6 md:px-12 flex flex-col justify-between overflow-x-hidden select-text"
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-amber-950/50 via-[#1a1408]/30 to-[#070707] opacity-95" />
       <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,168,67,0.12),transparent_55%)]" />

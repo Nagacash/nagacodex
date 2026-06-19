@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-06-19T21:30:47.100925+00:00",
+  "base_url": "http://127.0.0.1:4173",
+  "robots": {
+    "url": "http://127.0.0.1:4173/robots.txt",
+    "status": 200,
+    "body": "User-agent: *\nAllow: /\n\nSitemap: https://nagacodex.cloud/sitemap.xml\n"
+  },
+  "sitemap": {
+    "url": "http://127.0.0.1:4173/sitemap.xml",
+    "status": 200
+  },
+  "pages": {
+    "http://127.0.0.1:4173/": {
+      "url": "http://127.0.0.1:4173/",
+      "status": 200,
+      "content_type": "text/html",
+      "title": "Naga Codex | Maurice Holda \u2014 AI Manager, Cybersecurity & Film",
+      "meta_robots": "index, follow, max-image-preview:large",
+      "canonical": "https://nagacodex.cloud/",
+      "h1": [
+        "Naga Codex \u2014 Maurice Holda, Certified AI Manager in Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 0
+    }
+  },
+  "issues": [],
+  "summary": {
+    "pages_crawled": 1,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "note": "crawled 1 pages (max 200)"
+  }
+}

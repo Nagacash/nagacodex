@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
-import { Eye, ShieldAlert, Cpu } from 'lucide-react';
-import VideoBackground from './VideoBackground';
+import { Cpu } from 'lucide-react';
 
 export default function Philosophy() {
   const line1 = "WE_BUILD_SOVEREIGN_SYSTEMS".split("_");
@@ -37,15 +36,8 @@ export default function Philosophy() {
     <section
       id="philosophy-section"
       data-section="film"
-      className="relative w-full min-h-dvh flex flex-col justify-center py-24 px-6 md:px-12 bg-transparent border-t border-neutral-900 overflow-hidden"
+      className="relative w-full min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-transparent border-t border-neutral-900 overflow-hidden"
     >
-
-      {/* Decorative center coordinate target lines */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
-        <div className="w-full h-[1px] bg-neutral-700" />
-        <div className="h-full w-[1px] bg-neutral-700 absolute" />
-        <div className="w-48 h-48 rounded-full border border-neutral-600 absolute animate-pulse" />
-      </div>
 
       <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center justify-center gap-16 text-center">
         
@@ -67,7 +59,7 @@ export default function Philosophy() {
           className="flex flex-col gap-6 md:gap-10 items-center justify-center font-display uppercase w-full select-none"
         >
           {/* Row 1 */}
-          <div className="flex flex-wrap items-center justify-center text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-white">
+          <div className="flex flex-wrap items-center justify-center text-xl sm:text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-white">
             {line1.map((w, idx) => (
               <motion.span key={`l1-${idx}`} variants={wordVariants} className="inline-block mr-3 leading-none">
                 {w}
@@ -78,7 +70,7 @@ export default function Philosophy() {
           <div className="w-1.5 h-1.5 rounded-full bg-film/40" />
 
           {/* Row 2 */}
-          <div className="flex flex-wrap items-center justify-center text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-400">
+          <div className="flex flex-wrap items-center justify-center text-xl sm:text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-400">
             {line2.map((w, idx) => (
               <motion.span key={`l2-${idx}`} variants={wordVariants} className="inline-block mr-3 leading-none">
                 {w}
@@ -89,7 +81,7 @@ export default function Philosophy() {
           <div className="w-1.5 h-1.5 rounded-full bg-film/40" />
 
           {/* Row 3 */}
-          <div className="flex flex-wrap items-center justify-center text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-white">
+          <div className="flex flex-wrap items-center justify-center text-xl sm:text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-white">
             {line3.map((w, idx) => (
               <motion.span key={`l3-${idx}`} variants={wordVariants} className="inline-block mr-3 leading-none">
                 {w}
@@ -104,10 +96,6 @@ export default function Philosophy() {
         </p>
       </div>
 
-      {/* Decorative bottom metadata */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[8px] font-mono text-neutral-600 tracking-widest uppercase">
-        N_C_SYS_LOGS_ACTIVE // ALPHA_100
-      </div>
     </section>
   );
 }

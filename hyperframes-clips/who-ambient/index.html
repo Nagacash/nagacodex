@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Who Ambient — Naga Codex</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #070707;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+      }
+
+      [data-composition-id="who-ambient"] {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.08), transparent 52%),
+          linear-gradient(180deg, #050505 0%, #070707 45%, #050505 100%);
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.12;
+        background-image:
+          linear-gradient(rgba(0, 255, 136, 0.18) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 136, 0.18) 1px, transparent 1px);
+        background-size: 64px 64px;
+      }
+
+      .glow {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(80px);
+        mix-blend-mode: screen;
+      }
+
+      .glow-a {
+        width: 520px;
+        height: 520px;
+        left: 8%;
+        top: 12%;
+        background: rgba(0, 255, 136, 0.16);
+      }
+
+      .glow-b {
+        width: 640px;
+        height: 640px;
+        right: 6%;
+        bottom: 8%;
+        background: rgba(0, 255, 136, 0.1);
+      }
+
+      .hex {
+        position: absolute;
+        right: 120px;
+        top: 180px;
+        width: 220px;
+        height: 220px;
+        opacity: 0.35;
+      }
+
+      .hex svg {
+        width: 100%;
+        height: 100%;
+        stroke: rgba(0, 255, 136, 0.55);
+        fill: none;
+      }
+
+      .hud {
+        position: absolute;
+        left: 96px;
+        top: 220px;
+        padding: 18px 22px;
+        border: 1px solid rgba(0, 255, 136, 0.28);
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.42);
+        color: rgba(0, 255, 136, 0.72);
+        font-size: 16px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        box-shadow: 0 0 30px rgba(0, 255, 136, 0.08);
+      }
+
+      .hud small {
+        display: block;
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+      }
+
+      .matrix-col {
+        position: absolute;
+        top: -120px;
+        width: 18px;
+        color: rgba(0, 255, 136, 0.55);
+        font-size: 16px;
+        line-height: 1.15;
+        text-shadow: 0 0 8px rgba(0, 255, 136, 0.35);
+        white-space: pre;
+        opacity: 0.45;
+      }
+
+      .sweep {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(0, 255, 136, 0.08) 48%,
+          transparent 100%
+        );
+        transform: translateY(-110%);
+        pointer-events: none;
+      }
+
+      .vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.72) 100%);
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-composition-id="who-ambient"
+      data-width="1920"
+      data-height="1080"
+      data-start="0"
+      data-duration="8"
+      data-track-index="0"
+    >
+      <div id="grid" class="clip grid" data-start="0" data-duration="8" data-track-index="1"></div>
+      <div id="glow-a" class="clip glow glow-a" data-start="0" data-duration="8" data-track-index="2"></div>
+      <div id="glow-b" class="clip glow glow-b" data-start="0" data-duration="8" data-track-index="3"></div>
+
+      <div id="col-1" class="clip matrix-col col-1" data-start="0" data-duration="8" data-track-index="4">10110\n01101\n11010\n00111\n10101</div>
+      <div id="col-2" class="clip matrix-col col-2" data-start="0" data-duration="8" data-track-index="5">01011\n11001\n00101\n10110\n01110</div>
+      <div id="col-3" class="clip matrix-col col-3" data-start="0" data-duration="8" data-track-index="6">11100\n01010\n10011\n01101\n11010</div>
+      <div id="col-4" class="clip matrix-col col-4" data-start="0" data-duration="8" data-track-index="7">00101\n10111\n01001\n11010\n01100</div>
+
+      <div id="hex" class="clip hex" data-start="0" data-duration="8" data-track-index="8">
+        <svg viewBox="0 0 100 100">
+          <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" stroke-width="0.8" stroke-dasharray="4,4" />
+          <polygon points="50,22 74,36 74,64 50,78 26,64 26,36" stroke-width="1.2" />
+          <circle cx="50" cy="50" r="4" fill="rgba(0,255,136,0.8)" />
+        </svg>
+      </div>
+
+      <div id="hud" class="clip hud" data-start="0" data-duration="8" data-track-index="9">
+        ORBIT_VECTOR_01
+        <small>SYS_LOCK: SECURE // FPS: 60.00</small>
+      </div>
+
+      <div id="sweep" class="clip sweep" data-start="0" data-duration="8" data-track-index="10"></div>
+      <div id="vignette" class="clip vignette" data-start="0" data-duration="8" data-track-index="11"></div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        gsap.set(".col-1", { left: 180, y: 0 });
+        gsap.set(".col-2", { left: 260, y: -80 });
+        gsap.set(".col-3", { left: 340, y: -40 });
+        gsap.set(".col-4", { left: 420, y: -120 });
+        gsap.set(".hex", { rotation: 0, opacity: 0.35, scale: 1 });
+        gsap.set(".glow-a", { x: 0, y: 0, opacity: 0.7 });
+        gsap.set(".glow-b", { x: 0, y: 0, opacity: 0.55 });
+        gsap.set(".sweep", { y: "-110%" });
+
+        tl.to(".col-1", { y: 220, duration: 4, ease: "none" }, 0)
+          .to(".col-2", { y: 140, duration: 4, ease: "none" }, 0)
+          .to(".col-3", { y: 180, duration: 4, ease: "none" }, 0)
+          .to(".col-4", { y: 100, duration: 4, ease: "none" }, 0)
+          .to(".hex", { rotation: 12, scale: 1.05, opacity: 0.55, duration: 4, ease: "sine.inOut" }, 0)
+          .to(".glow-a", { x: 24, y: -18, opacity: 0.9, duration: 4, ease: "sine.inOut" }, 0)
+          .to(".glow-b", { x: -28, y: 16, opacity: 0.72, duration: 4, ease: "sine.inOut" }, 0)
+          .to(".sweep", { y: "110%", duration: 3.2, ease: "power1.inOut" }, 0.4)
+          .to(".col-1", { y: 0, duration: 4, ease: "none" }, 4)
+          .to(".col-2", { y: -80, duration: 4, ease: "none" }, 4)
+          .to(".col-3", { y: -40, duration: 4, ease: "none" }, 4)
+          .to(".col-4", { y: -120, duration: 4, ease: "none" }, 4)
+          .to(".hex", { rotation: 0, scale: 1, opacity: 0.35, duration: 4, ease: "sine.inOut" }, 4)
+          .to(".glow-a", { x: 0, y: 0, opacity: 0.7, duration: 4, ease: "sine.inOut" }, 4)
+          .to(".glow-b", { x: 0, y: 0, opacity: 0.55, duration: 4, ease: "sine.inOut" }, 4)
+          .set(".sweep", { y: "-110%" }, 4)
+          .to(".sweep", { y: "110%", duration: 3.2, ease: "power1.inOut" }, 4.4);
+
+        window.__timelines["who-ambient"] = tl;
+      </script>
+    </div>
+  </body>
+</html>
