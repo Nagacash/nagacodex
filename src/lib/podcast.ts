@@ -12,5 +12,5 @@ export const woodland360 = {
 } as const;
 
 export function woodland360EmbedUrl(videoId: string) {
-  return `https://www.youtube.com/embed/${videoId}?si=ut8vcCCun6XdawtQ`;
+  return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1`;
 }

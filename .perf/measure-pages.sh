@@ -22,7 +22,7 @@ median() {
   local -a vals=("$@")
   local n=${#vals[@]}
   if (( n == 0 )); then echo "0"; return; fi
-  IFS=$'\n' sorted=($(printf '%s\n' "${vals[@]}" | sort -n))
+  local IFS=$'\n' sorted=($(printf '%s\n' "${vals[@]}" | sort -n))
   if (( n % 2 == 1 )); then
     echo "${sorted[$((n / 2))]}"
   else

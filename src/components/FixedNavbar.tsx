@@ -22,7 +22,6 @@ export default function FixedNavbar() {
           key={idx}
           onClick={() => {
             sound.playClick();
-            if (label === 'PODCAST') sound.pauseForContent();
             gsap.to(window, {
               scrollTo: { y: scrollOffsets[idx] },
               duration: 1.3,

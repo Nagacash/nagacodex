@@ -42,6 +42,7 @@ export default function WhoSection() {
     if (activePillar === theme) {
       setActivePillar('none');
       sound.playClick();
+      if (theme === 'film') sound.resumeFromContent();
     } else {
       setActivePillar(theme);
       sound.playTransition();
