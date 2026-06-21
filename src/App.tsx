@@ -16,7 +16,7 @@ const Woodland360Section = lazy(() => import('./components/Woodland360Section'))
 const Contact = lazy(() => import('./components/Contact'));
 const CookieBanner = lazy(() => import('./components/CookieBanner'));
 
-const SectionFallback = () => <div className="absolute inset-0 bg-bg-dark" />;
+const SectionFallback = () => <div className="min-h-dvh w-full bg-bg-dark" />;
 
 export default function App() {
   const [loading, setLoading] = useState(true);

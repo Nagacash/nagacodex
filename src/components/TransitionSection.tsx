@@ -84,7 +84,11 @@ export default function TransitionSection({
 
       {/* Render the actual interactive child overlay */}
       <div
-        className={`relative z-10 w-full h-full flex flex-col content-wrapper overflow-y-auto overflow-x-hidden overscroll-contain ${
+        className={`relative z-10 w-full flex flex-col content-wrapper overscroll-contain ${
+          stacked
+            ? 'min-h-dvh overflow-x-hidden'
+            : 'h-full overflow-y-auto overflow-x-hidden'
+        } ${
           index === 5 || index === 4 || index === 2 || index === 6
             ? 'justify-start py-4 sm:py-6 md:py-8'
             : 'justify-center'
@@ -94,7 +98,7 @@ export default function TransitionSection({
           pointerEvents: stacked || isActive ? 'auto' : 'none',
         }}
       >
-        {cloneWithIsActive(children, isActive)}
+        {cloneWithIsActive(children, stacked || isActive)}
       </div>
     </div>
   );

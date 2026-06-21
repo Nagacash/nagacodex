@@ -42,7 +42,13 @@ export function scrollToSection(index: number, behavior: ScrollBehavior = 'smoot
   const labelTime = pinnedTimeline.labels[`section-${index}`];
   if (labelTime === undefined) return;
 
-  const progress = labelTime / pinnedTimeline.duration();
+  const duration = pinnedTimeline.duration();
+  if (duration <= 0) {
+    anchor?.scrollIntoView({ behavior, block: 'start' });
+    return;
+  }
+
+  const progress = labelTime / duration;
   const { start, end } = pinnedScrollTrigger;
   const targetY = start + progress * (end - start);
 
@@ -56,10 +62,13 @@ export function scrollToSection(index: number, behavior: ScrollBehavior = 'smoot
 
 export function getSectionIndexFromScroll(scrollY: number, sectionCount: number): number {
   if (pinnedScrollTrigger && pinnedTimeline) {
+    const duration = pinnedTimeline.duration();
+    if (duration <= 0) return 0;
+
     for (let i = sectionCount - 1; i >= 0; i--) {
       const labelTime = pinnedTimeline.labels[`section-${i}`];
       if (labelTime === undefined) continue;
-      const progress = labelTime / pinnedTimeline.duration();
+      const progress = labelTime / duration;
       const offset =
         pinnedScrollTrigger.start +
         progress * (pinnedScrollTrigger.end - pinnedScrollTrigger.start);

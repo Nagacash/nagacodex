@@ -29,7 +29,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGlitching, setIsGlitching] = useState(false);
   const [showIndicator, setShowIndicator] = useState(false);
-  const [useNativeScroll, setUseNativeScroll] = useState(false);
+  const [useNativeScroll, setUseNativeScroll] = useState(() =>
+    typeof window !== 'undefined' ? isTouchLikeDevice() : false,
+  );
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isManualOpen, setIsManualOpen] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(
@@ -552,8 +554,11 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
     return () => {
       unregisterPinnedNavigation();
+      st?.kill();
       masterTimeline.kill();
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      for (let i = 0; i < numSections; i++) {
+        gsap.set(`#transition-section-${i}`, { clearProps: 'all' });
+      }
     };
   }, [prefersReducedMotion, useNativeScroll, numSections]);
 
