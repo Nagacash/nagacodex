@@ -13,6 +13,7 @@ import {
   unregisterPinnedNavigation,
 } from '../lib/scrollNav';
 import SkillsManualModal from './SkillsManualModal';
+import ScrollReveal from './ScrollReveal';
 import { TransitionSectionProps } from './TransitionSection';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -594,13 +595,19 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
             });
 
             return (
-              <div
-                key={`section-anchor-${idx}`}
-                id={`section-anchor-${idx}`}
-                data-section-index={idx}
-                className="relative w-full scroll-mt-14 sm:scroll-mt-16"
-              >
-                {enhanced}
+              <div key={`section-anchor-${idx}`}>
+                <ScrollReveal
+                  sectionIndex={idx}
+                  className="relative w-full scroll-mt-14 sm:scroll-mt-16"
+                >
+                  <div
+                    id={`section-anchor-${idx}`}
+                    data-section-index={idx}
+                    className="relative w-full"
+                  >
+                    {enhanced}
+                  </div>
+                </ScrollReveal>
               </div>
             );
           })}
