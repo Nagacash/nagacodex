@@ -1,9 +1,5 @@
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import sound from '../lib/sound';
-import { scrollOffsets } from '../lib/sections';
-
-gsap.registerPlugin(ScrollToPlugin);
+import { scrollToSection } from '../lib/scrollNav';
 
 const links = [
   ['WHO', 1],
@@ -24,12 +20,7 @@ export default function FixedNavbar() {
               key={idx}
               onClick={() => {
                 sound.playClick();
-                gsap.to(window, {
-                  scrollTo: { y: scrollOffsets[idx] },
-                  duration: 1.3,
-                  ease: 'power3.inOut',
-                  overwrite: 'auto',
-                });
+                scrollToSection(idx);
               }}
               className="font-mono text-[8px] sm:text-[9px] text-neutral-500 hover:text-white tracking-widest uppercase transition-colors cursor-pointer px-2 py-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center md:min-h-0 md:min-w-0 md:px-0 md:py-0 shrink-0"
             >

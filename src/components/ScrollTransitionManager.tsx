@@ -4,7 +4,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ChevronDown, Sparkles, AlertCircle, BookOpen } from 'lucide-react';
 import sound from '../lib/sound';
-import { scrollOffsets } from '../lib/sections';
+import { sectionTimelineLabels } from '../lib/sections';
+import {
+  getSectionIndexFromScroll,
+  isTouchLikeDevice,
+  registerPinnedNavigation,
+  scrollToSection,
+  unregisterPinnedNavigation,
+} from '../lib/scrollNav';
 import SkillsManualModal from './SkillsManualModal';
 import { TransitionSectionProps } from './TransitionSection';
 
@@ -22,7 +29,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGlitching, setIsGlitching] = useState(false);
   const [showIndicator, setShowIndicator] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [useNativeScroll, setUseNativeScroll] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isManualOpen, setIsManualOpen] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(
@@ -37,17 +44,10 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const scrollDistance = 4800;
   const maxWindowScroll = scrollDistance;
 
-  // Find active index based on scroll position
-  const getIndexFromScroll = (scrollY: number) => {
-    for (let i = numSections - 1; i >= 0; i--) {
-      if (scrollY >= scrollOffsets[i] - 100) {
-        return i;
-      }
-    }
-    return 0;
-  };
+  const getIndexFromScroll = (scrollY: number) =>
+    getSectionIndexFromScroll(scrollY, numSections);
 
-  // 1. Check for reduced motion, mobile, and viewport changes
+  // 1. Check for reduced motion, touch/native scroll, and viewport changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
@@ -56,7 +56,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
     const handleViewportChange = () => {
       setViewportHeight(window.innerHeight);
-      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad/i.test(navigator.userAgent));
+      setUseNativeScroll(isTouchLikeDevice());
       ScrollTrigger.refresh();
     };
     handleViewportChange();
@@ -68,9 +68,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     };
   }, []);
 
-  // 2. Wheel momentum smooth scroll engine for Desktop
+  // 2. Wheel momentum smooth scroll engine for Desktop only (never on touch)
   useEffect(() => {
-    if (prefersReducedMotion || isMobile) return;
+    if (prefersReducedMotion || useNativeScroll) return;
 
     let targetScroll = window.scrollY;
 
@@ -110,7 +110,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [prefersReducedMotion, isMobile, maxWindowScroll]);
+  }, [prefersReducedMotion, useNativeScroll, maxWindowScroll]);
 
   // 3. Scroll activity timer to show/hide indicators (Stop scroll hint)
   useEffect(() => {
@@ -144,26 +144,36 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     syncActive();
     window.addEventListener('scroll', syncActive, { passive: true });
     return () => window.removeEventListener('scroll', syncActive);
-  }, [numSections]);
+  }, [numSections, useNativeScroll, prefersReducedMotion]);
 
-  // 4. Register the master GSAP scroll timeline
+  // IntersectionObserver for native stacked scroll
   useEffect(() => {
-    if (prefersReducedMotion) {
-      // In reduced motion, simply fallback to absolute block layers visible on basic triggers
-      const onMainScroll = () => {
-        const idx = getIndexFromScroll(window.scrollY);
-        setActiveIndex(idx);
-        sections.forEach((_, sIdx) => {
-          const el = document.getElementById(`transition-section-${sIdx}`);
-          if (el) {
-            el.style.visibility = sIdx === idx ? 'visible' : 'hidden';
-            el.style.opacity = sIdx === idx ? '1' : '0';
-          }
-        });
-      };
-      window.addEventListener('scroll', onMainScroll, { passive: true });
-      return () => window.removeEventListener('scroll', onMainScroll);
-    }
+    if (!useNativeScroll && !prefersReducedMotion) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length === 0) return;
+        const idx = Number(visible[0].target.getAttribute('data-section-index'));
+        if (!Number.isNaN(idx)) setActiveIndex(idx);
+      },
+      { rootMargin: '-35% 0px -35% 0px', threshold: [0, 0.25, 0.5, 0.75] },
+    );
+
+    sections.forEach((_, idx) => {
+      const anchor = document.getElementById(`section-anchor-${idx}`);
+      if (anchor) observer.observe(anchor);
+    });
+
+    return () => observer.disconnect();
+  }, [useNativeScroll, prefersReducedMotion, numSections]);
+
+  // 4. Register the master GSAP scroll timeline (desktop pinned mode only)
+  useEffect(() => {
+    if (prefersReducedMotion || useNativeScroll) return;
 
     // Helper to safely apply video speed changes
     const applyVideoSpeed = (idx: number, speed: number) => {
@@ -191,6 +201,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     // Master Scroll timeline — pin viewport from page top so section 0 shows immediately
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
+        id: 'master-pin',
         trigger: containerRef.current,
         pin: pinRef.current,
         start: 'top top',
@@ -202,6 +213,10 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
           setActiveIndex(getIndexFromScroll(window.scrollY));
         },
       }
+    });
+
+    Object.entries(sectionTimelineLabels).forEach(([idx, time]) => {
+      masterTimeline.addLabel(`section-${idx}`, time);
     });
 
     // Pin off-screen start positions only — visibility handled by React isActive
@@ -532,11 +547,15 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     ScrollTrigger.refresh();
     setActiveIndex(getIndexFromScroll(window.scrollY));
 
+    const st = masterTimeline.scrollTrigger;
+    if (st) registerPinnedNavigation(st, masterTimeline);
+
     return () => {
+      unregisterPinnedNavigation();
       masterTimeline.kill();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
-  }, [prefersReducedMotion, numSections]);
+  }, [prefersReducedMotion, useNativeScroll, numSections]);
 
   // Keep ScrollTrigger measurements in sync when the viewport changes
   useEffect(() => {
@@ -546,15 +565,10 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   // Handle slide dot clicking -> smooth scroll to offsets
   const handleDotClick = (idx: number) => {
     sound.playClick();
-    const targetScroll = scrollOffsets[idx];
-
-    gsap.to(window, {
-      scrollTo: { y: targetScroll },
-      duration: 1.3,
-      ease: 'power3.inOut',
-      overwrite: 'auto',
-    });
+    scrollToSection(idx);
   };
+
+  const nativeLayout = useNativeScroll || prefersReducedMotion;
 
   // Get active section color and title
   const getSectionColor = (idx: number) => {
@@ -566,8 +580,29 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
   return (
     <div ref={containerRef} className="relative w-full overflow-x-hidden bg-[#070707]">
-      
-      {/* 1. GSAP-pinned viewport (replaces CSS sticky + spacer) */}
+      {nativeLayout ? (
+        <div className="relative w-full">
+          {sections.map((child, idx) => {
+            const enhanced = React.cloneElement(child as React.ReactElement<TransitionSectionProps>, {
+              isActive: true,
+              stacked: true,
+            });
+
+            return (
+              <div
+                key={`section-anchor-${idx}`}
+                id={`section-anchor-${idx}`}
+                data-section-index={idx}
+                className="relative w-full scroll-mt-14 sm:scroll-mt-16"
+              >
+                {enhanced}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+      <>
+      {/* GSAP-pinned viewport (desktop only) */}
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden bg-black">
         
         {/* Dynamic section stack wrapper */}
@@ -703,8 +738,12 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
         </div>
 
-        {/* 3. Section Dots Progress Indicator (Navigation Overlay) */}
-        <div className="fixed right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-fixed flex flex-col gap-2 sm:gap-3 md:gap-4 items-center p-2 sm:p-2.5 md:p-3 bg-black/40 backdrop-blur-md rounded-full border border-neutral-900/60 shadow-lg">
+      </div>
+      </>
+      )}
+
+      {/* Section dots + manual — shared across layouts */}
+      <div className="fixed right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-fixed flex flex-col gap-2 sm:gap-3 md:gap-4 items-center p-2 sm:p-2.5 md:p-3 bg-black/40 backdrop-blur-md rounded-full border border-neutral-900/60 shadow-lg">
           {sections.map((_, idx) => {
             const isActive = activeIndex === idx;
             const dotColor = getSectionColor(idx);
@@ -765,7 +804,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
           </button>
         </div>
 
-        {/* 4. Scroll idle indicator HUD (Fades in on rest) */}
+      {!nativeLayout && (
+        <>
+        {/* Scroll idle indicator HUD — desktop pinned only */}
         <div
           ref={scrollIndicatorRef}
           className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-fixed safe-bottom flex flex-col items-center gap-1.5 transition-ui transform ${
@@ -793,8 +834,8 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
             />
           </div>
         </div>
-
-      </div>
+        </>
+      )}
 
       {/* Developer cognitive manual system blueprints overlay */}
       <SkillsManualModal

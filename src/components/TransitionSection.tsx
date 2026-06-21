@@ -25,6 +25,7 @@ export interface TransitionSectionProps {
   accentColor: string;       // section's accent color
   index: number;             // section index (0-based)
   isActive?: boolean;        // controlled by ScrollTransitionManager
+  stacked?: boolean;         // native vertical scroll layout (mobile)
 }
 
 export default function TransitionSection({
@@ -36,6 +37,7 @@ export default function TransitionSection({
   accentColor,
   index,
   isActive = false,
+  stacked = false,
 }: TransitionSectionProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -59,10 +61,14 @@ export default function TransitionSection({
       id={`transition-section-${index}`}
       data-transition={transitionType}
       data-accent={accentColor}
-      className="absolute inset-0 w-full h-full overflow-hidden flex flex-col justify-between"
+      className={
+        stacked
+          ? 'relative w-full min-h-dvh overflow-hidden flex flex-col justify-between'
+          : 'absolute inset-0 w-full h-full overflow-hidden flex flex-col justify-between'
+      }
       style={{
-        zIndex: isActive ? 50 : 10 + index,
-        willChange: 'transform, opacity',
+        zIndex: stacked ? undefined : isActive ? 50 : 10 + index,
+        willChange: stacked ? undefined : 'transform, opacity',
       }}
     >
       {/* Dynamic Background Canvas/Video layer */}
@@ -83,7 +89,10 @@ export default function TransitionSection({
             ? 'justify-start py-4 sm:py-6 md:py-8'
             : 'justify-center'
         }`}
-        style={{ opacity: 1, pointerEvents: isActive ? 'auto' : 'none' }}
+        style={{
+          opacity: 1,
+          pointerEvents: stacked || isActive ? 'auto' : 'none',
+        }}
       >
         {cloneWithIsActive(children, isActive)}
       </div>

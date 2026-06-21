@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Shield, Film, Shirt, Github, Instagram, Linkedin, ArrowUpRight, CheckCircle2, Code, ChevronUp } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import SoundToggle from './SoundToggle';
 import sound from '../lib/sound';
-
-gsap.registerPlugin(ScrollToPlugin);
+import { scrollToSection } from '../lib/scrollNav';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -280,12 +277,7 @@ export default function Contact() {
           <button
             onClick={() => {
               sound.playClick();
-              gsap.to(window, {
-                scrollTo: { y: 0 },
-                duration: 1.3,
-                ease: 'power3.inOut',
-                overwrite: 'auto',
-              });
+              scrollToSection(0);
             }}
             className="p-2 bg-neutral-950 border border-neutral-800 hover:border-cyber rounded-full text-neutral-500 hover:text-cyber transition-ui hover:scale-105 cursor-pointer"
             aria-label="Scroll to top"
