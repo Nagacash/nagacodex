@@ -7,8 +7,8 @@ export default function SoundToggle() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    // Keep sync with manager state (safeguards session caching)
     setActive(sound.getEnabled());
+    return sound.onChange(setActive);
   }, []);
 
   const handleToggle = () => {
@@ -26,7 +26,7 @@ export default function SoundToggle() {
     <button
       id="sound-toggle-btn"
       onClick={handleToggle}
-      className="group relative flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-800 bg-black/60 backdrop-blur-md text-[10px] tracking-[0.2em] font-mono text-neutral-400 hover:text-white hover:border-neutral-500 transition-ui pointer-events-auto cursor-pointer"
+      className="group relative flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200 bg-white/80 backdrop-blur-md text-[10px] tracking-[0.2em] font-mono text-neutral-800 hover:text-black hover:border-neutral-300 transition-ui pointer-events-auto cursor-pointer shadow-xs"
       aria-label="Toggle ambient atmospheric drone"
     >
       {/* Decorative pulse glow background */}

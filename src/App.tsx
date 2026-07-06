@@ -1,13 +1,14 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useEffect } from 'react';
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import ClickBurst from './components/ClickBurst';
 import ScrollTransitionManager from './components/ScrollTransitionManager';
 import TransitionSection from './components/TransitionSection';
 import FixedNavbar from './components/FixedNavbar';
+import Hero from './components/Hero';
+import sound from './lib/sound';
 import { heroIntro, philosophyAmbient, whoAmbient } from './lib/films';
 
-const Hero = lazy(() => import('./components/Hero'));
 const WhoSection = lazy(() => import('./components/WhoSection'));
 const WorkGrid = lazy(() => import('./components/WorkGrid'));
 const Philosophy = lazy(() => import('./components/Philosophy'));
@@ -16,19 +17,37 @@ const Woodland360Section = lazy(() => import('./components/Woodland360Section'))
 const Contact = lazy(() => import('./components/Contact'));
 const CookieBanner = lazy(() => import('./components/CookieBanner'));
 
-const SectionFallback = () => <div className="min-h-dvh w-full bg-bg-dark" />;
+const SectionFallback = () => (
+  <div className="min-h-dvh w-full bg-bg-dark flex items-center justify-center">
+    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-widest animate-pulse">
+      Loading…
+    </span>
+  </div>
+);
 
 export default function App() {
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    sound.armMobileAutoplay();
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handlePreloaderComplete = () => {
+    window.scrollTo(0, 0);
+    setLoading(false);
+  };
+
   return (
     <div className="relative min-h-dvh selection:bg-cyber/20 selection:text-cyber bg-bg-dark">
       {/* 1. Full-screen SVGs interactive boot manager */}
-      <Preloader onComplete={() => setLoading(false)} />
+      <Preloader onComplete={handlePreloaderComplete} />
 
       {!loading && (
-        <div className="page-enter">
-          {/* Skip to main content link for outstanding keyboard accessibility */}
+        <>
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-fixed focus:bg-black focus:text-cyber focus:p-4 focus:border focus:border-cyber focus:font-mono focus:text-[10px] uppercase tracking-wider rounded-md"
@@ -36,18 +55,14 @@ export default function App() {
             Skip to main content
           </a>
 
-          {/* 2. Global micro-interactions layers */}
           <CustomCursor />
           <ClickBurst />
 
-          {/* Background Noise/Texture */}
-          <div className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] z-chrome"></div>
+          <div className="fixed inset-0 pointer-events-none z-20 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.55),transparent_70%)]" />
 
-          {/* Fixed navbar - visible across all sections */}
           <FixedNavbar />
 
-          {/* 3. Main structured layout streams */}
-          <div id="main-content" className="relative flex flex-col w-full">
+          <div id="main-content" className="page-enter relative flex flex-col w-full">
             <main className="relative flex flex-col w-full">
               <ScrollTransitionManager>
                 
@@ -57,12 +72,9 @@ export default function App() {
                     transitionType="push-fade"
                     accentColor="#00FF88"
                     index={0}
-                    bgVideoWebm={heroIntro.webm}
                     bgVideoMp4={heroIntro.h264}
                   >
-                    <Suspense fallback={<SectionFallback />}>
-                      <Hero />
-                    </Suspense>
+                    <Hero />
                   </TransitionSection>
 
                 {/* 02. WHO */}
@@ -100,17 +112,17 @@ export default function App() {
                   </Suspense>
                 </TransitionSection>
 
-                {/* 05. WOODLAND360 PODCAST */}
-                <TransitionSection id="woodland360" transitionType="horizontal-slide" accentColor="#D4A843" index={4}>
+                {/* 04. SHOWCASE CAROUSEL */}
+                <TransitionSection id="showcase" transitionType="scale-blur" accentColor="#D4A843" index={4}>
                   <Suspense fallback={<SectionFallback />}>
-                    <Woodland360Section />
+                    <ShowcaseCarousel />
                   </Suspense>
                 </TransitionSection>
 
-                {/* 06. SHOWCASE CAROUSEL */}
-                <TransitionSection id="showcase" transitionType="scale-blur" accentColor="#D4A843" index={5}>
+                {/* 05. WOODLAND360 PODCAST */}
+                <TransitionSection id="woodland360" transitionType="horizontal-slide" accentColor="#D4A843" index={5}>
                   <Suspense fallback={<SectionFallback />}>
-                    <ShowcaseCarousel />
+                    <Woodland360Section />
                   </Suspense>
                 </TransitionSection>
 
@@ -128,7 +140,7 @@ export default function App() {
               <CookieBanner />
             </Suspense>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -28,3 +28,8 @@
 ## Final — 2026-06-19
 - All pages < 50 ms: yes
 - Summary: 1 passed, 0 failed
+
+## Run 3 — 2026-07-06
+- Change: Sidebar perf — extracted memoized `SectionNavSidebar` via portal; static accent colors (no DOM reads); removed `backdrop-blur`; lazy `SkillsManualModal`; navbar outside `page-enter` fade
+- Result: 0.22 ms median (PASS)
+- Sidebar lag fixes: portal skips 450ms page-enter fade; memo isolates dot re-renders; no `getElementById` per frame

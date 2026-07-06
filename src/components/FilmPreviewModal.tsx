@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Film } from 'lucide-react';
+import { X } from 'lucide-react';
 import sound from '../lib/sound';
 import { ProjectItem } from '../types';
 
@@ -53,17 +53,9 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
           <div className="h-[2px] w-full bg-film" />
 
           <div className="flex items-center justify-between gap-4 px-5 py-4 md:px-6 border-b border-neutral-900">
-            <div className="flex items-center gap-3 min-w-0">
-              <Film className="w-4 h-4 text-film shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <span className="font-mono text-[8px] text-neutral-500 uppercase tracking-widest truncate">
-                  {project.category}
-                </span>
-                <h2 className="font-display font-extrabold text-lg md:text-2xl text-white tracking-wide uppercase truncate">
-                  {project.title}
-                </h2>
-              </div>
-            </div>
+            <h2 className="font-display font-extrabold text-lg md:text-2xl text-white tracking-tight truncate min-w-0">
+              {project.title}
+            </h2>
 
             <button
               type="button"
@@ -71,7 +63,7 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
                 sound.playClick();
                 onClose();
               }}
-              className="p-2 border border-neutral-800 hover:border-neutral-600 bg-neutral-950 text-neutral-400 hover:text-white rounded-lg transition-ui active:scale-90 cursor-pointer shrink-0"
+              className="p-2 min-h-[44px] min-w-[44px] border border-neutral-800 hover:border-neutral-600 bg-neutral-950 text-neutral-400 hover:text-white rounded-lg transition-ui active:scale-90 cursor-pointer shrink-0 flex items-center justify-center"
               aria-label="Close film preview"
             >
               <X className="w-5 h-5" />
@@ -93,22 +85,6 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
                 <source src={project.videoFallbackSrc} type="video/mp4" />
               )}
             </video>
-          </div>
-
-          <div className="px-5 py-4 md:px-6 md:py-5 border-t border-neutral-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex flex-wrap gap-1.5">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[8px] text-neutral-400 border border-neutral-800 bg-black/50 px-2 py-0.5 rounded-sm uppercase tracking-wider"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-            <p className="font-sans text-[11px] md:text-xs text-neutral-500 font-light max-w-xl text-left sm:text-right">
-              Generative AI cinema — press Esc or click outside to close
-            </p>
           </div>
         </motion.div>
       </div>

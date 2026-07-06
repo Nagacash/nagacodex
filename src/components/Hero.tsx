@@ -7,6 +7,7 @@ import SoundToggle from './SoundToggle';
 import sound from '../lib/sound';
 import SkillsManualModal from './SkillsManualModal';
 import { brandLogo } from '../lib/brand';
+import { scrollToSection } from '../lib/scrollNav';
 import operatorPortrait from '../assets/images/maurice-portrait.jpg';
 import operatorPortraitWebp from '../assets/images/maurice-portrait.webp';
 
@@ -131,35 +132,35 @@ export default function Hero() {
       ref={containerRef}
       id="hero-section"
       data-section="none"
-      className="relative w-full min-h-dvh flex flex-col justify-between py-10 sm:py-12 px-4 sm:px-6 md:px-12 bg-transparent select-none pointer-events-none overflow-x-hidden"
+      className="relative w-full h-full min-h-dvh flex flex-col pt-[calc(4.75rem+env(safe-area-inset-top,0px))] sm:pt-[calc(5.25rem+env(safe-area-inset-top,0px))] pb-4 sm:pb-6 px-4 sm:px-6 md:px-12 bg-transparent select-none overflow-hidden"
     >
       {/* Decorative vector background */}
       <FloatingClips theme="cyber" />
 
       {/* 2. Top Bar Navigation Elements */}
-      <div className="relative z-20 w-full flex justify-between items-center pointer-events-auto">
-        <div className="flex items-center gap-3">
+      <div className="relative z-20 w-full shrink-0 mt-2 sm:mt-3 flex flex-wrap justify-between items-center gap-2 pointer-events-auto min-w-0">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <img
             src={brandLogo}
             alt="Naga Codex"
-            className="w-10 h-10 object-contain shrink-0"
+            className="w-9 h-9 sm:w-10 sm:h-10 object-contain shrink-0"
           />
-          <div className="flex flex-col">
-          <span className="font-display font-extrabold tracking-tight text-lg sm:text-xl text-white">
+          <div className="flex flex-col min-w-0">
+          <span className="font-display font-extrabold tracking-tight text-base sm:text-xl text-black truncate">
             NAGA <span className="text-culture">CODEX</span>
           </span>
-          <span className="font-mono text-[8px] text-cyber uppercase tracking-widest mt-0.5">HAMBURG // HQ</span>
+          <span className="hidden sm:block font-mono text-[8px] text-cyber uppercase tracking-widest mt-0.5">HAMBURG // HQ</span>
         </div>
         </div>
         
         {/* Subtle coordinate & system status panel with embedded Sound Toggle */}
-        <div className="flex items-center gap-2 sm:gap-4 font-mono text-[9px] text-neutral-400 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-4 font-mono text-[9px] text-neutral-500 shrink-0">
           <button
             onClick={() => {
               sound.playClick();
               setIsManualOpen(true);
             }}
-            className="flex md:hidden items-center gap-1.5 px-2 py-1.5 rounded border border-neutral-800 bg-neutral-950 text-[#D4A843] active:scale-95 transition-transform cursor-pointer text-[8px] shrink-0"
+            className="flex md:hidden items-center justify-center gap-1.5 px-3 py-2 min-h-11 rounded border border-neutral-200 bg-white text-[#D4A843] active:scale-95 transition-transform cursor-pointer text-[8px] shrink-0"
             title="Open Blueprints DB"
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -172,11 +173,11 @@ export default function Hero() {
                 sound.playClick();
                 setIsManualOpen(true);
               }}
-              className="flex items-center gap-1.5 text-neutral-400 hover:text-[#D4A843] transition-colors cursor-pointer group"
+              className="flex items-center gap-1.5 text-neutral-500 hover:text-[#D4A843] transition-colors cursor-pointer group"
               title="Open Blueprints Manual"
             >
               <BookOpen className="w-3.5 h-3.5 text-[#D4A843] group-hover:scale-110 transition-transform" />
-              <span className="underline decoration-neutral-800 hover:decoration-[#D4A843] transition-ui">EXPLORE WORK</span>
+              <span className="underline decoration-neutral-300 hover:decoration-[#D4A843] transition-ui">EXPLORE WORK</span>
             </button>
             <div className="flex items-center gap-1.5">
               <Shield className="w-3 h-3 text-cyber animate-pulse" />
@@ -192,12 +193,12 @@ export default function Hero() {
       </div>
 
       {/* 3. Central Core: Draggable Orb & Kinetic Words */}
-      <div className="relative z-10 flex flex-col items-center justify-center my-auto w-full max-w-5xl mx-auto">
+      <div className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center w-full max-w-5xl mx-auto overflow-y-auto overflow-x-hidden overscroll-contain py-4 sm:py-6">
         
         {/* Giant Title Headers */}
-        <div className="w-full text-center flex flex-col justify-center items-center pointer-events-none gap-2">
-          <h1 className="font-display font-extrabold text-[12vw] md:text-[8vw] xl:text-[7.5rem] tracking-tighter leading-[0.85] uppercase">
-            <span className="block text-white text-glitch">
+        <div className="w-full max-w-full text-center flex flex-col justify-center items-center pointer-events-none gap-2 px-1">
+          <h1 className="font-display font-extrabold w-full max-w-full text-[10.5vw] sm:text-[12vw] md:text-[8vw] xl:text-[7.5rem] tracking-tighter leading-[0.85] uppercase overflow-hidden">
+            <span className="block text-black text-glitch">
               {titleLine1.map((w, idx) => (
                 <RepellingWord key={`t1-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
               ))}
@@ -234,7 +235,7 @@ export default function Hero() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyber/15 via-film/10 to-culture/15 blur-xl group-hover:scale-125 transition-transform duration-500" />
 
               {/* Brand core */}
-              <div className="relative w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_28px_rgba(212,168,67,0.45)] border border-culture/30 bg-black/80">
+              <div className="relative w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_28px_rgba(212,168,67,0.35)] border border-culture/40 bg-white/90">
                 <img
                   src={brandLogo}
                   alt="Naga Codex emblem"
@@ -249,7 +250,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: [0.3, 0.8, 0.3], y: 0 }}
                   transition={{ repeat: Infinity, duration: 2.5 }}
-                  className="absolute top-26 bg-black/80 backdrop-blur-md px-2.5 py-1 border border-neutral-800 rounded-sm font-mono text-[7.5px] text-cyber tracking-widest uppercase text-center whitespace-nowrap"
+                  className="absolute top-26 bg-white/90 backdrop-blur-md px-2.5 py-1 border border-neutral-200 rounded-sm font-mono text-[7.5px] text-cyber tracking-widest uppercase text-center whitespace-nowrap"
                 >
                   ◄ DRAG_ORB_TO_REFLOW ►
                 </motion.div>
@@ -264,13 +265,13 @@ export default function Hero() {
           {/* Card 1: Avatar / Identity Badge */}
           <div className="lg:col-span-4 glass rounded-xl p-5 flex flex-col gap-4 relative overflow-hidden group hover:border-culture/40 transition-colors duration-300">
             {/* Status Indicator */}
-            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/80 px-2 py-0.5 rounded-full border border-neutral-800">
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/90 px-2 py-0.5 rounded-full border border-neutral-200">
               <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse shadow-[0_0_8px_#00FF88]" />
-              <span className="font-mono text-[7px] text-neutral-300 tracking-wider uppercase">Available for projects</span>
+              <span className="font-mono text-[7px] text-neutral-600 tracking-wider uppercase">Available for projects</span>
             </div>
             
             {/* Portrait frame with tech HUD accents */}
-            <div className="relative w-full aspect-square rounded-lg overflow-hidden border border-neutral-800 bg-neutral-950 flex items-center justify-center">
+            <div className="relative w-full aspect-square rounded-lg overflow-hidden border border-neutral-200 bg-neutral-100 flex items-center justify-center">
               <picture>
                 <source srcSet={operatorPortraitWebp} type="image/webp" />
                 <img
@@ -282,7 +283,7 @@ export default function Hero() {
                   className="w-full h-full object-cover object-[center_20%] opacity-85 group-hover:scale-102 transition-transform duration-700"
                 />
               </picture>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/30 via-transparent to-transparent opacity-60" />
               
               {/* Overlay crosshairs */}
               <div className="absolute top-2 left-2 font-mono text-[6px] text-neutral-500">ID: N_C_8841</div>
@@ -293,15 +294,13 @@ export default function Hero() {
             </div>
 
             {/* Identity Info */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <h3 className="font-display font-extrabold text-xl text-white tracking-tight">Maurice Holda</h3>
-                <span className="bg-[#D4A843]/10 border border-[#D4A843]/30 text-culture rounded-sm px-1.5 py-0.5 font-mono text-[7px] tracking-widest uppercase font-bold">AI MANAGER</span>
-              </div>
-              <p className="font-mono text-[8.5px] text-neutral-400 mt-1 uppercase tracking-wider">
-                AI Manager · Full-Stack Developer · Cybersecurity
+            <div className="flex flex-col gap-2">
+              <h3 className="font-display font-extrabold text-lg sm:text-xl text-neutral-900 tracking-tight">Maurice Holda</h3>
+              <span className="self-start bg-[#D4A843]/10 border border-[#D4A843]/30 text-culture rounded-sm px-1.5 py-0.5 font-mono text-[7px] tracking-widest uppercase font-bold">AI MANAGER</span>
+              <p className="font-mono text-[7px] sm:text-[8px] text-neutral-500 uppercase tracking-wide leading-relaxed break-words">
+                Certified AI Manager · Cyber Security Analyst · Web Developer
               </p>
-              <div className="text-[8px] font-mono text-neutral-500 mt-2.5 border-t border-neutral-900 pt-2 flex justify-between uppercase">
+              <div className="text-[7px] sm:text-[8px] font-mono text-neutral-500 border-t border-neutral-200 pt-2 flex flex-col gap-1 uppercase">
                 <span>Base: Hamburg, Germany</span>
                 <span className="text-cyber">SEC+ // AI strategy & ops</span>
               </div>
@@ -311,38 +310,38 @@ export default function Hero() {
           {/* Card 2: Professional Playbook & Credentials */}
           <div className="lg:col-span-8 flex flex-col gap-5 justify-between">
             {/* Playbook Description */}
-            <div className="glass rounded-xl p-6 flex flex-col gap-4 flex-1 hover:border-neutral-800 transition-colors duration-300">
-              <div className="flex justify-between items-center pb-3 border-b border-white/5">
-                <div className="flex items-center gap-2 font-mono text-[8.5px] text-culture tracking-widest uppercase">
-                  <Award className="w-3.5 h-3.5 text-culture animate-pulse" />
-                  <span>Certified AI Manager & Security Operator</span>
+            <div className="glass rounded-xl p-4 sm:p-6 flex flex-col gap-4 flex-1 hover:border-neutral-300 transition-colors duration-300">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 pb-3 border-b border-neutral-200">
+                <div className="flex items-start gap-2 font-mono text-[7.5px] sm:text-[8.5px] text-culture tracking-widest uppercase leading-relaxed">
+                  <Award className="w-3.5 h-3.5 text-culture animate-pulse shrink-0 mt-0.5" />
+                  <span>Certified AI Manager · Cyber Security Analyst · Web Developer</span>
                 </div>
-                <div className="font-mono text-[7px] text-neutral-500">PLAYBOOK // N_C_DEC_0</div>
+                <div className="font-mono text-[7px] text-neutral-500 shrink-0">PLAYBOOK // N_C_DEC_0</div>
               </div>
 
               {/* Custom header and paragraph */}
               <div className="flex flex-col gap-2">
-                <h4 className="font-display font-bold text-base md:text-lg text-white uppercase tracking-tight font-syne">
+                <h4 className="font-display font-bold text-base md:text-lg text-neutral-900 uppercase tracking-tight font-syne">
                   Orchestrating AI Capabilities and Product Systems.
                 </h4>
-                <p className="font-sans text-xs md:text-sm text-neutral-300 font-light leading-relaxed">
+                <p className="type-manifesto text-xs md:text-sm text-neutral-800 font-normal leading-relaxed">
                   Maurice Holda applies a Certified AI Manager playbook at Naga Codex—combining product visioning, governance, and technical leadership so copilots, MCP agents, and web systems ship with measurable impact and trusted guardrails.
                 </p>
               </div>
 
               {/* Credentials / Specs bento rows */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-1.5">
-                <div className="border border-white/5 bg-white/[0.01] p-3 rounded-lg flex flex-col gap-1">
+                <div className="border border-neutral-200 bg-neutral-50 p-3 rounded-lg flex flex-col gap-1">
                   <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Certified</span>
-                  <span className="font-display font-extrabold text-[10.5px] text-white tracking-tight uppercase">AI Manager · Security+</span>
+                  <span className="font-display font-extrabold text-[10.5px] text-neutral-900 tracking-tight uppercase">AI Manager · Security Analyst</span>
                 </div>
-                <div className="border border-white/5 bg-white/[0.01] p-3 rounded-lg flex flex-col gap-1">
-                  <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Focus</span>
-                  <span className="font-display font-extrabold text-[10.5px] text-culture tracking-tight uppercase">AI Strategy & Ops</span>
+                <div className="border border-neutral-200 bg-neutral-50 p-3 rounded-lg flex flex-col gap-1">
+                  <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Developer</span>
+                  <span className="font-display font-extrabold text-[10.5px] text-dev tracking-tight uppercase">Web Development</span>
                 </div>
-                <div className="border border-white/5 bg-white/[0.01] p-3 rounded-lg flex flex-col gap-1">
+                <div className="border border-neutral-200 bg-neutral-50 p-3 rounded-lg flex flex-col gap-1">
                   <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Base</span>
-                  <span className="font-display font-extrabold text-[10.5px] text-white tracking-tight uppercase">Hamburg, Germany</span>
+                  <span className="font-display font-extrabold text-[10.5px] text-neutral-900 tracking-tight uppercase">Hamburg, Germany</span>
                 </div>
               </div>
             </div>
@@ -354,7 +353,7 @@ export default function Hero() {
                 {["AI/ML", "React", "Next.js", "Security", "Cloud", "LLMs"].map((sk) => (
                   <span
                     key={sk}
-                    className="font-mono text-[8.5px] text-neutral-400 bg-white/[0.02] border border-white/10 px-2 py-0.5 rounded uppercase hover:border-culture hover:text-white transition-colors duration-200"
+                    className="font-mono text-[8.5px] text-neutral-500 bg-neutral-50 border border-neutral-200 px-2 py-0.5 rounded uppercase hover:border-culture hover:text-neutral-900 transition-colors duration-200"
                   >
                     #{sk}
                   </span>
@@ -362,22 +361,22 @@ export default function Hero() {
               </div>
 
               {/* CTAs */}
-              <div className="sm:col-span-5 flex gap-2">
+              <div className="sm:col-span-5 flex flex-col sm:flex-row gap-2">
                 <button
                   onClick={() => {
                     sound.playClick();
-                    document.getElementById('who-section')?.scrollIntoView({ behavior: 'smooth' });
+                    scrollToSection(1);
                   }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-culture text-black py-2.5 px-3 rounded-lg hover:bg-white transition-colors duration-300 active:scale-95"
+                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-culture text-black py-3 px-3 min-h-11 rounded-lg hover:bg-white transition-colors duration-300 active:scale-95"
                 >
                   START A BUILD
                 </button>
                 <button
                   onClick={() => {
                     sound.playClick();
-                    document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+                    scrollToSection(2);
                   }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase border border-neutral-700 hover:border-white text-white py-2.5 px-3 rounded-lg transition-colors duration-300 active:scale-95"
+                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase border border-neutral-300 hover:border-neutral-900 text-neutral-900 py-3 px-3 min-h-11 rounded-lg transition-colors duration-300 active:scale-95"
                 >
                   VIEW WORK
                 </button>
@@ -388,25 +387,37 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 4. Bottom Row Metrics */}
-      <h3 className="relative z-10 w-full flex justify-between items-end text-neutral-500 font-mono text-[8px] tracking-[0.2em] uppercase pointer-events-auto">
-        <div className="flex flex-col gap-1">
+      {/* 4. Bottom Row Metrics — pinned to viewport bottom */}
+      <footer className="relative z-20 w-full shrink-0 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 text-neutral-500 font-mono text-[8px] tracking-[0.2em] uppercase pointer-events-auto pt-3 safe-bottom border-t border-neutral-200/60">
+        <div className="hidden sm:flex flex-col gap-1">
           <span>HOST: NAGACODEX.CLOUD</span>
           <span className="text-[7.5px] text-neutral-600">HAMBURG // ST.PAULI</span>
         </div>
 
-        {/* Dynamic breathing Chevron to scroll indicators */}
-        <div className="flex flex-col items-center gap-1.5 group mx-auto animate-bounce pb-2 cursor-pointer"
-             onClick={() => document.getElementById('who-section')?.scrollIntoView({ behavior: 'smooth' })}>
-          <span className="text-[7.5px] text-neutral-400 group-hover:text-white transition-colors tracking-[0.3em]">SEC_WHO</span>
-          <ChevronDown className="w-4 h-4 text-[#00FF88]" />
-        </div>
+        <button
+          type="button"
+          className="flex flex-col items-center gap-1.5 group mx-auto min-h-11 py-1 cursor-pointer order-first sm:order-none"
+          onClick={() => {
+            sound.playClick();
+            scrollToSection(1);
+          }}
+        >
+          <span className="text-[7.5px] text-neutral-500 group-hover:text-neutral-900 group-active:text-neutral-900 transition-colors tracking-[0.3em]">
+            SEC_WHO
+          </span>
+          <ChevronDown className="w-5 h-5 text-cyber" />
+        </button>
 
-        <div className="flex flex-col items-end text-right gap-0.5">
+        <div className="hidden sm:flex flex-col items-end text-right gap-0.5">
           <span>LAT_GRID_LNG: 53.55</span>
           <span className="text-neutral-600">ALPHA_V0.96_BUILD</span>
         </div>
-      </h3>
+
+        <div className="flex sm:hidden justify-between w-full text-[7px] text-neutral-600">
+          <span>NAGACODEX.CLOUD</span>
+          <span>LAT 53.55</span>
+        </div>
+      </footer>
       {/* Skills support manual modal */}
       <SkillsManualModal isOpen={isManualOpen} onClose={() => setIsManualOpen(false)} />
     </section>

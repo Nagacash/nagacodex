@@ -2,32 +2,30 @@ import { motion } from 'motion/react';
 import { Cpu } from 'lucide-react';
 
 export default function Philosophy() {
-  const line1 = "WE_BUILD_SOVEREIGN_SYSTEMS".split("_");
-  const line2 = "WE_DIRECT_ARTIFICIAL_ENZYMES".split("_");
-  const line3 = "WE_WEAR_DECLARATIVE_ARMORS".split("_");
+  const line1 = 'WE BUILD SOVEREIGN SYSTEMS'.split(' ');
+  const line2 = 'WE DIRECT ARTIFICIAL ENZYMES'.split(' ');
+  const line3 = 'WE WEAR DECLARATIVE ARMORS'.split(' ');
 
-  // Dynamic animation configurations
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.15,
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
       },
     },
   };
 
   const wordVariants = {
-    hidden: { opacity: 0, y: 18, rotate: 4 },
+    hidden: { opacity: 0, y: 14 },
     visible: {
       opacity: 1,
       y: 0,
-      rotate: 0,
       transition: {
         type: 'spring',
-        damping: 14,
-        stiffness: 120,
+        damping: 18,
+        stiffness: 140,
       },
     },
   };
@@ -36,66 +34,67 @@ export default function Philosophy() {
     <section
       id="philosophy-section"
       data-section="film"
-      className="relative w-full min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-transparent border-t border-neutral-900 overflow-hidden"
+      className="relative w-full min-h-dvh flex flex-col justify-center pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 sm:px-6 md:px-12 overflow-hidden"
     >
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 55% at 50% 42%, rgba(255,107,53,0.12), transparent 68%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,0,0,0.45), transparent 70%)',
+        }}
+      />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center justify-center gap-16 text-center">
-        
-        {/* Fine Header badge */}
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center gap-1 font-mono text-[9px] text-[#FF6B35] tracking-[0.3em] uppercase mb-1">
+      <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-12 md:gap-16 text-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="flex items-center gap-2 font-mono text-[9px] text-film tracking-[0.3em] uppercase">
             <Cpu className="w-3.5 h-3.5" />
-            <span>NAGA_OPERATING_PHILOSOPHY</span>
+            <span>Operating philosophy</span>
           </div>
-          <span className="h-[1px] w-6 bg-film" />
+          <span className="h-px w-8 bg-film/50" />
         </div>
 
-        {/* Dense centered sequential manifesto lines */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.35 }}
-          className="flex flex-col gap-6 md:gap-10 items-center justify-center font-display uppercase w-full select-none"
+          viewport={{ once: true, amount: 0.4 }}
+          className="flex flex-col gap-5 md:gap-8 items-center justify-center font-display uppercase w-full select-none"
         >
-          {/* Row 1 */}
-          <div className="flex flex-wrap items-center justify-center text-xl sm:text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-white">
-            {line1.map((w, idx) => (
-              <motion.span key={`l1-${idx}`} variants={wordVariants} className="inline-block mr-3 leading-none">
-                {w}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xl sm:text-2xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-wide text-white leading-tight">
+            {line1.map((word, idx) => (
+              <motion.span key={`l1-${idx}`} variants={wordVariants} className="inline-block">
+                {word}
               </motion.span>
             ))}
           </div>
 
-          <div className="w-1.5 h-1.5 rounded-full bg-film/40" />
+          <div className="w-1 h-1 rounded-full bg-film/50" />
 
-          {/* Row 2 */}
-          <div className="flex flex-wrap items-center justify-center text-xl sm:text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-400">
-            {line2.map((w, idx) => (
-              <motion.span key={`l2-${idx}`} variants={wordVariants} className="inline-block mr-3 leading-none">
-                {w}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xl sm:text-2xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-wide leading-tight text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-400">
+            {line2.map((word, idx) => (
+              <motion.span key={`l2-${idx}`} variants={wordVariants} className="inline-block">
+                {word}
               </motion.span>
             ))}
           </div>
 
-          <div className="w-1.5 h-1.5 rounded-full bg-film/40" />
+          <div className="w-1 h-1 rounded-full bg-film/50" />
 
-          {/* Row 3 */}
-          <div className="flex flex-wrap items-center justify-center text-xl sm:text-2xl md:text-5xl lg:text-5xl font-extrabold tracking-wider text-white">
-            {line3.map((w, idx) => (
-              <motion.span key={`l3-${idx}`} variants={wordVariants} className="inline-block mr-3 leading-none">
-                {w}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xl sm:text-2xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-wide text-white leading-tight">
+            {line3.map((word, idx) => (
+              <motion.span key={`l3-${idx}`} variants={wordVariants} className="inline-block">
+                {word}
               </motion.span>
             ))}
           </div>
         </motion.div>
 
-        {/* Description subtext */}
-        <p className="max-w-xl text-[10.5px] md:text-xs font-mono text-neutral-500 uppercase tracking-widest leading-relaxed pt-8 border-t border-neutral-900">
-          WE DO NOT WORK WITH TEMPLATES. WE INTEGRATE DEFENSIVE AUDITS WITH DENSE ATMOSPHERIC CINEMA AND HEAVY RAW STITCH APPAREL. IN ST. PAULI, WE HARDEN THE SYSTEM CORES.
+        <p className="max-w-lg text-[10.5px] md:text-xs type-manifesto-tight text-neutral-400 leading-relaxed pt-8 border-t border-neutral-800/80">
+          We do not work with templates. We integrate defensive audits with dense atmospheric cinema and heavy raw
+          stitch apparel. In St. Pauli, we harden the system cores.
         </p>
       </div>
-
     </section>
   );
 }

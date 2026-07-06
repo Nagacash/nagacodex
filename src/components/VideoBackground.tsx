@@ -10,6 +10,8 @@ interface VideoBackgroundProps {
   parallaxIntensity?: number;
   playbackMode?: 'loop' | 'scroll-reactive';
   themeFallback?: SectionTheme;
+  tone?: 'light' | 'dark';
+  videoOpacity?: number;
 }
 
 export default function VideoBackground({
@@ -20,7 +22,10 @@ export default function VideoBackground({
   parallaxIntensity = 0.3,
   playbackMode = 'loop',
   themeFallback = 'none',
+  tone = 'dark',
+  videoOpacity,
 }: VideoBackgroundProps) {
+  const resolvedOpacity = videoOpacity ?? (tone === 'light' ? 0.08 : 0.2);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -233,7 +238,7 @@ export default function VideoBackground({
     }
 
     const draw = () => {
-      ctx.fillStyle = '#0A0A0A';
+      ctx.fillStyle = tone === 'light' ? '#F5F4F0' : '#0A0A0A';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       if (themeFallback === 'cyber') {
@@ -350,7 +355,7 @@ export default function VideoBackground({
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animId);
     };
-  }, [useCanvas, themeFallback, prefersReducedMotion]);
+  }, [useCanvas, themeFallback, prefersReducedMotion, tone]);
 
   return (
     <div
@@ -378,7 +383,7 @@ export default function VideoBackground({
         ) : useCanvas ? (
           <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full opacity-25"
+            className={`absolute inset-0 w-full h-full ${tone === 'light' ? 'opacity-[0.06]' : 'opacity-25'}`}
           />
         ) : (
           <video
@@ -387,7 +392,8 @@ export default function VideoBackground({
             loop
             playsInline
             autoPlay
-            className="w-full h-full object-cover opacity-20 transition-opacity duration-700"
+            className="w-full h-full object-cover transition-opacity duration-700"
+            style={{ opacity: resolvedOpacity }}
             poster={posterSrc}
           >
             {webmSrc && <source src={webmSrc} type="video/webm" />}
@@ -395,9 +401,18 @@ export default function VideoBackground({
           </video>
         )}
 
-        {/* Ambient Overlay Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A] opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-[#0A0A0A] opacity-90" />
+        {/* Ambient overlay vignette */}
+        {tone === 'light' ? (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-transparent to-bg-dark opacity-70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-bg-dark via-transparent to-bg-dark opacity-70" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A] opacity-90" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-[#0A0A0A] opacity-90" />
+          </>
+        )}
       </motion.div>
     </div>
   );

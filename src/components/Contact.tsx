@@ -4,6 +4,7 @@ import { Shield, Film, Shirt, Github, Instagram, Linkedin, ArrowUpRight, CheckCi
 import SoundToggle from './SoundToggle';
 import sound from '../lib/sound';
 import { scrollToSection } from '../lib/scrollNav';
+import { apparelUrl, linkedInUrl, nagaApparelInstagramUrl } from '../lib/seo';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -48,7 +49,7 @@ export default function Contact() {
     <footer
       id="contact-section"
       data-section="cyber"
-      className="relative w-full bg-transparent border-t border-neutral-900 pt-20 sm:pt-24 pb-10 sm:pb-12 px-4 sm:px-6 md:px-12 text-left"
+      className="relative w-full section-canvas border-t border-neutral-200/80 pt-20 sm:pt-24 pb-10 sm:pb-12 px-4 sm:px-6 md:px-12 text-left"
     >
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-16">
         
@@ -59,41 +60,41 @@ export default function Contact() {
               <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse" />
               <span>GET IN TOUCH</span>
             </span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl md:text-6xl tracking-tight text-white uppercase leading-none mb-4">
+            <h2 className="font-display font-black text-3xl sm:text-4xl md:text-6xl tracking-tight text-neutral-900 uppercase leading-none mb-4">
               LET'S <span className="text-neutral-500">WORK TOGETHER</span>
             </h2>
-            <p className="text-xs text-neutral-400 font-mono tracking-wide leading-relaxed uppercase">
+            <p className="text-xs text-neutral-600 type-manifesto-tight leading-relaxed">
               Security audits, AI films, web builds, and streetwear. Pick what you need — I'll handle the rest.
             </p>
-            <p className="mt-3 text-sm text-neutral-300 font-sans normal-case leading-relaxed max-w-lg">
-              Maurice Holda is a Certified AI Manager in Hamburg, Germany. Naga Codex combines cybersecurity,
-              generative AI cinema, custom web development, and{' '}
+            <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed max-w-lg">
+              Maurice Holda is a Certified AI Manager, Cyber Security Analyst, and Web Developer in Hamburg, Germany.
+              Naga Codex combines cybersecurity, generative AI cinema, custom web development, and{' '}
               <a
-                href="https://www.naga-apparel.com"
+                href={apparelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-culture hover:underline underline-offset-2"
               >
-                Naga Apparel streetwear
+                Naga Club streetwear
               </a>
               .
             </p>
           </div>
 
           {/* Core Interactive Copy Banner */}
-          <div className="flex flex-col font-mono text-sm p-5 sm:p-6 rounded-xl w-full md:w-auto md:min-w-[300px] min-w-0 glass border-neutral-800/40 hover:border-neutral-700/60 transition-colors duration-300">
+          <div className="flex flex-col font-mono text-sm p-5 sm:p-6 rounded-xl w-full md:w-auto md:min-w-[300px] min-w-0 glass border-neutral-200/40 hover:border-neutral-700/60 transition-colors duration-300">
             <span className="text-[9px] text-neutral-500 uppercase tracking-widest mb-2">EMAIL ME DIRECTLY</span>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-              <span className="font-bold text-white tracking-wide break-all text-sm sm:text-base">chosenfewrecords@hotmail.de</span>
+              <span className="font-bold text-neutral-900 tracking-wide break-all text-sm sm:text-base">chosenfewrecords@hotmail.de</span>
               <button
                 onClick={handleEmailCopy}
-                className="px-3 py-1 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-[9px] text-cyber rounded-sm font-bold uppercase tracking-wider transition-colors hover:border-neutral-700 active:scale-95 cursor-pointer"
+                className="px-3 py-1 bg-neutral-900 hover:bg-neutral-800 border border-neutral-200 text-[9px] text-cyber rounded-sm font-bold uppercase tracking-wider transition-colors hover:border-neutral-700 active:scale-95 cursor-pointer"
               >
                 {copied ? 'COPIED' : 'COPY'}
               </button>
             </div>
             {copied && (
-              <span className="text-[8px] text-neutral-400 flex items-center gap-1 mt-2 tracking-widest font-sans">
+              <span className="text-[8px] text-neutral-400 flex items-center gap-1 mt-2 tracking-widest type-manifesto">
                 <CheckCircle2 className="w-3 h-3 text-cyber inline" /> Email copied to clipboard
               </span>
             )}
@@ -101,7 +102,7 @@ export default function Contact() {
         </div>
 
         {/* 2. Magnetic CTA Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-neutral-900/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-neutral-200/60">
           
           {/* CTA 1: Cyber */}
           <motion.a
@@ -110,12 +111,12 @@ export default function Contact() {
             onMouseMove={(e) => handleMagneticMove(1, e)}
             onMouseLeave={() => handleMagneticLeave(1)}
             animate={{ x: b1Offset.x, y: b1Offset.y }}
-            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-800/40 hover:border-cyber/50 hover:shadow-[0_0_24px_rgba(0,255,136,0.08)] cursor-pointer transition-ui overflow-hidden"
+            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-200/40 hover:border-cyber/50 hover:shadow-[0_0_24px_rgba(0,255,136,0.08)] cursor-pointer transition-ui overflow-hidden"
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Shield className="w-5 h-5 text-cyber mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">SECURITY AUDIT</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Harden your systems</span>
+              <span className="font-display font-extrabold text-neutral-900 text-lg tracking-wide uppercase">SECURITY AUDIT</span>
+              <span className="type-manifesto-tight text-[8.5px] text-neutral-500">Harden your systems</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-cyber group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -128,12 +129,12 @@ export default function Contact() {
             onMouseMove={(e) => handleMagneticMove(2, e)}
             onMouseLeave={() => handleMagneticLeave(2)}
             animate={{ x: b2Offset.x, y: b2Offset.y }}
-            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-800/40 hover:border-film/50 hover:shadow-[0_0_24px_rgba(255,107,53,0.08)] cursor-pointer transition-ui overflow-hidden"
+            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-200/40 hover:border-film/50 hover:shadow-[0_0_24px_rgba(255,107,53,0.08)] cursor-pointer transition-ui overflow-hidden"
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Film className="w-5 h-5 text-film mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">AI CINEMA</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Commission a film</span>
+              <span className="font-display font-extrabold text-neutral-900 text-lg tracking-wide uppercase">AI CINEMA</span>
+              <span className="type-manifesto-tight text-[8.5px] text-neutral-500">Commission a film</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-film group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-film/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -146,12 +147,12 @@ export default function Contact() {
             onMouseMove={(e) => handleMagneticMove(4, e)}
             onMouseLeave={() => handleMagneticLeave(4)}
             animate={{ x: b4Offset.x, y: b4Offset.y }}
-            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-800/40 hover:border-dev/50 hover:shadow-[0_0_24px_rgba(189,0,255,0.08)] cursor-pointer transition-ui overflow-hidden"
+            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-200/40 hover:border-dev/50 hover:shadow-[0_0_24px_rgba(189,0,255,0.08)] cursor-pointer transition-ui overflow-hidden"
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Code className="w-5 h-5 text-dev mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">WEB DEVELOPMENT</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Build something custom</span>
+              <span className="font-display font-extrabold text-neutral-900 text-lg tracking-wide uppercase">WEB DEVELOPMENT</span>
+              <span className="type-manifesto-tight text-[8.5px] text-neutral-500">Build something custom</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-dev group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-dev/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -159,19 +160,19 @@ export default function Contact() {
 
           {/* CTA 3: Wear */}
           <motion.a
-            href="https://www.naga-apparel.com"
+            href={apparelUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => sound.playClick()}
             onMouseMove={(e) => handleMagneticMove(3, e)}
             onMouseLeave={() => handleMagneticLeave(3)}
             animate={{ x: b3Offset.x, y: b3Offset.y }}
-            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-800/40 hover:border-culture/50 hover:shadow-[0_0_24px_rgba(212,168,67,0.08)] cursor-pointer transition-ui overflow-hidden"
+            className="group relative flex items-center justify-between p-7 rounded-xl glass border-neutral-200/40 hover:border-culture/50 hover:shadow-[0_0_24px_rgba(212,168,67,0.08)] cursor-pointer transition-ui overflow-hidden"
           >
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Shirt className="w-5 h-5 text-culture mb-2" />
-              <span className="font-display font-extrabold text-white text-lg tracking-wide uppercase">SHOP WEAR</span>
-              <span className="font-mono text-[8.5px] text-neutral-500 tracking-wider">Browse the collection</span>
+              <span className="font-display font-extrabold text-neutral-900 text-lg tracking-wide uppercase">SHOP WEAR</span>
+              <span className="type-manifesto-tight text-[8.5px] text-neutral-500">Browse the collection</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-culture group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-culture/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -179,44 +180,44 @@ export default function Contact() {
         </div>
 
         {/* Answer-first FAQ for search + AI engines */}
-        <section aria-labelledby="faq-heading" className="glass rounded-xl border-neutral-800/40 p-6 sm:p-8 flex flex-col gap-4">
+        <section aria-labelledby="faq-heading" className="glass rounded-xl border-neutral-200/40 p-6 sm:p-8 flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <span className="font-mono text-[9px] text-culture tracking-[0.3em] uppercase">FAQ</span>
-            <h2 id="faq-heading" className="font-display font-extrabold text-xl sm:text-2xl text-white uppercase tracking-wide">
+            <h2 id="faq-heading" className="font-display font-extrabold text-xl sm:text-2xl text-neutral-900 uppercase tracking-wide">
               Common questions
             </h2>
           </div>
           <div className="flex flex-col gap-3 text-left">
-            <details className="group border border-neutral-900 rounded-lg p-4 open:border-neutral-800">
-              <summary className="font-display font-bold text-sm text-white uppercase tracking-wide cursor-pointer list-none flex justify-between items-center">
+            <details className="group border border-neutral-200 rounded-lg p-4 open:border-neutral-200">
+              <summary className="font-display font-bold text-sm text-neutral-900 uppercase tracking-wide cursor-pointer list-none flex justify-between items-center">
                 Who is Maurice Holda?
                 <span className="font-mono text-[10px] text-neutral-500 group-open:rotate-45 transition-transform">+</span>
               </summary>
-              <p className="mt-3 text-sm text-neutral-300 font-sans leading-relaxed">
-                Maurice Holda is a Certified AI Manager and cybersecurity operator based in Hamburg. He leads Naga Codex
-                across AI strategy, security consulting, generative film, web development, and Naga streetwear.
+              <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed">
+                Maurice Holda is a Certified AI Manager, Cyber Security Analyst, and Web Developer based in Hamburg.
+                He leads Naga Codex across AI strategy, security consulting, generative film, web development, and Naga streetwear.
               </p>
             </details>
-            <details className="group border border-neutral-900 rounded-lg p-4 open:border-neutral-800">
-              <summary className="font-display font-bold text-sm text-white uppercase tracking-wide cursor-pointer list-none flex justify-between items-center">
+            <details className="group border border-neutral-200 rounded-lg p-4 open:border-neutral-200">
+              <summary className="font-display font-bold text-sm text-neutral-900 uppercase tracking-wide cursor-pointer list-none flex justify-between items-center">
                 What does Naga Codex do?
                 <span className="font-mono text-[10px] text-neutral-500 group-open:rotate-45 transition-transform">+</span>
               </summary>
-              <p className="mt-3 text-sm text-neutral-300 font-sans leading-relaxed">
+              <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed">
                 Naga Codex delivers cybersecurity audits, AI management and agent workflows, generative AI cinema,
                 custom web applications, and technical apparel through{' '}
-                <a href="https://www.naga-apparel.com" target="_blank" rel="noopener noreferrer" className="text-culture hover:underline">
-                  Naga Apparel
+                <a href={apparelUrl} target="_blank" rel="noopener noreferrer" className="text-culture hover:underline">
+                  Naga Club
                 </a>
                 .
               </p>
             </details>
-            <details className="group border border-neutral-900 rounded-lg p-4 open:border-neutral-800">
-              <summary className="font-display font-bold text-sm text-white uppercase tracking-wide cursor-pointer list-none flex justify-between items-center">
+            <details className="group border border-neutral-200 rounded-lg p-4 open:border-neutral-200">
+              <summary className="font-display font-bold text-sm text-neutral-900 uppercase tracking-wide cursor-pointer list-none flex justify-between items-center">
                 How do I get started?
                 <span className="font-mono text-[10px] text-neutral-500 group-open:rotate-45 transition-transform">+</span>
               </summary>
-              <p className="mt-3 text-sm text-neutral-300 font-sans leading-relaxed">
+              <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed">
                 Email{' '}
                 <a href="mailto:chosenfewrecords@hotmail.de" className="text-cyber hover:underline">
                   chosenfewrecords@hotmail.de
@@ -228,41 +229,43 @@ export default function Contact() {
         </section>
 
         {/* 3. Footer Bar with Socials and Audiomodule toggle */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-neutral-950 mt-12 font-mono text-[9px] text-neutral-500">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-neutral-300 mt-12 font-mono text-[9px] text-neutral-600 safe-bottom">
           
-          <div className="flex flex-col items-center md:items-start gap-1">
+          <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left order-2 md:order-none">
             <span>MAURICE HOLDA © 2026 // ALL CORES HARDENED</span>
             <span>HNGR_GER_LAT_53.55</span>
           </div>
 
           {/* Custom vector SVG Socials */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 order-1 md:order-none">
             <a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-neutral-950 border border-neutral-900 hover:border-cyber rounded-full text-neutral-400 hover:text-white transition-ui hover:scale-105"
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-cyber rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"
               aria-label="Maurice Holda's GitHub Secure Audits Profile"
               onClick={() => sound.playClick()}
             >
               <Github className="w-4 h-4" />
             </a>
             <a
-              href="https://instagram.com"
+              href={nagaApparelInstagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-neutral-950 border border-neutral-900 hover:border-film rounded-full text-neutral-400 hover:text-white transition-ui hover:scale-105"
-              aria-label="Maurice Holda's Film/Creative Instagram Profile"
+              title="Naga Apparel (@naga_apparel)"
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-film rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"
+              aria-label="Naga Apparel on Instagram (@naga_apparel)"
               onClick={() => sound.playClick()}
             >
               <Instagram className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com"
+              href={linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-neutral-950 border border-neutral-900 hover:border-culture rounded-full text-neutral-400 hover:text-white transition-ui hover:scale-105"
-              aria-label="Maurice Holda's Corporate Consulting LinkedIn Profile"
+              title="Maurice Holda on LinkedIn"
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-culture rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"
+              aria-label="Maurice Holda on LinkedIn"
               onClick={() => sound.playClick()}
             >
               <Linkedin className="w-4 h-4" />
@@ -270,20 +273,19 @@ export default function Contact() {
           </div>
 
           {/* Self-contained widget controller inside the footer bar */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-4 order-3 md:order-none">
             <SoundToggle />
+            <button
+              onClick={() => {
+                sound.playClick();
+                scrollToSection(0);
+              }}
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-cyber rounded-full text-neutral-500 hover:text-cyber active:text-cyber transition-ui cursor-pointer"
+              aria-label="Scroll to top"
+            >
+              <ChevronUp className="w-4 h-4" />
+            </button>
           </div>
-
-          <button
-            onClick={() => {
-              sound.playClick();
-              scrollToSection(0);
-            }}
-            className="p-2 bg-neutral-950 border border-neutral-800 hover:border-cyber rounded-full text-neutral-500 hover:text-cyber transition-ui hover:scale-105 cursor-pointer"
-            aria-label="Scroll to top"
-          >
-            <ChevronUp className="w-4 h-4" />
-          </button>
         </div>
       </div>
     </footer>

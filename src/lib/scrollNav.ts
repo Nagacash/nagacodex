@@ -6,6 +6,15 @@ gsap.registerPlugin(ScrollToPlugin);
 
 let pinnedScrollTrigger: ScrollTrigger | null = null;
 let pinnedTimeline: gsap.core.Timeline | null = null;
+let programmaticNavUntil = 0;
+
+export function isProgrammaticNavigation(): boolean {
+  return typeof performance !== 'undefined' && performance.now() < programmaticNavUntil;
+}
+
+function markProgrammaticNavigation(ms = 400) {
+  programmaticNavUntil = performance.now() + ms;
+}
 
 export function registerPinnedNavigation(st: ScrollTrigger, tl: gsap.core.Timeline) {
   pinnedScrollTrigger = st;
@@ -24,6 +33,41 @@ export function isTouchLikeDevice(): boolean {
     window.matchMedia('(pointer: coarse)').matches ||
     'ontouchstart' in window
   );
+}
+
+export function getActiveIndexFromTimeline(
+  tl: gsap.core.Timeline,
+  sectionCount: number,
+  handoffLeadMs = 120,
+): number {
+  const time = tl.time();
+  let active = 0;
+
+  for (let i = 1; i < sectionCount; i++) {
+    const label = tl.labels[`section-${i}`];
+    if (label === undefined) continue;
+    if (time >= label - handoffLeadMs) active = i;
+  }
+
+  return active;
+}
+
+/** Force page + pinned timeline back to section 0 (hero). */
+export function resetScrollToHero() {
+  if (typeof window === 'undefined') return;
+
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  if (pinnedScrollTrigger && pinnedTimeline) {
+    pinnedTimeline.progress(0);
+    pinnedScrollTrigger.scroll(pinnedScrollTrigger.start);
+  }
 }
 
 export function scrollToSection(index: number, behavior: ScrollBehavior = 'smooth') {
@@ -52,12 +96,15 @@ export function scrollToSection(index: number, behavior: ScrollBehavior = 'smoot
   const { start, end } = pinnedScrollTrigger;
   const targetY = start + progress * (end - start);
 
-  gsap.to(window, {
-    scrollTo: { y: targetY },
-    duration: 1.3,
-    ease: 'power3.inOut',
-    overwrite: 'auto',
-  });
+  // Kill any in-flight scroll tween — animating scroll scrubs the timeline through hero
+  gsap.killTweensOf(window);
+
+  markProgrammaticNavigation();
+
+  // Jump timeline + scroll together so we never scrub through intermediate sections
+  pinnedTimeline.progress(progress);
+  pinnedScrollTrigger.scroll(targetY);
+  window.scrollTo(0, targetY);
 }
 
 export function getSectionIndexFromScroll(scrollY: number, sectionCount: number): number {

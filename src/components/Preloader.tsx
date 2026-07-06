@@ -40,7 +40,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       {!isDone && (
         <motion.div
           id="preloader-container"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A] font-mono text-xs text-[#E8E8E8] select-none"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bg-dark font-mono text-xs text-neutral-800 select-none"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
@@ -66,7 +66,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             />
 
             {/* Wordmark NAGA CODEX */}
-            <h1 className="font-display text-2xl tracking-[0.4em] text-white font-bold text-center select-none uppercase mb-2">
+            <h1 className="font-display text-2xl tracking-[0.4em] text-neutral-900 font-bold text-center select-none uppercase mb-2">
               NAGA CODEX
             </h1>
             <div className="text-[10px] tracking-[0.2em] text-[#00FF88] opacity-80 uppercase mb-8">
@@ -74,7 +74,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             </div>
 
             {/* Loader Track */}
-            <div className="w-64 h-[2px] bg-neutral-900 rounded-full overflow-hidden relative mb-3">
+            <div className="w-64 h-[2px] bg-neutral-200 rounded-full overflow-hidden relative mb-3">
               <motion.div
                 className="h-full bg-gradient-to-r from-cyber via-film to-culture"
                 style={{ width: `${progress}%` }}

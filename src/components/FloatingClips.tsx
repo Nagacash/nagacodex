@@ -75,8 +75,8 @@ export default function FloatingClips({ theme }: FloatingClipsProps) {
             <span className="w-1.5 h-1.5 rounded-full bg-current animate-ping" />
             <span>ORBIT_VECTOR_01</span>
           </div>
-          <span className="text-neutral-500">SYS_LOCK: SECURE</span>
-          <span className="text-neutral-400">FPS: 60.00 // LATENCY: 4MS</span>
+          <span className="text-neutral-600">SYS_LOCK: SECURE</span>
+          <span className="text-neutral-500">FPS: 60.00 // LATENCY: 4MS</span>
         </div>
 
         {/* Floating wireframe hexagonal ring (Right) */}

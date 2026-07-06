@@ -1,42 +1,19 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Shield, Film, Shirt, Command, Activity, ArrowRight, Zap, Target, Cpu, Code, Award, BookOpen } from 'lucide-react';
+import { Shield, Film, Shirt, ArrowRight, Award, Code, ZoomIn } from 'lucide-react';
 import { SectionTheme, PillarData } from '../types';
 import VideoBackground from './VideoBackground';
+import CertificationLightbox from './CertificationLightbox';
 import sound from '../lib/sound';
 import { mandeFilm } from '../lib/films';
+import { certifications } from '../lib/certifications';
+import type { Certification } from '../lib/certifications';
+import { scrollToSection } from '../lib/scrollNav';
 
 export default function WhoSection() {
   const [activePillar, setActivePillar] = useState<SectionTheme>('none');
   const [hoveredPillar, setHoveredPillar] = useState<SectionTheme>('none');
-
-  // Coordinates for 3D card tilts
-  const [tilt1, setTilt1] = useState({ x: 0, y: 0 });
-  const [tilt2, setTilt2] = useState({ x: 0, y: 0 });
-  const [tilt3, setTilt3] = useState({ x: 0, y: 0 });
-  const [tilt4, setTilt4] = useState({ x: 0, y: 0 });
-
-  const handleCardTilt = (idx: number, e: React.MouseEvent<HTMLDivElement>) => {
-    const cardRect = e.currentTarget.getBoundingClientRect();
-    const cursorX = e.clientX - cardRect.left;
-    const cursorY = e.clientY - cardRect.top;
-    
-    // Convert to angle (-12deg to 12deg range limit)
-    const rx = ((cursorY / cardRect.height) - 0.5) * -12;
-    const ry = ((cursorX / cardRect.width) - 0.5) * 12;
-
-    if (idx === 1) setTilt1({ x: rx, y: ry });
-    if (idx === 2) setTilt2({ x: rx, y: ry });
-    if (idx === 3) setTilt3({ x: rx, y: ry });
-    if (idx === 4) setTilt4({ x: rx, y: ry });
-  };
-
-  const resetCardTilt = (idx: number) => {
-    if (idx === 1) setTilt1({ x: 0, y: 0 });
-    if (idx === 2) setTilt2({ x: 0, y: 0 });
-    if (idx === 3) setTilt3({ x: 0, y: 0 });
-    if (idx === 4) setTilt4({ x: 0, y: 0 });
-  };
+  const [activeCertification, setActiveCertification] = useState<Certification | null>(null);
 
   const handlePillarClick = (theme: SectionTheme) => {
     if (activePillar === theme) {
@@ -50,109 +27,62 @@ export default function WhoSection() {
     }
   };
 
-  const getTiltVal = (idx: number) => {
-    if (idx === 1) return tilt1;
-    if (idx === 2) return tilt2;
-    if (idx === 3) return tilt3;
-    return tilt4;
+  const handleSeeWork = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    sound.playClick();
+    scrollToSection(2);
+  };
+
+  const handleOpenCertification = (cert: Certification) => {
+    sound.playClick();
+    setActiveCertification(cert);
   };
 
   const pillars: PillarData[] = [
     {
       id: 'cyber',
-      title: 'CYBER SECURITY',
-      role: 'CORE ADVISOR / OPERATOR',
-      subtitle: 'DIGITAL SOVEREIGNTY',
+      title: 'Cyber Security',
+      tagline: 'Enterprise protection and audits.',
       accentClass: 'text-cyber',
       glowClass: 'glow-cyber border-cyber bg-[#00FF88]/[0.02]',
-      description: 'Consultancy operations validating enterprise network architectures. Specializing in off-sec operations, automated smart-contract auditing, red-teaming simulations, and hardening sensitive cloud infrastructure. Protecting Hamburg enterprise systems and international decentralized systems.',
-      stats: [
-        { label: 'PENTESTS COMPLETED', value: '140+' },
-        { label: 'CONTRACTS AUDITED', value: '45' },
-        { label: 'CVSS SEVERITY REDUCED', value: '98%' },
-      ],
+      description: 'Offensive security, smart-contract auditing, and cloud hardening for enterprise and decentralized systems.',
+      headlineStat: { label: 'Pentests completed', value: '140+' },
     },
     {
       id: 'film',
-      title: 'AI CINEMA',
-      role: 'DIRECTOR / SYNTHESIZER',
-      subtitle: 'GENERATIVE FUTURES',
+      title: 'AI Cinema',
+      tagline: 'Generative narrative and sound.',
       accentClass: 'text-film',
       glowClass: 'glow-film border-film bg-[#FF6B35]/[0.02]',
-      description: 'Pioneering text-to-video / image generative pipeline integration. Fabricating immersive narrative shorts, abstract computer-generated visual loops, and multi-layered soundscapes. Directing creative agencies and indie filmmakers into the era of artificial synthesizers and procedural art.',
-      stats: [
-        { label: 'GENERATED SCENES', value: '18,200+' },
-        { label: 'INDIE FESTIVALS', value: '5' },
-        { label: 'PIPELINE SPEED MULTI', value: '4.5X' },
-      ],
+      description: 'Text-to-video pipelines for immersive shorts, visual loops, and layered soundscapes.',
+      headlineStat: { label: 'Generated scenes', value: '18k+' },
     },
     {
       id: 'dev',
-      title: 'WEB DEVELOPMENT',
-      role: 'ENGINEER / ARCHITECT',
-      subtitle: 'CUSTOM APPLICATIONS',
+      title: 'Web Development',
+      tagline: 'Fast bespoke digital products.',
       accentClass: 'text-dev',
       glowClass: 'glow-dev border-dev bg-[#BD00FF]/[0.02]',
-      description: 'Engineered responsive bespoke React applications, progressive web systems, high-frequency microservice APIs, and secure serverless operations. Scaling complex design patterns into lightning-fast, standards-compliant digital interfaces.',
-      stats: [
-        { label: 'BUILD DEPLOYMENTS', value: '280+' },
-        { label: 'PERFORMANCE SCORE', value: '100%' },
-        { label: 'SYSTEM COLD START', value: '< 80ms' },
-      ],
+      description: 'React apps, PWAs, and serverless APIs built for performance and clean interfaces.',
+      headlineStat: { label: 'Deployments', value: '280+' },
     },
     {
       id: 'culture',
-      title: 'STREET CULTURE',
-      role: 'BRAND ARCHITECT',
-      subtitle: 'SUBVERSIVE STREETWEAR',
+      title: 'Street Culture',
+      tagline: 'Brutalist streetwear from Hamburg.',
       accentClass: 'text-culture',
       glowClass: 'glow-culture border-culture bg-[#D4A843]/[0.02]',
-      description: 'Founder and lead creative designer of Hamburg-based streetwear capsule line. Infusing brutalist typography, cryptographic print styles, and rugged technical garments. Translating cyber security warnings and glitch paradigms into luxury raw heavy cotton outerwear.',
-      stats: [
-        { label: 'CAPSULE RELEASES', value: '6' },
-        { label: 'WORLDWIDE ORDERS', value: '1,400+' },
-        { label: 'THREAD DENSITY (GSM)', value: '450' },
-      ],
+      description: 'Technical outerwear with cryptographic prints and rugged 450 GSM cotton construction.',
+      headlineStat: { label: 'Worldwide orders', value: '1,400+' },
     },
-  ];
-
-  const educations = [
-    {
-      institution: "AI HUB STARTPLATZ, KÖLN - DE",
-      degree: "AI MANAGER, IT",
-      period: "JANUARY 2026",
-      status: "GRADUATED WITH CERTIFICATION (AI MANAGER)",
-      skills: ["GEN-AI PIPELINES", "AGENT ARCHITECTS", "NEURAL DEPLOYMENT"],
-      accent: "text-cyber",
-      borderColor: "border-cyber/30",
-    },
-    {
-      institution: "MASTERSCHOOL UNIVERSITY, BERLIN - DE",
-      degree: "CYBER SECURITY, ANALYST",
-      period: "FEBRUARY 2025",
-      status: "GRADUATED WITH CERTIFICATION (SECURITY +)",
-      skills: ["NETWORK COMPLIANCE", "AST FUZZING", "SIEM AUDITING"],
-      accent: "text-film",
-      borderColor: "border-film/30",
-    },
-    {
-      institution: "DCI UNIVERSITY, BERLIN - DE",
-      degree: "WEBDEV, IT",
-      period: "JULY 2022",
-      status: "GRADUATED WITH CERTIFICATION (WEBDEV)",
-      skills: ["FULLSTACK SPA", "DOM FLOW DYNAMICS", "COMPILER TUNING"],
-      accent: "text-dev",
-      borderColor: "border-dev/30",
-    }
   ];
 
   return (
     <section
       id="who-section"
       data-section={hoveredPillar !== 'none' ? hoveredPillar : activePillar}
-      className="relative w-full min-h-dvh flex flex-col justify-center py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-transparent border-t border-neutral-900 transition-colors duration-700"
+      className="relative w-full min-h-dvh flex flex-col justify-center py-16 sm:py-20 px-4 sm:px-6 md:px-12 section-canvas border-t border-neutral-200/80 transition-colors duration-700"
     >
-      {/* 1. Backdrop Video Controllers (Morphs as cards are active or hovered) */}
       <AnimatePresence mode="popLayout">
         {activePillar === 'cyber' || hoveredPillar === 'cyber' ? (
           <motion.div
@@ -163,7 +93,7 @@ export default function WhoSection() {
             transition={{ duration: 0.8 }}
             className="absolute inset-0 z-0"
           >
-            <VideoBackground themeFallback="cyber" blendMode="screen" />
+            <VideoBackground themeFallback="cyber" blendMode="multiply" tone="light" />
           </motion.div>
         ) : activePillar === 'film' || hoveredPillar === 'film' ? (
           <motion.div
@@ -176,7 +106,8 @@ export default function WhoSection() {
           >
             <VideoBackground
               themeFallback="film"
-              blendMode="screen"
+              blendMode="multiply"
+              tone="light"
               webmSrc={mandeFilm.webm}
               mp4Src={mandeFilm.h264}
             />
@@ -190,7 +121,7 @@ export default function WhoSection() {
             transition={{ duration: 0.8 }}
             className="absolute inset-0 z-0"
           >
-            <VideoBackground themeFallback="dev" blendMode="screen" />
+            <VideoBackground themeFallback="dev" blendMode="multiply" tone="light" />
           </motion.div>
         ) : activePillar === 'culture' || hoveredPillar === 'culture' ? (
           <motion.div
@@ -201,34 +132,29 @@ export default function WhoSection() {
             transition={{ duration: 0.8 }}
             className="absolute inset-0 z-0"
           >
-            <VideoBackground themeFallback="culture" blendMode="screen" />
+            <VideoBackground themeFallback="culture" blendMode="multiply" tone="light" />
           </motion.div>
         ) : null}
       </AnimatePresence>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-12">
-        
-        {/* Section Header */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2 text-cyber font-mono text-[9px] tracking-[0.3em] uppercase mb-1.5">
-              <Activity className="w-3.5 h-3.5" />
-              <span>IDENTITY PROFILE // CORE PILLARS</span>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2 text-cyber font-mono text-[9px] tracking-[0.3em] uppercase">
+              <Shield className="w-3.5 h-3.5" />
+              <span>Core disciplines</span>
             </div>
-            <h2 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-white uppercase leading-none">
-              WHO IS <span className="text-neutral-400">MAURICE HOLDA</span>
+            <h2 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-neutral-900 uppercase leading-none">
+              Who is <span className="text-neutral-500">Maurice Holda</span>
             </h2>
           </div>
-          <p className="max-w-md text-xs font-mono text-neutral-500 tracking-wide uppercase text-left md:text-right">
-            NAGA CODEX represents the convergence of systemic protection, synthetic visual generation, and tangible tactile wearable artifacts.
+          <p className="max-w-sm type-manifesto text-sm text-neutral-800 leading-relaxed md:text-right">
+            Four disciplines. One operator.
           </p>
         </div>
 
-        {/* 2. Interactive Columns grid list */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-start">
-          {pillars.map((pillar, idx) => {
-            const index = idx + 1;
-            const tilt = getTiltVal(index);
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+          {pillars.map((pillar) => {
             const isActive = activePillar === pillar.id;
             const isAnyActive = activePillar !== 'none';
             const isDimmed = isAnyActive && !isActive;
@@ -236,151 +162,123 @@ export default function WhoSection() {
             return (
               <motion.div
                 key={pillar.id}
-                onMouseMove={(e) => handleCardTilt(index, e)}
-                onMouseLeave={() => {
-                  resetCardTilt(index);
-                  setHoveredPillar('none');
-                }}
+                onMouseLeave={() => setHoveredPillar('none')}
                 onMouseEnter={() => setHoveredPillar(pillar.id)}
                 onClick={() => handlePillarClick(pillar.id)}
-                className={`tilt-card text-left select-none relative p-6 border rounded-xl overflow-hidden cursor-pointer transition-ui ${
-                  isActive || hoveredPillar === pillar.id ? pillar.glowClass : 'glass border-neutral-800/40'
-                } ${isDimmed ? 'opacity-40 scale-[0.98]' : 'hover:scale-[1.01]'}`}
-                style={{
-                  transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(0)`,
-                  transition: 'transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s, scale 0.3s',
-                }}
+                className={`text-left select-none relative p-6 sm:p-8 border rounded-xl overflow-hidden cursor-pointer transition-ui border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm ${
+                  isDimmed ? 'opacity-40' : ''
+                }`}
               >
-                {/* Accent glow corner indicator */}
-                <div className={`absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r ${
-                  pillar.id === 'cyber' ? 'from-cyber' : pillar.id === 'film' ? 'from-film' : pillar.id === 'dev' ? 'from-dev' : 'from-culture'
-                } to-transparent`} />
-
-                {/* Index marker */}
-                <div className="w-full flex justify-between items-center mb-6 font-mono text-[9px] text-neutral-600">
-                  <span>CODE_V{index}.0</span>
-                  <span>[{pillar.subtitle}]</span>
-                </div>
-
-                {/* Pillar Icon */}
-                <div className={`mb-6 p-3 rounded-lg w-fit bg-neutral-900 border border-neutral-800 ${pillar.accentClass}`}>
+                <div className={`mb-5 ${pillar.accentClass}`}>
                   {pillar.id === 'cyber' && <Shield className="w-6 h-6" />}
                   {pillar.id === 'film' && <Film className="w-6 h-6" />}
                   {pillar.id === 'dev' && <Code className="w-6 h-6" />}
                   {pillar.id === 'culture' && <Shirt className="w-6 h-6" />}
                 </div>
 
-                <h3 className="font-display font-extrabold text-xl tracking-wide text-white uppercase mb-1">
+                <h3 className="font-display font-extrabold text-xl tracking-tight text-neutral-900 mb-2">
                   {pillar.title}
                 </h3>
-                <p className="font-mono text-[9px] text-neutral-400 tracking-wider mb-6">
-                  {pillar.role}
+                <p className="type-manifesto text-sm text-neutral-800 leading-relaxed">
+                  {pillar.tagline}
                 </p>
 
-                {/* Inline expand animation details */}
                 <AnimatePresence initial={false}>
                   {isActive ? (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: 'easeInOut' }}
+                      transition={{ duration: 0.35, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="pt-4 border-t border-neutral-900 mt-4 flex flex-col gap-5">
-                        
-                        <p className="text-xs text-neutral-300 leading-relaxed font-sans">
+                      <div className="pt-6 mt-6 border-t border-neutral-200 flex flex-col gap-5">
+                        <p className="text-sm text-neutral-700 leading-relaxed type-manifesto">
                           {pillar.description}
                         </p>
 
-                        {/* Live dynamic metrics listing inside expanded box */}
-                        <div className="flex flex-col gap-2 pt-2 border-t border-neutral-900">
-                          {pillar.stats.map((s, sIdx) => (
-                            <div key={sIdx} className="flex justify-between items-center font-mono text-[9.5px]">
-                              <span className="text-neutral-500 uppercase">{s.label}</span>
-                              <span className={`font-bold ${pillar.accentClass}`}>{s.value}</span>
-                            </div>
-                          ))}
+                        <div className="flex justify-between items-center type-manifesto text-sm">
+                          <span className="text-neutral-500">{pillar.headlineStat.label}</span>
+                          <span className={`font-semibold ${pillar.accentClass}`}>
+                            {pillar.headlineStat.value}
+                          </span>
                         </div>
 
-                        {/* Expandable CTA panel */}
-                        <div className="flex items-center gap-1 font-mono text-[8.5px] uppercase tracking-widest text-[#E8E8E8] group/card mt-2">
-                          <span>EXPLORE CONTRACTS</span>
-                          <ArrowRight className="w-3.5 h-3.5 text-current group-hover/card:translate-x-1 transition-transform" />
-                        </div>
+                        <button
+                          type="button"
+                          onClick={handleSeeWork}
+                          className="inline-flex items-center gap-2 self-start min-h-[44px] text-sm text-neutral-700 hover:text-neutral-900 transition-colors group/link"
+                        >
+                          See work
+                          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-0.5 transition-transform" />
+                        </button>
                       </div>
                     </motion.div>
-                  ) : (
-                    <div className="flex justify-between items-center text-[10px] font-mono text-neutral-500 uppercase mt-4 pt-4 border-t border-neutral-900/40">
-                      <span>ACTIVATE MODULE</span>
-                      <Command className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
-                    </div>
-                  )}
+                  ) : null}
                 </AnimatePresence>
               </motion.div>
             );
           })}
         </div>
 
-        {/* 3. Academic Dossier & certifications sub-panel */}
-        <div className="mt-12 pt-10 border-t border-neutral-900/60 text-left">
+        <div className="pt-10 border-t border-neutral-200 text-left">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2 text-culture font-mono text-[9px] tracking-[0.3em] uppercase mb-1.5">
-                <Award className="w-3.5 h-3.5 text-[#D4A843]" />
-                <span>VERIFIED SCHOLASTIC LEDGER // CERTIFICATIONS</span>
+            <div className="flex flex-col gap-3 max-w-xl">
+              <div className="flex items-center gap-2 text-culture font-mono text-[9px] tracking-[0.3em] uppercase">
+                <Award className="w-3.5 h-3.5 text-culture" />
+                <span>Certifications</span>
               </div>
-              <h3 className="font-display font-black text-2xl md:text-3xl tracking-tight text-white uppercase leading-none">
-                ACADEMIC <span className="text-neutral-500">DOSSIER</span>
+              <h3 className="font-display font-black text-2xl md:text-3xl tracking-tight text-neutral-900 uppercase leading-none">
+                Verified <span className="text-neutral-500">credentials</span>
               </h3>
+              <p className="type-manifesto text-sm text-neutral-700 leading-relaxed max-w-md">
+                AZAV-certified programs from Cert-IT, Masterschool, and DCI — documented training, not self-taught claims.
+              </p>
             </div>
-            <p className="max-w-xs text-[9px] font-mono text-neutral-500 tracking-wide uppercase">
-              DECENTRALIZED CREDENTIAL RECORDS SECURED WITH ENTERPRISE CERTIFICATE KEY PAIRS.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {educations.map((edu, idx) => (
-              <div 
-                key={idx}
-                className={`relative p-5 rounded-lg bg-neutral-950/40 border ${edu.borderColor} glass hover:bg-neutral-950/70 transition-ui flex flex-col justify-between h-48 group`}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {certifications.map((cert) => (
+              <button
+                key={cert.id}
+                type="button"
+                onClick={() => handleOpenCertification(cert)}
+                className={`group text-left flex flex-col rounded-xl bg-white border ${cert.borderColor} shadow-xs hover:shadow-md hover:border-neutral-300 transition-ui overflow-hidden cursor-pointer`}
               >
-                {/* Visual side accent dot */}
-                <div className="absolute top-4 right-4 flex items-center gap-1.5 text-[8.5px] font-mono text-neutral-500 bg-neutral-900/60 px-2 py-0.5 rounded border border-neutral-800">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>{edu.period}</span>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <span className="text-[7.5px] text-neutral-500 font-mono tracking-widest uppercase">
-                    {edu.institution}
-                  </span>
-                  <h4 className="font-display font-extrabold text-base text-white tracking-wide uppercase leading-tight group-hover:text-[#D4A843] transition-colors duration-300">
-                    {edu.degree}
-                  </h4>
-                  <span className="text-[9.5px] font-mono font-bold text-neutral-400 uppercase tracking-wide leading-none flex items-center gap-1.5">
-                    <BookOpen className="w-3 h-3 text-neutral-600" />
-                    <span>{edu.status}</span>
-                  </span>
-                </div>
-
-                {/* Micro tech tags listing skill competencies */}
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-neutral-900">
-                  {edu.skills.map((sk, i) => (
-                    <span 
-                      key={i} 
-                      className="text-[7px] font-mono bg-neutral-900 px-1.5 py-0.5 rounded-sm border border-neutral-800 text-neutral-500 uppercase tracking-wider"
-                    >
-                      {sk}
+                <div className="relative aspect-[3/4] bg-neutral-100 border-b border-neutral-200 overflow-hidden">
+                  <img
+                    src={cert.image}
+                    alt={`${cert.title} certificate — ${cert.issuer}`}
+                    className="w-full h-full object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider bg-white text-neutral-900 px-3 py-2 rounded-full border border-neutral-200 shadow-sm">
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      View certificate
                     </span>
-                  ))}
+                  </div>
                 </div>
-              </div>
+
+                <div className="p-5 flex flex-col gap-2">
+                  <span className="text-[10px] text-neutral-500 type-manifesto">{cert.issuer}</span>
+                  <h4 className={`font-display font-extrabold text-lg text-neutral-900 tracking-tight ${cert.accentClass}`}>
+                    {cert.title}
+                  </h4>
+                  <span className="font-mono text-xs text-neutral-500">{cert.completed}</span>
+                  <p className="type-manifesto text-xs text-neutral-600 leading-relaxed pt-1">{cert.detail}</p>
+                </div>
+              </button>
             ))}
           </div>
         </div>
-
       </div>
+
+      <CertificationLightbox
+        certification={activeCertification}
+        onClose={() => setActiveCertification(null)}
+      />
     </section>
   );
 }

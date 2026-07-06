@@ -3,6 +3,10 @@ const BG_MUSIC_URL = new URL(
   import.meta.url
 ).href;
 
+const MUTE_STORAGE_KEY = 'naga_bg_muted';
+
+type SoundChangeListener = (enabled: boolean) => void;
+
 class SoundManager {
   private ctx: AudioContext | null = null;
   private isEnabled: boolean = false;
@@ -12,6 +16,9 @@ class SoundManager {
   private droneOscs: OscillatorNode[] = [];
   private droneGain: GainNode | null = null;
   private filter: BiquadFilterNode | null = null;
+  private listeners = new Set<SoundChangeListener>();
+  private mobileAutoplayArmed = false;
+  private mobileAutoplayCleanup: (() => void) | null = null;
 
   init() {
     if (this.ctx) return;
@@ -22,26 +29,104 @@ class SoundManager {
     }
   }
 
-  toggle(forceState?: boolean): boolean {
-    this.init();
-    if (!this.ctx) return false;
+  onChange(listener: SoundChangeListener) {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
 
+  private notify() {
+    this.listeners.forEach((listener) => listener(this.isEnabled));
+  }
+
+  private isUserMuted() {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem(MUTE_STORAGE_KEY) === 'true';
+  }
+
+  private persistMutePreference(muted: boolean) {
+    if (typeof window === 'undefined') return;
+    if (muted) {
+      localStorage.setItem(MUTE_STORAGE_KEY, 'true');
+    } else {
+      localStorage.removeItem(MUTE_STORAGE_KEY);
+    }
+  }
+
+  /** Mobile browsers block autoplay until a user gesture — arm listeners + retry. */
+  armMobileAutoplay() {
+    if (typeof window === 'undefined' || this.mobileAutoplayArmed) return;
+    if (this.isUserMuted()) return;
+
+    const isTouchDevice =
+      window.matchMedia('(max-width: 767px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      'ontouchstart' in window;
+
+    if (!isTouchDevice) return;
+
+    this.mobileAutoplayArmed = true;
+
+    const tryEnable = () => {
+      if (this.isUserMuted() || this.isEnabled) return;
+      this.toggle(true);
+    };
+
+    const onGesture = () => {
+      tryEnable();
+      this.teardownMobileAutoplayListeners();
+    };
+
+    const events: Array<keyof WindowEventMap> = [
+      'touchstart',
+      'touchend',
+      'pointerdown',
+      'click',
+    ];
+
+    events.forEach((event) => {
+      window.addEventListener(event, onGesture, { once: true, passive: true });
+    });
+
+    this.mobileAutoplayCleanup = () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, onGesture);
+      });
+    };
+
+    // Works on some Android builds; iOS will unlock on the first gesture above.
+    tryEnable();
+  }
+
+  private teardownMobileAutoplayListeners() {
+    this.mobileAutoplayCleanup?.();
+    this.mobileAutoplayCleanup = null;
+  }
+
+  toggle(forceState?: boolean): boolean {
     const nextState = forceState !== undefined ? forceState : !this.isEnabled;
     if (nextState === this.isEnabled) return this.isEnabled;
 
     this.isEnabled = nextState;
+    this.persistMutePreference(!this.isEnabled);
 
     if (this.isEnabled) {
-      if (this.ctx.state === 'suspended') {
+      this.init();
+      if (this.ctx?.state === 'suspended') {
         this.ctx.resume();
       }
       this.startMusic();
-      this.startDrone();
+      if (this.ctx) {
+        this.startDrone();
+      }
     } else {
       this.stopMusic();
-      this.stopDrone();
+      if (this.ctx) {
+        this.stopDrone();
+      }
+      this.teardownMobileAutoplayListeners();
     }
 
+    this.notify();
     return this.isEnabled;
   }
 
@@ -71,6 +156,8 @@ class SoundManager {
         this.musicAudio = new Audio(BG_MUSIC_URL);
         this.musicAudio.loop = true;
         this.musicAudio.volume = 0.4;
+        this.musicAudio.preload = 'auto';
+        this.musicAudio.setAttribute('playsinline', '');
       }
       this.musicAudio.play().catch(() => {});
     } catch (e) {}

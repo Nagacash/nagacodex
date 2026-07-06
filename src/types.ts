@@ -10,15 +10,17 @@ export interface ProjectItem {
   videoSrc?: string;
   videoFallbackSrc?: string;
   externalUrl?: string;
-  aspectClass: string;
+  tagline?: string;
+  detailLine?: string;
+  ctaLabel?: string;
+  aspectClass?: string;
 }
 
 export interface PillarData {
   id: SectionTheme;
   title: string;
-  role: string;
-  subtitle: string;
-  stats: { label: string; value: string }[];
+  tagline: string;
+  headlineStat: { label: string; value: string };
   description: string;
   accentClass: string;
   glowClass: string;
