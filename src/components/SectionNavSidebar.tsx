@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { createPortal } from 'react-dom';
-import { BookOpen } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { getSectionAccentColor, sectionNavLabels } from '../lib/sections';
 
 interface SectionNavSidebarProps {
@@ -60,13 +60,13 @@ function SectionNavSidebar({
       <button
         type="button"
         onClick={onManualOpen}
-        className="group relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-white border border-neutral-200 hover:border-culture text-neutral-500 hover:text-culture cursor-pointer active:scale-95 transition-[border-color,color,transform] duration-150"
-        title="Open Developer Blueprints Support manual"
+        className="group relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-white border border-neutral-200 hover:border-neutral-800 text-neutral-500 hover:text-neutral-900 cursor-pointer active:scale-95 transition-[border-color,color,transform] duration-150"
+        title="Open source repos"
       >
-        <span className="section-nav-tooltip hidden md:block absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-[opacity,transform] duration-150 bg-white border border-neutral-200 text-[8px] font-mono text-culture tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase shadow-sm">
-          BOOK A CALL
+        <span className="section-nav-tooltip hidden md:block absolute right-10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-[opacity,transform] duration-150 bg-white border border-neutral-200 text-[8px] font-mono text-neutral-800 tracking-widest px-2.5 py-1 rounded-md whitespace-nowrap uppercase shadow-sm">
+          OPEN SOURCE
         </span>
-        <BookOpen className="w-4 h-4" />
+        <Github className="w-4 h-4" />
       </button>
     </nav>
   );

@@ -147,17 +147,17 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       setShowIndicator(false);
       clearTimeout(timer);
 
-      // Trigger reveal after exactly 1 second of resting scroll position
+      // Trigger reveal after 300ms of resting scroll position
       timer = setTimeout(() => {
         setShowIndicator(true);
-      }, 1000);
+      }, 300);
     };
 
     window.addEventListener('scroll', handleScrollActivity, { passive: true });
-    // Initialize
+    // Initialize — show quickly on load
     timer = setTimeout(() => {
       setShowIndicator(true);
-    }, 1000);
+    }, 300);
 
     return () => {
       window.removeEventListener('scroll', handleScrollActivity);
@@ -877,9 +877,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
         onManualOpen={handleManualOpen}
       />
 
-      {!nativeLayout && (
+      {/* Scroll idle indicator HUD — shown on all devices */}
+      {true && (
         <>
-        {/* Scroll idle indicator HUD — desktop pinned only */}
         <div
           ref={scrollIndicatorRef}
           className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-fixed safe-bottom flex flex-col items-center gap-1.5 transition-ui transform ${

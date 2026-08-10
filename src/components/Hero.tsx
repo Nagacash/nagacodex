@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, useMotionValue } from 'motion/react';
-import { HelpCircle, ChevronDown, Monitor, Shield, Layers, Award, MapPin, CheckCircle2, BookOpen } from 'lucide-react';
+import { HelpCircle, ChevronDown, Monitor, Shield, Layers, Award, MapPin, CheckCircle2 } from 'lucide-react';
 import VideoBackground from './VideoBackground';
 import FloatingClips from './FloatingClips';
 import SoundToggle from './SoundToggle';
@@ -396,16 +396,17 @@ export default function Hero() {
 
         <button
           type="button"
-          className="flex flex-col items-center gap-1.5 group mx-auto min-h-11 py-1 cursor-pointer order-first sm:order-none"
+          className="flex flex-col items-center gap-1 group mx-auto min-h-11 py-1 cursor-pointer order-first sm:order-none"
           onClick={() => {
             sound.playClick();
             scrollToSection(1);
           }}
+          aria-label="Scroll to next section"
         >
-          <span className="text-[7.5px] text-neutral-500 group-hover:text-neutral-900 group-active:text-neutral-900 transition-colors tracking-[0.3em]">
-            SEC_WHO
+          <span className="text-[8px] font-semibold text-neutral-700 group-hover:text-neutral-900 group-active:text-neutral-900 transition-colors tracking-[0.2em] uppercase">
+            Scroll
           </span>
-          <ChevronDown className="w-5 h-5 text-cyber" />
+          <ChevronDown className="w-5 h-5 text-cyber animate-bounce" />
         </button>
 
         <div className="hidden sm:flex flex-col items-end text-right gap-0.5">

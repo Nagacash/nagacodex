@@ -6,6 +6,7 @@ import { mandeFilm } from '../lib/films';
 import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
+import mandeStill from '../assets/images/mande-still.jpg';
 import ProjectDetailModal from './ProjectDetailModal';
 import FilmPreviewModal from './FilmPreviewModal';
 
@@ -63,7 +64,7 @@ const projects: ProjectItem[] = [
     title: 'Mandé Oyapock',
     category: 'AI film',
     tags: ['Sora AI'],
-    thumbnail: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=800&q=80',
+    thumbnail: mandeStill,
     videoSrc: mandeFilm.webm,
     videoFallbackSrc: mandeFilm.h264,
     tagline: 'Generative AI short film.',
