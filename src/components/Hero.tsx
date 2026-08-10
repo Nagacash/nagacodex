@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, useMotionValue } from 'motion/react';
-import { HelpCircle, ChevronDown, Monitor, Shield, Layers, Award, MapPin, CheckCircle2 } from 'lucide-react';
+import { HelpCircle, ChevronDown, Monitor, Shield, Layers, Award, MapPin, CheckCircle2, Github } from 'lucide-react';
 import VideoBackground from './VideoBackground';
 import FloatingClips from './FloatingClips';
 import SoundToggle from './SoundToggle';
@@ -163,7 +163,7 @@ export default function Hero() {
             className="flex md:hidden items-center justify-center gap-1.5 px-3 py-2 min-h-11 rounded border border-neutral-200 bg-white text-[#D4A843] active:scale-95 transition-transform cursor-pointer text-[8px] shrink-0"
             title="Open Blueprints DB"
           >
-            <BookOpen className="w-3.5 h-3.5" />
+            <Github className="w-3.5 h-3.5" />
             <span>EXPLORE WORK</span>
           </button>
 
@@ -176,7 +176,7 @@ export default function Hero() {
               className="flex items-center gap-1.5 text-neutral-500 hover:text-[#D4A843] transition-colors cursor-pointer group"
               title="Open Blueprints Manual"
             >
-              <BookOpen className="w-3.5 h-3.5 text-[#D4A843] group-hover:scale-110 transition-transform" />
+              <Github className="w-3.5 h-3.5 text-[#D4A843] group-hover:scale-110 transition-transform" />
               <span className="underline decoration-neutral-300 hover:decoration-[#D4A843] transition-ui">EXPLORE WORK</span>
             </button>
             <div className="flex items-center gap-1.5">
