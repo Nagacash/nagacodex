@@ -234,12 +234,17 @@ export default function Contact() {
           <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left order-2 md:order-none">
             <span>MAURICE HOLDA © 2026 // ALL CORES HARDENED</span>
             <span>HNGR_GER_LAT_53.55</span>
+            <div className="flex gap-3 mt-1">
+              <a href="/impressum.html" className="hover:text-neutral-900 transition-colors">Impressum</a>
+              <span>·</span>
+              <a href="/datenschutz.html" className="hover:text-neutral-900 transition-colors">Datenschutz</a>
+            </div>
           </div>
 
           {/* Custom vector SVG Socials */}
           <div className="flex items-center gap-4 order-1 md:order-none">
             <a
-              href="https://github.com"
+              href="https://github.com/Nagacash"
               target="_blank"
               rel="noopener noreferrer"
               className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-cyber rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"

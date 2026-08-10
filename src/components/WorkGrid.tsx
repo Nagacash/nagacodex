@@ -6,6 +6,9 @@ import { mandeFilm } from '../lib/films';
 import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
+// Images hosted on CDN — not bundled as local assets
+const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
+const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
 import ProjectDetailModal from './ProjectDetailModal';
 import FilmPreviewModal from './FilmPreviewModal';
 
@@ -20,50 +23,61 @@ interface WorkflowArea {
 
 const workflowAreas: WorkflowArea[] = [
   {
-    id: 'security',
+    id: 'agents',
     number: '01',
-    title: 'Security & governance',
+    title: 'AI Agents & Automation',
     description:
-      'Offensive audits, smart-contract reviews, and AI governance so products ship with measurable risk reduction.',
-    tags: ['Pentesting', 'Smart contracts', 'Cloud hardening', 'Compliance'],
+      'Custom agent systems that research, decide, and act — from intake bots and data pipelines to fully autonomous workflows. Built with Gemini, Claude, and MCP; shipped production-ready.',
+    tags: ['Gemini API', 'Claude SDK', 'n8n', 'LangGraph', 'MCP'],
     accentClass: 'text-cyber',
   },
   {
     id: 'cinema',
     number: '02',
-    title: 'AI cinema & media',
+    title: 'AI Cinema & Media',
     description:
-      'Text-to-video pipelines, generative narrative, and layered sound design for shorts and brand films.',
-    tags: ['Sora AI', 'Sound design', 'Color grade', 'FFmpeg'],
+      'Text-to-video pipelines, generative narrative, and layered sound design for shorts and brand films. From script to final grade.',
+    tags: ['Sora AI', 'Kling', 'Sound design', 'Color grade', 'FFmpeg'],
     accentClass: 'text-film',
   },
   {
     id: 'product',
     number: '03',
-    title: 'Web & product',
+    title: 'Web & Product',
     description:
-      'React apps, serverless APIs, and clean interfaces built for performance, clarity, and maintainability.',
-    tags: ['React', 'TypeScript', 'GSAP', 'Vercel'],
+      'React apps, serverless APIs, and sharp interfaces built for performance and maintainability. Full-stack when needed; always production-ready.',
+    tags: ['React', 'TypeScript', 'GSAP', 'Vercel', 'Tailwind'],
     accentClass: 'text-dev',
   },
   {
-    id: 'brand',
+    id: 'security',
     number: '04',
-    title: 'Street & brand',
+    title: 'Security & Governance',
     description:
-      'Technical apparel and brutalist brand systems rooted in Hamburg street culture and direct-to-fan commerce.',
-    tags: ['450 GSM', 'Print systems', 'E-commerce', 'nagaclub.de'],
-    accentClass: 'text-culture',
+      'Offensive audits, smart-contract reviews, and AI governance frameworks so products ship with measurable risk reduction.',
+    tags: ['Pentesting', 'Smart contracts', 'Cloud hardening', 'Compliance'],
+    accentClass: 'text-neutral-500',
   },
 ];
 
 const projects: ProjectItem[] = [
   {
+    id: 'p1',
+    title: 'Naga Codex — this site',
+    category: 'Web & Product',
+    tags: ['React 19', 'GSAP', 'TypeScript'],
+    thumbnail: agentsVisual,
+    tagline: 'Personal brand hub built from scratch.',
+    detailLine: 'React 19, Tailwind v4, GSAP scroll-pinned transitions, multi-format video, structured SEO — shipped solo from Hamburg.',
+    ctaLabel: 'View source',
+    externalUrl: 'https://github.com/Nagacash/nagacodex',
+  },
+  {
     id: 'p2',
     title: 'Mandé Oyapock',
     category: 'AI film',
     tags: ['Sora AI'],
-    thumbnail: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=800&q=80',
+    thumbnail: mandeStill,
     videoSrc: mandeFilm.webm,
     videoFallbackSrc: mandeFilm.h264,
     tagline: 'Generative AI short film.',
@@ -135,7 +149,7 @@ export default function WorkGrid() {
             </h2>
           </div>
           <p className="max-w-md type-manifesto text-sm text-neutral-800 leading-relaxed md:text-right">
-            Four areas that shape how Naga Codex ships — from security and AI film to product engineering and streetwear.
+            Four disciplines, one studio — AI agents, generative film, web engineering, and security from Hamburg.
           </p>
         </div>
 
