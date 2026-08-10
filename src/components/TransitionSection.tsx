@@ -93,7 +93,7 @@ export default function TransitionSection({
         } ${
           index === 0
             ? 'h-full min-h-0 justify-start overflow-hidden py-0'
-            : index === 5 || index === 4 || index === 2 || index === 6
+            : index === 5 || index === 4 || index === 2 || index === 6 || index === 1
               ? 'justify-start py-4 sm:py-6 md:py-8'
               : 'justify-center'
         }`}
