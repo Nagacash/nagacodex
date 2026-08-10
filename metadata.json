@@ -1,6 +1,5 @@
 {
-  "name": "NAGA CODEX",
-  "description": "Interactive landing page for NAGA CODEX, the personal brand of Maurice Holda: cyber security consultant, AI filmmaker, and streetwear brand owner space in Hamburg.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "name": "Naga Codex",
+  "description": "Personal brand site for Maurice Holda — AI agents, generative film, web development, and security consulting from Hamburg, Germany.",
+  "url": "https://nagacodex.cloud"
 }

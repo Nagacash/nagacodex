@@ -6,7 +6,9 @@ import { mandeFilm } from '../lib/films';
 import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
-import mandeStill from '../assets/images/mande-still.jpg';
+// Images hosted on CDN — not bundled as local assets
+const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
+const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
 import ProjectDetailModal from './ProjectDetailModal';
 import FilmPreviewModal from './FilmPreviewModal';
 
@@ -59,6 +61,17 @@ const workflowAreas: WorkflowArea[] = [
 ];
 
 const projects: ProjectItem[] = [
+  {
+    id: 'p1',
+    title: 'Naga Codex — this site',
+    category: 'Web & Product',
+    tags: ['React 19', 'GSAP', 'TypeScript'],
+    thumbnail: agentsVisual,
+    tagline: 'Personal brand hub built from scratch.',
+    detailLine: 'React 19, Tailwind v4, GSAP scroll-pinned transitions, multi-format video, structured SEO — shipped solo from Hamburg.',
+    ctaLabel: 'View source',
+    externalUrl: 'https://github.com/Nagacash/nagacodex',
+  },
   {
     id: 'p2',
     title: 'Mandé Oyapock',
