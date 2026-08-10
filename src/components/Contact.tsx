@@ -247,7 +247,7 @@ export default function Contact() {
               href="https://github.com/Nagacash"
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-cyber rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-cyber rounded-lg text-[#8B9BB4] hover:text-[#E8EDF5] active:text-[#E8EDF5] transition-ui"
               aria-label="Maurice Holda's GitHub Secure Audits Profile"
               onClick={() => sound.playClick()}
             >
@@ -258,7 +258,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               title="Naga Apparel (@naga_apparel)"
-              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-film rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-film rounded-lg text-[#8B9BB4] hover:text-[#E8EDF5] active:text-[#E8EDF5] transition-ui"
               aria-label="Naga Apparel on Instagram (@naga_apparel)"
               onClick={() => sound.playClick()}
             >
@@ -269,7 +269,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               title="Maurice Holda on LinkedIn"
-              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-culture rounded-full text-neutral-400 hover:text-neutral-900 active:text-neutral-900 transition-ui"
+              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-culture rounded-lg text-[#8B9BB4] hover:text-[#E8EDF5] active:text-[#E8EDF5] transition-ui"
               aria-label="Maurice Holda on LinkedIn"
               onClick={() => sound.playClick()}
             >
@@ -285,7 +285,7 @@ export default function Contact() {
                 sound.playClick();
                 scrollToSection(0);
               }}
-              className="tap-target flex items-center justify-center p-3 bg-white border border-neutral-200 hover:border-cyber rounded-full text-neutral-500 hover:text-cyber active:text-cyber transition-ui cursor-pointer"
+              className="tap-target flex items-center justify-center p-3 bg-[#162035] border border-white/10 hover:border-cyber/50 rounded-lg text-[#8B9BB4] hover:text-cyber active:text-cyber transition-ui cursor-pointer"
               aria-label="Scroll to top"
             >
               <ChevronUp className="w-4 h-4" />

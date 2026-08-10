@@ -276,7 +276,7 @@ export default function WorkGrid() {
                       isHovered ? 'opacity-100' : 'opacity-0'
                     }`}
                   >
-                    <span className="inline-flex items-center gap-2 type-manifesto text-sm bg-white text-neutral-900 px-4 py-2.5 rounded-full border border-neutral-200 shadow-lg">
+                    <span className="inline-flex items-center gap-2 type-manifesto text-sm bg-[#0F1929] text-[#E8EDF5] px-4 py-2.5 rounded-lg border border-white/20 shadow-lg">
                       {proj.videoSrc ? (
                         <Play className="w-4 h-4 fill-neutral-900" />
                       ) : (

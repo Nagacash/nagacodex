@@ -19,7 +19,7 @@ const CookieBanner = lazy(() => import('./components/CookieBanner'));
 
 const SectionFallback = () => (
   <div className="min-h-dvh w-full bg-bg-dark flex items-center justify-center">
-    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-widest animate-pulse">
+    <span className="font-mono text-[10px] text-[#8B9BB4] uppercase tracking-widest animate-pulse">
       Loading…
     </span>
   </div>
@@ -58,7 +58,7 @@ export default function App() {
           <CustomCursor />
           <ClickBurst />
 
-          <div className="fixed inset-0 pointer-events-none z-20 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.55),transparent_70%)]" />
+          <div className="fixed inset-0 pointer-events-none z-20 bg-[radial-gradient(ellipse_at_50%_-10%,rgba(0,255,136,0.05),transparent_60%)]" />
 
           <FixedNavbar />
 

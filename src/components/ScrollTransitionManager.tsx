@@ -888,7 +888,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
         >
           {/* Chevron and active segment display */}
           <div
-            className="flex items-center gap-2 px-4 py-2.5 min-h-11 rounded-full border border-neutral-200 bg-white/90 backdrop-blur-md shadow-sm animate-bounce cursor-pointer text-[8px] font-mono tracking-widest uppercase transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 min-h-11 rounded-lg border border-white/15 bg-[#0F1929]/95 backdrop-blur-md shadow-lg animate-bounce cursor-pointer text-[8px] font-mono tracking-widest uppercase transition-colors text-[#E8EDF5]"
             style={{ color: currentAccent, borderColor: `${currentAccent}33` }}
             onClick={() => handleDotClick(Math.min(activeIndex + 1, numSections - 1))}
             role="button"
