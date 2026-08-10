@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, useMotionValue } from 'motion/react';
-import { HelpCircle, ChevronDown, Monitor, Shield, Layers, Award, MapPin, CheckCircle2, Github } from 'lucide-react';
+import { HelpCircle, ChevronDown, Monitor, Shield, Layers, MapPin, CheckCircle2, Github } from 'lucide-react';
 import VideoBackground from './VideoBackground';
 import FloatingClips from './FloatingClips';
 import SoundToggle from './SoundToggle';
@@ -307,81 +307,141 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Card 2: Professional Playbook & Credentials */}
-          <div className="lg:col-span-8 flex flex-col gap-5 justify-between">
-            {/* Playbook Description */}
-            <div className="glass rounded-xl p-4 sm:p-6 flex flex-col gap-4 flex-1 hover:border-neutral-300 transition-colors duration-300">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 pb-3 border-b border-neutral-200">
-                <div className="flex items-start gap-2 font-mono text-[7.5px] sm:text-[8.5px] text-culture tracking-widest uppercase leading-relaxed">
-                  <Award className="w-3.5 h-3.5 text-culture animate-pulse shrink-0 mt-0.5" />
-                  <span>AI Agents · Film · Web Dev · Security — Hamburg</span>
+          {/* Card 2: AI Chat Interface */}
+          <div className="lg:col-span-8 flex flex-col gap-4">
+
+            {/* ChatGPT-style conversation window */}
+            <div className="flex flex-col rounded-xl overflow-hidden border border-white/10 bg-[#08111E]">
+
+              {/* Window chrome bar */}
+              <div className="flex items-center gap-3 px-4 py-2.5 border-b border-white/10 bg-[#050C17]">
+                <div className="flex gap-1.5 shrink-0">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
                 </div>
-                <div className="font-mono text-[7px] text-neutral-500 shrink-0">PLAYBOOK // N_C_DEC_0</div>
+                <div className="flex items-center gap-2 mx-auto">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse shadow-[0_0_8px_#00FF88]" />
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#E8EDF5] font-bold uppercase">NAGA CODEX AI</span>
+                </div>
+                <span className="shrink-0 font-mono text-[7px] text-[#8B9BB4] border border-white/10 px-2 py-0.5 rounded">GPT-4.1 • LIVE</span>
               </div>
 
-              {/* Custom header and paragraph */}
-              <div className="flex flex-col gap-2">
-                <h4 className="font-display font-bold text-base md:text-lg text-neutral-900 uppercase tracking-tight font-syne">
-                  Orchestrating AI Capabilities and Product Systems.
-                </h4>
-                <p className="type-manifesto text-xs md:text-sm text-neutral-800 font-normal leading-relaxed">
-                  Maurice Holda applies a Certified AI Manager playbook at Naga Codex—combining product visioning, governance, and technical leadership so copilots, MCP agents, and web systems ship with measurable impact and trusted guardrails.
-                </p>
+              {/* Thread */}
+              <div className="flex flex-col gap-4 p-4">
+
+                {/* User Q */}
+                <div className="flex justify-end">
+                  <div className="max-w-[76%] bg-[#162035] border border-white/10 rounded-xl rounded-tr-sm px-3.5 py-2.5">
+                    <p className="font-sans text-[11.5px] text-[#E8EDF5] leading-relaxed">What can Naga Codex actually ship?</p>
+                  </div>
+                </div>
+
+                {/* AI A */}
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-cyber/10 border border-cyber/25 flex items-center justify-center shrink-0 mt-0.5">
+                    <img src={brandLogo} alt="NC" className="w-5 h-5 object-contain" />
+                  </div>
+                  <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
+                    <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
+                      AI agent systems that run while you sleep. React products that convert. Generative films that stop the scroll. Security audits that catch what others miss.{' '}
+                      <span className="text-cyber font-semibold">Zero middlemen</span> — you talk directly to the builder shipping your product.
+                    </p>
+                  </div>
+                </div>
+
+                {/* User Q */}
+                <div className="flex justify-end">
+                  <div className="max-w-[76%] bg-[#162035] border border-white/10 rounded-xl rounded-tr-sm px-3.5 py-2.5">
+                    <p className="font-sans text-[11.5px] text-[#E8EDF5] leading-relaxed">What's the edge over an agency?</p>
+                  </div>
+                </div>
+
+                {/* AI A */}
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-cyber/10 border border-cyber/25 flex items-center justify-center shrink-0 mt-0.5">
+                    <img src={brandLogo} alt="NC" className="w-5 h-5 object-contain" />
+                  </div>
+                  <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
+                    <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
+                      No retainers. No account managers. No scoping decks that cost €5K. Four disciplines under one operator —{' '}
+                      <span className="text-cyber">agents</span>,{' '}
+                      <span className="text-film">film</span>,{' '}
+                      <span className="text-dev">web</span>,{' '}
+                      <span className="text-[#E8EDF5]">security</span>.
+                      {' '}140+ audits. 280+ deployments. 18K+ AI-generated scenes. Hamburg bred, ships worldwide.
+                    </p>
+                  </div>
+                </div>
+
+                {/* User Q */}
+                <div className="flex justify-end">
+                  <div className="max-w-[76%] bg-[#162035] border border-white/10 rounded-xl rounded-tr-sm px-3.5 py-2.5">
+                    <p className="font-sans text-[11.5px] text-[#E8EDF5] leading-relaxed">How fast can you move?</p>
+                  </div>
+                </div>
+
+                {/* AI A — last, with blinking cursor */}
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-cyber/10 border border-cyber/25 flex items-center justify-center shrink-0 mt-0.5">
+                    <img src={brandLogo} alt="NC" className="w-5 h-5 object-contain" />
+                  </div>
+                  <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
+                    <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
+                      Agent system:{' '}<span className="text-cyber font-medium">2–4 weeks</span>.{' '}
+                      Web build:{' '}<span className="text-dev font-medium">1–3 weeks</span>.{' '}
+                      Security audit:{' '}<span className="text-film font-medium">48h</span> initial report.
+                      {' '}First call is 20 minutes, free, no pitch deck. Just a direct conversation about what needs to get built.
+                      <span className="inline-block w-[2px] h-3.5 bg-cyber ml-0.5 animate-pulse align-text-bottom rounded-sm" />
+                    </p>
+                  </div>
+                </div>
+
               </div>
 
-              {/* Credentials / Specs bento rows */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-1.5">
-                <div className="border border-neutral-200 bg-neutral-50 p-3 rounded-lg flex flex-col gap-1">
-                  <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Certified</span>
-                  <span className="font-display font-extrabold text-[10.5px] text-neutral-900 tracking-tight uppercase">AI Manager · Security Analyst</span>
+              {/* Fake input bar */}
+              <div className="flex items-center gap-2 px-3 py-2.5 border-t border-white/10 bg-[#050C17]">
+                <div className="flex-1 bg-[#0F1929] border border-white/8 rounded-lg px-3 py-2 font-sans text-[11px] text-[#4A5A72]">
+                  Ask Naga Codex anything...
                 </div>
-                <div className="border border-neutral-200 bg-neutral-50 p-3 rounded-lg flex flex-col gap-1">
-                  <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Developer</span>
-                  <span className="font-display font-extrabold text-[10.5px] text-dev tracking-tight uppercase">Web Development</span>
-                </div>
-                <div className="border border-neutral-200 bg-neutral-50 p-3 rounded-lg flex flex-col gap-1">
-                  <span className="font-mono text-[7px] text-neutral-500 uppercase tracking-widest">Base</span>
-                  <span className="font-display font-extrabold text-[10.5px] text-neutral-900 tracking-tight uppercase">Hamburg, Germany</span>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => { sound.playClick(); scrollToSection(6); }}
+                  className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-cyber text-black font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-[#00DD77] transition-colors active:scale-95 cursor-pointer"
+                >
+                  Contact ↗
+                </button>
               </div>
             </div>
 
-            {/* Bottom Competencies and CTA block */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-              {/* Skill tag lists */}
+            {/* Tags + CTAs */}
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
               <div className="sm:col-span-7 flex flex-wrap gap-1.5">
-                {["AI/ML", "React", "Next.js", "Security", "Cloud", "LLMs"].map((sk) => (
+                {['AI Agents', 'React', 'Security', 'AI Film', 'MCP', 'LLMs'].map((sk) => (
                   <span
                     key={sk}
-                    className="font-mono text-[8.5px] text-neutral-500 bg-neutral-50 border border-neutral-200 px-2 py-0.5 rounded uppercase hover:border-culture hover:text-neutral-900 transition-colors duration-200"
+                    className="font-mono text-[8px] text-[#8B9BB4] bg-[#162035] border border-white/10 px-2.5 py-1 rounded uppercase hover:border-cyber/40 hover:text-cyber transition-colors duration-200 cursor-default"
                   >
                     #{sk}
                   </span>
                 ))}
               </div>
-
-              {/* CTAs */}
-              <div className="sm:col-span-5 flex flex-col sm:flex-row gap-2">
+              <div className="sm:col-span-5 flex gap-2">
                 <button
-                  onClick={() => {
-                    sound.playClick();
-                    scrollToSection(1);
-                  }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-culture text-black py-3 px-3 min-h-11 rounded-lg hover:bg-white transition-colors duration-300 active:scale-95"
+                  onClick={() => { sound.playClick(); scrollToSection(1); }}
+                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-cyber text-black py-3 px-3 min-h-11 rounded-lg hover:bg-[#00DD77] transition-colors duration-200 active:scale-95"
                 >
                   START A BUILD
                 </button>
                 <button
-                  onClick={() => {
-                    sound.playClick();
-                    scrollToSection(2);
-                  }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase border border-neutral-300 hover:border-neutral-900 text-neutral-900 py-3 px-3 min-h-11 rounded-lg transition-colors duration-300 active:scale-95"
+                  onClick={() => { sound.playClick(); scrollToSection(2); }}
+                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase border border-white/20 hover:border-white/40 text-[#E8EDF5] py-3 px-3 min-h-11 rounded-lg transition-colors duration-200 active:scale-95"
                 >
                   VIEW WORK
                 </button>
               </div>
             </div>
+
           </div>
 
         </div>
