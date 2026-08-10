@@ -20,40 +20,40 @@ interface WorkflowArea {
 
 const workflowAreas: WorkflowArea[] = [
   {
-    id: 'security',
+    id: 'agents',
     number: '01',
-    title: 'Security & governance',
+    title: 'AI Agents & Automation',
     description:
-      'Offensive audits, smart-contract reviews, and AI governance so products ship with measurable risk reduction.',
-    tags: ['Pentesting', 'Smart contracts', 'Cloud hardening', 'Compliance'],
+      'Custom agent systems that research, decide, and act — from intake bots and data pipelines to fully autonomous workflows. Built with Gemini, Claude, and MCP; shipped production-ready.',
+    tags: ['Gemini API', 'Claude SDK', 'n8n', 'LangGraph', 'MCP'],
     accentClass: 'text-cyber',
   },
   {
     id: 'cinema',
     number: '02',
-    title: 'AI cinema & media',
+    title: 'AI Cinema & Media',
     description:
-      'Text-to-video pipelines, generative narrative, and layered sound design for shorts and brand films.',
-    tags: ['Sora AI', 'Sound design', 'Color grade', 'FFmpeg'],
+      'Text-to-video pipelines, generative narrative, and layered sound design for shorts and brand films. From script to final grade.',
+    tags: ['Sora AI', 'Kling', 'Sound design', 'Color grade', 'FFmpeg'],
     accentClass: 'text-film',
   },
   {
     id: 'product',
     number: '03',
-    title: 'Web & product',
+    title: 'Web & Product',
     description:
-      'React apps, serverless APIs, and clean interfaces built for performance, clarity, and maintainability.',
-    tags: ['React', 'TypeScript', 'GSAP', 'Vercel'],
+      'React apps, serverless APIs, and sharp interfaces built for performance and maintainability. Full-stack when needed; always production-ready.',
+    tags: ['React', 'TypeScript', 'GSAP', 'Vercel', 'Tailwind'],
     accentClass: 'text-dev',
   },
   {
-    id: 'brand',
+    id: 'security',
     number: '04',
-    title: 'Street & brand',
+    title: 'Security & Governance',
     description:
-      'Technical apparel and brutalist brand systems rooted in Hamburg street culture and direct-to-fan commerce.',
-    tags: ['450 GSM', 'Print systems', 'E-commerce', 'nagaclub.de'],
-    accentClass: 'text-culture',
+      'Offensive audits, smart-contract reviews, and AI governance frameworks so products ship with measurable risk reduction.',
+    tags: ['Pentesting', 'Smart contracts', 'Cloud hardening', 'Compliance'],
+    accentClass: 'text-neutral-500',
   },
 ];
 
@@ -135,7 +135,7 @@ export default function WorkGrid() {
             </h2>
           </div>
           <p className="max-w-md type-manifesto text-sm text-neutral-800 leading-relaxed md:text-right">
-            Four areas that shape how Naga Codex ships — from security and AI film to product engineering and streetwear.
+            Four disciplines, one studio — AI agents, generative film, web engineering, and security from Hamburg.
           </p>
         </div>
 

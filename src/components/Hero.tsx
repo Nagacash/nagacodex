@@ -298,11 +298,11 @@ export default function Hero() {
               <h3 className="font-display font-extrabold text-lg sm:text-xl text-neutral-900 tracking-tight">Maurice Holda</h3>
               <span className="self-start bg-[#D4A843]/10 border border-[#D4A843]/30 text-culture rounded-sm px-1.5 py-0.5 font-mono text-[7px] tracking-widest uppercase font-bold">AI MANAGER</span>
               <p className="font-mono text-[7px] sm:text-[8px] text-neutral-500 uppercase tracking-wide leading-relaxed break-words">
-                Certified AI Manager · Cyber Security Analyst · Web Developer
+                AI Agents · Film · Web Dev · Security — Hamburg
               </p>
               <div className="text-[7px] sm:text-[8px] font-mono text-neutral-500 border-t border-neutral-200 pt-2 flex flex-col gap-1 uppercase">
                 <span>Base: Hamburg, Germany</span>
-                <span className="text-cyber">SEC+ // AI strategy & ops</span>
+                <span className="text-cyber">AGENTS // FILM // WEB // SEC</span>
               </div>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function Hero() {
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 pb-3 border-b border-neutral-200">
                 <div className="flex items-start gap-2 font-mono text-[7.5px] sm:text-[8.5px] text-culture tracking-widest uppercase leading-relaxed">
                   <Award className="w-3.5 h-3.5 text-culture animate-pulse shrink-0 mt-0.5" />
-                  <span>Certified AI Manager · Cyber Security Analyst · Web Developer</span>
+                  <span>AI Agents · Film · Web Dev · Security — Hamburg</span>
                 </div>
                 <div className="font-mono text-[7px] text-neutral-500 shrink-0">PLAYBOOK // N_C_DEC_0</div>
               </div>
