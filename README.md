@@ -68,6 +68,16 @@ Your agent said done. It wasn't. Ten failure modes, a claim taxonomy, and the pr
 `agents` `verification` `qa` `ai-safety`
 
 </td>
+<td width="25%">
+
+### [social-post-forge](https://github.com/Nagacash/social-post-forge)
+![social-post-forge](https://pub.hyperagent.com/api/published/pbf01KZRZ9R2H_8XPDEKTR1W4SJ24T/500507d5-5a24-4793-9e87-85b6c919af17.png)
+
+Turn any source into platform-native LinkedIn, Instagram, X and TikTok posts. Rubric-scored, humanized, benchmarked against trending structure.
+
+`agent-skills` `content-marketing` `ai-writing` `anti-slop`
+
+</td>
 </tr>
 </table>
 

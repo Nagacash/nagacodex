@@ -52,4 +52,16 @@ export const nagaRepos: NagaRepo[] = [
     accent: '#FF6B35',
     image: PROVE_IT_IMG,
   },
+  {
+    id: 'social-post-forge',
+    name: 'social-post-forge',
+    description:
+      'Turn a podcast, article, or pile of notes into platform-native LinkedIn, Instagram, X and TikTok posts. Rubric-scored, run through a 33-pattern AI-tell humanizer, benchmarked against trending structure — then shipped as a copy-paste pack or auto-published. Works as an agent skill or standalone CLI.',
+    tags: ['agent-skills', 'content-marketing', 'ai-writing', 'anti-slop', 'humanizer', 'linkedin', 'instagram', 'tiktok'],
+    githubUrl: 'https://github.com/Nagacash/social-post-forge',
+    license: 'MIT',
+    updatedLabel: 'today',
+    accent: '#3B82F6',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZRZ9R2H_8XPDEKTR1W4SJ24T/500507d5-5a24-4793-9e87-85b6c919af17.png',
+  },
 ];
