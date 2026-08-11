@@ -101,8 +101,39 @@ export default function Contact() {
           </div>
         </div>
 
+        {/* Book a call — primary CTA */}
+        <div className="pt-8 border-t border-white/10">
+          <a
+            href="https://calendly.com/sonic13-ch"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sound.playClick()}
+            className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 rounded-xl border border-cyber/30 bg-cyber/5 hover:bg-cyber/10 hover:border-cyber/60 transition-ui cursor-pointer"
+          >
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-cyber animate-pulse shadow-[0_0_8px_#00FF88]" />
+                <span className="font-mono text-[9px] text-cyber tracking-[0.3em] uppercase font-bold">Available now</span>
+              </div>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-[#E8EDF5] tracking-tight uppercase leading-none">
+                Book a free 20-min call
+              </h3>
+              <p className="font-mono text-[10px] text-[#8B9BB4] uppercase tracking-wider">
+                No pitch deck. No agency overhead. Just a direct conversation.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="font-mono text-[9px] text-[#8B9BB4] uppercase tracking-wider hidden sm:block">calendly.com/sonic13-ch</span>
+              <span className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyber text-black font-display font-extrabold text-sm uppercase tracking-widest group-hover:bg-[#00DD77] transition-colors active:scale-95">
+                Book now
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </span>
+            </div>
+          </a>
+        </div>
+
         {/* 2. Magnetic CTA Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-neutral-200/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-white/10">
           
           {/* CTA 1: Cyber */}
           <motion.a

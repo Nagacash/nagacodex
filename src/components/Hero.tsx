@@ -404,13 +404,15 @@ export default function Hero() {
                 <div className="flex-1 bg-[#0F1929] border border-white/8 rounded-lg px-3 py-2 font-sans text-[11px] text-[#4A5A72]">
                   Ask Naga Codex anything...
                 </div>
-                <button
-                  type="button"
-                  onClick={() => { sound.playClick(); scrollToSection(6); }}
+                <a
+                  href="https://calendly.com/sonic13-ch"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playClick()}
                   className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-cyber text-black font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-[#00DD77] transition-colors active:scale-95 cursor-pointer"
                 >
-                  Contact ↗
-                </button>
+                  Book Call ↗
+                </a>
               </div>
             </div>
 
