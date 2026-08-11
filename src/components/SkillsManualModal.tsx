@@ -70,7 +70,7 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                             className="w-full h-full object-cover opacity-90"
                           />
                         </div>
-                        {/* Name + license */}
+                        {/* Name + license + link */}
                         <div className="flex items-center justify-between gap-2">
                           <span
                             className="text-[9px] font-bold tracking-wider uppercase truncate"
@@ -78,9 +78,21 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                           >
                             {repo.name}
                           </span>
-                          <span className="text-[7px] text-neutral-600 shrink-0 border border-neutral-800 px-1.5 py-0.5 rounded">
-                            {repo.license}
-                          </span>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className="text-[7px] text-neutral-600 border border-neutral-800 px-1.5 py-0.5 rounded">
+                              {repo.license}
+                            </span>
+                            <a
+                              href={repo.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => { e.stopPropagation(); sound.playClick(); }}
+                              className="text-neutral-500 hover:text-white transition-colors p-0.5"
+                              title={`Open ${repo.name} on GitHub`}
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </div>
                         </div>
                       </button>
                     );
@@ -111,9 +123,15 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                     className="w-2 h-2 rounded-full shrink-0"
                     style={{ backgroundColor: active.accent }}
                   />
-                  <span className="text-[10px] text-white font-bold tracking-widest uppercase truncate">
+                  <a
+                    href={active.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playClick()}
+                    className="text-[10px] text-white font-bold tracking-widest uppercase truncate hover:underline underline-offset-2 cursor-pointer"
+                  >
                     {active.name}
-                  </span>
+                  </a>
                   <span className="text-[8px] text-neutral-500 hidden sm:block shrink-0">
                     Updated {active.updatedLabel}
                   </span>
@@ -159,6 +177,19 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                     {active.description}
                   </p>
 
+                  {/* CTA — placed here so it's visible without scrolling */}
+                  <a
+                    href={active.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playClick()}
+                    className="inline-flex items-center gap-2.5 self-start px-5 py-3 rounded-lg font-mono text-[10px] font-bold tracking-wider uppercase text-[#050C17] transition-ui active:scale-95 hover:opacity-90"
+                    style={{ backgroundColor: active.accent }}
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>View on GitHub →</span>
+                  </a>
+
                   {/* Tags */}
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-1.5 text-[8px] text-neutral-500 uppercase tracking-widest">
@@ -190,19 +221,6 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                     <span>Origin: <span className="text-neutral-300">Hamburg, DE</span></span>
                   </div>
 
-                  {/* CTA */}
-                  <a
-                    href={active.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => sound.playClick()}
-                    className="inline-flex items-center gap-2.5 self-start px-5 py-3 rounded-lg font-mono text-[10px] font-bold tracking-wider uppercase text-black transition-ui active:scale-95 hover:opacity-90"
-                    style={{ backgroundColor: active.accent }}
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>View on GitHub</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
 
                 </div>
               </div>
