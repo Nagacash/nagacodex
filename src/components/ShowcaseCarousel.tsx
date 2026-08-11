@@ -56,8 +56,7 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
     id: 'chosen_few_records',
     title: 'Chosen Few Records',
-    url: 'https://nagacodex.cloud',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QS6P_5AFB8VRBDBTA6E4P/2d1be45d-38f4-4080-bca1-7f7643a155da.png',
+    url: 'https://chosenfewrecrecords.vercel.app/',
     category: 'Music',
     description: 'Hamburg underground music label — hip-hop and electronic production, A&R, and artist development rooted in the city\'s independent music scene.',
     role: 'Founder & creative director',
