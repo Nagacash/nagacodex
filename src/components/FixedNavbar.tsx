@@ -4,6 +4,7 @@ import { getSectionAccentColor } from '../lib/sections';
 import { scrollToSection } from '../lib/scrollNav';
 
 const links = [
+  ['HOME', 0],
   ['WHO', 1],
   ['WORK', 2],
   ['PHILOSOPHY', 3],
