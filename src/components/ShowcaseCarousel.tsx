@@ -26,6 +26,48 @@ const SCREENSHOT_WIDTH = 1440;
 
 const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
+    id: 'naga_codex_brand',
+    title: 'Naga Codex',
+    url: 'https://nagacodex.cloud',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QR7E_3G27JY8QNAVFH7M8/1140768b-32df-48de-a083-d91a23df106e.png',
+    category: 'AI Studio',
+    description: 'Personal brand hub built from scratch — AI agents, generative film, web engineering, and security consulting from Hamburg. Solo operator, zero middlemen.',
+    role: 'Founder & full-stack developer',
+    duration: 'Ongoing',
+    accent: '#00FF88',
+    colorMix: 'from-emerald-900/20 via-bg-dark to-bg-dark',
+    stack: ['React 19', 'GSAP', 'TypeScript', 'Tailwind v4', 'Gemini API'],
+    features: ['ChatGPT-style hero interface', 'GSAP pinned scroll transitions', 'Dark navy design system'],
+  },
+  {
+    id: 'naga_apparel',
+    title: 'Naga Apparel',
+    url: 'https://nagaclub.de',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QRQ8_ZS8JTTPZ39EPW613/ca83c012-2dd5-4c32-a6f5-52e1b0cc2c03.png',
+    category: 'Streetwear',
+    description: 'Technical outerwear from Hamburg — 450 GSM brutalist construction, cryptographic prints, and direct-to-fan commerce rooted in St. Pauli street culture.',
+    role: 'Brand & creative direction',
+    duration: 'Ongoing',
+    accent: '#D4A843',
+    colorMix: 'from-amber-900/20 via-bg-dark to-bg-dark',
+    stack: ['Brand design', 'E-commerce', 'Print systems', 'Direct-to-fan'],
+    features: ['450 GSM cotton construction', 'Limited capsule drops', 'Hamburg street culture aesthetic'],
+  },
+  {
+    id: 'chosen_few_records',
+    title: 'Chosen Few Records',
+    url: 'https://nagacodex.cloud',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QS6P_5AFB8VRBDBTA6E4P/2d1be45d-38f4-4080-bca1-7f7643a155da.png',
+    category: 'Music',
+    description: 'Hamburg underground music label — hip-hop and electronic production, A&R, and artist development rooted in the city\'s independent music scene.',
+    role: 'Founder & creative director',
+    duration: 'Ongoing',
+    accent: '#FF6B35',
+    colorMix: 'from-orange-900/20 via-bg-dark to-bg-dark',
+    stack: ['Music production', 'Label management', 'Artist development', 'Sound design'],
+    features: ['Original production', 'Hamburg underground scene', 'Independent artist support'],
+  },
+  {
     id: 'body_mind',
     title: 'Body & Mind Hamburg',
     url: 'https://www.bodyandmindhamburg.com/',
@@ -99,48 +141,6 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     colorMix: 'from-amber-100/90 via-white to-bg-dark',
     stack: ['React 18', 'Vite', 'Framer Motion', 'PostgreSQL'],
     features: ['3D scroll transitions', 'Interactive coursework LMS', 'Face coordinate mapping'],
-  },
-  {
-    id: 'naga_codex_brand',
-    title: 'Naga Codex',
-    url: 'https://nagacodex.cloud',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QR7E_3G27JY8QNAVFH7M8/1140768b-32df-48de-a083-d91a23df106e.png',
-    category: 'AI Studio',
-    description: 'Personal brand hub built from scratch — AI agents, generative film, web engineering, and security consulting from Hamburg. Solo operator, zero middlemen.',
-    role: 'Founder & full-stack developer',
-    duration: 'Ongoing',
-    accent: '#00FF88',
-    colorMix: 'from-emerald-900/20 via-bg-dark to-bg-dark',
-    stack: ['React 19', 'GSAP', 'TypeScript', 'Tailwind v4', 'Gemini API'],
-    features: ['ChatGPT-style hero interface', 'GSAP pinned scroll transitions', 'Dark navy design system'],
-  },
-  {
-    id: 'naga_apparel',
-    title: 'Naga Apparel',
-    url: 'https://nagaclub.de',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QRQ8_ZS8JTTPZ39EPW613/ca83c012-2dd5-4c32-a6f5-52e1b0cc2c03.png',
-    category: 'Streetwear',
-    description: 'Technical outerwear from Hamburg — 450 GSM brutalist construction, cryptographic prints, and direct-to-fan commerce rooted in St. Pauli street culture.',
-    role: 'Brand & creative direction',
-    duration: 'Ongoing',
-    accent: '#D4A843',
-    colorMix: 'from-amber-900/20 via-bg-dark to-bg-dark',
-    stack: ['Brand design', 'E-commerce', 'Print systems', 'Direct-to-fan'],
-    features: ['450 GSM cotton construction', 'Limited capsule drops', 'Hamburg street culture aesthetic'],
-  },
-  {
-    id: 'chosen_few_records',
-    title: 'Chosen Few Records',
-    url: 'https://nagacodex.cloud',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZS1QS6P_5AFB8VRBDBTA6E4P/2d1be45d-38f4-4080-bca1-7f7643a155da.png',
-    category: 'Music',
-    description: 'Hamburg underground music label — hip-hop and electronic production, A&R, and artist development rooted in the city\'s independent music scene.',
-    role: 'Founder & creative director',
-    duration: 'Ongoing',
-    accent: '#FF6B35',
-    colorMix: 'from-orange-900/20 via-bg-dark to-bg-dark',
-    stack: ['Music production', 'Label management', 'Artist development', 'Sound design'],
-    features: ['Original production', 'Hamburg underground scene', 'Independent artist support'],
   },
 ];
 
@@ -285,10 +285,10 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
         <div className="flex flex-col gap-3 max-w-xl">
           <div className="flex items-center gap-2 text-cyber font-mono text-[9px] tracking-[0.3em] uppercase">
             <Sparkles className="w-3.5 h-3.5 text-[#00FF88]" />
-            <span>Client work</span>
+            <span>Brands & client work</span>
           </div>
           <h2 className="font-display font-black text-3xl md:text-5xl tracking-tight text-neutral-900 uppercase leading-none">
-            Live <span className="text-neutral-500">sites</span>
+            Selected <span className="text-neutral-500">work</span>
           </h2>
         </div>
 
