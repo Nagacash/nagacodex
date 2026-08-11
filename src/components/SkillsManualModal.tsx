@@ -34,13 +34,13 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
             {/* LEFT PANEL — repo list */}
             <div className="w-full md:w-64 md:h-full border-b md:border-b-0 md:border-r border-neutral-800 bg-[#0a0a0a]/80 p-5 flex flex-col shrink-0 text-left min-h-0 max-h-[44vh] md:max-h-none">
               <div className="flex flex-col gap-2 shrink-0 pb-4 border-b border-neutral-900/60">
-                <span className="text-[8px] text-[#00FF88] tracking-[0.25em] uppercase">GITHUB // OPEN SOURCE</span>
+                <span className="text-[8px] text-[#00FF88] tracking-[0.25em] uppercase">BUILT FROM SCRATCH // MIT</span>
                 <h2 className="font-display font-black text-sm tracking-wide text-white uppercase flex items-center gap-2">
                   <Github className="w-4 h-4 text-neutral-400" />
-                  <span>NAGA_CODEX_REPOS</span>
+                  <span>NAGA CODEX SKILLS</span>
                 </h2>
-                <p className="font-sans text-[8.5px] text-neutral-500 leading-normal">
-                  Open-source tools built for AI filmmakers, agents, and creative developers.
+                <p className="font-sans text-[8.5px] text-neutral-400 leading-normal">
+                  Original tools written by <span className="text-[#D4A843] font-semibold">Maurice Holda</span> — not wrappers, not clones. Built from real production work at Naga Codex and released free.
                 </p>
               </div>
 
@@ -96,7 +96,7 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                   className="flex items-center gap-1.5 text-[8px] text-neutral-400 hover:text-white transition-ui"
                 >
                   <ExternalLink className="w-3 h-3" />
-                  <span>VIEW ALL ON GITHUB</span>
+                  <span>ALL NAGA CODEX REPOS ON GITHUB</span>
                 </a>
               </div>
             </div>
@@ -143,6 +143,17 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
 
                 <div className="p-6 md:p-8 flex flex-col gap-6">
 
+                  {/* Provenance banner */}
+                  <div className="flex items-start gap-3 p-4 rounded-lg border border-[#D4A843]/20 bg-[#D4A843]/05">
+                    <span className="text-[#D4A843] text-lg mt-0.5">✦</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-mono text-[9px] text-[#D4A843] tracking-[0.2em] uppercase font-bold">Original work — Naga Codex</span>
+                      <p className="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                        Written from scratch by <span className="text-white font-semibold">Maurice Holda</span> based on real production workflows. Not a fork, not a template — built to solve actual problems in AI filmmaking, agent development, and creative tooling.
+                      </p>
+                    </div>
+                  </div>
+
                   {/* Description */}
                   <p className="font-sans text-sm text-neutral-300 leading-relaxed max-w-2xl">
                     {active.description}
@@ -172,10 +183,11 @@ export default function SkillsManualModal({ isOpen, onClose }: SkillsManualModal
                   </div>
 
                   {/* Meta row */}
-                  <div className="flex flex-wrap items-center gap-4 text-[8.5px] text-neutral-500 font-mono uppercase tracking-widest border-t border-neutral-900 pt-4">
-                    <span>License: <span className="text-neutral-300">{active.license}</span></span>
+                  <div className="flex flex-wrap items-center gap-4 text-[8.5px] text-neutral-500 font-mono uppercase tracking-widest border-t border-neutral-800 pt-4">
+                    <span>License: <span className="text-[#00FF88]">{active.license} — free to use</span></span>
                     <span>Updated: <span className="text-neutral-300">{active.updatedLabel}</span></span>
-                    <span>Author: <span className="text-neutral-300">Nagacash</span></span>
+                    <span>Author: <span className="text-[#D4A843]">Maurice Holda / Naga Codex</span></span>
+                    <span>Origin: <span className="text-neutral-300">Hamburg, DE</span></span>
                   </div>
 
                   {/* CTA */}
