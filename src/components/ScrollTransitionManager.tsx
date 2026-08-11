@@ -23,6 +23,7 @@ import { TransitionSectionProps } from './TransitionSection';
 const SkillsManualModal = lazy(() => import('./SkillsManualModal'));
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+ScrollTrigger.config({ limitCallbacks: true });
 
 interface ScrollTransitionManagerProps {
   children: React.ReactNode;
@@ -31,10 +32,10 @@ interface ScrollTransitionManagerProps {
 export default function ScrollTransitionManager({ children }: ScrollTransitionManagerProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
+  const pinWrapperRef = useRef<HTMLDivElement | null>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement | null>(null);
   
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isGlitching, setIsGlitching] = useState(false);
   const [showIndicator, setShowIndicator] = useState(false);
   const [useNativeScroll, setUseNativeScroll] = useState(() =>
     typeof window !== 'undefined' ? isTouchLikeDevice() : false,
@@ -46,9 +47,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const showIndicatorRef = useRef(false);
   const gsapReadyRef = useRef(false);
   const atHeroScrollRef = useRef(true);
-  const [atHeroScroll, setAtHeroScroll] = useState(true);
   const viewportInitializedRef = useRef(false);
-  const lastVideoSpeedRef = useRef<Record<number, number>>({});
   const [viewportHeight, setViewportHeight] = useState(
     () => (typeof window !== 'undefined' ? window.innerHeight : 800)
   );
@@ -72,9 +71,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   };
 
   const setAtHeroScrollIfChanged = (next: boolean) => {
-    if (atHeroScrollRef.current === next) return;
     atHeroScrollRef.current = next;
-    setAtHeroScroll(next);
   };
 
   // 1. Check for reduced motion, touch/native scroll, and viewport changes
@@ -97,51 +94,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     };
   }, []);
 
-  // 2. Wheel momentum smooth scroll engine for Desktop only (never on touch)
-  useEffect(() => {
-    if (prefersReducedMotion || useNativeScroll) return;
-
-    let targetScroll = window.scrollY;
-
-    const canScrollWithin = (target: HTMLElement, deltaY: number) => {
-      const style = window.getComputedStyle(target);
-      const overflowY = style.overflowY;
-      if (overflowY !== 'auto' && overflowY !== 'scroll') return false;
-      if (target.scrollHeight <= target.clientHeight) return false;
-
-      const atTop = target.scrollTop <= 0;
-      const atBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 1;
-      return (deltaY < 0 && !atTop) || (deltaY > 0 && !atBottom);
-    };
-    
-    // Listen to wheel events with { passive: false } to support e.preventDefault()
-    const handleWheel = (e: WheelEvent) => {
-      let target = e.target as HTMLElement | null;
-      while (target && target !== document.body) {
-        if (canScrollWithin(target, e.deltaY)) return;
-        target = target.parentElement;
-      }
-
-      e.preventDefault();
-      targetScroll = window.scrollY;
-      
-      const delta = e.deltaY;
-      targetScroll += delta * 1.1; // modest boost
-      targetScroll = Math.max(0, Math.min(targetScroll, maxWindowScroll));
-
-      gsap.to(window, {
-        scrollTo: { y: targetScroll },
-        duration: 0.85,
-        ease: 'power2.out',
-        overwrite: 'auto',
-      });
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, [prefersReducedMotion, useNativeScroll, maxWindowScroll]);
-
-  // 3. Scroll activity timer to show/hide indicators (Stop scroll hint)
+  // 2. Scroll activity timer to show/hide indicators (Stop scroll hint)
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
@@ -183,8 +136,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
   // Sync active section for native stacked scroll only (pinned mode uses GSAP onUpdate)
   useEffect(() => {
+    if (!useNativeScroll && !prefersReducedMotion) return;
+
     const syncActive = () => {
-      if (gsapReadyRef.current) return;
       setActiveIndexIfChanged(getIndexFromScroll(window.scrollY));
     };
     syncActive();
@@ -223,6 +177,23 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
     let ctx: gsap.Context | undefined;
     let cancelled = false;
+    let wasAtHero = true;
+    let pendingActiveIndex: number | null = null;
+    let activeIndexRaf = 0;
+    const scheduleActiveIndex = (idx: number) => {
+      setActiveSectionIndex(idx);
+      pendingActiveIndex = idx;
+      if (activeIndexRaf) return;
+      activeIndexRaf = requestAnimationFrame(() => {
+        activeIndexRaf = 0;
+        if (pendingActiveIndex === null) return;
+        const next = pendingActiveIndex;
+        pendingActiveIndex = null;
+        if (activeIndexRef.current === next) return;
+        activeIndexRef.current = next;
+        setActiveIndex(next);
+      });
+    };
 
     const restoreHeroFrame = () => {
       gsap.set('#transition-section-0', {
@@ -239,31 +210,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       gsap.set('#transition-section-1', { y: '100vh', x: 0, opacity: 1 });
     };
 
-    const applyVideoSpeed = (idx: number, speed: number) => {
-      const rounded = Math.round(speed * 100) / 100;
-      if (lastVideoSpeedRef.current[idx] === rounded) return;
-      lastVideoSpeedRef.current[idx] = rounded;
-
-      const video = document.querySelector(`#transition-section-${idx} video`) as HTMLVideoElement;
-      if (video) {
-        try {
-          video.playbackRate = rounded;
-        } catch {
-          // fail safe
-        }
-      }
-    };
-
-    const speedProxies = [
-      { speed: 1.0 },
-      { speed: 1.0 },
-      { speed: 1.0 },
-      { speed: 1.0 },
-      { speed: 1.0 },
-      { speed: 1.0 },
-      { speed: 1.0 },
-    ];
-
     const frameId = requestAnimationFrame(() => {
       if (cancelled || !pinRef.current || !containerRef.current) return;
 
@@ -277,22 +223,20 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
         pinType: 'transform',
         start: 'top top',
         end: `+=${scrollDistance}`,
-        scrub: 0.8,
-        anticipatePin: 0,
+        scrub: true,
+        anticipatePin: 1,
+        fastScrollEnd: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           if (isProgrammaticNavigation()) return;
 
           const atHero = self.scroll() <= self.start + 80;
-          setAtHeroScrollIfChanged(atHero);
-
-          if (atHero) {
-            restoreHeroFrame();
-            setActiveIndexIfChanged(0);
-            return;
+          if (atHero !== wasAtHero) {
+            wasAtHero = atHero;
+            setAtHeroScrollIfChanged(atHero);
+            if (atHero) restoreHeroFrame();
           }
-
-          setActiveIndexIfChanged(getActiveIndexFromTimeline(masterTimeline, numSections));
+          scheduleActiveIndex(atHero ? 0 : getActiveIndexFromTimeline(masterTimeline, numSections));
         },
         onRefreshInit: (self) => {
           if (self.scroll() <= 80) {
@@ -334,12 +278,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { opacity: 0.3, ease: 'power1.out', duration: 800 },
       0
     );
-    masterTimeline.to(speedProxies[0], {
-      speed: 0.25,
-      ease: 'power1.out',
-      duration: 800,
-      onUpdate: () => applyVideoSpeed(0, speedProxies[0].speed)
-    }, 0);
 
     // WHO enters (Push Up from below)
     masterTimeline.fromTo('#transition-section-1',
@@ -389,12 +327,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { opacity: 0.3, ease: 'power1.out', duration: 600 },
       800
     );
-    masterTimeline.to(speedProxies[1], {
-      speed: 0.25,
-      ease: 'power1.out',
-      duration: 600,
-      onUpdate: () => applyVideoSpeed(1, speedProxies[1].speed)
-    }, 800);
 
     // WORK enters (Horizontal Slide from right)
     masterTimeline.fromTo('#transition-section-2',
@@ -411,9 +343,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     // Glitch trigger near midpoint 1100
     masterTimeline.to({}, {
       duration: 150,
-      onStart: () => setIsGlitching(true),
-      onComplete: () => setIsGlitching(false),
-      onReverseComplete: () => setIsGlitching(false),
+      onStart: () => pinWrapperRef.current?.classList.add("glitch-screen"),
+      onComplete: () => pinWrapperRef.current?.classList.remove("glitch-screen"),
+      onReverseComplete: () => pinWrapperRef.current?.classList.remove("glitch-screen"),
     }, 1025);
 
     // Midpoint: Gradient 1, Scanline 1, Vignette pulse
@@ -447,12 +379,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { opacity: 0.25, ease: 'power1.out', duration: 700 },
       1400
     );
-    masterTimeline.to(speedProxies[2], {
-      speed: 0.25,
-      ease: 'power1.out',
-      duration: 700,
-      onUpdate: () => applyVideoSpeed(2, speedProxies[2].speed)
-    }, 1400);
 
     // PHILOSOPHY enters (scale up + fade)
     masterTimeline.fromTo('#transition-section-3',
@@ -506,11 +432,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       opacity: 0.1,
       ease: 'power1.out',
     }, 2100);
-    masterTimeline.to(speedProxies[3], {
-      speed: 0.25,
-      ease: 'power1.out',
-      onUpdate: () => applyVideoSpeed(3, speedProxies[3].speed)
-    }, 2100);
 
     // SHOWCASE enters (Zoom/Fade in)
     masterTimeline.fromTo('#transition-section-4',
@@ -554,11 +475,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       opacity: 0.1,
       ease: 'power1.out',
     }, 2800);
-    masterTimeline.to(speedProxies[4], {
-      speed: 0.25,
-      ease: 'power1.out',
-      onUpdate: () => applyVideoSpeed(4, speedProxies[4].speed)
-    }, 2800);
 
     // WOODLAND360 enters (Slide from right)
     masterTimeline.fromTo('#transition-section-5',
@@ -600,11 +516,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     masterTimeline.to('#transition-section-5 .video-wrap', {
       opacity: 0.1,
       ease: 'power1.out',
-    }, 3500);
-    masterTimeline.to(speedProxies[5], {
-      speed: 0.25,
-      ease: 'power1.out',
-      onUpdate: () => applyVideoSpeed(5, speedProxies[5].speed)
     }, 3500);
 
     // CONTACT enters (Zoom/Fade in)
@@ -652,6 +563,8 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     return () => {
       cancelled = true;
       cancelAnimationFrame(frameId);
+      if (activeIndexRaf) cancelAnimationFrame(activeIndexRaf);
+      pinWrapperRef.current?.classList.remove("glitch-screen");
       gsapReadyRef.current = false;
       unregisterPinnedNavigation();
       ctx?.revert();
@@ -736,20 +649,14 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden bg-bg-dark z-40">
         
         {/* Dynamic section stack wrapper */}
-        <div className={`relative w-full h-full transition-ui ${isGlitching ? 'glitch-screen' : ''}`}>
+        <div ref={pinWrapperRef} className="relative w-full h-full">
           
           {/* Render individual TransitionSections */}
           {sections.map((child, idx) => {
-            const sectionActive =
-              activeIndex === idx || (idx === 0 && atHeroScroll && activeIndex === 0);
-            const enhanced = React.cloneElement(child as React.ReactElement<TransitionSectionProps>, {
-              isActive: sectionActive,
-            });
-
             // Keep split-reveal DOM mounted so GSAP can finish exit animations
             if (idx === 3 && !prefersReducedMotion) {
               return (
-                <div key={`split-shell-${idx}`} className="absolute inset-0 w-full h-full" style={{ zIndex: activeIndex === 3 ? 50 : 13 }}>
+                <div key={`split-shell-${idx}`} className="absolute inset-0 w-full h-full z-[13]">
                   
                   {/* Top Split segment half */}
                   <div
@@ -758,7 +665,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
                     style={{ clipPath: 'inset(0 0 0 0)', transform: 'translateY(0)', willChange: 'transform, opacity' }}
                   >
                     <div className="absolute top-0 left-0 w-full h-[200%]">
-                      {enhanced}
+                      {child}
                     </div>
                   </div>
 
@@ -769,7 +676,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
                     style={{ clipPath: 'inset(0 0 0 0)', transform: 'translateY(0)', willChange: 'transform, opacity' }}
                   >
                     <div className="absolute bottom-0 left-0 w-full h-[200%] -top-[100%]">
-                      {enhanced}
+                      {child}
                     </div>
                   </div>
 
@@ -779,7 +686,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
             return (
               <React.Fragment key={`pin-section-${idx}`}>
-                {enhanced}
+                {child}
               </React.Fragment>
             );
           })}

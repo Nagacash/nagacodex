@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react';
 import { motion, useMotionValue } from 'motion/react';
 import { HelpCircle, ChevronDown, Monitor, Shield, Layers, MapPin, CheckCircle2, Github } from 'lucide-react';
 import VideoBackground from './VideoBackground';
 import FloatingClips from './FloatingClips';
 import SoundToggle from './SoundToggle';
 import sound from '../lib/sound';
-import SkillsManualModal from './SkillsManualModal';
+const SkillsManualModal = lazy(() => import('./SkillsManualModal'));
 import { brandLogo } from '../lib/brand';
 import { scrollToSection } from '../lib/scrollNav';
 import operatorPortrait from '../assets/images/maurice-portrait.jpg';
@@ -482,7 +482,7 @@ export default function Hero() {
         </div>
       </footer>
       {/* Skills support manual modal */}
-      <SkillsManualModal isOpen={isManualOpen} onClose={() => setIsManualOpen(false)} />
+      {isManualOpen && (<Suspense fallback={null}><SkillsManualModal isOpen={isManualOpen} onClose={() => setIsManualOpen(false)} /></Suspense>)}
     </section>
   );
 }

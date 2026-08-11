@@ -1,13 +1,14 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import Preloader from './components/Preloader';
-import CustomCursor from './components/CustomCursor';
-import ClickBurst from './components/ClickBurst';
 import ScrollTransitionManager from './components/ScrollTransitionManager';
 import TransitionSection from './components/TransitionSection';
 import FixedNavbar from './components/FixedNavbar';
 import Hero from './components/Hero';
 import sound from './lib/sound';
-import { heroIntro, philosophyAmbient, whoAmbient } from './lib/films';
+import { heroIntro } from './lib/films/hero';
+
+const CustomCursor = lazy(() => import('./components/CustomCursor'));
+const ClickBurst = lazy(() => import('./components/ClickBurst'));
 
 const WhoSection = lazy(() => import('./components/WhoSection'));
 const WorkGrid = lazy(() => import('./components/WorkGrid'));
@@ -27,6 +28,7 @@ const SectionFallback = () => (
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [showChromeFx, setShowChromeFx] = useState(false);
 
   useEffect(() => {
     sound.armMobileAutoplay();
@@ -39,11 +41,18 @@ export default function App() {
   const handlePreloaderComplete = () => {
     window.scrollTo(0, 0);
     setLoading(false);
+    requestAnimationFrame(() => {
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => setShowChromeFx(true), { timeout: 1200 });
+      } else {
+        setTimeout(() => setShowChromeFx(true), 400);
+      }
+    });
   };
 
   return (
     <div className="relative min-h-dvh selection:bg-cyber/20 selection:text-cyber bg-bg-dark">
-      {/* 1. Full-screen SVGs interactive boot manager */}
       <Preloader onComplete={handlePreloaderComplete} />
 
       {!loading && (
@@ -55,8 +64,12 @@ export default function App() {
             Skip to main content
           </a>
 
-          <CustomCursor />
-          <ClickBurst />
+          {showChromeFx && (
+            <Suspense fallback={null}>
+              <CustomCursor />
+              <ClickBurst />
+            </Suspense>
+          )}
 
           <div className="fixed inset-0 pointer-events-none z-20 bg-[radial-gradient(ellipse_at_50%_-10%,rgba(0,255,136,0.05),transparent_60%)]" />
 
@@ -65,74 +78,61 @@ export default function App() {
           <div id="main-content" className="page-enter relative flex flex-col w-full">
             <main className="relative flex flex-col w-full">
               <ScrollTransitionManager>
-                
-                {/* 01. HERO */}
-                  <TransitionSection
-                    id="hero"
-                    transitionType="push-fade"
-                    accentColor="#00FF88"
-                    index={0}
-                    bgVideoMp4={heroIntro.h264}
-                  >
-                    <Hero />
-                  </TransitionSection>
+                <TransitionSection
+                  id="hero"
+                  transitionType="push-fade"
+                  accentColor="#00FF88"
+                  index={0}
+                  bgVideoMp4={heroIntro.h264}
+                >
+                  <Hero />
+                </TransitionSection>
 
-                {/* 02. WHO */}
                 <TransitionSection
                   id="who"
                   transitionType="horizontal-slide"
                   accentColor="#FF6B35"
                   index={1}
-                  bgVideoWebm={whoAmbient.webm}
-                  bgVideoMp4={whoAmbient.h264}
                 >
                   <Suspense fallback={<SectionFallback />}>
                     <WhoSection />
                   </Suspense>
                 </TransitionSection>
 
-                {/* 03. WORK */}
                 <TransitionSection id="work" transitionType="scale-blur" accentColor="#BD00FF" index={2}>
                   <Suspense fallback={<SectionFallback />}>
                     <WorkGrid />
                   </Suspense>
                 </TransitionSection>
 
-                {/* 04. PHILOSOPHY */}
                 <TransitionSection
                   id="philosophy"
                   transitionType="split-reveal"
                   accentColor="#D4A843"
                   index={3}
-                  bgVideoWebm={philosophyAmbient.webm}
-                  bgVideoMp4={philosophyAmbient.h264}
                 >
                   <Suspense fallback={<SectionFallback />}>
                     <Philosophy />
                   </Suspense>
                 </TransitionSection>
 
-                {/* 04. SHOWCASE CAROUSEL */}
                 <TransitionSection id="showcase" transitionType="scale-blur" accentColor="#D4A843" index={4}>
                   <Suspense fallback={<SectionFallback />}>
                     <ShowcaseCarousel />
                   </Suspense>
                 </TransitionSection>
 
-                {/* 05. WOODLAND360 PODCAST */}
                 <TransitionSection id="woodland360" transitionType="horizontal-slide" accentColor="#D4A843" index={5}>
                   <Suspense fallback={<SectionFallback />}>
                     <Woodland360Section />
                   </Suspense>
                 </TransitionSection>
 
-                {/* 07. CONTACT */}
                 <TransitionSection id="contact" transitionType="push-fade" accentColor="#3B82F6" index={6}>
                   <Suspense fallback={<SectionFallback />}>
                     <Contact />
                   </Suspense>
                 </TransitionSection>
-
               </ScrollTransitionManager>
             </main>
 

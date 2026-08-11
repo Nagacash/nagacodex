@@ -1,6 +1,14 @@
-import React, { Suspense, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import VideoBackground from './VideoBackground';
 import { SectionTheme } from '../types';
+import { useIsSectionActive } from '../lib/activeSection';
+
+type LazyVideoSources = { webm: string; h264: string };
+
+const lazySectionVideos = {
+  1: () => import('../lib/films/who').then(m => ({ webm: m.whoAmbient.webm, h264: m.whoAmbient.h264 })),
+  3: () => import('../lib/films/philosophy').then(m => ({ webm: m.philosophyAmbient.webm, h264: m.philosophyAmbient.h264 })),
+};
 
 function cloneWithIsActive(children: React.ReactNode, isActive: boolean): React.ReactNode {
   if (!React.isValidElement(children)) return children;
@@ -49,13 +57,33 @@ export default function TransitionSection({
   bgVideoMp4,
   accentColor,
   index,
-  isActive = false,
+  isActive: isActiveProp = false,
   stacked = false,
 }: TransitionSectionProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const storeActive = useIsSectionActive(index);
+  const isActive = stacked ? isActiveProp : storeActive;
   const isDarkSection = index === 3;
   const bgTone = isDarkSection ? 'dark' : 'light';
   const isHero = index === 0;
+  const [lazyVideos, setLazyVideos] = useState<LazyVideoSources | null>(null);
+  const resolvedWebm = bgVideoWebm ?? lazyVideos?.webm;
+  const resolvedMp4 = bgVideoMp4 ?? lazyVideos?.h264;
+  const shouldLoadVideo = isHero || Boolean(resolvedWebm || resolvedMp4);
+
+  useEffect(() => {
+    if (bgVideoWebm || bgVideoMp4) return;
+    const loader = lazySectionVideos[index];
+    if (!loader || lazyVideos) return;
+    const loadVideos = () => loader().then(setLazyVideos).catch(() => {});
+    if (!stacked) { if (isActive) loadVideos(); return; }
+    const el = containerRef.current; if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { loadVideos(); observer.disconnect(); }
+    }, { rootMargin: '240px 0px' });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [bgVideoWebm, bgVideoMp4, index, isActive, stacked, lazyVideos]);
 
   return (
     <div
@@ -74,15 +102,21 @@ export default function TransitionSection({
       }}
     >
       <div className="absolute inset-0 z-0 video-wrap select-none pointer-events-none">
-        <VideoBackground
-          webmSrc={bgVideoWebm}
-          mp4Src={bgVideoMp4}
-          themeFallback={getThemeFallback(index)}
-          blendMode={isDarkSection ? 'screen' : isHero ? 'normal' : 'multiply'}
-          parallaxIntensity={0.12}
-          tone={bgTone}
-          videoOpacity={isHero ? 1 : undefined}
-        />
+        {shouldLoadVideo && (
+          <VideoBackground
+            webmSrc={resolvedWebm}
+            mp4Src={resolvedMp4}
+            themeFallback={getThemeFallback(index)}
+            blendMode={isDarkSection ? 'screen' : isHero ? 'normal' : 'multiply'}
+            parallaxIntensity={stacked ? (isHero ? 0.08 : 0.12) : 0}
+            tone={bgTone}
+            videoOpacity={isHero ? 1 : undefined}
+            preload={isHero ? 'metadata' : 'none'}
+            eager={isHero}
+            active={isActive}
+            useNativeVisibility={stacked}
+          />
+        )}
       </div>
 
       <div

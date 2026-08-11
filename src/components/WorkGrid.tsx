@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Grid, ArrowRight, Workflow, Play, ExternalLink } from 'lucide-react';
 import { ProjectItem } from '../types';
 import sound from '../lib/sound';
-import { mandeFilm } from '../lib/films';
+import { mandeFilm } from '../lib/films/mande';
 import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';

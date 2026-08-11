@@ -33,3 +33,16 @@
 - Change: Sidebar perf — extracted memoized `SectionNavSidebar` via portal; static accent colors (no DOM reads); removed `backdrop-blur`; lazy `SkillsManualModal`; navbar outside `page-enter` fade
 - Result: 0.22 ms median (PASS)
 - Sidebar lag fixes: portal skips 450ms page-enter fade; memo isolates dot re-renders; no `getElementById` per frame
+
+## Run 4 — 2026-08-11 (post GitHub pull + perf re-apply)
+- Git: pulled origin/main — already up to date at 2f08aee
+- Changes:
+  - Split film assets (hero-only in main bundle; WHO/Philosophy videos lazy)
+  - Faster Preloader (~450–1400ms, skips on reduced-motion)
+  - Non-blocking Google Fonts
+  - Deferred CustomCursor/ClickBurst until idle
+  - Lazy SkillsManualModal in Hero
+  - VideoBackground: rAF parallax + preload metadata/none
+  - Scroll stutter fixes: removed wheel tween conflict, scrub true, limitCallbacks
+- Bundle: main 335 kB (108 kB gzip) — down from 468 kB
+- Result: 0.18 ms median HTML (PASS)

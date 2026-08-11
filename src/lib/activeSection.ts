@@ -23,3 +23,15 @@ export function useActiveSectionIndex() {
     () => 0,
   );
 }
+
+/** Per-section subscription — React bails out when this section's active state is unchanged. */
+export function useIsSectionActive(index: number) {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      listeners.add(onStoreChange);
+      return () => listeners.delete(onStoreChange);
+    },
+    () => getActiveSectionIndex() === index,
+    () => index === 0,
+  );
+}

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
 import { SectionTheme } from '../types';
 
 interface VideoBackgroundProps {
@@ -12,6 +11,12 @@ interface VideoBackgroundProps {
   themeFallback?: SectionTheme;
   tone?: 'light' | 'dark';
   videoOpacity?: number;
+  preload?: 'none' | 'metadata' | 'auto';
+  eager?: boolean;
+  /** When false, video is paused (pinned scroll — only one section active at a time). */
+  active?: boolean;
+  /** Use IntersectionObserver for play/pause (native stacked scroll). */
+  useNativeVisibility?: boolean;
 }
 
 export default function VideoBackground({
@@ -24,6 +29,10 @@ export default function VideoBackground({
   themeFallback = 'none',
   tone = 'dark',
   videoOpacity,
+  preload = 'metadata',
+  eager = false,
+  active = true,
+  useNativeVisibility = false,
 }: VideoBackgroundProps) {
   const resolvedOpacity = videoOpacity ?? (tone === 'light' ? 0.08 : 0.2);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -32,7 +41,7 @@ export default function VideoBackground({
 
   const [useCanvas, setUseCanvas] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [offsetY, setOffsetY] = useState(0);
+  const parallaxRef = useRef(null);
 
   // 1. Accessibility listener
   useEffect(() => {
@@ -46,21 +55,26 @@ export default function VideoBackground({
     return () => motionQuery.removeEventListener('change', onMotionChange);
   }, []);
 
-  // 2. Parallax calculations
+  // 2. Parallax — direct transform (no React re-renders on scroll)
   useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const handleScroll = () => {
-      if (!wrapperRef.current) return;
-      const rect = wrapperRef.current.getBoundingClientRect();
-      const scrolled = window.scrollY;
-      // Drifts proportionate to alignment
-      setOffsetY(scrolled * -parallaxIntensity);
+    if (prefersReducedMotion || parallaxIntensity === 0 || !active) return;
+    let parallaxRaf = 0;
+    const applyParallax = () => {
+      parallaxRaf = 0;
+      if (!parallaxRef.current) return;
+      parallaxRef.current.style.transform = "translate3d(0, " + (window.scrollY * -parallaxIntensity) + "px, 0)";
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [parallaxIntensity, prefersReducedMotion]);
+    const handleScroll = () => {
+      if (parallaxRaf) return;
+      parallaxRaf = requestAnimationFrame(applyParallax);
+    };
+    applyParallax();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (parallaxRaf) cancelAnimationFrame(parallaxRaf);
+    };
+  }, [parallaxIntensity, prefersReducedMotion, active]);
 
   // 3. Scroll reactive velocity mapping (Gsap-like speed ramp using smooth animation decay)
   useEffect(() => {
@@ -97,8 +111,23 @@ export default function VideoBackground({
     return () => cancelAnimationFrame(frameId);
   }, [playbackMode, prefersReducedMotion]);
 
-  // 4. Lazy loading / Pause off-screen (Performance enhancement)
+  // 4a. Pinned scroll — parent controls playback via `active`
   useEffect(() => {
+    if (useNativeVisibility) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!active || prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+    video.play().catch(() => {});
+  }, [prefersReducedMotion, active, useNativeVisibility]);
+
+  // 4b. Native stacked scroll — IntersectionObserver play/pause
+  useEffect(() => {
+    if (!useNativeVisibility) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -114,12 +143,12 @@ export default function VideoBackground({
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(video);
     return () => observer.disconnect();
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, useNativeVisibility]);
 
   // 5. High-end synthetic canvas artwork fallback if video does not exist/fails to play
   useEffect(() => {
@@ -366,11 +395,9 @@ export default function VideoBackground({
         transform: 'translateZ(0)', // Force GPU layer
       }}
     >
-      <motion.div
-        className="absolute inset-0 w-full h-[120%] -top-[10%]"
-        style={{
-          y: prefersReducedMotion ? 0 : offsetY,
-        }}
+      <div
+        ref={parallaxRef}
+        className="absolute inset-0 w-full h-[120%] -top-[10%] will-change-transform"
       >
         {/* Poster / Reduced motion backdrop */}
         {prefersReducedMotion && posterSrc ? (
@@ -391,7 +418,8 @@ export default function VideoBackground({
             muted
             loop
             playsInline
-            autoPlay
+            autoPlay={eager}
+            preload={preload}
             className="w-full h-full object-cover transition-opacity duration-700"
             style={{ opacity: resolvedOpacity }}
             poster={posterSrc}
@@ -413,7 +441,7 @@ export default function VideoBackground({
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-[#0A0A0A] opacity-90" />
           </>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

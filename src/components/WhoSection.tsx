@@ -5,7 +5,7 @@ import { SectionTheme, PillarData } from '../types';
 import VideoBackground from './VideoBackground';
 import CertificationLightbox from './CertificationLightbox';
 import sound from '../lib/sound';
-import { mandeFilm } from '../lib/films';
+import { mandeFilm } from '../lib/films/mande';
 import { certifications } from '../lib/certifications';
 import type { Certification } from '../lib/certifications';
 import { scrollToSection } from '../lib/scrollNav';
