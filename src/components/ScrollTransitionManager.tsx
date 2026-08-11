@@ -42,6 +42,8 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isManualOpen, setIsManualOpen] = useState(false);
   const activeIndexRef = useRef(0);
+  // Ref guard — prevents setShowIndicator firing on every scroll frame
+  const showIndicatorRef = useRef(false);
   const gsapReadyRef = useRef(false);
   const atHeroScrollRef = useRef(true);
   const [atHeroScroll, setAtHeroScroll] = useState(true);
@@ -144,18 +146,24 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     let timer: NodeJS.Timeout;
 
     const handleScrollActivity = () => {
-      setShowIndicator(false);
+      // Only call setState when transitioning visible→hidden — not every frame
+      if (showIndicatorRef.current) {
+        showIndicatorRef.current = false;
+        setShowIndicator(false);
+      }
       clearTimeout(timer);
 
-      // Trigger reveal after 300ms of resting scroll position
+      // Reveal after 300ms idle
       timer = setTimeout(() => {
+        showIndicatorRef.current = true;
         setShowIndicator(true);
       }, 300);
     };
 
     window.addEventListener('scroll', handleScrollActivity, { passive: true });
-    // Initialize — show quickly on load
+    // Initialize
     timer = setTimeout(() => {
+      showIndicatorRef.current = true;
       setShowIndicator(true);
     }, 300);
 

@@ -409,7 +409,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sound.playClick()}
-                  className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-cyber text-black font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-[#00DD77] transition-colors active:scale-95 cursor-pointer"
+                  className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-cyber text-[#050C17] font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-[#00DD77] transition-colors active:scale-95 cursor-pointer"
                 >
                   Book Call ↗
                 </a>
@@ -431,7 +431,7 @@ export default function Hero() {
               <div className="sm:col-span-5 flex gap-2">
                 <button
                   onClick={() => { sound.playClick(); scrollToSection(1); }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-cyber text-black py-3 px-3 min-h-11 rounded-lg hover:bg-[#00DD77] transition-colors duration-200 active:scale-95"
+                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-cyber text-[#050C17] py-3 px-3 min-h-11 rounded-lg hover:bg-[#00DD77] transition-colors duration-200 active:scale-95"
                 >
                   START A BUILD
                 </button>
