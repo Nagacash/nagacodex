@@ -132,7 +132,7 @@ export default function Hero() {
       ref={containerRef}
       id="hero-section"
       data-section="none"
-      className="relative w-full h-full min-h-dvh flex flex-col pt-[calc(4.75rem+env(safe-area-inset-top,0px))] sm:pt-[calc(5.25rem+env(safe-area-inset-top,0px))] pb-4 sm:pb-6 px-4 sm:px-6 md:px-12 bg-transparent select-none overflow-hidden"
+      className="relative w-full h-full min-h-dvh flex flex-col justify-start pt-24 sm:pt-28 pb-4 sm:pb-6 px-4 sm:px-6 md:px-12 bg-transparent select-none overflow-hidden"
     >
       {/* Decorative vector background */}
       <FloatingClips theme="cyber" />
