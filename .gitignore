@@ -10,3 +10,6 @@ coverage/
 
 # Lockfile — project uses pnpm, keep pnpm-lock.yaml only
 package-lock.json
+
+# Permanently block MacOS resource forks
+._*
