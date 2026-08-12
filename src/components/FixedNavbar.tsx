@@ -9,8 +9,9 @@ const links = [
   ['WORK', 2],
   ['PHILOSOPHY', 3],
   ['SHOWCASE', 4],
-  ['PODCAST', 5],
-  ['CONTACT', 6],
+  ['ECOSYSTEM', 5],
+  ['PODCAST', 6],
+  ['CONTACT', 7],
 ] as const;
 
 export default function FixedNavbar() {
