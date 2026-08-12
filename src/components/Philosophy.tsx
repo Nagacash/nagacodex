@@ -34,7 +34,7 @@ export default function Philosophy() {
     <section
       id="philosophy-section"
       data-section="film"
-      className="relative w-full min-h-dvh flex flex-col justify-center pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 sm:px-6 md:px-12 overflow-hidden"
+      className="relative w-full min-h-dvh flex flex-col justify-start pt-32 sm:pt-40 pb-16 sm:pb-24 px-4 sm:px-6 md:px-12 overflow-hidden"
     >
       <div
         className="pointer-events-none absolute inset-0"
