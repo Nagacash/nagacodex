@@ -67,7 +67,16 @@ export default function Contact() {
               Security audits, AI films, web builds, and streetwear. Pick what you need — I'll handle the rest.
             </p>
             <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed max-w-lg">
-              Maurice Holda is an AI developer, filmmaker, and security consultant based in Hamburg. Naga Codex runs alongside{' '}
+              Maurice Holda is an AI developer, filmmaker, and security consultant based in Hamburg. Naga Codex builds alongside{' '}
+              <a
+                href="https://nagafilms-studio.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-film hover:underline underline-offset-2"
+              >
+                Naga Films Studio
+              </a>
+              {' '}(self-hostable AI production suite),{' '}
               <a
                 href={apparelUrl}
                 target="_blank"
@@ -76,7 +85,7 @@ export default function Contact() {
               >
                 Naga Apparel
               </a>
-              {' '}and{' '}
+              {' '}(technical streetwear), and{' '}
               <a
                 href="https://chosenfewrecrecords.vercel.app/"
                 target="_blank"
@@ -85,7 +94,7 @@ export default function Contact() {
               >
                 Chosen Few Records
               </a>
-              .
+              {' '}(Hamburg music label).
             </p>
           </div>
 
