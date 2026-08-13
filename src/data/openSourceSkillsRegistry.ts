@@ -2,24 +2,13 @@
 const PITCH_READY_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZPTQP88_AM0R2ZQYWW73Q6N7/8bb6c7f7-115f-4d9f-98a9-bcf28c1e1d06.png';
 const NARRATIVE_FILM_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZPTQPW7_RE7XTBYK51JCWJHM/9dd0df4f-2ec2-4e09-ae30-1b3f5a8f76b3.png';
 const PROVE_IT_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZPTQQGH_2D3QW0XKYREXNCP1/dd22c94e-14aa-490e-ac7d-33a7f0365a76.png';
+const SEO_SKILL_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZYFFDE6_B1T60QPEJYN7SJZT/56f92dc5-e935-49ca-9fc7-1ae59761ea25.png';
 
 export interface NagaRepo {
   id: string;
   name: string;
   description: string;
-  tags: string[  {
-    id: 'search-visibility-engineering',
-    name: 'search-visibility-engineering',
-    description:
-      'Five-script SEO + AI-search audit suite: page-level signal scoring, technical crawl analysis, entity schema generation, AI answer-engine prompt benchmarking, and scored reports. Covers Google, Bing, ChatGPT, Perplexity, and Claude citation paths. Applied to nagacodex.cloud to lift SEO score 73→84.',
-    tags: ['seo', 'ai-search', 'structured-data', 'schema-org', 'llms', 'perplexity', 'chatgpt', 'audit', 'python'],
-    githubUrl: 'https://github.com/Nagacash/search-visibility-engineering',
-    license: 'MIT',
-    updatedLabel: 'today',
-    accent: '#00FF88',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYFFDE6_B1T60QPEJYN7SJZT/56f92dc5-e935-49ca-9fc7-1ae59761ea25.png',
-  },
-];
+  tags: string[];
   githubUrl: string;
   license: string;
   updatedLabel: string;
@@ -86,6 +75,6 @@ export const nagaRepos: NagaRepo[] = [
     license: 'MIT',
     updatedLabel: 'today',
     accent: '#00FF88',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYFFDE6_B1T60QPEJYN7SJZT/56f92dc5-e935-49ca-9fc7-1ae59761ea25.png',
+    image: SEO_SKILL_IMG,
   },
 ];
