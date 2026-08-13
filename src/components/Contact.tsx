@@ -69,7 +69,7 @@ export default function Contact() {
             <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed max-w-lg">
               Maurice Holda is an AI developer, filmmaker, and security consultant based in Hamburg. Naga Codex builds alongside{' '}
               <a
-                href="https://nagafilms-studio.vercel.app/"
+                href="https://www.naga-films.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-film hover:underline underline-offset-2"

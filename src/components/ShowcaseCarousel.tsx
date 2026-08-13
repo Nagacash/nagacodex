@@ -52,7 +52,7 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     id: 'nagafilms',
     name: 'Naga Films Studio',
     shortDesc: 'Self-hostable AI video production suite',
-    url: 'https://nagafilms-studio.vercel.app/',
+    url: 'https://www.naga-films.com/',
   },
 ];
 

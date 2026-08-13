@@ -16,7 +16,7 @@ const products: StudioProduct[] = [
     id: 'films',
     title: 'Naga Films Studio',
     description: 'Self-hostable AI video production suite — image generation, video synthesis, cinema workflows, and lip-sync.',
-    url: 'https://nagafilms-studio.vercel.app/',
+    url: 'https://www.naga-films.com/',
     accent: '#FF6B35',
     icon: '🎬',
   },
