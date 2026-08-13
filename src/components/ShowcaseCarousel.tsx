@@ -20,43 +20,47 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     name: 'Naga Codex',
     shortDesc: 'Personal brand site — AI agents, film, web dev, security',
     url: 'https://nagacodex.cloud',
-    image: 'https://pub.hyperagent.com/api/published/a12f5e2c/naga-codex-hero.jpg',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3DQ1_1EWA6XKZBA110JF8/0da6d741-7c8b-4a85-8e31-568d620c39bc.jpg',
   },
   {
     id: 'naga-apparel',
     name: 'Naga Apparel',
     shortDesc: 'Technical streetwear — 450 GSM brutalist construction',
-    url: 'https://nagaclub.de',
-    image: 'https://pub.hyperagent.com/api/published/b45a9d8e/naga-apparel.jpg',
+    url: 'https://www.nagaclub.de',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3JHA_YFF4A5H2V6H1DR2E/209fbb03-1b81-41a7-af42-a58d959d14bb.jpg',
   },
   {
     id: 'chosen-few-records',
     name: 'Chosen Few Records',
     shortDesc: 'Hamburg underground music label — hip-hop & electronic',
     url: 'https://chosenfewrecrecords.vercel.app/',
-    image: 'https://pub.hyperagent.com/api/published/c78d2e4f/chosen-few.jpg',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3K4H_JBNCVYWRFDP20TP6/5915fa64-ac59-4ede-ad68-3fdc7f62845c.jpg',
   },
   {
     id: 'bodyandmind2',
     name: 'Body & Mind',
     shortDesc: 'Symptom tracking & encrypted health records app',
     url: 'https://github.com/Nagacash/bodyandmind2',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KF8_TH7BRPDD8RA5V3WA/c88292cf-0db9-424e-aad6-b4dc78974734.jpg',
   },
   {
     id: 'eric-love',
     name: 'Eric Love — Album Launch',
     shortDesc: 'Music streaming integration & PayPal support',
     url: 'https://github.com/Nagacash/eric-love',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KSW_MXA6RF7SS01TAHSX/704264f4-7e17-4b41-ad1c-ec7be3e2fbb3.jpg',
   },
   {
     id: 'nagafilms',
     name: 'Naga Films Studio',
     shortDesc: 'Self-hostable AI video production suite',
     url: 'https://www.naga-films.com/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3M43_XYHTYEP9950EYD3S/36fddafb-bf81-45e0-9b90-36373967fb68.jpg',
   },
 ];
 
-const screenshotUrl = (siteUrl: string) => `https://capture.cloud/screenshot?url=${encodeURIComponent(siteUrl)}`;
+// All projects now have real CDN screenshots; this function is kept as a safe fallback.
+const screenshotUrl = (_siteUrl: string) => '';
 
 const preloadScreenshot = (url: string) => {
   const img = new Image();

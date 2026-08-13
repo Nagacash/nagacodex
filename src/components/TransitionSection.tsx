@@ -133,7 +133,9 @@ export default function TransitionSection({
         }`}
         style={{
           opacity: 1,
-          pointerEvents: stacked || isActive ? 'auto' : 'none',
+          // Sections at index 6+ are in the natural scroll tail after GSAP pinning ends;
+          // they are always interactable regardless of the active-section store value.
+          pointerEvents: stacked || isActive || index >= 6 ? 'auto' : 'none',
         }}
       >
         {cloneWithIsActive(children, stacked || isActive)}

@@ -284,9 +284,9 @@ export default function Contact() {
             <span>HNGR_GER_LAT_53.55</span>
             <time dateTime="2026-08-13" className="text-neutral-500">Updated 13 August 2026</time>
             <div className="flex gap-3 mt-1">
-              <a href="/impressum.html" className="hover:text-neutral-900 transition-colors">Impressum</a>
+              <a href="/impressum/" className="hover:text-neutral-900 transition-colors">Impressum</a>
               <span>·</span>
-              <a href="/datenschutz.html" className="hover:text-neutral-900 transition-colors">Datenschutz</a>
+              <a href="/datenschutz/" className="hover:text-neutral-900 transition-colors">Datenschutz</a>
             </div>
           </div>
 
