@@ -53,10 +53,10 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   },
   {
     id: 'eric-love',
-    name: 'Eric Love — Album Launch',
-    shortDesc: 'Music streaming integration & PayPal support',
-    url: 'https://github.com/Nagacash/eric-love',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KSW_MXA6RF7SS01TAHSX/704264f4-7e17-4b41-ad1c-ec7be3e2fbb3.jpg',
+    name: 'Eric Gray — Love Is Here',
+    shortDesc: 'Album launch site — music streaming & PayPal support',
+    url: 'https://eric-love.vercel.app/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEV7ZQ_RGQZ0XE9BAFRFT06/1b708bce-3805-42d9-8e56-b20b60b171f4.jpg',
   },
   // ── NAGA ECOSYSTEM ───────────────────────────────────────────────────────
   {
@@ -99,10 +99,11 @@ const preloadScreenshot = (url: string) => {
 
 export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [previewLoading, setPreviewLoading] = useState(true);
+  const [previewLoaded, setPreviewLoaded] = useState(false);
   const [showLoadingUi, setShowLoadingUi] = useState(false);
   const [previewError, setPreviewError] = useState(false);
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  const loadTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const projects = SHOWCASE_PROJECTS;
   const currentProj = projects[currentIndex];
@@ -120,16 +121,17 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
 
   useEffect(() => {
     prefetchNeighbors(currentIndex);
-    setPreviewLoading(true);
+    setPreviewLoaded(false);
     setPreviewError(false);
     setShowLoadingUi(false);
 
-    const timer = setTimeout(() => {
-      if (previewLoading) setShowLoadingUi(true);
-    }, 1200);
+    if (loadTimerRef.current) clearTimeout(loadTimerRef.current);
+    loadTimerRef.current = setTimeout(() => setShowLoadingUi(true), 1200);
 
-    return () => clearTimeout(timer);
-  }, [currentIndex, prefetchNeighbors, previewLoading]);
+    return () => {
+      if (loadTimerRef.current) clearTimeout(loadTimerRef.current);
+    };
+  }, [currentIndex, prefetchNeighbors]);
 
   const handlePrev = () => {
     sound.playClick();
@@ -197,11 +199,19 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
                 src={currentShot}
                 alt={currentProj.name}
                 className="w-full h-full object-cover"
-                onLoad={() => setPreviewLoading(false)}
-                onError={() => setPreviewError(true)}
+                onLoad={() => {
+                  setPreviewLoaded(true);
+                  setShowLoadingUi(false);
+                  if (loadTimerRef.current) clearTimeout(loadTimerRef.current);
+                }}
+                onError={() => {
+                  setPreviewError(true);
+                  setShowLoadingUi(false);
+                  if (loadTimerRef.current) clearTimeout(loadTimerRef.current);
+                }}
               />
 
-              {showLoadingUi && (
+              {showLoadingUi && !previewLoaded && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-neutral-100/95">
                   <div className="w-8 h-8 border-2 border-neutral-300 border-t-neutral-900 rounded-full animate-spin" />
                   <span className="font-mono text-xs text-neutral-600">Loading preview...</span>
