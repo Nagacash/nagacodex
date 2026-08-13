@@ -45,6 +45,13 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYEAPSY_92YTMJ1NANHHZR6N/905fdb2c-796b-46af-9af4-a531bcb60b0e.jpg',
   },
   {
+    id: 'bodyandmind',
+    name: 'Body & Mind Hamburg',
+    shortDesc: 'Premium private training — boxing, kickboxing & recovery',
+    url: 'https://www.bodyandmindhamburg.com/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYF1CFH_S3YNFD5Z68BDJ61A/4c4203e5-0c8e-44e7-936f-d41d60e8b844.jpg',
+  },
+  {
     id: 'eric-love',
     name: 'Eric Gray — Love Is Here',
     shortDesc: 'Album launch site — music streaming & PayPal support',
