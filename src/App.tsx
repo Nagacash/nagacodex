@@ -1,4 +1,5 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import ClickBurst from './components/ClickBurst';
@@ -151,6 +152,7 @@ export default function App() {
           </div>
         </>
       )}
+      <Analytics />
     </div>
   );
 }
