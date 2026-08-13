@@ -57,6 +57,13 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     url: 'https://www.naga-films.com/',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3M43_XYHTYEP9950EYD3S/36fddafb-bf81-45e0-9b90-36373967fb68.jpg',
   },
+  {
+    id: 'wilde-muschel',
+    name: 'Wilde Muschel',
+    shortDesc: '18+ podcast site — age gate, Neon-backed player, likes & comments',
+    url: 'https://wilde-muschel.vercel.app/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEAPSY_92YTMJ1NANHHZR6N/905fdb2c-796b-46af-9af4-a531bcb60b0e.jpg',
+  },
 ];
 
 // All projects now have real CDN screenshots; this function is kept as a safe fallback.
