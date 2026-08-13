@@ -91,6 +91,12 @@ export default function CookieBanner() {
                 VIEW_DECLARATION
               </button>
             </div>
+
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[7.5px] text-neutral-500 uppercase tracking-wider border-t border-neutral-900 pt-2">
+              <a href="/datenschutz.html" className="hover:text-white transition-colors">Datenschutz</a>
+              <span aria-hidden="true">·</span>
+              <a href="/impressum.html" className="hover:text-white transition-colors">Impressum</a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -201,9 +207,12 @@ export default function CookieBanner() {
 
               {/* Modal Footer */}
               <div className="p-5 border-t border-neutral-900 bg-neutral-950 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
-                <span className="flex items-center gap-1">
+                <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <Lock className="w-3.5 h-3.5 text-cyber" />
                   <span>Secure Local SSL Connection Verified</span>
+                  <span aria-hidden="true">·</span>
+                  <a href="/datenschutz.html" className="hover:text-white underline">Datenschutz</a>
+                  <a href="/impressum.html" className="hover:text-white underline">Impressum</a>
                 </span>
                 <button
                   onClick={() => {

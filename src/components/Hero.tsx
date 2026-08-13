@@ -474,11 +474,23 @@ export default function Hero() {
         <div className="hidden sm:flex flex-col items-end text-right gap-0.5">
           <span>LAT_GRID_LNG: 53.55</span>
           <span className="text-neutral-600">ALPHA_V0.96_BUILD</span>
+          <div className="flex gap-2 mt-1 normal-case tracking-normal">
+            <a href="/impressum.html" className="hover:text-neutral-800 transition-colors">Impressum</a>
+            <a href="/datenschutz.html" className="hover:text-neutral-800 transition-colors">Datenschutz</a>
+            <a href="mailto:chosenfewrecords@hotmail.de" className="hover:text-neutral-800 transition-colors">Contact</a>
+          </div>
         </div>
 
-        <div className="flex sm:hidden justify-between w-full text-[7px] text-neutral-600">
-          <span>NAGACODEX.CLOUD</span>
-          <span>LAT 53.55</span>
+        <div className="flex sm:hidden flex-col gap-1.5 w-full text-[7px] text-neutral-600">
+          <div className="flex justify-between">
+            <span>NAGACODEX.CLOUD</span>
+            <span>LAT 53.55</span>
+          </div>
+          <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+            <a href="/impressum.html" className="hover:text-neutral-900 transition-colors">Impressum</a>
+            <a href="/datenschutz.html" className="hover:text-neutral-900 transition-colors">Datenschutz</a>
+            <a href="mailto:chosenfewrecords@hotmail.de" className="hover:text-neutral-900 transition-colors">Contact</a>
+          </div>
         </div>
       </footer>
       {/* Skills support manual modal */}

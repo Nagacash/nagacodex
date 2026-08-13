@@ -282,6 +282,7 @@ export default function Contact() {
           <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left order-2 md:order-none">
             <span>MAURICE HOLDA © 2026 // ALL CORES HARDENED</span>
             <span>HNGR_GER_LAT_53.55</span>
+            <time dateTime="2026-08-13" className="text-neutral-500">Updated 13 August 2026</time>
             <div className="flex gap-3 mt-1">
               <a href="/impressum.html" className="hover:text-neutral-900 transition-colors">Impressum</a>
               <span>·</span>

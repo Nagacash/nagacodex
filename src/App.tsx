@@ -5,6 +5,7 @@ import ClickBurst from './components/ClickBurst';
 import ScrollTransitionManager from './components/ScrollTransitionManager';
 import TransitionSection from './components/TransitionSection';
 import FixedNavbar from './components/FixedNavbar';
+import LegalFooter from './components/LegalFooter';
 import Hero from './components/Hero';
 import sound from './lib/sound';
 import { heroIntro, philosophyAmbient, whoAmbient } from './lib/films';
@@ -44,7 +45,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-dvh selection:bg-cyber/20 selection:text-cyber bg-bg-dark">
-      {/* 1. Full-screen SVGs interactive boot manager */}
+      <LegalFooter />
       <Preloader onComplete={handlePreloaderComplete} />
 
       {!loading && (
