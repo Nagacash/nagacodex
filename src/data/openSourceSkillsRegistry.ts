@@ -7,7 +7,19 @@ export interface NagaRepo {
   id: string;
   name: string;
   description: string;
-  tags: string[];
+  tags: string[  {
+    id: 'search-visibility-engineering',
+    name: 'search-visibility-engineering',
+    description:
+      'Five-script SEO + AI-search audit suite: page-level signal scoring, technical crawl analysis, entity schema generation, AI answer-engine prompt benchmarking, and scored reports. Covers Google, Bing, ChatGPT, Perplexity, and Claude citation paths. Applied to nagacodex.cloud to lift SEO score 73→84.',
+    tags: ['seo', 'ai-search', 'structured-data', 'schema-org', 'llms', 'perplexity', 'chatgpt', 'audit', 'python'],
+    githubUrl: 'https://github.com/Nagacash/search-visibility-engineering',
+    license: 'MIT',
+    updatedLabel: 'today',
+    accent: '#00FF88',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYFFDE6_B1T60QPEJYN7SJZT/56f92dc5-e935-49ca-9fc7-1ae59761ea25.png',
+  },
+];
   githubUrl: string;
   license: string;
   updatedLabel: string;
@@ -63,5 +75,17 @@ export const nagaRepos: NagaRepo[] = [
     updatedLabel: 'today',
     accent: '#3B82F6',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZRZ9R2H_8XPDEKTR1W4SJ24T/500507d5-5a24-4793-9e87-85b6c919af17.png',
+  },
+  {
+    id: 'search-visibility-engineering',
+    name: 'search-visibility-engineering',
+    description:
+      'Five-script SEO + AI-search audit suite: page-level signal scoring, technical crawl analysis, entity schema generation, AI answer-engine prompt benchmarking, and scored reports. Covers Google, Bing, ChatGPT, Perplexity, and Claude citation paths. Applied to nagacodex.cloud to lift SEO score 73→84.',
+    tags: ['seo', 'ai-search', 'structured-data', 'schema-org', 'llms', 'perplexity', 'chatgpt', 'audit', 'python'],
+    githubUrl: 'https://github.com/Nagacash/search-visibility-engineering',
+    license: 'MIT',
+    updatedLabel: 'today',
+    accent: '#00FF88',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYFFDE6_B1T60QPEJYN7SJZT/56f92dc5-e935-49ca-9fc7-1ae59761ea25.png',
   },
 ];
