@@ -84,7 +84,12 @@ export function scrollToSection(index: number, behavior: ScrollBehavior = 'smoot
   }
 
   const labelTime = pinnedTimeline.labels[`section-${index}`];
-  if (labelTime === undefined) return;
+  if (labelTime === undefined) {
+    // Section is outside the pinned range (natural scroll tail, e.g. Contact at index 7).
+    // Fall back to scrollIntoView so the nav link still works.
+    anchor?.scrollIntoView({ behavior, block: 'start' });
+    return;
+  }
 
   const duration = pinnedTimeline.duration();
   if (duration <= 0) {
