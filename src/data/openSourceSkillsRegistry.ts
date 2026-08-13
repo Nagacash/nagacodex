@@ -1,8 +1,9 @@
-// Images hosted on CDN — no local asset imports to avoid bundler issues
-const PITCH_READY_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZPTQP88_AM0R2ZQYWW73Q6N7/8bb6c7f7-115f-4d9f-98a9-bcf28c1e1d06.png';
-const NARRATIVE_FILM_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZPTQPW7_RE7XTBYK51JCWJHM/9dd0df4f-2ec2-4e09-ae30-1b3f5a8f76b3.png';
-const PROVE_IT_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZPTQQGH_2D3QW0XKYREXNCP1/dd22c94e-14aa-490e-ac7d-33a7f0365a76.png';
-const SEO_SKILL_IMG = 'https://pub.hyperagent.com/api/published/pbf01KZYFFDE6_B1T60QPEJYN7SJZT/56f92dc5-e935-49ca-9fc7-1ae59761ea25.png';
+// Images stored directly in the repo — no external CDN dependency
+import pitchReadyImg from '../assets/images/skills/pitch-ready.jpg';
+import narrativeFilmImg from '../assets/images/skills/narrative-film-direction.jpg';
+import proveItImg from '../assets/images/skills/prove-it.jpg';
+import socialPostForgeImg from '../assets/images/skills/social-post-forge.jpg';
+import searchVisibilityImg from '../assets/images/skills/search-visibility.jpg';
 
 export interface NagaRepo {
   id: string;
@@ -27,7 +28,7 @@ export const nagaRepos: NagaRepo[] = [
     license: 'MIT',
     updatedLabel: '1 hour ago',
     accent: '#D4A843',
-    image: PITCH_READY_IMG,
+    image: pitchReadyImg,
   },
   {
     id: 'narrative-film-direction',
@@ -39,7 +40,7 @@ export const nagaRepos: NagaRepo[] = [
     license: 'MIT',
     updatedLabel: '3 hours ago',
     accent: '#00FF88',
-    image: NARRATIVE_FILM_IMG,
+    image: narrativeFilmImg,
   },
   {
     id: 'prove-it',
@@ -51,7 +52,7 @@ export const nagaRepos: NagaRepo[] = [
     license: 'MIT',
     updatedLabel: 'recently',
     accent: '#FF6B35',
-    image: PROVE_IT_IMG,
+    image: proveItImg,
   },
   {
     id: 'social-post-forge',
@@ -63,7 +64,7 @@ export const nagaRepos: NagaRepo[] = [
     license: 'MIT',
     updatedLabel: 'today',
     accent: '#3B82F6',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZRZ9R2H_8XPDEKTR1W4SJ24T/500507d5-5a24-4793-9e87-85b6c919af17.png',
+    image: socialPostForgeImg,
   },
   {
     id: 'search-visibility-engineering',
@@ -75,6 +76,6 @@ export const nagaRepos: NagaRepo[] = [
     license: 'MIT',
     updatedLabel: 'today',
     accent: '#00FF88',
-    image: SEO_SKILL_IMG,
+    image: searchVisibilityImg,
   },
 ];
