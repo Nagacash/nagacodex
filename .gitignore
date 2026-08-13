@@ -4,12 +4,11 @@ dist/
 coverage/
 .DS_Store
 ._*
+**/.DS_Store
+**/._*
 *.log
 .env*
 !.env.example
 
 # Lockfile — project uses pnpm, keep pnpm-lock.yaml only
 package-lock.json
-
-# Permanently block MacOS resource forks
-._*
