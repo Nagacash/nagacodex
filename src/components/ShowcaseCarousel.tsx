@@ -45,13 +45,6 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYEAPSY_92YTMJ1NANHHZR6N/905fdb2c-796b-46af-9af4-a531bcb60b0e.jpg',
   },
   {
-    id: 'bodyandmind2',
-    name: 'Body & Mind',
-    shortDesc: 'Symptom tracking & encrypted health records app',
-    url: 'https://github.com/Nagacash/bodyandmind2',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KF8_TH7BRPDD8RA5V3WA/c88292cf-0db9-424e-aad6-b4dc78974734.jpg',
-  },
-  {
     id: 'eric-love',
     name: 'Eric Gray — Love Is Here',
     shortDesc: 'Album launch site — music streaming & PayPal support',
