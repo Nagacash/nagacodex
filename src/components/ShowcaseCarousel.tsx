@@ -15,6 +15,50 @@ interface ShowcaseCarouselProps {
 }
 
 const SHOWCASE_PROJECTS: ShowcaseProject[] = [
+  // ── CLIENT WORK ──────────────────────────────────────────────────────────
+  {
+    id: 'listeneurope',
+    name: 'Listen Europe',
+    shortDesc: 'AI radio station & music generator platform',
+    url: 'https://www.listeneurope.com/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEFH0G_EKRZFST3F48MQWFN/54a0a8f7-ce45-4497-a7e5-2b0d3fc11d8e.jpg',
+  },
+  {
+    id: 'glamour-academy',
+    name: 'Glamour Academy',
+    shortDesc: 'Beauty academy & skin treatment clinic — Hamburg',
+    url: 'https://www.glamour-academy.com/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEFHDB_3YP00WFF9BS0YSWX/92df8e57-94c7-4d6c-b1ba-10292278b3ac.jpg',
+  },
+  {
+    id: 'mesoskin-hamburg',
+    name: 'Mesoskin Hamburg',
+    shortDesc: 'Medical aesthetics — drip spas, PDO threads & hyaluronic',
+    url: 'https://www.mesoskin-hamburg.com/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEFHS2_5DXV86GVX4BT1NGZ/18dca5ac-a711-4611-bb52-8cea206ebffd.jpg',
+  },
+  {
+    id: 'wilde-muschel',
+    name: 'Wilde Muschel',
+    shortDesc: '18+ podcast site — age gate, Neon-backed player, likes & comments',
+    url: 'https://wilde-muschel.vercel.app/',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEAPSY_92YTMJ1NANHHZR6N/905fdb2c-796b-46af-9af4-a531bcb60b0e.jpg',
+  },
+  {
+    id: 'bodyandmind2',
+    name: 'Body & Mind',
+    shortDesc: 'Symptom tracking & encrypted health records app',
+    url: 'https://github.com/Nagacash/bodyandmind2',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KF8_TH7BRPDD8RA5V3WA/c88292cf-0db9-424e-aad6-b4dc78974734.jpg',
+  },
+  {
+    id: 'eric-love',
+    name: 'Eric Love — Album Launch',
+    shortDesc: 'Music streaming integration & PayPal support',
+    url: 'https://github.com/Nagacash/eric-love',
+    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KSW_MXA6RF7SS01TAHSX/704264f4-7e17-4b41-ad1c-ec7be3e2fbb3.jpg',
+  },
+  // ── NAGA ECOSYSTEM ───────────────────────────────────────────────────────
   {
     id: 'nagacodex-brand',
     name: 'Naga Codex',
@@ -37,32 +81,11 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3K4H_JBNCVYWRFDP20TP6/5915fa64-ac59-4ede-ad68-3fdc7f62845c.jpg',
   },
   {
-    id: 'bodyandmind2',
-    name: 'Body & Mind',
-    shortDesc: 'Symptom tracking & encrypted health records app',
-    url: 'https://github.com/Nagacash/bodyandmind2',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KF8_TH7BRPDD8RA5V3WA/c88292cf-0db9-424e-aad6-b4dc78974734.jpg',
-  },
-  {
-    id: 'eric-love',
-    name: 'Eric Love — Album Launch',
-    shortDesc: 'Music streaming integration & PayPal support',
-    url: 'https://github.com/Nagacash/eric-love',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3KSW_MXA6RF7SS01TAHSX/704264f4-7e17-4b41-ad1c-ec7be3e2fbb3.jpg',
-  },
-  {
     id: 'nagafilms',
     name: 'Naga Films Studio',
     shortDesc: 'Self-hostable AI video production suite',
     url: 'https://www.naga-films.com/',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3M43_XYHTYEP9950EYD3S/36fddafb-bf81-45e0-9b90-36373967fb68.jpg',
-  },
-  {
-    id: 'wilde-muschel',
-    name: 'Wilde Muschel',
-    shortDesc: '18+ podcast site — age gate, Neon-backed player, likes & comments',
-    url: 'https://wilde-muschel.vercel.app/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEAPSY_92YTMJ1NANHHZR6N/905fdb2c-796b-46af-9af4-a531bcb60b0e.jpg',
   },
 ];
 
