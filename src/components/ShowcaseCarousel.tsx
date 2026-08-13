@@ -33,7 +33,7 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     id: 'chosen-few-records',
     name: 'Chosen Few Records',
     shortDesc: 'Hamburg underground music label — hip-hop & electronic',
-    url: 'https://chosenfewrecrecords.vercel.app/',
+    url: 'https://www.chosenfewrecords.com/',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3K4H_JBNCVYWRFDP20TP6/5915fa64-ac59-4ede-ad68-3fdc7f62845c.jpg',
   },
   {

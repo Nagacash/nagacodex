@@ -87,7 +87,7 @@ export default function Contact() {
               </a>
               {' '}(technical streetwear), and{' '}
               <a
-                href="https://chosenfewrecrecords.vercel.app/"
+                href="https://www.chosenfewrecords.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-film hover:underline underline-offset-2"

@@ -32,7 +32,7 @@ const products: StudioProduct[] = [
     id: 'records',
     title: 'Chosen Few Records',
     description: 'Hamburg underground music label — hip-hop and electronic production, A&R, artist development.',
-    url: 'https://chosenfewrecrecords.vercel.app/',
+    url: 'https://www.chosenfewrecords.com/',
     accent: '#FF6B35',
     icon: '🎵',
   },
