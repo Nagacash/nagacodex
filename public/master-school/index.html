@@ -183,7 +183,7 @@
     .clip-frame {
       position: relative; border-radius: 4px; overflow: hidden;
       border: 1px solid rgba(0,255,136,0.18);
-      background: #000;
+      background: #0a0f1a;
       box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8), 0 0 60px -20px rgba(0,255,136,0.15);
       aspect-ratio: 9 / 16;
       max-height: 72dvh; margin-inline: auto;
@@ -192,7 +192,6 @@
     @media (max-width: 880px) { .clip-frame { max-width: 340px; } }
     .clip-frame video {
       width: 100%; height: 100%; object-fit: cover; display: block;
-      poster: center / cover;
     }
     .clip-caption {
       position: absolute; left: 14px; bottom: 12px; z-index: 2;
@@ -202,8 +201,8 @@
       backdrop-filter: blur(4px);
     }
     .clip-frame::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(180deg, transparent 60%, rgba(7,13,26,0.5) 100%);
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: linear-gradient(180deg, transparent 75%, rgba(7,13,26,0.35) 100%);
     }
 
     /* Pillars */
@@ -380,11 +379,11 @@
       <div class="hero-clip reveal d3">
         <div class="clip-frame">
           <video
-            autoplay muted loop playsinline preload="metadata"
+            controls autoplay muted loop playsinline preload="auto"
             poster="poster.jpg"
             aria-label="MasterSchool Tech-Noir recruitment clip">
-            <source src="technoir.webm" type="video/webm">
             <source src="technoir.mp4" type="video/mp4">
+            <source src="technoir.webm" type="video/webm">
           </video>
           <span class="clip-caption">TECH-NOIR · MSIT × NAGA CODEX</span>
         </div>
@@ -550,27 +549,32 @@
   </footer>
 
   <script>
-    // Respect reduced-motion: pause autoplay loop for users who prefer less motion.
+    // Reliable video playback: force load, attempt play with retry, and pause off-screen.
     (function () {
       var v = document.querySelector('.clip-frame video');
       if (!v) return;
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) { v.removeAttribute('autoplay'); v.pause(); }
-      // Lazy-play only when in viewport on slow connections
+      v.load(); // force the browser to fetch the source eagerly
+      function tryPlay() { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      if (!reduce) {
+        // Attempt play immediately and again on first user interaction (autoplay-policy fallback).
+        tryPlay();
+        ['click','touchstart','keydown','scroll'].forEach(function (evt) {
+          window.addEventListener(evt, tryPlay, { once: true, passive: true });
+        });
+      } else {
+        v.removeAttribute('autoplay');
+      }
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) { v.play().catch(function(){}); }
+            if (e.isIntersecting && !reduce) { tryPlay(); }
             else { v.pause(); }
           });
         }, { threshold: 0.25 });
         io.observe(v);
       }
     })();
-  </script>
-</body>
-</html>
-  })();
   </script>
 </body>
 </html>
