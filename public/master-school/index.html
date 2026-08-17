@@ -431,6 +431,20 @@
       .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; }
       .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; }
     }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 0; border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 2px; overflow: hidden; background: var(--surface);
+    }
+    .lang-toggle button {
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-muted); background: transparent;
+      border: none; padding: 6px 10px; cursor: pointer; transition: background .2s, color .2s;
+      min-height: 28px;
+    }
+    .lang-toggle button:hover { color: var(--text-main); }
+    .lang-toggle button[aria-pressed="true"] { background: var(--cyber); color: #03110a; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -442,8 +456,12 @@
       <span class="brand-name">NAGA CODEX</span>
     </a>
     <div class="nav">
-      <span class="tag hide-sm">Recommended training</span>
-      <a href="/" class="hide-sm">← Back to studio</a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      </div>
+      <span class="tag hide-sm" data-i18n="topbar_tag">Recommended training</span>
+      <a href="/" class="hide-sm" data-i18n="topbar_back">← Back to studio</a>
     </div>
   </div>
 
@@ -451,11 +469,11 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow reveal d1">My path · The funded version</div>
-        <h1 class="display reveal d2">
+        <div class="eyebrow reveal d1" data-i18n="hero_eyebrow">My path · The funded version</div>
+        <h1 class="display reveal d2" data-i18n-html="hero_h1">
           The work I do every day — <span class="accent">now a funded path in</span>, not just a portfolio out.
         </h1>
-        <p class="lede reveal d3">
+        <p class="lede reveal d3" data-i18n-html="hero_lede">
           I'm Maurice. I run <strong>Naga Codex</strong> from Hamburg — AI agent systems, generative film, web engineering, and security consulting, solo, no middlemen. This page isn't a sales pitch for my services. It's the route I'd point someone at who wants to get <em>into</em> this field without the debt I've seen people take on: <strong>MasterSchool</strong>, AZAV-certified, 100% funded via Bildungsgutschein if you're unemployed or at risk in Germany.
         </p>
         <div class="cta-row reveal d4">
@@ -464,17 +482,19 @@
              target="_blank"
              rel="sponsored nofollow noopener noreferrer"
              referrerpolicy="no-referrer"
-             id="primary-cta">
+             id="primary-cta"
+             data-i18n="hero_cta_en">
             Take the funded route (EN) <span class="arrow" aria-hidden="true">→</span>
           </a>
           <a class="cta-secondary"
              href="https://start.joinmsit.de/maurice-holda-de?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
              target="_blank"
              rel="sponsored nofollow noopener noreferrer"
-             referrerpolicy="no-referrer">
+             referrerpolicy="no-referrer"
+             data-i18n="hero_cta_de">
             <span class="lang-tag">DE</span>Auf Deutsch bewerben →
           </a>
-          <span class="cta-meta">
+          <span class="cta-meta" data-i18n="hero_meta">
             Bildungsgutschein eligible <span class="dot">·</span> Next cohort: Jul 7, 2026 <span class="dot">·</span> 8-month track
           </span>
         </div>
@@ -498,26 +518,26 @@
   <!-- Pillars -->
   <section class="pillars">
     <div class="wrap">
-      <div class="section-label reveal d1">Tracks</div>
-      <h2 class="section-title reveal d2">Three fields I work in — and the ones MasterSchool trains you for.</h2>
+      <div class="section-label reveal d1" data-i18n="pillars_label">Tracks</div>
+      <h2 class="section-title reveal d2" data-i18n="pillars_title">Three fields I work in — and the ones MasterSchool trains you for.</h2>
       <div class="pillar-grid">
         <div class="pillar reveal d2">
           <div class="num">// 01</div>
-          <h3>Cybersecurity</h3>
-          <p>Defend organizations against real threats. The track I'd point any career-changer at first — it overlaps with the security work I ship at Naga Codex.</p>
+          <h3 data-i18n="pillar1_h3">Cybersecurity</h3>
+          <p data-i18n="pillar1_p">Defend organizations against real threats. The track I'd point any career-changer at first — it overlaps with the security work I ship at Naga Codex.</p>
           <div class="cert">CompTIA A+ · Security+ · IHK Cyber Security Advisor</div>
         </div>
         <div class="pillar reveal d3">
           <div class="num">// 02</div>
-          <h3>AI Engineering</h3>
-          <p>Build with the same class of tools I use daily — LLMs, agents, model pipelines. Career support runs until you're hired.</p>
-          <div class="cert">Live online · 8-week industry internship</div>
+          <h3 data-i18n="pillar2_h3">AI Engineering</h3>
+          <p data-i18n="pillar2_p">Build with the same class of tools I use daily — LLMs, agents, model pipelines. Career support runs until you're hired.</p>
+          <div class="cert" data-i18n="pillar2_cert">Live online · 8-week industry internship</div>
         </div>
         <div class="pillar reveal d4">
           <div class="num">// 03</div>
-          <h3>Web &amp; Cloud</h3>
-          <p>Full-stack web development and cloud engineering — the engineering foundation under every product I build for clients.</p>
-          <div class="cert">React, cloud, serverless · job-ready in months</div>
+          <h3 data-i18n="pillar3_h3">Web &amp; Cloud</h3>
+          <p data-i18n="pillar3_p">Full-stack web development and cloud engineering — the engineering foundation under every product I build for clients.</p>
+          <div class="cert" data-i18n="pillar3_cert">React, cloud, serverless · job-ready in months</div>
         </div>
       </div>
     </div>
@@ -526,24 +546,24 @@
   <!-- How it works -->
   <section class="how">
     <div class="wrap">
-      <div class="section-label reveal d1">How the funding works</div>
-      <h2 class="section-title reveal d2">Bildungsgutschein — the German voucher that pays your tuition.</h2>
+      <div class="section-label reveal d1" data-i18n="how_label">How the funding works</div>
+      <h2 class="section-title reveal d2" data-i18n="how_title">Bildungsgutschein — the German voucher that pays your tuition.</h2>
       <div class="steps">
         <div class="step reveal d2">
-          <h4>Check eligibility</h4>
-          <p>Unemployed, soon to be, or in short-time work (Kurzarbeit). Registered with the Agentur für Arbeit or Jobcenter.</p>
+          <h4 data-i18n="step1_h4">Check eligibility</h4>
+          <p data-i18n="step1_p">Unemployed, soon to be, or in short-time work (Kurzarbeit). Registered with the Agentur für Arbeit or Jobcenter.</p>
         </div>
         <div class="step reveal d3">
-          <h4>Apply via MasterSchool</h4>
-          <p>Use the link above. MasterSchool matches you with a consultant who walks you through the paperwork.</p>
+          <h4 data-i18n="step2_h4">Apply via MasterSchool</h4>
+          <p data-i18n="step2_p">Use the link above. MasterSchool matches you with a consultant who walks you through the paperwork.</p>
         </div>
         <div class="step reveal d4">
-          <h4>Get your Bildungsgutschein</h4>
-          <p>MSIT is AZAV-certified, so the voucher can cover 100% of tuition. They help you file the application.</p>
+          <h4 data-i18n="step3_h4">Get your Bildungsgutschein</h4>
+          <p data-i18n="step3_p">MSIT is AZAV-certified, so the voucher can cover 100% of tuition. They help you file the application.</p>
         </div>
         <div class="step reveal d5">
-          <h4>Train &amp; get hired</h4>
-          <p>~8 months live online + an 8-week internship. Career coaching continues until you land your first tech role.</p>
+          <h4 data-i18n="step4_h4">Train &amp; get hired</h4>
+          <p data-i18n="step4_p">~8 months live online + an 8-week internship. Career coaching continues until you land your first tech role.</p>
         </div>
       </div>
     </div>
@@ -552,45 +572,45 @@
   <!-- Journey: my path, then the funded fork -->
   <section class="journey">
     <div class="wrap">
-      <div class="section-label reveal d1">My path — and the funded fork off it</div>
-      <h2 class="section-title reveal d2">How I got here, and where I'd tell past-me to branch.</h2>
-      <p class="journey-intro reveal d2">
+      <div class="section-label reveal d1" data-i18n="journey_label">My path — and the funded fork off it</div>
+      <h2 class="section-title reveal d2" data-i18n="journey_title">How I got here, and where I'd tell past-me to branch.</h2>
+      <p class="journey-intro reveal d2" data-i18n-html="journey_intro">
         I'm not a course reseller. I run the work this training leads to — <strong>offensive audits, AI agent systems, generative film, web engineering</strong> — solo from Hamburg. Here's the honest shape of my path, and the fork where a funded route would have saved years of detours.
       </p>
 
       <div class="timeline">
         <div class="tl-item reveal d2">
-          <div class="tl-fork">// Started creative</div>
-          <h4>Music, film, and the Hamburg underground</h4>
-          <p>I came up through records and visuals first — directing, sound, and editing. The storytelling muscle from that still runs underneath everything I ship now. <span class="accent">Film taught me how to ship a thing end-to-end.</span></p>
+          <div class="tl-fork" data-i18n="tl1_fork">// Started creative</div>
+          <h4 data-i18n="tl1_h4">Music, film, and the Hamburg underground</h4>
+          <p data-i18n-html="tl1_p">I came up through records and visuals first — directing, sound, and editing. The storytelling muscle from that still runs underneath everything I ship now. <span class="accent">Film taught me how to ship a thing end-to-end.</span></p>
         </div>
 
         <div class="tl-item reveal d3">
-          <div class="tl-fork">// Picked up engineering</div>
-          <h4>Web &amp; product, self-taught</h4>
-          <p>React, TypeScript, Vercel, Cloud Run — the modern stack I now build client products on. I learned most of it the hard way, project by project, with no structured track behind me. <span class="accent">A funded bootcamp would have compressed this into months.</span></p>
+          <div class="tl-fork" data-i18n="tl2_fork">// Picked up engineering</div>
+          <h4 data-i18n="tl2_h4">Web &amp; product, self-taught</h4>
+          <p data-i18n-html="tl2_p">React, TypeScript, Vercel, Cloud Run — the modern stack I now build client products on. I learned most of it the hard way, project by project, with no structured track behind me. <span class="accent">A funded bootcamp would have compressed this into months.</span></p>
         </div>
 
         <div class="tl-item reveal d4">
-          <div class="tl-fork">// Went deep on AI</div>
-          <h4>Agent systems &amp; generative film</h4>
-          <p>Gemini API, Claude SDK, n8n, MCP — production agent systems and text-to-video pipelines with sound design and grading. This is half my client work today, and it's exactly the AI engineering track MasterSchool trains.</p>
+          <div class="tl-fork" data-i18n="tl3_fork">// Went deep on AI</div>
+          <h4 data-i18n="tl3_h4">Agent systems &amp; generative film</h4>
+          <p data-i18n="tl3_p">Gemini API, Claude SDK, n8n, MCP — production agent systems and text-to-video pipelines with sound design and grading. This is half my client work today, and it's exactly the AI engineering track MasterSchool trains.</p>
         </div>
 
         <div class="tl-item reveal d5">
-          <div class="tl-fork">// Hardened into security</div>
-          <h4>Offensive audits &amp; cloud hardening</h4>
-          <p>Offensive audits, smart-contract reviews, cloud hardening — the discipline I'd point any career-changer at first. It overlaps directly with MasterSchool's cybersecurity track (CompTIA Security+, IHK Cyber Security Advisor).</p>
+          <div class="tl-fork" data-i18n="tl4_fork">// Hardened into security</div>
+          <h4 data-i18n="tl4_h4">Offensive audits &amp; cloud hardening</h4>
+          <p data-i18n="tl4_p">Offensive audits, smart-contract reviews, cloud hardening — the discipline I'd point any career-changer at first. It overlaps directly with MasterSchool's cybersecurity track (CompTIA Security+, IHK Cyber Security Advisor).</p>
         </div>
 
         <div class="tl-item now reveal d5">
-          <div class="tl-fork">// Today</div>
-          <h4>Naga Codex — four disciplines, one operator</h4>
-          <p>AI agents · generative film · web engineering · security consulting. Solo. Zero middlemen. The portfolio you came from is the live version of this path.</p>
+          <div class="tl-fork" data-i18n="tl5_fork">// Today</div>
+          <h4 data-i18n="tl5_h4">Naga Codex — four disciplines, one operator</h4>
+          <p data-i18n="tl5_p">AI agents · generative film · web engineering · security consulting. Solo. Zero middlemen. The portfolio you came from is the live version of this path.</p>
         </div>
       </div>
 
-      <div class="tl-bridge reveal d1">
+      <div class="tl-bridge reveal d1" data-i18n="tl_bridge">
         <span class="arrow">↳</span> If I were starting that path today — unemployed in Germany, no tech background, no budget for tuition — the fork I'd take is the funded one below. Same destination, no debt, and a consultant who walks you through the paperwork.
       </div>
     </div>
@@ -602,8 +622,8 @@
       <div class="note-block reveal d1">
         <div class="note-avatar" aria-hidden="true">M</div>
         <div>
-          <div class="who"><strong>Maurice Holda</strong> · Security &amp; AI operator, Naga Codex — Hamburg</div>
-          <p>I'm recommending this because the cybersecurity and AI tracks line up with the work I actually do — not because I'm paid to. The links above are affiliate links: if you enroll, I earn a referral fee at no cost to you. Pick the language you're comfortable applying in (EN or DE). If it's not useful, ignore it. If it is, take it.</p>
+          <div class="who" data-i18n="note_who"><strong>Maurice Holda</strong> · Security &amp; AI operator, Naga Codex — Hamburg</div>
+          <p data-i18n="note_p">I'm recommending this because the cybersecurity and AI tracks line up with the work I actually do — not because I'm paid to. The links above are affiliate links: if you enroll, I earn a referral fee at no cost to you. Pick the language you're comfortable applying in (EN or DE). If it's not useful, ignore it. If it is, take it.</p>
         </div>
       </div>
     </div>
@@ -612,32 +632,32 @@
   <!-- FAQ (German, SEO-targeted for Bildungsgutschein / MasterSchool queries) -->
   <section class="faq">
     <div class="wrap">
-      <div class="section-label reveal d1">Häufige Fragen</div>
-      <h2 class="section-title reveal d2">MasterSchool &amp; Bildungsgutschein — die wichtigsten Fragen.</h2>
+      <div class="section-label reveal d1" data-i18n="faq_label">Häufige Fragen</div>
+      <h2 class="section-title reveal d2" data-i18n="faq_title">MasterSchool &amp; Bildungsgutschein — die wichtigsten Fragen.</h2>
       <div class="faq-list">
         <details class="faq-item reveal d2">
-          <summary>Was ist der Bildungsgutschein und wer ist berechtigt? <span class="q-mark" aria-hidden="true">+</span></summary>
-          <div class="a">Der <strong>Bildungsgutschein</strong> ist ein Dokument der <strong>Agentur für Arbeit</strong> oder des <strong>Jobcenters</strong>, das die Kosten einer AZAV-zertifizierten Weiterbildung zu 100% übernimmt. Berechtigt sind Arbeitslose, von Arbeitslosigkeit bedrohte Personen und Personen in Kurzarbeit (§ 77 SGB III). <strong>MasterSchool</strong> ist AZAV-zertifiziert und mit dem Bildungsgutschein förderfähig.</div>
+          <summary data-i18n="faq1_q">Was ist der Bildungsgutschein und wer ist berechtigt? <span class="q-mark" aria-hidden="true">+</span></summary>
+          <div class="a" data-i18n-html="faq1_a">Der <strong>Bildungsgutschein</strong> ist ein Dokument der <strong>Agentur für Arbeit</strong> oder des <strong>Jobcenters</strong>, das die Kosten einer AZAV-zertifizierten Weiterbildung zu 100% übernimmt. Berechtigt sind Arbeitslose, von Arbeitslosigkeit bedrohte Personen und Personen in Kurzarbeit (§ 77 SGB III). <strong>MasterSchool</strong> ist AZAV-zertifiziert und mit dem Bildungsgutschein förderfähig.</div>
         </details>
         <details class="faq-item reveal d2">
-          <summary>Ist MasterSchool AZAV-zertifiziert und förderfähig? <span class="q-mark" aria-hidden="true">+</span></summary>
-          <div class="a">Ja. <strong>MasterSchool Institute of Technology (MSIT)</strong> ist ein <strong>AZAV-zertifiziertes</strong> Institut für IT-Weiterbildungen. Alle Programme sind bei der Arbeitsagentur registriert und können mit einem Bildungsgutschein zu 100% gefördert werden, wenn die individuelle Berechtigung vorliegt.</div>
+          <summary data-i18n="faq2_q">Ist MasterSchool AZAV-zertifiziert und förderfähig? <span class="q-mark" aria-hidden="true">+</span></summary>
+          <div class="a" data-i18n-html="faq2_a">Ja. <strong>MasterSchool Institute of Technology (MSIT)</strong> ist ein <strong>AZAV-zertifiziertes</strong> Institut für IT-Weiterbildungen. Alle Programme sind bei der Arbeitsagentur registriert und können mit einem Bildungsgutschein zu 100% gefördert werden, wenn die individuelle Berechtigung vorliegt.</div>
         </details>
         <details class="faq-item reveal d3">
-          <summary>Welche MasterSchool Programme gibt es für Cyber Security und IT? <span class="q-mark" aria-hidden="true">+</span></summary>
-          <div class="a"><strong>MasterSchool</strong> bietet bootcampartige <strong>Weiterbildungen in Cyber Security</strong> (CompTIA A+, Security+, IHK Cyber Security Advisor), <strong>AI Engineering</strong>, <strong>Web Development</strong>, <strong>Cloud Engineering</strong>, Data Science und QA Engineering. Die Programme dauern etwa 8 Monate, werden live online unterrichtet und umfassen ein 8-wöchiges Industrie-Praktikum sowie Career Support bis zur ersten Stelle.</div>
+          <summary data-i18n="faq3_q">Welche MasterSchool Programme gibt es für Cyber Security und IT? <span class="q-mark" aria-hidden="true">+</span></summary>
+          <div class="a" data-i18n-html="faq3_a"><strong>MasterSchool</strong> bietet bootcampartige <strong>Weiterbildungen in Cyber Security</strong> (CompTIA A+, Security+, IHK Cyber Security Advisor), <strong>AI Engineering</strong>, <strong>Web Development</strong>, <strong>Cloud Engineering</strong>, Data Science und QA Engineering. Die Programme dauern etwa 8 Monate, werden live online unterrichtet und umfassen ein 8-wöchiges Industrie-Praktikum sowie Career Support bis zur ersten Stelle.</div>
         </details>
         <details class="faq-item reveal d3">
-          <summary>Wie lange dauert eine MasterSchool Weiterbildung? <span class="q-mark" aria-hidden="true">+</span></summary>
-          <div class="a">Die <strong>MasterSchool Programme</strong> dauern etwa <strong>8 Monate</strong> und werden live online durchgeführt. Nach der fachlichen Ausbildung folgt ein 8-wöchiges Industrie-Praktikum. Begleitet wird der gesamte Weg von Career Coaching bis zur ersten Stelle im Tech-Bereich.</div>
+          <summary data-i18n="faq4_q">Wie lange dauert eine MasterSchool Weiterbildung? <span class="q-mark" aria-hidden="true">+</span></summary>
+          <div class="a" data-i18n-html="faq4_a">Die <strong>MasterSchool Programme</strong> dauern etwa <strong>8 Monate</strong> und werden live online durchgeführt. Nach der fachlichen Ausbildung folgt ein 8-wöchiges Industrie-Praktikum. Begleitet wird der gesamte Weg von Career Coaching bis zur ersten Stelle im Tech-Bereich.</div>
         </details>
         <details class="faq-item reveal d4">
-          <summary>Kann ich als Quereinsteiger ohne IT-Erfahrung bei MasterSchool einsteigen? <span class="q-mark" aria-hidden="true">+</span></summary>
-          <div class="a">Ja. Die MasterSchool Programme richten sich ausdrücklich an <strong>Quereinsteigerinnen und Quereinsteiger</strong> ohne vorherige IT-Erfahrung. Mit einem <strong>Bildungsgutschein</strong> ist die Teilnahme für berechtigte Personen (arbeitsuchend oder von Arbeitslosigkeit bedroht) kostenlos.</div>
+          <summary data-i18n="faq5_q">Kann ich als Quereinsteiger ohne IT-Erfahrung bei MasterSchool einsteigen? <span class="q-mark" aria-hidden="true">+</span></summary>
+          <div class="a" data-i18n-html="faq5_a">Ja. Die MasterSchool Programme richten sich ausdrücklich an <strong>Quereinsteigerinnen und Quereinsteiger</strong> ohne vorherige IT-Erfahrung. Mit einem <strong>Bildungsgutschein</strong> ist die Teilnahme für berechtigte Personen (arbeitsuchend oder von Arbeitslosigkeit bedroht) kostenlos.</div>
         </details>
         <details class="faq-item reveal d4">
-          <summary>Wie bewerbe ich mich bei MasterSchool mit Bildungsgutschein? <span class="q-mark" aria-hidden="true">+</span></summary>
-          <div class="a">Die Bewerbung läuft über die MasterSchool Website. Nach der Bewerbung wird man mit einem Berater verbunden, der durch den gesamten Prozess begleitet — inklusive der <strong>Beantragung des Bildungsgutscheins</strong> bei der Agentur für Arbeit oder dem Jobcenter. Sobald der Bildungsgutschein vorliegt, kann die Weiterbildung kostenlos starten. Bewerbung oben auf dieser Seite über die EN- oder DE-Links.</div>
+          <summary data-i18n="faq6_q">Wie bewerbe ich mich bei MasterSchool mit Bildungsgutschein? <span class="q-mark" aria-hidden="true">+</span></summary>
+          <div class="a" data-i18n-html="faq6_a">Die Bewerbung läuft über die MasterSchool Website. Nach der Bewerbung wird man mit einem Berater verbunden, der durch den gesamten Prozess begleitet — inklusive der <strong>Beantragung des Bildungsgutscheins</strong> bei der Agentur für Arbeit oder dem Jobcenter. Sobald der Bildungsgutschein vorliegt, kann die Weiterbildung kostenlos starten. Bewerbung oben auf dieser Seite über die EN- oder DE-Links.</div>
         </details>
       </div>
     </div>
@@ -646,25 +666,29 @@
   <!-- Final CTA -->
   <section class="final">
     <div class="wrap">
-      <h2 class="reveal d1">The version of my path that doesn't cost what mine cost.</h2>
-      <p class="reveal d2">Funded, AZAV-certified, and built to land you a job. The first move is a 2-minute application.</p>
+      <h2 class="reveal d1" data-i18n="final_h2">The version of my path that doesn't cost what mine cost.</h2>
+      <p class="reveal d2" data-i18n="final_p">Funded, AZAV-certified, and built to land you a job. The first move is a 2-minute application.</p>
       <div class="reveal d3" style="display:flex;flex-direction:column;gap:12px;align-items:center;">
         <a class="cta"
            href="https://start.joinmsit.de/maurice-holda-en?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
            target="_blank"
            rel="sponsored nofollow noopener noreferrer"
-           referrerpolicy="no-referrer">
+           referrerpolicy="no-referrer"
+           id="final-cta-en"
+           data-i18n="final_cta_en">
           Take the funded route (EN) →
         </a>
         <a class="cta-secondary" style="border-bottom-color:transparent;"
            href="https://start.joinmsit.de/maurice-holda-de?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
            target="_blank"
            rel="sponsored nofollow noopener noreferrer"
-           referrerpolicy="no-referrer">
+           referrerpolicy="no-referrer"
+           id="final-cta-de"
+           data-i18n="final_cta_de">
           <span class="lang-tag">DE</span>Auf Deutsch bewerben →
         </a>
       </div>
-      <p class="reveal d3" style="margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);">
+      <p class="reveal d3" style="margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);" data-i18n-html="final_referral_note">
         Prefer the short referral link? <a href="https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim);">referral.masterschool.com/un3o7O2J</a>
       </p>
     </div>
@@ -672,7 +696,7 @@
 
   <!-- Footer + disclosure -->
   <footer class="legal">
-    <p class="disclosure">
+    <p class="disclosure" data-i18n="disclosure">
       Affiliate disclosure: This page contains affiliate links to MasterSchool Institute of Technology (start.joinmsit.de and referral.masterschool.com). If you enroll through any of these links, Maurice Holda / Naga Codex may earn a referral commission at no additional cost to you. MasterSchool programs are AZAV-certified and may be 100% funded via Bildungsgutschein for eligible applicants in Germany; eligibility is determined by the Agentur für Arbeit or Jobcenter, not by Naga Codex. Naga Codex is not the training provider and is not responsible for program content, outcomes, or funding decisions.
     </p>
     <nav class="legal-links" aria-label="Legal">
@@ -687,15 +711,221 @@
   </footer>
 
   <script>
-    // Reliable video playback: force load, attempt play with retry, and pause off-screen.
+    // ---------- i18n: EN/DE toggle ----------
+    var I18N = {
+      en: {
+        _title: "MasterSchool mit Bildungsgutschein — kostenlos in IT & Cyber Security | Maurice Holda",
+        _desc: "A funded path into cybersecurity, AI, and web engineering — recommended by Maurice Holda, security operator at Naga Codex. Apply through MasterSchool.",
+        topbar_tag: "Recommended training",
+        topbar_back: "← Back to studio",
+        hero_eyebrow: "My path · The funded version",
+        hero_h1: 'The work I do every day — <span class="accent">now a funded path in</span>, not just a portfolio out.',
+        hero_lede: "I'm Maurice. I run <strong>Naga Codex</strong> from Hamburg — AI agent systems, generative film, web engineering, and security consulting, solo, no middlemen. This page isn't a sales pitch for my services. It's the route I'd point someone at who wants to get <em>into</em> this field without the debt I've seen people take on: <strong>MasterSchool</strong>, AZAV-certified, 100% funded via Bildungsgutschein if you're unemployed or at risk in Germany.",
+        hero_cta_en: 'Take the funded route (EN) <span class="arrow" aria-hidden="true">→</span>',
+        hero_cta_de: '<span class="lang-tag">DE</span>Auf Deutsch bewerben →',
+        hero_meta: 'Bildungsgutschein eligible <span class="dot">·</span> Next cohort: Jul 7, 2026 <span class="dot">·</span> 8-month track',
+        pillars_label: "Tracks",
+        pillars_title: "Three fields I work in — and the ones MasterSchool trains you for.",
+        pillar1_h3: "Cybersecurity",
+        pillar1_p: "Defend organizations against real threats. The track I'd point any career-changer at first — it overlaps with the security work I ship at Naga Codex.",
+        pillar2_h3: "AI Engineering",
+        pillar2_p: "Build with the same class of tools I use daily — LLMs, agents, model pipelines. Career support runs until you're hired.",
+        pillar2_cert: "Live online · 8-week industry internship",
+        pillar3_h3: "Web &amp; Cloud",
+        pillar3_p: "Full-stack web development and cloud engineering — the engineering foundation under every product I build for clients.",
+        pillar3_cert: "React, cloud, serverless · job-ready in months",
+        how_label: "How the funding works",
+        how_title: "Bildungsgutschein — the German voucher that pays your tuition.",
+        step1_h4: "Check eligibility",
+        step1_p: "Unemployed, soon to be, or in short-time work (Kurzarbeit). Registered with the Agentur für Arbeit or Jobcenter.",
+        step2_h4: "Apply via MasterSchool",
+        step2_p: "Use the link above. MasterSchool matches you with a consultant who walks you through the paperwork.",
+        step3_h4: "Get your Bildungsgutschein",
+        step3_p: "MSIT is AZAV-certified, so the voucher can cover 100% of tuition. They help you file the application.",
+        step4_h4: "Train &amp; get hired",
+        step4_p: "~8 months live online + an 8-week internship. Career coaching continues until you land your first tech role.",
+        journey_label: "My path — and the funded fork off it",
+        journey_title: "How I got here, and where I'd tell past-me to branch.",
+        journey_intro: "I'm not a course reseller. I run the work this training leads to — <strong>offensive audits, AI agent systems, generative film, web engineering</strong> — solo from Hamburg. Here's the honest shape of my path, and the fork where a funded route would have saved years of detours.",
+        tl1_fork: "// Started creative",
+        tl1_h4: "Music, film, and the Hamburg underground",
+        tl1_p: 'I came up through records and visuals first — directing, sound, and editing. The storytelling muscle from that still runs underneath everything I ship now. <span class="accent">Film taught me how to ship a thing end-to-end.</span>',
+        tl2_fork: "// Picked up engineering",
+        tl2_h4: "Web &amp; product, self-taught",
+        tl2_p: 'React, TypeScript, Vercel, Cloud Run — the modern stack I now build client products on. I learned most of it the hard way, project by project, with no structured track behind me. <span class="accent">A funded bootcamp would have compressed this into months.</span>',
+        tl3_fork: "// Went deep on AI",
+        tl3_h4: "Agent systems &amp; generative film",
+        tl3_p: "Gemini API, Claude SDK, n8n, MCP — production agent systems and text-to-video pipelines with sound design and grading. This is half my client work today, and it's exactly the AI engineering track MasterSchool trains.",
+        tl4_fork: "// Hardened into security",
+        tl4_h4: "Offensive audits &amp; cloud hardening",
+        tl4_p: "Offensive audits, smart-contract reviews, cloud hardening — the discipline I'd point any career-changer at first. It overlaps directly with MasterSchool's cybersecurity track (CompTIA Security+, IHK Cyber Security Advisor).",
+        tl5_fork: "// Today",
+        tl5_h4: "Naga Codex — four disciplines, one operator",
+        tl5_p: "AI agents · generative film · web engineering · security consulting. Solo. Zero middlemen. The portfolio you came from is the live version of this path.",
+        tl_bridge: '<span class="arrow">↳</span> If I were starting that path today — unemployed in Germany, no tech background, no budget for tuition — the fork I\'d take is the funded one below. Same destination, no debt, and a consultant who walks you through the paperwork.',
+        note_who: "<strong>Maurice Holda</strong> · Security &amp; AI operator, Naga Codex — Hamburg",
+        note_p: "I'm recommending this because the cybersecurity and AI tracks line up with the work I actually do — not because I'm paid to. The links above are affiliate links: if you enroll, I earn a referral fee at no cost to you. Pick the language you're comfortable applying in (EN or DE). If it's not useful, ignore it. If it is, take it.",
+        faq_label: "Häufige Fragen",
+        faq_title: "MasterSchool &amp; Bildungsgutschein — die wichtigsten Fragen.",
+        faq1_q: 'What is the Bildungsgutschein and who is eligible? <span class="q-mark" aria-hidden="true">+</span>',
+        faq1_a: "The <strong>Bildungsgutschein</strong> is a voucher from the <strong>Agentur für Arbeit</strong> or <strong>Jobcenter</strong> that covers 100% of an AZAV-certified further education. Eligible: unemployed, at risk of unemployment, or in short-time work (Kurzarbeit). <strong>MasterSchool</strong> is AZAV-certified and eligible for Bildungsgutschein funding.",
+        faq2_q: 'Is MasterSchool AZAV-certified and funded? <span class="q-mark" aria-hidden="true">+</span>',
+        faq2_a: "Yes. <strong>MasterSchool Institute of Technology (MSIT)</strong> is an <strong>AZAV-certified</strong> IT training institute. All programs are registered with the Arbeitsagentur and can be 100% funded with a Bildungsgutschein if you're individually eligible.",
+        faq3_q: 'Which MasterSchool programs are there for Cyber Security and IT? <span class="q-mark" aria-hidden="true">+</span>',
+        faq3_a: "<strong>MasterSchool</strong> offers bootcamp-style <strong>Cyber Security</strong> further education (CompTIA A+, Security+, IHK Cyber Security Advisor), <strong>AI Engineering</strong>, <strong>Web Development</strong>, <strong>Cloud Engineering</strong>, Data Science and QA Engineering. Programs run about 8 months, are taught live online, and include an 8-week industry internship plus career support until you're hired.",
+        faq4_q: 'How long does a MasterSchool program take? <span class="q-mark" aria-hidden="true">+</span>',
+        faq4_a: "The <strong>MasterSchool programs</strong> take about <strong>8 months</strong> and run live online. After the technical training follows an 8-week industry internship. The whole journey is accompanied by career coaching until your first tech role.",
+        faq5_q: 'Can I start as a career changer with no IT experience? <span class="q-mark" aria-hidden="true">+</span>',
+        faq5_a: "Yes. The MasterSchool programs are explicitly aimed at <strong>career changers</strong> with no prior IT experience. With a <strong>Bildungsgutschein</strong>, participation is free for eligible people (jobseeking or at risk of unemployment).",
+        faq6_q: 'How do I apply to MasterSchool with a Bildungsgutschein? <span class="q-mark" aria-hidden="true">+</span>',
+        faq6_a: "Apply via the MasterSchool website. After applying, you're matched with a consultant who guides you through the whole process — including <strong>applying for the Bildungsgutschein</strong> at the Agentur für Arbeit or Jobcenter. Once the voucher is approved, the training starts free. Apply via the EN or DE links at the top of this page.",
+        final_h2: "The version of my path that doesn't cost what mine cost.",
+        final_p: "Funded, AZAV-certified, and built to land you a job. The first move is a 2-minute application.",
+        final_cta_en: "Take the funded route (EN) →",
+        final_cta_de: '<span class="lang-tag">DE</span>Auf Deutsch bewerben →',
+        final_referral_note: 'Prefer the short referral link? <a href="https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim);">referral.masterschool.com/un3o7O2J</a>',
+        disclosure: "Affiliate disclosure: This page contains affiliate links to MasterSchool Institute of Technology (start.joinmsit.de and referral.masterschool.com). If you enroll through any of these links, Maurice Holda / Naga Codex may earn a referral commission at no additional cost to you. MasterSchool programs are AZAV-certified and may be 100% funded via Bildungsgutschein for eligible applicants in Germany; eligibility is determined by the Agentur für Arbeit or Jobcenter, not by Naga Codex. Naga Codex is not the training provider and is not responsible for program content, outcomes, or funding decisions."
+      },
+      de: {
+        _title: "MasterSchool mit Bildungsgutschein — kostenlos in IT & Cyber Security | Maurice Holda",
+        _desc: "AZAV-zertifizierte IT-Weiterbildung bei MasterSchool — 100% gefördert durch den Bildungsgutschein. Cyber Security, AI, Web & Cloud. Empfohlen von Maurice Holda (Naga Codex, Hamburg). Jetzt bewerben.",
+        topbar_tag: "Empfohlene Weiterbildung",
+        topbar_back: "← Zurück zum Studio",
+        hero_eyebrow: "Mein Weg · Die geförderte Version",
+        hero_h1: 'Das, was ich täglich mache — <span class="accent">jetzt als geförderter Weg rein</span>, nicht nur als Portfolio raus.',
+        hero_lede: "Ich bin Maurice. Ich betreibe <strong>Naga Codex</strong> aus Hamburg — KI-Agentensysteme, generativen Film, Web-Engineering und Security-Beratung, solo, ohne Mittelsmänner. Diese Seite ist kein Verkaufs­pitch für meine Dienste. Sie ist die Route, die ich jemandem zeigen würde, der <em>in</em> dieses Feld will — ohne die Schulden, die ich bei anderen gesehen habe: <strong>MasterSchool</strong>, AZAV-zertifiziert, 100% gefördert per Bildungsgutschein, wenn du in Deutschland arbeitslos bist oder davon bedroht.",
+        hero_cta_en: 'Take the funded route (EN) <span class="arrow" aria-hidden="true">→</span>',
+        hero_cta_de: '<span class="lang-tag">DE</span>Auf Deutsch bewerben →',
+        hero_meta: 'Bildungsgutschein-förderfähig <span class="dot">·</span> Nächster Kohort: 7. Jul. 2026 <span class="dot">·</span> 8-Monats-Track',
+        pillars_label: "Tracks",
+        pillars_title: "Drei Felder, in denen ich arbeite — und die MasterSchool dich trainiert.",
+        pillar1_h3: "Cyber Security",
+        pillar1_p: "Organisationen gegen echte Bedrohungen verteidigen. Der Track, den ich jedem Quereinsteiger zuerst empfehle — er überschneidet sich direkt mit der Security-Arbeit, die ich bei Naga Codex liefere.",
+        pillar2_h3: "AI Engineering",
+        pillar2_p: "Mit derselben Art von Tools arbeiten, die ich täglich nutze — LLMs, Agenten, Modell-Pipelines. Career Support bis zur Einstellung.",
+        pillar2_cert: "Live online · 8-wöchiges Industrie-Praktikum",
+        pillar3_h3: "Web &amp; Cloud",
+        pillar3_p: "Full-Stack-Webentwicklung und Cloud-Engineering — das Engineering-Fundament unter jedem Produkt, das ich für Kunden baue.",
+        pillar3_cert: "React, Cloud, Serverless · job-ready in Monaten",
+        how_label: "Wie die Förderung funktioniert",
+        how_title: "Bildungsgutschein — der deutsche Gutschein, der dein Lehrgeld zahlt.",
+        step1_h4: "Förderfähigkeit prüfen",
+        step1_p: "Arbeitslos, bald arbeitslos oder in Kurzarbeit. Gemeldet bei der Agentur für Arbeit oder dem Jobcenter.",
+        step2_h4: "Bei MasterSchool bewerben",
+        step2_p: "Link oben verwenden. MasterSchool verbindet dich mit einem Berater, der dich durch den Papierkram begleitet.",
+        step3_h4: "Bildungsgutschein holen",
+        step3_p: "MSIT ist AZAV-zertifiziert, daher kann der Gutschein 100% der Lehrgelder übernehmen. Sie helfen dir beim Antrag.",
+        step4_h4: "Trainieren &amp; eingestellt werden",
+        step4_p: "~8 Monate live online + ein 8-wöchiges Praktikum. Career Coaching begleitet dich bis zu deiner ersten Tech-Stelle.",
+        journey_label: "Mein Weg — und die geförderte Abzweigung davon",
+        journey_title: "Wie ich hierherkam, und wo ich dem Ich von damals raten würde abzubiegen.",
+        journey_intro: "Ich bin kein Kurs-Reseller. Ich mache die Arbeit, auf die diese Ausbildung führt — <strong>offensive Audits, KI-Agentensysteme, generativer Film, Web-Engineering</strong> — solo aus Hamburg. Hier ist die ehrliche Form meines Weges, und die Abzweigung, an der eine geförderte Route Jahre Umwege gespart hätte.",
+        tl1_fork: "// Kreativ gestartet",
+        tl1_h4: "Musik, Film und der Hamburger Untergrund",
+        tl1_p: 'Ich kam zuerst über Platten und Visuelles rein — Regie, Sound, Schnitt. Die Erzähl-Muskeln daraus laufen noch immer unter allem, was ich heute shippe. <span class="accent">Film hat mich gelehrt, ein Ding end-to-end zu shippen.</span>',
+        tl2_fork: "// Engineering angeeignet",
+        tl2_h4: "Web &amp; Produkt, selbst gelernt",
+        tl2_p: 'React, TypeScript, Vercel, Cloud Run — der moderne Stack, auf dem ich jetzt Kundenprodukte baue. Das meiste habe ich auf dem harten Weg gelernt, Projekt für Projekt, ohne strukturierten Track. <span class="accent">Ein geförderter Bootcamp hätte das auf Monate komprimiert.</span>',
+        tl3_fork: "// Tief in KI gegangen",
+        tl3_h4: "Agentensysteme &amp; generativer Film",
+        tl3_p: "Gemini API, Claude SDK, n8n, MCP — produktive Agentensysteme und Text-to-Video-Pipelines mit Sounddesign und Grading. Das ist heute die Hälfte meiner Kundenarbeit, und es ist exakt der AI-Engineering-Track, den MasterSchool trainiert.",
+        tl4_fork: "// Zu Security gehärtet",
+        tl4_h4: "Offensive Audits &amp; Cloud Hardening",
+        tl4_p: "Offensive Audits, Smart-Contract-Reviews, Cloud Hardening — die Disziplin, die ich jedem Quereinsteiger zuerst empfehle. Überschneidet sich direkt mit MasterSchools Cyber-Security-Track (CompTIA Security+, IHK Cyber Security Advisor).",
+        tl5_fork: "// Heute",
+        tl5_h4: "Naga Codex — vier Disziplinen, ein Operator",
+        tl5_p: "KI-Agenten · generativer Film · Web-Engineering · Security-Beratung. Solo. Null Mittelsmänner. Das Portfolio, von dem du kamst, ist die Live-Version dieses Weges.",
+        tl_bridge: '<span class="arrow">↳</span> Wenn ich diesen Weg heute starten würde — arbeitslos in Deutschland, ohne Tech-Erfahrung, ohne Budget fürs Lehrgeld — wäre die Abzweigung, die ich nehmen würde, die geförderte unten. Dasselbe Ziel, keine Schulden, und ein Berater, der dich durch den Papierkram begleitet.',
+        note_who: "<strong>Maurice Holda</strong> · Security- &amp; KI-Operator, Naga Codex — Hamburg",
+        note_p: "Ich empfehle das, weil die Cyber-Security- und KI-Tracks mit der Arbeit übereinstimmen, die ich wirklich mache — nicht, weil ich dafür bezahlt werde. Die Links oben sind Affiliate-Links: Wenn du dich einschreibst, bekomme ich eine Vermittlungsgebühr, für dich ohne Kosten. Wähle die Sprache, in der du dich wohler bewirbst (EN oder DE). Wenn es nicht nützlich ist, ignoriere es. Wenn es nützlich ist, nimm es.",
+        faq_label: "Häufige Fragen",
+        faq_title: "MasterSchool &amp; Bildungsgutschein — die wichtigsten Fragen.",
+        faq1_q: 'Was ist der Bildungsgutschein und wer ist berechtigt? <span class="q-mark" aria-hidden="true">+</span>',
+        faq1_a: "Der <strong>Bildungsgutschein</strong> ist ein Dokument der <strong>Agentur für Arbeit</strong> oder des <strong>Jobcenters</strong>, das die Kosten einer AZAV-zertifizierten Weiterbildung zu 100% übernimmt. Berechtigt sind Arbeitslose, von Arbeitslosigkeit bedrohte Personen und Personen in Kurzarbeit (§ 77 SGB III). <strong>MasterSchool</strong> ist AZAV-zertifiziert und mit dem Bildungsgutschein förderfähig.",
+        faq2_q: 'Ist MasterSchool AZAV-zertifiziert und förderfähig? <span class="q-mark" aria-hidden="true">+</span>',
+        faq2_a: "Ja. <strong>MasterSchool Institute of Technology (MSIT)</strong> ist ein <strong>AZAV-zertifiziertes</strong> Institut für IT-Weiterbildungen. Alle Programme sind bei der Arbeitsagentur registriert und können mit einem Bildungsgutschein zu 100% gefördert werden, wenn die individuelle Berechtigung vorliegt.",
+        faq3_q: 'Welche MasterSchool Programme gibt es für Cyber Security und IT? <span class="q-mark" aria-hidden="true">+</span>',
+        faq3_a: "<strong>MasterSchool</strong> bietet bootcampartige <strong>Weiterbildungen in Cyber Security</strong> (CompTIA A+, Security+, IHK Cyber Security Advisor), <strong>AI Engineering</strong>, <strong>Web Development</strong>, <strong>Cloud Engineering</strong>, Data Science und QA Engineering. Die Programme dauern etwa 8 Monate, werden live online unterrichtet und umfassen ein 8-wöchiges Industrie-Praktikum sowie Career Support bis zur ersten Stelle.",
+        faq4_q: 'Wie lange dauert eine MasterSchool Weiterbildung? <span class="q-mark" aria-hidden="true">+</span>',
+        faq4_a: "Die <strong>MasterSchool Programme</strong> dauern etwa <strong>8 Monate</strong> und werden live online durchgeführt. Nach der fachlichen Ausbildung folgt ein 8-wöchiges Industrie-Praktikum. Begleitet wird der gesamte Weg von Career Coaching bis zur ersten Stelle im Tech-Bereich.",
+        faq5_q: 'Kann ich als Quereinsteiger ohne IT-Erfahrung bei MasterSchool einsteigen? <span class="q-mark" aria-hidden="true">+</span>',
+        faq5_a: "Ja. Die MasterSchool Programme richten sich ausdrücklich an <strong>Quereinsteigerinnen und Quereinsteiger</strong> ohne vorherige IT-Erfahrung. Mit einem <strong>Bildungsgutschein</strong> ist die Teilnahme für berechtigte Personen (arbeitsuchend oder von Arbeitslosigkeit bedroht) kostenlos.",
+        faq6_q: 'Wie bewerbe ich mich bei MasterSchool mit Bildungsgutschein? <span class="q-mark" aria-hidden="true">+</span>',
+        faq6_a: "Die Bewerbung läuft über die MasterSchool Website. Nach der Bewerbung wird man mit einem Berater verbunden, der durch den gesamten Prozess begleitet — inklusive der <strong>Beantragung des Bildungsgutscheins</strong> bei der Agentur für Arbeit oder dem Jobcenter. Sobald der Bildungsgutschein vorliegt, kann die Weiterbildung kostenlos starten. Bewerbung oben auf dieser Seite über die EN- oder DE-Links.",
+        final_h2: "Die Version meines Weges, die nicht kostet, was meiner gekostet hat.",
+        final_p: "Gefördert, AZAV-zertifiziert und darauf ausgelegt, dich in einen Job zu bringen. Der erste Schritt ist eine 2-Minuten-Bewerbung.",
+        final_cta_en: "Take the funded route (EN) →",
+        final_cta_de: '<span class="lang-tag">DE</span>Auf Deutsch bewerben →',
+        final_referral_note: 'Lieber der kurze Referral-Link? <a href="https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim);">referral.masterschool.com/un3o7O2J</a>',
+        disclosure: "Affiliate-Hinweis: Diese Seite enthält Affiliate-Links zu MasterSchool Institute of Technology (start.joinmsit.de und referral.masterschool.com). Wenn du dich über diese Links einschreibst, kann Maurice Holda / Naga Codex eine Vermittlungsprovision ohne zusätzliche Kosten für dich verdienen. MasterSchool-Programme sind AZAV-zertifiziert und können für berechtigte Bewerber in Deutschland zu 100% über den Bildungsgutschein gefördert werden; die Förderfähigkeit wird durch die Agentur für Arbeit oder das Jobcenter bestimmt, nicht durch Naga Codex. Naga Codex ist nicht der Weiterbildungsanbieter und nicht verantwortlich für Programm­inhalte, -ergebnisse oder Förderentscheidungen."
+      }
+    };
+
+    var CTA_EN = "https://start.joinmsit.de/maurice-holda-en?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit";
+    var CTA_DE = "https://start.joinmsit.de/maurice-holda-de?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit";
+
+    function applyLang(lang) {
+      if (!I18N[lang]) return;
+      var dict = I18N[lang];
+      // text keys
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var k = el.getAttribute('data-i18n');
+        if (dict[k] != null) el.innerHTML = dict[k];
+      });
+      // html keys (same mechanism — both set innerHTML)
+      document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+        var k = el.getAttribute('data-i18n-html');
+        if (dict[k] != null) el.innerHTML = dict[k];
+      });
+      // document title + meta description
+      if (dict._title) document.title = dict._title;
+      var md = document.querySelector('meta[name="description"]');
+      if (md && dict._desc) md.setAttribute('content', dict._desc);
+      // html lang
+      document.documentElement.setAttribute('lang', lang);
+      // toggle button states
+      document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
+      });
+      // primary CTA: when DE active, the primary button points to the DE link; when EN, to EN link.
+      var primary = document.getElementById('primary-cta');
+      if (primary) primary.setAttribute('href', lang === 'de' ? CTA_DE : CTA_EN);
+      var finalEn = document.getElementById('final-cta-en');
+      var finalDe = document.getElementById('final-cta-de');
+      // In DE mode, promote the DE link as the primary (green) button and demote EN to secondary.
+      if (finalEn && finalDe) {
+        if (lang === 'de') {
+          finalEn.classList.remove('cta'); finalEn.classList.add('cta-secondary'); finalEn.style.borderBottomColor = 'transparent';
+          finalDe.classList.remove('cta-secondary'); finalDe.classList.add('cta');
+        } else {
+          finalDe.classList.remove('cta'); finalDe.classList.add('cta-secondary'); finalDe.style.borderBottomColor = 'transparent';
+          finalEn.classList.remove('cta-secondary'); finalEn.classList.add('cta');
+        }
+      }
+      try { localStorage.setItem('ms_lang', lang); } catch (e) {}
+    }
+
+    (function () {
+      // Initial language: stored pref > browser language > 'en'
+      var stored = null;
+      try { stored = localStorage.getItem('ms_lang'); } catch (e) {}
+      var browser = (navigator.language || 'en').slice(0, 2).toLowerCase();
+      var init = stored || (browser === 'de' ? 'de' : 'en');
+      applyLang(init);
+      // Wire toggle
+      document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+        b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+      });
+    })();
+
+    // ---------- Video playback: force load, attempt play with retry, pause off-screen ----------
     (function () {
       var v = document.querySelector('.clip-frame video');
       if (!v) return;
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      v.load(); // force the browser to fetch the source eagerly
+      v.load();
       function tryPlay() { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
       if (!reduce) {
-        // Attempt play immediately and again on first user interaction (autoplay-policy fallback).
         tryPlay();
         ['click','touchstart','keydown','scroll'].forEach(function (evt) {
           window.addEventListener(evt, tryPlay, { once: true, passive: true });
