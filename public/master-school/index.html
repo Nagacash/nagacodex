@@ -39,11 +39,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-  <!-- Affiliate link constant (single source of truth) -->
-  <!--
-    AFFILIATE_URL = https://referral.masterschool.com/un3o7O2J
-    UTMs: utm_source=nagacodex & utm_medium=site & utm_campaign=msit_recruit
-    rel: sponsored nofollow  |  target: _blank  |  referrer: no-referrer
+  <!-- Affiliate links (personalized EN + DE primary, referral short link secondary):
+    PRIMARY (EN): https://start.joinmsit.de/maurice-holda-en?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit
+    PRIMARY (DE): https://start.joinmsit.de/maurice-holda-de?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit
+    SECONDARY:    https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit
+    All carry: rel="sponsored nofollow noopener noreferrer" | target="_blank" | referrerpolicy="no-referrer"
   -->
 
   <style>
@@ -155,6 +155,29 @@
       text-transform: uppercase; color: var(--text-muted);
     }
     .cta-meta .dot { color: var(--cyber); margin: 0 8px; }
+
+    /* Dual CTA: EN primary button + DE secondary link */
+    .cta-pair { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .cta-row .cta-primary { display: inline-flex; align-items: center; gap: 12px;
+      background: var(--cyber); color: #03110a;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 16px 26px; border: none; border-radius: 2px;
+      text-decoration: none; cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s;
+    }
+    .cta-row .cta-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 28px -8px rgba(0,255,136,0.5); background: #19ff95; }
+    .cta-row .cta-primary:active { transform: translateY(0); }
+    .cta-row .cta-primary .arrow { transition: transform .15s ease; }
+    .cta-row .cta-primary:hover .arrow { transform: translateX(4px); }
+    .cta-secondary {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+      text-decoration: none; padding: 4px 0; transition: color .2s;
+      border-bottom: 1px solid transparent;
+    }
+    .cta-secondary:hover { color: var(--gold); border-bottom-color: var(--gold-dim); }
+    .cta-secondary .lang-tag { color: var(--gold-dim); margin-right: 6px; }
 
     /* Video frame */
     .clip-frame {
@@ -333,13 +356,20 @@
           I'm Maurice. I run <strong>Naga Codex</strong> from Hamburg — AI agent systems, generative film, web engineering, and security consulting, solo, no middlemen. This page isn't a sales pitch for my services. It's the route I'd point someone at who wants to get <em>into</em> this field without the debt I've seen people take on: <strong>MasterSchool</strong>, AZAV-certified, 100% funded via Bildungsgutschein if you're unemployed or at risk in Germany.
         </p>
         <div class="cta-row reveal d4">
-          <a class="cta"
-             href="https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
+          <a class="cta-primary"
+             href="https://start.joinmsit.de/maurice-holda-en?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
              target="_blank"
              rel="sponsored nofollow noopener noreferrer"
              referrerpolicy="no-referrer"
              id="primary-cta">
-            Take the funded route →
+            Take the funded route (EN) <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cta-secondary"
+             href="https://start.joinmsit.de/maurice-holda-de?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
+             target="_blank"
+             rel="sponsored nofollow noopener noreferrer"
+             referrerpolicy="no-referrer">
+            <span class="lang-tag">DE</span>Auf Deutsch bewerben →
           </a>
           <span class="cta-meta">
             Bildungsgutschein eligible <span class="dot">·</span> Next cohort: Jul 7, 2026 <span class="dot">·</span> 8-month track
@@ -470,7 +500,7 @@
         <div class="note-avatar" aria-hidden="true">M</div>
         <div>
           <div class="who"><strong>Maurice Holda</strong> · Security &amp; AI operator, Naga Codex — Hamburg</div>
-          <p>I'm recommending this because the cybersecurity and AI tracks line up with the work I actually do — not because I'm paid to. The link is an affiliate link: if you enroll, I earn a referral fee at no cost to you. If it's not useful, ignore it. If it is, take it.</p>
+          <p>I'm recommending this because the cybersecurity and AI tracks line up with the work I actually do — not because I'm paid to. The links above are affiliate links: if you enroll, I earn a referral fee at no cost to you. Pick the language you're comfortable applying in (EN or DE). If it's not useful, ignore it. If it is, take it.</p>
         </div>
       </div>
     </div>
@@ -481,20 +511,32 @@
     <div class="wrap">
       <h2 class="reveal d1">The version of my path that doesn't cost what mine cost.</h2>
       <p class="reveal d2">Funded, AZAV-certified, and built to land you a job. The first move is a 2-minute application.</p>
-      <a class="cta reveal d3"
-         href="https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
-         target="_blank"
-         rel="sponsored nofollow noopener noreferrer"
-         referrerpolicy="no-referrer">
-        Take the funded route →
-      </a>
+      <div class="reveal d3" style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <a class="cta"
+           href="https://start.joinmsit.de/maurice-holda-en?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
+           target="_blank"
+           rel="sponsored nofollow noopener noreferrer"
+           referrerpolicy="no-referrer">
+          Take the funded route (EN) →
+        </a>
+        <a class="cta-secondary" style="border-bottom-color:transparent;"
+           href="https://start.joinmsit.de/maurice-holda-de?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit"
+           target="_blank"
+           rel="sponsored nofollow noopener noreferrer"
+           referrerpolicy="no-referrer">
+          <span class="lang-tag">DE</span>Auf Deutsch bewerben →
+        </a>
+      </div>
+      <p class="reveal d3" style="margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);">
+        Prefer the short referral link? <a href="https://referral.masterschool.com/un3o7O2J?utm_source=nagacodex&utm_medium=site&utm_campaign=msit_recruit" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim);">referral.masterschool.com/un3o7O2J</a>
+      </p>
     </div>
   </section>
 
   <!-- Footer + disclosure -->
   <footer class="legal">
     <p class="disclosure">
-      Affiliate disclosure: This page contains affiliate links to MasterSchool Institute of Technology (referral.masterschool.com). If you enroll through these links, Maurice Holda / Naga Codex may earn a referral commission at no additional cost to you. MasterSchool programs are AZAV-certified and may be 100% funded via Bildungsgutschein for eligible applicants in Germany; eligibility is determined by the Agentur für Arbeit or Jobcenter, not by Naga Codex. Naga Codex is not the training provider and is not responsible for program content, outcomes, or funding decisions.
+      Affiliate disclosure: This page contains affiliate links to MasterSchool Institute of Technology (start.joinmsit.de and referral.masterschool.com). If you enroll through any of these links, Maurice Holda / Naga Codex may earn a referral commission at no additional cost to you. MasterSchool programs are AZAV-certified and may be 100% funded via Bildungsgutschein for eligible applicants in Germany; eligibility is determined by the Agentur für Arbeit or Jobcenter, not by Naga Codex. Naga Codex is not the training provider and is not responsible for program content, outcomes, or funding decisions.
     </p>
     <nav class="legal-links" aria-label="Legal">
       <a href="/">Studio</a>
