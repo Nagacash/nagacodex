@@ -20,6 +20,14 @@ export default function LegalFooter() {
           Contact
         </a>
         <span aria-hidden="true">·</span>
+        <a
+          href="/master-school"
+          className="hover:text-neutral-300 transition-colors"
+          title="Funded tech training — recommended by Naga Codex"
+        >
+          Recommended training
+        </a>
+        <span aria-hidden="true">·</span>
         <time dateTime={SITE_UPDATED} className="text-neutral-600">
           Updated {SITE_UPDATED_LABEL}
         </time>
