@@ -1,0 +1,10 @@
+---
+description: Naga Codex Cyber Security — load security skills for audits, AppSec, AI/MCP, GDPR/NIS2
+globs:
+alwaysApply: false
+---
+When the user asks for security audits, pentests, OWASP/LLM/agent reviews, secrets scanning,
+cloud hardening, incident triage, or EU compliance (GDPR, NIS2, ISO 27001, BSI), follow the
+Naga Codex Cyber Security skills installed under the skills path. Always run authorization-gate
+before active testing. Emit findings using the Naga Codex finding schema. Prefer bilingual
+EN/DE client reports for DACH engagements.

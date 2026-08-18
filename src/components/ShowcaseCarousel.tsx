@@ -62,23 +62,29 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
     id: 'nagacodex-brand',
     name: 'Naga Codex',
-    shortDesc: 'Personal brand site — AI agents, film, web dev, security',
+    shortDesc: 'Personal brand site: AI agents, film, web dev, security',
     url: 'https://nagacodex.cloud',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3DQ1_1EWA6XKZBA110JF8/0da6d741-7c8b-4a85-8e31-568d620c39bc.jpg',
   },
   {
     id: 'naga-apparel',
     name: 'Naga Apparel',
-    shortDesc: 'Technical streetwear — 450 GSM brutalist construction',
+    shortDesc: 'Technical streetwear, 450 GSM cotton',
     url: 'https://www.nagaclub.de',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3JHA_YFF4A5H2V6H1DR2E/209fbb03-1b81-41a7-af42-a58d959d14bb.jpg',
   },
   {
     id: 'chosen-few-records',
     name: 'Chosen Few Records',
-    shortDesc: 'Hamburg underground music label — hip-hop & electronic',
+    shortDesc: 'Hamburg music label, hip-hop and electronic',
     url: 'https://www.chosenfewrecords.com/',
     image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3K4H_JBNCVYWRFDP20TP6/5915fa64-ac59-4ede-ad68-3fdc7f62845c.jpg',
+  },
+  {
+    id: 'nagacodex-cyber-security',
+    name: 'Naga Codex Cyber Security',
+    shortDesc: '25 defensive agent skills: AppSec, AI/MCP, GDPR/NIS2',
+    url: 'https://github.com/Nagacash/NagaCodex-cyber-security',
   },
   {
     id: 'nagafilms',
@@ -160,7 +166,7 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
             Selected <span className="text-neutral-500">work</span>
           </h2>
           <p className="max-w-md type-manifesto text-sm text-neutral-700 leading-relaxed">
-            Brands, products, and platforms shipped from Hamburg.
+            Recent client and personal projects from Hamburg.
           </p>
         </div>
 

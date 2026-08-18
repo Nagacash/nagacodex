@@ -10,5 +10,5 @@ coverage/
 .env*
 !.env.example
 
-# Lockfile — project uses pnpm, keep pnpm-lock.yaml only
-package-lock.json
+# Cursor agent skills — install locally via NagaCodex-cyber-security/install.sh
+.cursor/skills/

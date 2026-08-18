@@ -42,7 +42,7 @@ export default function WhoSection() {
     {
       id: 'cyber',
       title: 'Cyber Security',
-      tagline: 'Enterprise protection and audits.',
+      tagline: 'Security audits and hardening.',
       accentClass: 'text-cyber',
       glowClass: 'glow-cyber border-cyber bg-[#00FF88]/[0.02]',
       description: 'Offensive security, smart-contract auditing, and cloud hardening for enterprise and decentralized systems.',
@@ -51,16 +51,16 @@ export default function WhoSection() {
     {
       id: 'film',
       title: 'AI Cinema',
-      tagline: 'Generative narrative and sound.',
+      tagline: 'AI shorts, loops, and sound.',
       accentClass: 'text-film',
       glowClass: 'glow-film border-film bg-[#FF6B35]/[0.02]',
-      description: 'Text-to-video pipelines for immersive shorts, visual loops, and layered soundscapes.',
+      description: 'Text-to-video for shorts, loops, and layered sound.',
       headlineStat: { label: 'Generated scenes', value: '18k+' },
     },
     {
       id: 'dev',
       title: 'Web Development',
-      tagline: 'Fast bespoke digital products.',
+      tagline: 'React apps and APIs.',
       accentClass: 'text-dev',
       glowClass: 'glow-dev border-dev bg-[#BD00FF]/[0.02]',
       description: 'React apps, PWAs, and serverless APIs built for performance and clean interfaces.',
@@ -149,7 +149,7 @@ export default function WhoSection() {
             </h2>
           </div>
           <p className="max-w-sm type-manifesto text-sm text-neutral-800 leading-relaxed md:text-right">
-            Four disciplines. One operator.
+            Agents, film, web, and security. One person in Hamburg.
           </p>
         </div>
 
@@ -232,7 +232,7 @@ export default function WhoSection() {
                 Verified <span className="text-neutral-500">credentials</span>
               </h3>
               <p className="type-manifesto text-sm text-neutral-700 leading-relaxed max-w-md">
-                AZAV-certified programs from Cert-IT, Masterschool, and DCI — documented training, not self-taught claims.
+                Cert-IT, Masterschool, and DCI programs on file.
               </p>
             </div>
           </div>

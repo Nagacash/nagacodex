@@ -5,7 +5,7 @@ export const woodland360 = {
   name: 'Woodland360',
   tagline: 'Urban culture // Hamburg frequency',
   description:
-    'Street-level conversations on creative sovereignty, counter-culture, tech, and city life — recorded in the round, mixed for the night drive.',
+    'Conversations on counter-culture, tech, and city life in Hamburg. Recorded in the round, mixed for late-night listening.',
   youtubeChannelUrl: 'https://www.youtube.com/@Woodland360',
   youtubeVideoId: woodland360FeaturedVideoId,
   accent: '#D4A843',

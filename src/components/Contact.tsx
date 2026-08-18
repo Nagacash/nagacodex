@@ -64,7 +64,7 @@ export default function Contact() {
               LET'S <span className="text-neutral-500">WORK TOGETHER</span>
             </h2>
             <p className="text-xs text-neutral-600 type-manifesto-tight leading-relaxed">
-              Security audits, AI films, web builds, and streetwear. Pick what you need — I'll handle the rest.
+              Pick what you need and send a note.
             </p>
             <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed max-w-lg">
               Maurice Holda is an AI developer, filmmaker, and security consultant based in Hamburg. Naga Codex builds alongside{' '}
@@ -136,7 +136,7 @@ export default function Contact() {
                 Book a free 20-min call
               </h3>
               <p className="font-mono text-[10px] text-[#8B9BB4] uppercase tracking-wider">
-                No pitch deck. No agency overhead. Just a direct conversation.
+                20-minute call. No deck required.
               </p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
@@ -164,7 +164,7 @@ export default function Contact() {
             <div className="flex flex-col gap-1.5 relative z-10 text-left">
               <Shield className="w-5 h-5 text-cyber mb-2" />
               <span className="font-display font-extrabold text-neutral-900 text-lg tracking-wide uppercase">SECURITY AUDIT</span>
-              <span className="type-manifesto-tight text-[8.5px] text-neutral-500">Harden your systems</span>
+              <span className="type-manifesto-tight text-[8.5px] text-neutral-500">Audit your stack</span>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-cyber group-hover:translate-x-1 group-hover:-translate-y-1 transition-ui relative z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-cyber/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -243,7 +243,7 @@ export default function Contact() {
               </summary>
               <p className="mt-3 text-sm text-neutral-800 type-manifesto leading-relaxed">
                 Maurice Holda is a Certified AI Manager, Cyber Security Analyst, and Web Developer based in Hamburg.
-                He leads Naga Codex across AI strategy, security consulting, generative film, web development, and Naga streetwear.
+                He runs Naga Codex and works across AI, security, film, web, and Naga streetwear.
               </p>
             </details>
             <details className="group border border-neutral-200 rounded-lg p-4 open:border-neutral-200">
@@ -270,7 +270,7 @@ export default function Contact() {
                 <a href="mailto:chosenfewrecords@hotmail.de" className="text-cyber hover:underline">
                   chosenfewrecords@hotmail.de
                 </a>{' '}
-                with your project type — security audit, AI film, web build, or wear collaboration.
+                with your project type: security audit, AI film, web build, or wear collaboration.
               </p>
             </details>
           </div>

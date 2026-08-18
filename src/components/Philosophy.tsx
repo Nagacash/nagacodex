@@ -2,9 +2,9 @@ import { motion } from 'motion/react';
 import { Cpu } from 'lucide-react';
 
 export default function Philosophy() {
-  const line1 = 'WE BUILD SOVEREIGN SYSTEMS'.split(' ');
-  const line2 = 'WE DIRECT ARTIFICIAL ENZYMES'.split(' ');
-  const line3 = 'WE WEAR DECLARATIVE ARMORS'.split(' ');
+  const line1 = 'WE BUILD WHAT WE RUN'.split(' ');
+  const line2 = 'WE SHOOT AI FILM'.split(' ');
+  const line3 = 'WE SEW HEAVY COTTON'.split(' ');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -91,8 +91,7 @@ export default function Philosophy() {
         </motion.div>
 
         <p className="max-w-lg text-[10.5px] md:text-xs type-manifesto-tight text-neutral-400 leading-relaxed pt-8 border-t border-neutral-800/80">
-          We do not work with templates. We integrate defensive audits with dense atmospheric cinema and heavy raw
-          stitch apparel. In St. Pauli, we harden the system cores.
+          No template builds. Security work, film, and 450 GSM cotton share one studio in St. Pauli.
         </p>
       </div>
     </section>

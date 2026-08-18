@@ -344,8 +344,7 @@ export default function Hero() {
                   </div>
                   <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
                     <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
-                      AI agent systems that run while you sleep. React products that convert. Generative films that stop the scroll. Security audits that catch what others miss.{' '}
-                      <span className="text-cyber font-semibold">Zero middlemen</span> — you talk directly to the builder shipping your product.
+                      Agent workflows, React sites, AI short films, and security audits. You work with me directly, not through an agency layer.
                     </p>
                   </div>
                 </div>
@@ -364,12 +363,12 @@ export default function Hero() {
                   </div>
                   <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
                     <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
-                      No retainers. No account managers. No scoping decks that cost €5K. Four disciplines under one operator —{' '}
+                      One person covers{' '}
                       <span className="text-cyber">agents</span>,{' '}
                       <span className="text-film">film</span>,{' '}
-                      <span className="text-dev">web</span>,{' '}
+                      <span className="text-dev">web</span>, and{' '}
                       <span className="text-[#E8EDF5]">security</span>.
-                      {' '}140+ audits. 280+ deployments. 18K+ AI-generated scenes. Hamburg bred, ships worldwide.
+                      {' '}140+ audits, 280+ deployments, 18K+ generated scenes. Based in Hamburg, working with clients elsewhere too.
                     </p>
                   </div>
                 </div>
@@ -388,10 +387,10 @@ export default function Hero() {
                   </div>
                   <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
                     <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
-                      Agent system:{' '}<span className="text-cyber font-medium">2–4 weeks</span>.{' '}
+                      Agent build:{' '}<span className="text-cyber font-medium">2–4 weeks</span>.{' '}
                       Web build:{' '}<span className="text-dev font-medium">1–3 weeks</span>.{' '}
-                      Security audit:{' '}<span className="text-film font-medium">48h</span> initial report.
-                      {' '}First call is 20 minutes, free, no pitch deck. Just a direct conversation about what needs to get built.
+                      Security audit:{' '}<span className="text-film font-medium">48h</span> for the first report.
+                      {' '}First call is 20 minutes, free, and mostly about what you actually need built.
                       <span className="inline-block w-[2px] h-3.5 bg-cyber ml-0.5 animate-pulse align-text-bottom rounded-sm" />
                     </p>
                   </div>

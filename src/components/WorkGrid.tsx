@@ -6,6 +6,7 @@ import { mandeFilm } from '../lib/films/mande';
 import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
+import cyberCert from '../assets/certifications/cyber certi.png';
 // Images hosted on CDN — not bundled as local assets
 const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
 const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
@@ -19,6 +20,7 @@ interface WorkflowArea {
   description: string;
   tags: string[];
   accentClass: string;
+  projectUrl?: string;
 }
 
 const workflowAreas: WorkflowArea[] = [
@@ -27,7 +29,7 @@ const workflowAreas: WorkflowArea[] = [
     number: '01',
     title: 'AI Agents & Automation',
     description:
-      'Custom agent systems that research, decide, and act — from intake bots and data pipelines to fully autonomous workflows. Built with Gemini, Claude, and MCP; shipped production-ready.',
+      'Agent systems for research, intake, and routine decisions. Built with Gemini, Claude, and MCP.',
     tags: ['Gemini API', 'Claude SDK', 'n8n', 'LangGraph', 'MCP'],
     accentClass: 'text-cyber',
   },
@@ -45,7 +47,7 @@ const workflowAreas: WorkflowArea[] = [
     number: '03',
     title: 'Web & Product',
     description:
-      'React apps, serverless APIs, and sharp interfaces built for performance and maintainability. Full-stack when needed; always production-ready.',
+      'React apps, serverless APIs, and interfaces built for speed and maintainability. Full-stack when the project needs it.',
     tags: ['React', 'TypeScript', 'GSAP', 'Vercel', 'Tailwind'],
     accentClass: 'text-dev',
   },
@@ -54,9 +56,10 @@ const workflowAreas: WorkflowArea[] = [
     number: '04',
     title: 'Security & Governance',
     description:
-      'Offensive audits, smart-contract reviews, and AI governance frameworks so products ship with measurable risk reduction.',
+      'Pentests, smart-contract reviews, and AI governance so you know what to fix before launch.',
     tags: ['Pentesting', 'Smart contracts', 'Cloud hardening', 'Compliance'],
     accentClass: 'text-neutral-500',
+    projectUrl: 'https://github.com/Nagacash/NagaCodex-cyber-security',
   },
 ];
 
@@ -68,7 +71,7 @@ const projects: ProjectItem[] = [
     tags: ['React 19', 'GSAP', 'TypeScript'],
     thumbnail: agentsVisual,
     tagline: 'Personal brand hub built from scratch.',
-    detailLine: 'React 19, Tailwind v4, GSAP scroll-pinned transitions, multi-format video, structured SEO — shipped solo from Hamburg.',
+    detailLine: 'React 19, Tailwind v4, GSAP scroll-pinned transitions, multi-format video, structured SEO. Shipped solo from Hamburg.',
     ctaLabel: 'View source',
     externalUrl: 'https://github.com/Nagacash/nagacodex',
   },
@@ -95,6 +98,18 @@ const projects: ProjectItem[] = [
     tagline: 'Technical streetwear capsule.',
     detailLine: 'Brutalist outerwear built for Hamburg — shop the full line at Naga Club.',
     ctaLabel: 'Shop',
+  },
+  {
+    id: 'p4',
+    title: 'Naga Codex Cyber Security',
+    category: 'Security',
+    tags: ['OWASP', 'GDPR', 'MCP', 'Agent Skills'],
+    thumbnail: cyberCert,
+    tagline: 'Defensive consulting skills for AI agents.',
+    detailLine:
+      '25 skills for authorized AppSec, AI/MCP hardening, EU compliance, and incident response. OWASP LLM and Agentic Top 10, bilingual EN/DE client reports.',
+    ctaLabel: 'View repo',
+    externalUrl: 'https://github.com/Nagacash/NagaCodex-cyber-security',
   },
 ];
 
@@ -149,7 +164,7 @@ export default function WorkGrid() {
             </h2>
           </div>
           <p className="max-w-md type-manifesto text-sm text-neutral-800 leading-relaxed md:text-right">
-            Four disciplines, one studio — AI agents, generative film, web engineering, and security from Hamburg.
+            Agents, film, web, and security from Hamburg.
           </p>
         </div>
 
@@ -185,6 +200,18 @@ export default function WorkGrid() {
                   </span>
                 ))}
               </div>
+              {area.projectUrl && (
+                <a
+                  href={area.projectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playClick()}
+                  className="inline-flex items-center gap-2 self-start text-sm type-manifesto text-neutral-700 hover:text-neutral-900 transition-colors pt-1"
+                >
+                  View project
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
             </article>
           ))}
         </div>
@@ -322,7 +349,7 @@ export default function WorkGrid() {
         </div>
 
         <p className="type-manifesto text-sm text-neutral-500 text-center md:text-left">
-          More work on request — email Maurice directly.
+          More work on request. Email Maurice directly.
         </p>
       </div>
 

@@ -5,6 +5,8 @@ import proveItImg from '../assets/images/skills/prove-it.jpg';
 import socialPostForgeImg from '../assets/images/skills/social-post-forge.jpg';
 import searchVisibilityImg from '../assets/images/skills/search-visibility.jpg';
 
+const CYBER_SECURITY_IMG = 'https://raw.githubusercontent.com/Nagacash/NagaCodex-cyber-security/main/assets/og-card-photo.svg';
+
 export interface NagaRepo {
   id: string;
   name: string;
@@ -53,6 +55,18 @@ export const nagaRepos: NagaRepo[] = [
     updatedLabel: 'recently',
     accent: '#FF6B35',
     image: proveItImg,
+  },
+  {
+    id: 'naga-codex-cyber-security',
+    name: 'NagaCodex-cyber-security',
+    description:
+      'Defensive consulting skills for AI agents: authorized AppSec, AI/MCP hardening, GDPR/NIS2/ISO/BSI mapping, and incident response. 25 skills, bilingual EN/DE reports, normalized finding schema.',
+    tags: ['cybersecurity', 'appsec', 'owasp', 'gdpr', 'nis2', 'mcp', 'agent-skills', 'defensive-security'],
+    githubUrl: 'https://github.com/Nagacash/NagaCodex-cyber-security',
+    license: 'MIT',
+    updatedLabel: 'today',
+    accent: '#00FF88',
+    image: CYBER_SECURITY_IMG,
   },
   {
     id: 'social-post-forge',

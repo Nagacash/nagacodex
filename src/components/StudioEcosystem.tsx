@@ -15,7 +15,7 @@ const products: StudioProduct[] = [
   {
     id: 'films',
     title: 'Naga Films Studio',
-    description: 'Self-hostable AI video production suite — image generation, video synthesis, cinema workflows, and lip-sync.',
+    description: 'Self-hostable AI video tools: image gen, video synthesis, cinema workflows, lip-sync.',
     url: 'https://www.naga-films.com/',
     accent: '#FF6B35',
     icon: '🎬',
@@ -23,7 +23,7 @@ const products: StudioProduct[] = [
   {
     id: 'apparel',
     title: 'Naga Apparel',
-    description: 'Technical streetwear from Hamburg — 450 GSM brutalist construction, cryptographic prints, direct-to-fan.',
+    description: 'Technical streetwear from Hamburg. 450 GSM cotton, limited runs, sold direct.',
     url: 'https://nagaclub.de',
     accent: '#D4A843',
     icon: '👕',
@@ -31,7 +31,7 @@ const products: StudioProduct[] = [
   {
     id: 'records',
     title: 'Chosen Few Records',
-    description: 'Hamburg underground music label — hip-hop and electronic production, A&R, artist development.',
+    description: 'Hamburg label for hip-hop and electronic. Production, A&R, artist development.',
     url: 'https://www.chosenfewrecords.com/',
     accent: '#FF6B35',
     icon: '🎵',
@@ -56,7 +56,7 @@ export default function StudioEcosystem() {
             Studio <span className="text-neutral-500">Ecosystem</span>
           </h2>
           <p className="max-w-md type-manifesto text-sm text-neutral-800 leading-relaxed">
-            Three independent ventures rooted in Hamburg — each built from scratch, each with its own discipline.
+            Three Hamburg ventures: film studio, streetwear label, and music label.
           </p>
         </div>
 
