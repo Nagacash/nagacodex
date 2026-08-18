@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Shield, Film, Shirt, ArrowRight, Award, Code, ZoomIn } from 'lucide-react';
+import { Shield, Film, Shirt, ArrowRight, Award, Code, ZoomIn, Scale } from 'lucide-react';
 import { SectionTheme, PillarData } from '../types';
 import VideoBackground from './VideoBackground';
 import CertificationLightbox from './CertificationLightbox';
@@ -9,6 +9,10 @@ import { mandeFilm } from '../lib/films/mande';
 import { certifications } from '../lib/certifications';
 import type { Certification } from '../lib/certifications';
 import { scrollToSection } from '../lib/scrollNav';
+import {
+  euAiActExplainerPosterUrl,
+  euAiActExplainerVideoUrl,
+} from '../lib/euAiActExplainer';
 
 export default function WhoSection() {
   const [activePillar, setActivePillar] = useState<SectionTheme>('none');
@@ -219,6 +223,38 @@ export default function WhoSection() {
               </motion.div>
             );
           })}
+        </div>
+
+        <div className="pt-10 border-t border-neutral-200 text-left">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+            <div className="flex flex-col gap-3 max-w-xl">
+              <div className="flex items-center gap-2 text-cyber font-mono text-[9px] tracking-[0.3em] uppercase">
+                <Scale className="w-3.5 h-3.5" />
+                <span>EU AI Act</span>
+              </div>
+              <h3 className="font-display font-black text-2xl md:text-3xl tracking-tight text-neutral-900 uppercase leading-none">
+                Explainer <span className="text-neutral-500">video</span>
+              </h3>
+              <p className="type-manifesto text-sm text-neutral-700 leading-relaxed max-w-md">
+                Maurice walks through what the EU AI Act means for builders, operators, and teams shipping AI in Europe: risk tiers, documentation, and what to fix before launch.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative w-full max-w-4xl mx-auto aspect-video rounded-xl overflow-hidden border border-neutral-200 bg-neutral-900 shadow-sm">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              playsInline
+              preload="metadata"
+              poster={euAiActExplainerPosterUrl}
+              onPlay={() => sound.pauseForContent()}
+              onPause={() => sound.resumeFromContent()}
+              onEnded={() => sound.resumeFromContent()}
+            >
+              <source src={euAiActExplainerVideoUrl} type="video/mp4" />
+            </video>
+          </div>
         </div>
 
         <div className="pt-10 border-t border-neutral-200 text-left">
