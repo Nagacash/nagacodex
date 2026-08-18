@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react';
-import { motion, useMotionValue } from 'motion/react';
-import { HelpCircle, ChevronDown, Monitor, Shield, Layers, MapPin, CheckCircle2, Github } from 'lucide-react';
-import VideoBackground from './VideoBackground';
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import { motion } from 'motion/react';
+import { ChevronDown, Shield, Layers, Github } from 'lucide-react';
 import FloatingClips from './FloatingClips';
 import SoundToggle from './SoundToggle';
 import sound from '../lib/sound';
@@ -10,76 +9,6 @@ import { brandLogo } from '../lib/brand';
 import { scrollToSection } from '../lib/scrollNav';
 import operatorPortrait from '../assets/images/maurice-portrait.jpg';
 import operatorPortraitWebp from '../assets/images/maurice-portrait.webp';
-
-interface RepellingWordProps {
-  key?: string | number;
-  word: string;
-  orbPos: { x: number; y: number };
-}
-
-// Interactive repelling word sub-component
-function RepellingWord({ word, orbPos }: RepellingWordProps) {
-  const spanRef = useRef<HTMLSpanElement | null>(null);
-  const [restCoords, setRestCoords] = useState<{ x: number; y: number } | null>(null);
-
-  // Read viewport position to find static layout center
-  const measureCoords = () => {
-    if (spanRef.current) {
-      const rect = spanRef.current.getBoundingClientRect();
-      setRestCoords({
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-      });
-    }
-  };
-
-  useEffect(() => {
-    measureCoords();
-    // Re-measure position on window resize
-    window.addEventListener('resize', measureCoords);
-    window.addEventListener('scroll', measureCoords, { passive: true });
-    return () => {
-      window.removeEventListener('resize', measureCoords);
-      window.removeEventListener('scroll', measureCoords);
-    };
-  }, []);
-
-  // Compute repulsion vector relative to general dragging coordinates
-  const offsets = useMemo(() => {
-    if (!restCoords || orbPos.x === 0 && orbPos.y === 0) return { x: 0, y: 0 };
-
-    const dx = restCoords.x - orbPos.x;
-    const dy = restCoords.y - orbPos.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    // Repelling boundary field radius
-    const radius = 110; 
-
-    if (distance < radius && distance > 0) {
-      const force = (radius - distance) / radius; // 1.0 (at center) to 0.0 (at edge)
-      const pushFactor = 80; // High vector repulsion amplitude
-      return {
-        x: (dx / distance) * force * pushFactor,
-        y: (dy / distance) * force * pushFactor,
-      };
-    }
-
-    return { x: 0, y: 0 };
-  }, [restCoords, orbPos]);
-
-  return (
-    <span
-      ref={spanRef}
-      style={{
-        transform: `translate3d(${offsets.x}px, ${offsets.y}px, 0)`,
-        transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
-      }}
-      className="inline-block will-change-transform select-none"
-    >
-      {word}&nbsp;
-    </span>
-  );
-}
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -106,14 +35,6 @@ export default function Hero() {
 
     return () => window.removeEventListener('resize', checkViewport);
   }, []);
-
-  // Splitting core typography texts for kinetic animation repellers
-  const titleLine1 = useMemo(() => "NAGA".split(' '), []);
-  const titleLine2 = useMemo(() => "CODEX".split(' '), []);
-  const manifestoParagraph = useMemo(
-    () => "Personal brand of Maurice Holda: cyber security consultant, AI filmmaker, and streetwear brand owner based in Hamburg, Germany. Navigating the intersections of digital sovereignty, computer-generated cinematic media, and elevated counter-culture fashion.".split(' '),
-    []
-  );
 
   // Track dragging updates
   const handleOrbDrag = (_: any, info: any) => {
@@ -192,24 +113,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 3. Central Core: Draggable Orb & Kinetic Words */}
+      {/* 3. Central Core: Draggable Orb & Profile Hub */}
       <div className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center w-full max-w-5xl mx-auto overflow-y-auto overflow-x-hidden overscroll-contain py-4 sm:py-6">
-        
-        {/* Giant Title Headers */}
-        <div className="w-full max-w-full text-center flex flex-col justify-center items-center pointer-events-none gap-2 px-1">
-          <h1 className="font-display font-extrabold w-full max-w-full text-[10.5vw] sm:text-[12vw] md:text-[8vw] xl:text-[7.5rem] tracking-tighter leading-[0.85] uppercase overflow-hidden">
-            <span className="block text-black text-glitch">
-              {titleLine1.map((w, idx) => (
-                <RepellingWord key={`t1-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
-              ))}
-            </span>
-            <span className="block text-culture">
-              {titleLine2.map((w, idx) => (
-                <RepellingWord key={`t2-${idx}`} word={w} orbPos={isMobile ? { x: 0, y: 0 } : orbPos} />
-              ))}
-            </span>
-          </h1>
-        </div>
 
         {/* Draggable Active Glowing Core Orb (Disable on mobile to fall back to clean presentation) */}
         {!isMobile && (
@@ -322,7 +227,7 @@ export default function Hero() {
                 </div>
                 <div className="flex items-center gap-2 mx-auto">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse shadow-[0_0_8px_#00FF88]" />
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#E8EDF5] font-bold uppercase">NAGA CODEX AI</span>
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#E8EDF5] font-bold uppercase">AI ASSISTANT</span>
                 </div>
                 <span className="shrink-0 font-mono text-[7px] text-[#8B9BB4] border border-white/10 px-2 py-0.5 rounded">GPT-4.1 • LIVE</span>
               </div>
