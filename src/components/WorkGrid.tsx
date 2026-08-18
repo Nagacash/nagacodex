@@ -7,6 +7,7 @@ import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
 import cyberCert from '../assets/certifications/cyber certi.png';
+import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
 // Images hosted on CDN — not bundled as local assets
 const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
 const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
@@ -21,6 +22,7 @@ interface WorkflowArea {
   tags: string[];
   accentClass: string;
   projectUrl?: string;
+  projectLinks?: { label: string; url: string }[];
 }
 
 const workflowAreas: WorkflowArea[] = [
@@ -56,10 +58,13 @@ const workflowAreas: WorkflowArea[] = [
     number: '04',
     title: 'Security & Governance',
     description:
-      'Pentests, smart-contract reviews, and AI governance so you know what to fix before launch.',
-    tags: ['Pentesting', 'Smart contracts', 'Cloud hardening', 'Compliance'],
+      'Pentests, smart-contract reviews, cryptographic signing systems, and AI governance so you know what to fix before launch.',
+    tags: ['Pentesting', 'Ed25519', 'Smart contracts', 'Compliance'],
     accentClass: 'text-neutral-500',
-    projectUrl: 'https://github.com/Nagacash/NagaCodex-cyber-security',
+    projectLinks: [
+      { label: 'Cyber skills repo', url: 'https://github.com/Nagacash/NagaCodex-cyber-security' },
+      { label: 'SoundDrop', url: 'https://sounddrop-nu.vercel.app/' },
+    ],
   },
 ];
 
@@ -110,6 +115,18 @@ const projects: ProjectItem[] = [
       '25 skills for authorized AppSec, AI/MCP hardening, EU compliance, and incident response. OWASP LLM and Agentic Top 10, bilingual EN/DE client reports.',
     ctaLabel: 'View repo',
     externalUrl: 'https://github.com/Nagacash/NagaCodex-cyber-security',
+  },
+  {
+    id: 'p5',
+    title: 'SoundDrop',
+    category: 'Security',
+    tags: ['Ed25519', 'Web Crypto', 'Content signing'],
+    thumbnail: sounddropImg,
+    tagline: 'Artist-owned music drops signed with browser-held Ed25519 keys.',
+    detailLine:
+      'Publish MP3s with metadata signed in-browser; only the public key hits the server. Listeners stream, download, and verify releases without a middleman catalog.',
+    ctaLabel: 'Visit site',
+    externalUrl: 'https://sounddrop-nu.vercel.app/',
   },
 ];
 
@@ -200,7 +217,20 @@ export default function WorkGrid() {
                   </span>
                 ))}
               </div>
-              {area.projectUrl && (
+              {area.projectLinks?.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playClick()}
+                  className="inline-flex items-center gap-2 self-start text-sm type-manifesto text-neutral-700 hover:text-neutral-900 transition-colors pt-1"
+                >
+                  {link.label}
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              ))}
+              {!area.projectLinks && area.projectUrl && (
                 <a
                   href={area.projectUrl}
                   target="_blank"

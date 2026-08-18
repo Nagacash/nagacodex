@@ -277,10 +277,10 @@ export default function Hero() {
                 <img
                   src={operatorPortrait}
                   alt="Portrait of Maurice Holda"
-                  width={800}
-                  height={800}
+                  width={805}
+                  height={1200}
                   decoding="async"
-                  className="w-full h-full object-cover object-[center_20%] opacity-85 group-hover:scale-102 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center opacity-90 group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/30 via-transparent to-transparent opacity-60" />

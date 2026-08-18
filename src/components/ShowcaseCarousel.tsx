@@ -11,6 +11,7 @@ import nagacodexImg from '../assets/images/showcase/nagacodex.jpg';
 import nagaApparelImg from '../assets/images/showcase/naga-apparel.jpg';
 import chosenFewImg from '../assets/images/showcase/chosen-few-records.jpg';
 import cyberSecurityImg from '../assets/images/showcase/cyber-security.svg';
+import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
 import nagafilmsImg from '../assets/images/showcase/nagafilms.jpg';
 
 interface ShowcaseProject {
@@ -97,6 +98,13 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     shortDesc: '25 defensive agent skills: AppSec, AI/MCP, GDPR/NIS2',
     url: 'https://github.com/Nagacash/NagaCodex-cyber-security',
     image: cyberSecurityImg,
+  },
+  {
+    id: 'sounddrop',
+    name: 'SoundDrop',
+    shortDesc: 'Ed25519-signed MP3 publishing — private keys stay in the browser',
+    url: 'https://sounddrop-nu.vercel.app/',
+    image: sounddropImg,
   },
   {
     id: 'nagafilms',
