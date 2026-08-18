@@ -1,6 +1,17 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import sound from '../lib/sound';
+import listeneuropeImg from '../assets/images/showcase/listeneurope.png';
+import glamourAcademyImg from '../assets/images/showcase/glamour-academy.jpg';
+import mesoskinImg from '../assets/images/showcase/mesoskin-hamburg.webp';
+import wildeMuschelImg from '../assets/images/showcase/wilde-muschel.jpg';
+import bodyandmindImg from '../assets/images/showcase/bodyandmind-hamburg.jpg';
+import ericLoveImg from '../assets/images/showcase/eric-love.jpg';
+import nagacodexImg from '../assets/images/showcase/nagacodex.jpg';
+import nagaApparelImg from '../assets/images/showcase/naga-apparel.jpg';
+import chosenFewImg from '../assets/images/showcase/chosen-few-records.jpg';
+import cyberSecurityImg from '../assets/images/showcase/cyber-security.svg';
+import nagafilmsImg from '../assets/images/showcase/nagafilms.jpg';
 
 interface ShowcaseProject {
   id: string;
@@ -21,42 +32,42 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     name: 'Listen Europe',
     shortDesc: 'AI radio station & music generator platform',
     url: 'https://www.listeneurope.com/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEFH0G_EKRZFST3F48MQWFN/54a0a8f7-ce45-4497-a7e5-2b0d3fc11d8e.jpg',
+    image: listeneuropeImg,
   },
   {
     id: 'glamour-academy',
     name: 'Glamour Academy',
     shortDesc: 'Beauty academy & skin treatment clinic — Hamburg',
     url: 'https://www.glamour-academy.com/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEFHDB_3YP00WFF9BS0YSWX/92df8e57-94c7-4d6c-b1ba-10292278b3ac.jpg',
+    image: glamourAcademyImg,
   },
   {
     id: 'mesoskin-hamburg',
     name: 'Mesoskin Hamburg',
     shortDesc: 'Medical aesthetics — drip spas, PDO threads & hyaluronic',
     url: 'https://www.mesoskin-hamburg.com/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEFHS2_5DXV86GVX4BT1NGZ/18dca5ac-a711-4611-bb52-8cea206ebffd.jpg',
+    image: mesoskinImg,
   },
   {
     id: 'wilde-muschel',
     name: 'Wilde Muschel',
     shortDesc: '18+ podcast site — age gate, Neon-backed player, likes & comments',
     url: 'https://wilde-muschel.vercel.app/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEAPSY_92YTMJ1NANHHZR6N/905fdb2c-796b-46af-9af4-a531bcb60b0e.jpg',
+    image: wildeMuschelImg,
   },
   {
     id: 'bodyandmind',
     name: 'Body & Mind Hamburg',
     shortDesc: 'Premium private training — boxing, kickboxing & recovery',
     url: 'https://www.bodyandmindhamburg.com/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYF1CFH_S3YNFD5Z68BDJ61A/4c4203e5-0c8e-44e7-936f-d41d60e8b844.jpg',
+    image: bodyandmindImg,
   },
   {
     id: 'eric-love',
     name: 'Eric Gray — Love Is Here',
     shortDesc: 'Album launch site — music streaming & PayPal support',
     url: 'https://eric-love.vercel.app/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYEV7ZQ_RGQZ0XE9BAFRFT06/1b708bce-3805-42d9-8e56-b20b60b171f4.jpg',
+    image: ericLoveImg,
   },
   // ── NAGA ECOSYSTEM ───────────────────────────────────────────────────────
   {
@@ -64,43 +75,42 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     name: 'Naga Codex',
     shortDesc: 'Personal brand site: AI agents, film, web dev, security',
     url: 'https://nagacodex.cloud',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3DQ1_1EWA6XKZBA110JF8/0da6d741-7c8b-4a85-8e31-568d620c39bc.jpg',
+    image: nagacodexImg,
   },
   {
     id: 'naga-apparel',
     name: 'Naga Apparel',
     shortDesc: 'Technical streetwear, 450 GSM cotton',
     url: 'https://www.nagaclub.de',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3JHA_YFF4A5H2V6H1DR2E/209fbb03-1b81-41a7-af42-a58d959d14bb.jpg',
+    image: nagaApparelImg,
   },
   {
     id: 'chosen-few-records',
     name: 'Chosen Few Records',
     shortDesc: 'Hamburg music label, hip-hop and electronic',
     url: 'https://www.chosenfewrecords.com/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3K4H_JBNCVYWRFDP20TP6/5915fa64-ac59-4ede-ad68-3fdc7f62845c.jpg',
+    image: chosenFewImg,
   },
   {
     id: 'nagacodex-cyber-security',
     name: 'Naga Codex Cyber Security',
     shortDesc: '25 defensive agent skills: AppSec, AI/MCP, GDPR/NIS2',
     url: 'https://github.com/Nagacash/NagaCodex-cyber-security',
+    image: cyberSecurityImg,
   },
   {
     id: 'nagafilms',
     name: 'Naga Films Studio',
     shortDesc: 'Self-hostable AI video production suite',
     url: 'https://www.naga-films.com/',
-    image: 'https://pub.hyperagent.com/api/published/pbf01KZYE3M43_XYHTYEP9950EYD3S/36fddafb-bf81-45e0-9b90-36373967fb68.jpg',
+    image: nagafilmsImg,
   },
 ];
 
-// All projects now have real CDN screenshots; this function is kept as a safe fallback.
-const screenshotUrl = (_siteUrl: string) => '';
-
-const preloadScreenshot = (url: string) => {
+// Bundled screenshots — no external CDN dependency
+const preloadImage = (src: string) => {
   const img = new Image();
-  img.src = screenshotUrl(url);
+  img.src = src;
 };
 
 export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselProps) {
@@ -113,16 +123,20 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
 
   const projects = SHOWCASE_PROJECTS;
   const currentProj = projects[currentIndex];
-  const currentShot = currentProj.image ?? screenshotUrl(currentProj.url);
+  const currentShot = currentProj.image ?? '';
 
   const prefetchNeighbors = useCallback((index: number) => {
-    preloadScreenshot(SHOWCASE_PROJECTS[index].url);
-    preloadScreenshot(SHOWCASE_PROJECTS[(index + 1) % SHOWCASE_PROJECTS.length].url);
-    preloadScreenshot(SHOWCASE_PROJECTS[(index - 1 + SHOWCASE_PROJECTS.length) % SHOWCASE_PROJECTS.length].url);
+    const preloadAt = (i: number) => {
+      const src = SHOWCASE_PROJECTS[i].image;
+      if (src) preloadImage(src);
+    };
+    preloadAt(index);
+    preloadAt((index + 1) % SHOWCASE_PROJECTS.length);
+    preloadAt((index - 1 + SHOWCASE_PROJECTS.length) % SHOWCASE_PROJECTS.length);
   }, []);
 
   useEffect(() => {
-    SHOWCASE_PROJECTS.forEach((p) => { if (!p.image) preloadScreenshot(p.url); });
+    SHOWCASE_PROJECTS.forEach((p) => { if (p.image) preloadImage(p.image); });
   }, []);
 
   useEffect(() => {
