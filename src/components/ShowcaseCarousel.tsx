@@ -15,6 +15,9 @@ import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
 import nagafilmsImg from '../assets/images/showcase/nagafilms.jpg';
 import nagapilotImg from '../assets/images/showcase/nagapilot.jpg';
 import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
+import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
+import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
+import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
 
 interface ShowcaseProject {
   id: string;
@@ -43,6 +46,27 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     shortDesc: '5–10s musical ads — jingle, animation & sonic logo from €290',
     url: 'https://www.naga-ads.shop/',
     image: nagaAdsImg,
+  },
+  {
+    id: 'naga-iq',
+    name: 'NAGA IQ',
+    shortDesc: '3D chess you can step into — rated, AI & local play',
+    url: 'https://naga-iq.vercel.app/',
+    image: nagaIqImg,
+  },
+  {
+    id: 'nagacodex-factory',
+    name: 'Naga Codex Factory Skill',
+    shortDesc: 'Agent skills: Isolate → Build → Prove → Ship',
+    url: 'https://github.com/Nagacash/nagacodex-factory-skill',
+    image: factorySkillImg,
+  },
+  {
+    id: 'naga-it-creator',
+    name: 'Naga IT Creator',
+    shortDesc: 'Native AI code editor — agents, LSP, git, under 20 MB',
+    url: 'https://github.com/Nagacash/naga-IT-creator',
+    image: nagaItCreatorImg,
   },
   // ── CLIENT WORK ──────────────────────────────────────────────────────────
   {

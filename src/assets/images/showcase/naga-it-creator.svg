@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1929"/>
+      <stop offset="100%" stop-color="#1A1030"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g2)"/>
+  <rect x="48" y="48" width="1104" height="704" rx="24" fill="none" stroke="#BD00FF" stroke-opacity="0.4" stroke-width="2"/>
+  <text x="96" y="180" fill="#BD00FF" font-family="ui-monospace, Menlo, monospace" font-size="28" letter-spacing="6">AI CODE EDITOR</text>
+  <text x="96" y="280" fill="#E8EDF5" font-family="Georgia, serif" font-size="64" font-weight="700">Naga IT Creator</text>
+  <text x="96" y="360" fill="#8B9BB4" font-family="ui-sans-serif, system-ui" font-size="32">Native AI editor · under 20 MB</text>
+  <text x="96" y="480" fill="#C5D0E0" font-family="ui-sans-serif, system-ui" font-size="28">Agents, code intelligence, git, and</text>
+  <text x="96" y="520" fill="#C5D0E0" font-family="ui-sans-serif, system-ui" font-size="28">debugging — built on the biscuit engine.</text>
+  <text x="96" y="680" fill="#6B7A90" font-family="ui-monospace, Menlo, monospace" font-size="22">github.com/Nagacash/naga-IT-creator</text>
+</svg>

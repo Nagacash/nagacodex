@@ -10,6 +10,9 @@ import cyberCert from '../assets/certifications/cyber certi.png';
 import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
 import nagapilotImg from '../assets/images/showcase/nagapilot.jpg';
 import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
+import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
+import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
+import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
 // Images hosted on CDN — not bundled as local assets
 const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
 const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
@@ -33,10 +36,14 @@ const workflowAreas: WorkflowArea[] = [
     number: '01',
     title: 'AI Agents & Automation',
     description:
-      'Agent systems for research, intake, and routine decisions — plus Naga Pilot, our own canvas automation platform.',
-    tags: ['Naga Pilot', 'Gemini API', 'Claude SDK', 'LangGraph', 'MCP'],
+      'Agent systems, Naga Pilot automation, and the Naga Codex Factory skill pipeline — Isolate → Build → Prove → Ship.',
+    tags: ['Naga Pilot', 'Factory Skill', 'Claude SDK', 'LangGraph', 'MCP'],
     accentClass: 'text-cyber',
-    projectUrl: 'https://www.nagapilot.cloud/',
+    projectLinks: [
+      { label: 'Naga Pilot', url: 'https://www.nagapilot.cloud/' },
+      { label: 'Factory Skill', url: 'https://github.com/Nagacash/nagacodex-factory-skill' },
+      { label: 'Naga IT Creator', url: 'https://github.com/Nagacash/naga-IT-creator' },
+    ],
   },
   {
     id: 'cinema',
@@ -53,9 +60,10 @@ const workflowAreas: WorkflowArea[] = [
     number: '03',
     title: 'Web & Product',
     description:
-      'React apps, serverless APIs, and interfaces built for speed and maintainability. Full-stack when the project needs it.',
-    tags: ['React', 'TypeScript', 'GSAP', 'Vercel', 'Tailwind'],
+      'React apps, games, and product UIs — including NAGA IQ, a 3D chess club you can step into in the browser.',
+    tags: ['NAGA IQ', 'React', 'TypeScript', 'Vercel', 'Three.js'],
     accentClass: 'text-dev',
+    projectUrl: 'https://naga-iq.vercel.app/',
   },
   {
     id: 'security',
@@ -96,6 +104,42 @@ const projects: ProjectItem[] = [
       'SonIQ Studio service: custom jingle, matching animation, and a reusable sonic logo — mixed for mobile, ready for YouTube bumpers, Meta, TikTok, and your site. First concept in 1–2 working days. Hamburg & Zurich.',
     ctaLabel: 'See packages',
     externalUrl: 'https://www.naga-ads.shop/',
+  },
+  {
+    id: 'p0c',
+    title: 'NAGA IQ',
+    category: 'Games',
+    tags: ['3D chess', 'Rated matchmaking', 'AI opponents', 'Stockfish'],
+    thumbnail: nagaIqImg,
+    tagline: 'Chess you can step into — rooms, rated play, and talking AI.',
+    detailLine:
+      'Browser chess club with mood rooms, rated matchmaking, pass-and-play, and five AI opponents that explain their moves. Free to play.',
+    ctaLabel: 'Play now',
+    externalUrl: 'https://naga-iq.vercel.app/',
+  },
+  {
+    id: 'p0d',
+    title: 'Naga Codex Factory Skill',
+    category: 'Open source',
+    tags: ['Agent skills', 'Isolate', 'Build', 'Prove', 'Ship'],
+    thumbnail: factorySkillImg,
+    tagline: 'Factory pipeline for AI coding agents — not a chatbot free-for-all.',
+    detailLine:
+      'Open skills that turn Claude/OpenCode into a repeatable production line: new-feature isolation, code structure, evidence-driven testing, before/after, greploop, and unslop.',
+    ctaLabel: 'View repo',
+    externalUrl: 'https://github.com/Nagacash/nagacodex-factory-skill',
+  },
+  {
+    id: 'p0e',
+    title: 'Naga IT Creator',
+    category: 'Open source',
+    tags: ['AI editor', 'Agents', 'LSP', 'Under 20 MB'],
+    thumbnail: nagaItCreatorImg,
+    tagline: 'Native AI code editor with agents, git, and debugging built in.',
+    detailLine:
+      'Lightweight editor on the biscuit engine — agentic edits, code intelligence, source control, and DAP debugging. Install with pip or uv and open a project in seconds.',
+    ctaLabel: 'View repo',
+    externalUrl: 'https://github.com/Nagacash/naga-IT-creator',
   },
   {
     id: 'p1',
