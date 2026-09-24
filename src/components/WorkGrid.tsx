@@ -8,6 +8,8 @@ import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
 import cyberCert from '../assets/certifications/cyber certi.png';
 import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
+import nagapilotImg from '../assets/images/showcase/nagapilot.jpg';
+import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
 // Images hosted on CDN — not bundled as local assets
 const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
 const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
@@ -31,18 +33,20 @@ const workflowAreas: WorkflowArea[] = [
     number: '01',
     title: 'AI Agents & Automation',
     description:
-      'Agent systems for research, intake, and routine decisions. Built with Gemini, Claude, and MCP.',
-    tags: ['Gemini API', 'Claude SDK', 'n8n', 'LangGraph', 'MCP'],
+      'Agent systems for research, intake, and routine decisions — plus Naga Pilot, our own canvas automation platform.',
+    tags: ['Naga Pilot', 'Gemini API', 'Claude SDK', 'LangGraph', 'MCP'],
     accentClass: 'text-cyber',
+    projectUrl: 'https://www.nagapilot.cloud/',
   },
   {
     id: 'cinema',
     number: '02',
     title: 'AI Cinema & Media',
     description:
-      'Text-to-video pipelines, generative narrative, and layered sound design for shorts and brand films. From script to final grade.',
-    tags: ['Sora AI', 'Kling', 'Sound design', 'Color grade', 'FFmpeg'],
+      'Text-to-video pipelines, brand films, and Sonic Micro-Ads — 5–10s musical spots with jingle, animation, and a clear CTA.',
+    tags: ['Sonic Micro-Ads', 'Sora AI', 'Kling', 'Sound design', 'FFmpeg'],
     accentClass: 'text-film',
+    projectUrl: 'https://www.naga-ads.shop/',
   },
   {
     id: 'product',
@@ -69,6 +73,30 @@ const workflowAreas: WorkflowArea[] = [
 ];
 
 const projects: ProjectItem[] = [
+  {
+    id: 'p0',
+    title: 'Naga Pilot',
+    category: 'Automation',
+    tags: ['Canvas', 'AI steps', 'Durable runs', 'BYOK'],
+    thumbnail: nagapilotImg,
+    tagline: 'Canvas workflow automation — our own build, not n8n.',
+    detailLine:
+      'Drag triggers, AI steps and app actions onto a canvas. Your OpenAI or Anthropic keys, encrypted per org. Retries, week-long waits, and human approvals included.',
+    ctaLabel: 'Open product',
+    externalUrl: 'https://www.nagapilot.cloud/',
+  },
+  {
+    id: 'p0b',
+    title: 'Sonic Micro-Ads',
+    category: 'Audio & Ads',
+    tags: ['5–10s jingles', 'Animation', 'Sonic logo', 'From €290'],
+    thumbnail: nagaAdsImg,
+    tagline: 'Short musical ads that make a brand stick in 5–10 seconds.',
+    detailLine:
+      'SonIQ Studio service: custom jingle, matching animation, and a reusable sonic logo — mixed for mobile, ready for YouTube bumpers, Meta, TikTok, and your site. First concept in 1–2 working days. Hamburg & Zurich.',
+    ctaLabel: 'See packages',
+    externalUrl: 'https://www.naga-ads.shop/',
+  },
   {
     id: 'p1',
     title: 'Naga Codex — this site',

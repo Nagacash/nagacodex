@@ -13,6 +13,8 @@ import chosenFewImg from '../assets/images/showcase/chosen-few-records.jpg';
 import cyberSecurityImg from '../assets/images/showcase/cyber-security.svg';
 import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
 import nagafilmsImg from '../assets/images/showcase/nagafilms.jpg';
+import nagapilotImg from '../assets/images/showcase/nagapilot.jpg';
+import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
 
 interface ShowcaseProject {
   id: string;
@@ -27,6 +29,21 @@ interface ShowcaseCarouselProps {
 }
 
 const SHOWCASE_PROJECTS: ShowcaseProject[] = [
+  // ── FEATURED ─────────────────────────────────────────────────────────────
+  {
+    id: 'nagapilot',
+    name: 'Naga Pilot',
+    shortDesc: 'Canvas automation — our own n8n-class build, your AI keys',
+    url: 'https://www.nagapilot.cloud/',
+    image: nagapilotImg,
+  },
+  {
+    id: 'naga-ads',
+    name: 'Sonic Micro-Ads',
+    shortDesc: '5–10s musical ads — jingle, animation & sonic logo from €290',
+    url: 'https://www.naga-ads.shop/',
+    image: nagaAdsImg,
+  },
   // ── CLIENT WORK ──────────────────────────────────────────────────────────
   {
     id: 'listeneurope',

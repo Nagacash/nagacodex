@@ -13,6 +13,15 @@ interface StudioProduct {
 
 const products: StudioProduct[] = [
   {
+    id: 'sonic-ads',
+    title: 'Sonic Micro-Ads',
+    description:
+      '5–10 second musical ads for small brands: custom jingle, animation, and sonic logo. From €290 — packages for YouTube, Meta, and TikTok.',
+    url: 'https://www.naga-ads.shop/',
+    accent: '#D4A843',
+    icon: '🔊',
+  },
+  {
     id: 'films',
     title: 'Naga Films Studio',
     description: 'Self-hostable AI video tools: image gen, video synthesis, cinema workflows, lip-sync.',
@@ -56,12 +65,12 @@ export default function StudioEcosystem() {
             Studio <span className="text-neutral-500">Ecosystem</span>
           </h2>
           <p className="max-w-md type-manifesto text-sm text-neutral-800 leading-relaxed">
-            Three Hamburg ventures: film studio, streetwear label, and music label.
+            Hamburg ventures: sonic micro-ads, film studio, streetwear, and music label.
           </p>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <a
               key={product.id}
