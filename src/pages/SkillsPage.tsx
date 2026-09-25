@@ -99,7 +99,7 @@ export default function SkillsPage() {
             </h1>
             <p className="mt-6 max-w-2xl font-sans text-base md:text-lg text-text-muted leading-relaxed">
               {data.meta.subtitle}. State lives in files — scope, specs, AGENTS.md, tests — not in a
-              chat session. Adapted from the JSMastery Engineering Workflow for Naga Codex agents.
+              chat session.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
@@ -275,21 +275,20 @@ export default function SkillsPage() {
           </div>
         </Section>
 
-        {/* Attribution */}
-        <Section id="attribution" eyebrow="08 — Attribution" title="Attribution">
+        {/* License */}
+        <Section id="license" eyebrow="08 — License" title="License">
           <p className="font-sans text-sm text-text-muted leading-relaxed max-w-2xl">
-            The Naga Codex Engineering Workflow is adapted from the{' '}
+            Naga Codex Skills are released under the MIT License. Full copyright notices live in the
+            repository{' '}
             <a
-              href={data.meta.attributionSource}
+              href={`${data.meta.repositoryUrlPlaceholder}/blob/main/LICENSE`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-cyber hover:underline"
             >
-              JSMastery Engineering Workflow
-            </a>{' '}
-            (MIT). See license and attribution in the skills repository when published (
-            <code className="text-[12px] text-neutral-400">{data.meta.repositoryUrlPlaceholder}</code>
-            ). Not affiliated with JavaScript Mastery.
+              LICENSE
+            </a>
+            .
           </p>
         </Section>
 
