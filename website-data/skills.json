@@ -1,0 +1,417 @@
+{
+  "meta": {
+    "title": "Naga Codex Skills",
+    "subtitle": "File-based engineering workflow for AI coding agents",
+    "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills",
+    "repositoryUrlPlaceholder": "https://github.com/Nagacash/naga-codex-skills",
+    "repositoryStatus": "published",
+    "attributionSource": "https://github.com/jsmastery-pro/skills",
+    "license": "MIT",
+    "version": "0.1.0",
+    "siteUrl": "https://www.nagacodex.cloud/skills"
+  },
+  "install": {
+    "allPlaceholder": "npx skills@latest add Nagacash/naga-codex-skills",
+    "onePlaceholder": "npx skills@latest add Nagacash/naga-codex-skills --skill scope",
+    "localNote": "Public repository is live. Prefer the npx commands below."
+  },
+  "supportedAgents": [
+    "Cursor",
+    "OpenAI Codex",
+    "OpenCode",
+    "Claude Code",
+    "Agent Skills-compatible clients"
+  ],
+  "workflowDepths": [
+    {
+      "id": "prototype",
+      "name": "Prototype",
+      "description": "Just /develop with self-check. Throwaway work."
+    },
+    {
+      "id": "alpha",
+      "name": "Alpha",
+      "description": "Adds /check verify against the real app."
+    },
+    {
+      "id": "beta",
+      "name": "Beta",
+      "description": "Adds /test for meaningful coverage."
+    },
+    {
+      "id": "ga",
+      "name": "GA",
+      "description": "Adds independent /check review and /document."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "AGENTS.md",
+      "path": "AGENTS.md",
+      "owner": "audit / sync"
+    },
+    {
+      "name": "Scope",
+      "path": "docs/scope/",
+      "owner": "scope"
+    },
+    {
+      "name": "Specs",
+      "path": "docs/specs/",
+      "owner": "architect"
+    },
+    {
+      "name": "Reviews",
+      "path": "docs/reviews/",
+      "owner": "check"
+    },
+    {
+      "name": "Tests",
+      "path": "project test dirs",
+      "owner": "test"
+    },
+    {
+      "name": "Changelog",
+      "path": "CHANGELOG.md",
+      "owner": "document"
+    },
+    {
+      "name": "Context sync",
+      "path": "AGENTS.md + scope + specs",
+      "owner": "sync"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "project-context",
+      "name": "Project context",
+      "description": "Concise AGENTS.md facts agents need on most tasks \u2014 not full API dumps."
+    },
+    {
+      "id": "permissions",
+      "name": "Permissions",
+      "description": "Allow / Ask / Deny baseline. Secrets blocked; production needs approval."
+    },
+    {
+      "id": "plan-mode",
+      "name": "Plan mode",
+      "description": "Read-first planning for expensive or hard-to-undo changes."
+    },
+    {
+      "id": "skills",
+      "name": "Skills",
+      "description": "Repeatable procedures loaded only when relevant."
+    },
+    {
+      "id": "sub-agents",
+      "name": "Sub-agents",
+      "description": "Narrow delegated investigations; main agent verifies results."
+    },
+    {
+      "id": "verification",
+      "name": "Verification",
+      "description": "Run the real app and prove acceptance criteria."
+    },
+    {
+      "id": "independent-review",
+      "name": "Independent review",
+      "description": "Fresh-eyes review before production, without editing app code."
+    },
+    {
+      "id": "context-clearing",
+      "name": "Context clearing and compaction",
+      "description": "Fresh context for unrelated work; compact only mid-task clutter."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Do I need every skill?",
+      "a": "No. Run only the phases a change needs. A bug can go straight to /debug."
+    },
+    {
+      "q": "When should I use plan mode?",
+      "a": "Database, auth, migrations, payments, production infra, large refactors, or anything hard to undo. Not for typos or small style fixes."
+    },
+    {
+      "q": "What belongs in AGENTS.md?",
+      "a": "Framework, package manager, important commands, main directories, testing, DB conventions, design and security rules, deployment restrictions. Keep it short."
+    },
+    {
+      "q": "When should I use a skill instead of project rules?",
+      "a": "Skills are procedures for a phase. Rules are always-on facts. Use skills when you enter a workflow phase."
+    },
+    {
+      "q": "When should I use a sub-agent?",
+      "a": "Parallel exploration, research, test planning, or security review \u2014 with a narrow purpose and no deploy authority."
+    },
+    {
+      "q": "How are secrets protected?",
+      "a": "Deny rules block .env and credentials where the runtime supports it. Instructions alone are not enough; inspect skills before install."
+    },
+    {
+      "q": "Does the workflow deploy production automatically?",
+      "a": "No. Deploy, DNS, and production actions require explicit human approval."
+    },
+    {
+      "q": "What happens when a decision is unresolved?",
+      "a": "Ask. Do not invent. /develop gates to /architect when a load-bearing decision is owed."
+    },
+    {
+      "q": "When should I clear or compact context?",
+      "a": "Clear for unrelated work. Compact only when continuing the same task and context is cluttered."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Scope",
+      "command": "/scope",
+      "slug": "scope",
+      "phase": 1,
+      "description": "Turns an idea into an ordered, living plan in docs/scope/.",
+      "outputs": [
+        "Living scope plan",
+        "Feature order and workflow depth"
+      ],
+      "artifactPaths": [
+        "docs/scope/"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-scope",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Audit",
+      "command": "/audit",
+      "slug": "audit",
+      "phase": 2,
+      "description": "Inspects a codebase and writes AGENTS.md project context.",
+      "outputs": [
+        "AGENTS.md",
+        "CLAUDE.md pointer"
+      ],
+      "artifactPaths": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-audit",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Architect",
+      "command": "/architect",
+      "slug": "architect",
+      "phase": 3,
+      "description": "Records important technical and product decisions in docs/specs/.",
+      "outputs": [
+        "Build specs",
+        "Acceptance criteria"
+      ],
+      "artifactPaths": [
+        "docs/specs/"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-architect",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Develop",
+      "command": "/develop",
+      "slug": "develop",
+      "phase": 4,
+      "description": "Implements an approved specification in small, reviewable steps.",
+      "outputs": [
+        "Application code",
+        "Optional design.md"
+      ],
+      "artifactPaths": [
+        "src/",
+        "design.md"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-develop",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Check",
+      "command": "/check",
+      "slug": "check",
+      "phase": 5,
+      "description": "Verify runs the real app; review is independent fresh-eyes code review.",
+      "outputs": [
+        "Verification evidence",
+        "docs/reviews/ findings"
+      ],
+      "artifactPaths": [
+        "docs/reviews/"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-check",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Test",
+      "command": "/test",
+      "slug": "test",
+      "phase": 6,
+      "description": "Writes and runs meaningful tests for normal, edge, error, and a11y paths.",
+      "outputs": [
+        "Test suite",
+        "Passing runs"
+      ],
+      "artifactPaths": [
+        "tests/",
+        "src/**/*.test.*"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-test",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Document",
+      "command": "/document",
+      "slug": "document",
+      "phase": 7,
+      "description": "Writes changelogs, release notes, PR descriptions, or postmortems from the real diff.",
+      "outputs": [
+        "CHANGELOG.md",
+        "docs/releases/",
+        "PR body"
+      ],
+      "artifactPaths": [
+        "CHANGELOG.md",
+        "docs/releases/",
+        "docs/postmortems/"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-document",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Sync",
+      "command": "/sync",
+      "slug": "sync",
+      "phase": 8,
+      "description": "Reconciles project context, scope status, specifications, and the current codebase.",
+      "outputs": [
+        "Updated AGENTS.md",
+        "Reconciled scope and spec status"
+      ],
+      "artifactPaths": [
+        "AGENTS.md",
+        "docs/scope/",
+        "docs/specs/"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-sync",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    },
+    {
+      "name": "Debug",
+      "command": "/debug",
+      "slug": "debug",
+      "phase": 9,
+      "description": "Investigates the real cause of a failure and hands a regression test to /test.",
+      "outputs": [
+        "Minimal root-cause fix",
+        "Regression handoff to /test"
+      ],
+      "artifactPaths": [
+        "src/"
+      ],
+      "supportedAgents": [
+        "Cursor",
+        "OpenAI Codex",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "status": "stable",
+      "version": "0.1.0",
+      "source": "adapted-from-jsmastery",
+      "license": "MIT",
+      "attribution": "Adapted from jsmastery-pro/skills (MIT)",
+      "documentationUrl": "/skills#phase-debug",
+      "repositoryUrl": "https://github.com/Nagacash/naga-codex-skills"
+    }
+  ]
+}

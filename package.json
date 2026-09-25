@@ -10,7 +10,8 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "encode:mande": "~/.cursor/skills/video-web-encode/scripts/encode.sh src/assets/clips/mande.mp4 src/assets/clips",
-    "encode:intro": "~/.cursor/skills/video-web-encode/scripts/encode.sh src/assets/clips/intro.mp4 src/assets/clips --no-audio --no-hevc"
+    "encode:intro": "~/.cursor/skills/video-web-encode/scripts/encode.sh src/assets/clips/intro.mp4 src/assets/clips --no-audio --no-hevc",
+    "suggest-skill": "node scripts/suggest-skill.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -23,6 +24,7 @@
     "motion": "^12.23.24",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
+    "react-router-dom": "^7.18.4",
     "vite": "^6.2.3"
   },
   "devDependencies": {

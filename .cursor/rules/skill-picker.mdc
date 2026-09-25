@@ -1,0 +1,18 @@
+---
+description: Use TypeSafe/Jev to pick the best agent skill before loading specialized skills
+alwaysApply: true
+---
+
+# Skill picker (TypeSafe / Jev)
+
+For non-trivial tasks (implementation, debugging, security, video, design, CRM, deploy), **before** reading multiple specialized skills:
+
+1. Run:
+   ```bash
+   node scripts/suggest-skill.mjs "<user's task in one sentence>"
+   ```
+2. If it prints a `Suggested:` skill, **Read that skill's SKILL.md first** and follow it.
+3. If it prints `No skill suggested`, proceed with normal judgment — do not force-load a skill.
+4. Ignore the suggestion if it clearly does not match what the user asked.
+
+Requires `TYPESAFE_API_KEY` in project `.env`. Use `--all` only when the default Cursor roster is too narrow.
