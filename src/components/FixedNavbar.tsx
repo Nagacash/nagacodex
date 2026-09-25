@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import sound from '../lib/sound';
 import { useActiveSectionIndex } from '../lib/activeSection';
 import { getSectionAccentColor } from '../lib/sections';
@@ -16,7 +17,6 @@ const links = [
 
 export default function FixedNavbar() {
   const activeIndex = useActiveSectionIndex();
-  const isPhilosophy = activeIndex === 3;
 
   return (
     <nav
@@ -55,6 +55,13 @@ export default function FixedNavbar() {
               </button>
             );
           })}
+          <Link
+            to="/skills"
+            onClick={() => sound.playClick()}
+            className="relative snap-center font-mono text-[9px] tracking-widest uppercase transition-colors cursor-pointer px-2.5 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 text-cyber hover:text-white"
+          >
+            SKILLS
+          </Link>
         </div>
       </div>
     </nav>
