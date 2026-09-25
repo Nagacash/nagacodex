@@ -1,6 +1,9 @@
-import React from 'react';
 import { ExternalLink, Sparkles } from 'lucide-react';
 import sound from '../lib/sound';
+import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
+import nagafilmsImg from '../assets/images/showcase/nagafilms.jpg';
+import nagaApparelImg from '../assets/images/showcase/naga-apparel.jpg';
+import chosenFewImg from '../assets/images/showcase/chosen-few-records.jpg';
 
 interface StudioProduct {
   id: string;
@@ -8,7 +11,8 @@ interface StudioProduct {
   description: string;
   url: string;
   accent: string;
-  icon: React.ReactNode;
+  image: string;
+  imageAlt: string;
 }
 
 const products: StudioProduct[] = [
@@ -19,7 +23,8 @@ const products: StudioProduct[] = [
       '5–10 second musical ads for small brands: custom jingle, animation, and sonic logo. From €290 — packages for YouTube, Meta, and TikTok.',
     url: 'https://www.naga-ads.shop/',
     accent: '#D4A843',
-    icon: '🔊',
+    image: nagaAdsImg,
+    imageAlt: 'Sonic Micro-Ads campaign still',
   },
   {
     id: 'films',
@@ -27,7 +32,8 @@ const products: StudioProduct[] = [
     description: 'Self-hostable AI video tools: image gen, video synthesis, cinema workflows, lip-sync.',
     url: 'https://www.naga-films.com/',
     accent: '#FF6B35',
-    icon: '🎬',
+    image: nagafilmsImg,
+    imageAlt: 'Naga Films Studio production still',
   },
   {
     id: 'apparel',
@@ -35,7 +41,8 @@ const products: StudioProduct[] = [
     description: 'Technical streetwear from Hamburg. 450 GSM cotton, limited runs, sold direct.',
     url: 'https://nagaclub.de',
     accent: '#D4A843',
-    icon: '👕',
+    image: nagaApparelImg,
+    imageAlt: 'Naga Apparel technical streetwear',
   },
   {
     id: 'records',
@@ -43,7 +50,8 @@ const products: StudioProduct[] = [
     description: 'Hamburg label for hip-hop and electronic. Production, A&R, artist development.',
     url: 'https://www.chosenfewrecords.com/',
     accent: '#FF6B35',
-    icon: '🎵',
+    image: chosenFewImg,
+    imageAlt: 'Chosen Few Records artwork',
   },
 ];
 
@@ -55,10 +63,9 @@ export default function StudioEcosystem() {
       className="relative w-full min-h-dvh py-16 sm:py-20 px-4 sm:px-6 md:px-12 section-canvas border-t border-neutral-200/80"
     >
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-16">
-        {/* Header */}
         <div className="flex flex-col gap-3 max-w-xl">
           <div className="flex items-center gap-2 text-culture font-mono text-[9px] tracking-[0.3em] uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4A843]" />
+            <Sparkles className="w-3.5 h-3.5 text-culture" />
             <span>Beyond Code</span>
           </div>
           <h2 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-neutral-900 uppercase leading-none">
@@ -69,8 +76,7 @@ export default function StudioEcosystem() {
           </p>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {products.map((product) => (
             <a
               key={product.id}
@@ -78,29 +84,37 @@ export default function StudioEcosystem() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="group flex flex-col gap-4 p-6 rounded-xl border border-neutral-200 bg-white hover:border-neutral-400 hover:shadow-md transition-ui cursor-pointer h-full"
+              className="group flex flex-col gap-4 cursor-pointer h-full"
             >
-              {/* Icon */}
-              <div className="text-4xl">{product.icon}</div>
-
-              {/* Title */}
-              <h3 className="font-display font-semibold text-lg tracking-tight text-neutral-900">
-                {product.title}
-              </h3>
-
-              {/* Description */}
-              <p className="type-manifesto text-sm text-neutral-700 leading-relaxed flex-1">
-                {product.description}
-              </p>
-
-              {/* CTA */}
-              <div className="flex items-center gap-2 pt-2 text-sm type-manifesto font-semibold group-hover:text-neutral-900 transition-colors">
-                <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: product.accent }}
+              <div className="relative aspect-[16/10] overflow-hidden border border-neutral-200 bg-neutral-100">
+                <img
+                  src={product.image}
+                  alt={product.imageAlt}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  loading="lazy"
                 />
-                <span>Visit</span>
-                <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <div
+                  className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent pointer-events-none"
+                  aria-hidden
+                />
+                <span
+                  className="absolute bottom-3 left-3 w-2 h-2 rounded-full ring-2 ring-white/80"
+                  style={{ backgroundColor: product.accent }}
+                  aria-hidden
+                />
+              </div>
+
+              <div className="flex flex-col gap-2 px-0.5">
+                <h3 className="font-display font-semibold text-lg tracking-tight text-neutral-900">
+                  {product.title}
+                </h3>
+                <p className="type-manifesto text-sm text-neutral-700 leading-relaxed flex-1">
+                  {product.description}
+                </p>
+                <div className="flex items-center gap-2 pt-1 text-sm type-manifesto font-semibold text-neutral-800 group-hover:text-neutral-950 transition-colors">
+                  <span>Visit</span>
+                  <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </div>
             </a>
           ))}

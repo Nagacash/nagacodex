@@ -18,6 +18,7 @@ import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
 import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
 import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
 import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
+import nagaCodexSkillsImg from '../assets/images/showcase/naga-codex-skills.jpg';
 
 interface ShowcaseProject {
   id: string;
@@ -25,6 +26,7 @@ interface ShowcaseProject {
   shortDesc: string;
   url: string;
   image?: string;
+  internal?: boolean;
 }
 
 interface ShowcaseCarouselProps {
@@ -33,6 +35,14 @@ interface ShowcaseCarouselProps {
 
 const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   // ── FEATURED ─────────────────────────────────────────────────────────────
+  {
+    id: 'naga-codex-skills',
+    name: 'Naga Codex Skills',
+    shortDesc: 'Nine-phase engineering workflow — scope → ship',
+    url: '/skills',
+    image: nagaCodexSkillsImg,
+    internal: true,
+  },
   {
     id: 'nagapilot',
     name: 'Naga Pilot',
@@ -336,12 +346,14 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
             {/* Project Link */}
             <a
               href={currentProj.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={currentProj.internal ? undefined : '_blank'}
+              rel={currentProj.internal ? undefined : 'noopener noreferrer'}
               onClick={() => sound.playClick()}
               className="flex items-center justify-between p-4 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition-colors cursor-pointer group"
             >
-              <span className="font-display font-semibold text-sm tracking-tight">Visit project</span>
+              <span className="font-display font-semibold text-sm tracking-tight">
+                {currentProj.internal ? 'Open skills page' : 'Visit project'}
+              </span>
               <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>

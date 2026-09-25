@@ -13,11 +13,13 @@ import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
 import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
 import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
 import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
+import nagaCodexSkillsImg from '../assets/images/showcase/naga-codex-skills.jpg';
 // Images hosted on CDN — not bundled as local assets
 const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
 const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
 import ProjectDetailModal from './ProjectDetailModal';
 import FilmPreviewModal from './FilmPreviewModal';
+import { useNavigate } from 'react-router-dom';
 
 interface WorkflowArea {
   id: string;
@@ -36,11 +38,12 @@ const workflowAreas: WorkflowArea[] = [
     number: '01',
     title: 'AI Agents & Automation',
     description:
-      'Agent systems, Naga Pilot automation, and the Naga Codex Factory skill pipeline — Isolate → Build → Prove → Ship.',
-    tags: ['Naga Pilot', 'Factory Skill', 'Claude SDK', 'LangGraph', 'MCP'],
+      'Agent systems, Naga Pilot automation, and the Naga Codex engineering skill pipeline — scope → architect → develop → ship.',
+    tags: ['Naga Pilot', 'Engineering Skills', 'Factory Skill', 'MCP'],
     accentClass: 'text-cyber',
     projectLinks: [
       { label: 'Naga Pilot', url: 'https://www.nagapilot.cloud/' },
+      { label: 'Engineering Skills', url: '/skills' },
       { label: 'Factory Skill', url: 'https://github.com/Nagacash/nagacodex-factory-skill' },
       { label: 'Naga IT Creator', url: 'https://github.com/Nagacash/naga-IT-creator' },
     ],
@@ -116,6 +119,18 @@ const projects: ProjectItem[] = [
       'Browser chess club with mood rooms, rated matchmaking, pass-and-play, and five AI opponents that explain their moves. Free to play.',
     ctaLabel: 'Play now',
     externalUrl: 'https://naga-iq.vercel.app/',
+  },
+  {
+    id: 'p0skills',
+    title: 'Naga Codex Skills',
+    category: 'Open source',
+    tags: ['Agent skills', 'Scope', 'Architect', 'Develop', 'Ship'],
+    thumbnail: nagaCodexSkillsImg,
+    tagline: 'Nine-phase engineering workflow for AI coding agents.',
+    detailLine:
+      'File-based skills: /scope → /audit → /architect → /develop → /check → /test → /document → /sync (+ /debug). State lives in docs/, not in chat.',
+    ctaLabel: 'Open skills',
+    externalUrl: '/skills',
   },
   {
     id: 'p0d',
@@ -203,6 +218,7 @@ const projects: ProjectItem[] = [
 ];
 
 export default function WorkGrid() {
+  const navigate = useNavigate();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [filmPreview, setFilmPreview] = useState<ProjectItem | null>(null);
@@ -224,6 +240,10 @@ export default function WorkGrid() {
   const handleCardClick = (proj: ProjectItem) => {
     sound.playClick();
     if (proj.externalUrl) {
+      if (proj.externalUrl.startsWith('/')) {
+        navigate(proj.externalUrl);
+        return;
+      }
       window.open(proj.externalUrl, '_blank', 'noopener,noreferrer');
       return;
     }
@@ -233,6 +253,16 @@ export default function WorkGrid() {
       return;
     }
     setSelectedProject(proj);
+  };
+
+  const handleWorkflowLink = (e: React.MouseEvent, url: string) => {
+    e.preventDefault();
+    sound.playClick();
+    if (url.startsWith('/')) {
+      navigate(url);
+      return;
+    }
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -293,9 +323,9 @@ export default function WorkGrid() {
                 <a
                   key={link.url}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => sound.playClick()}
+                  target={link.url.startsWith('/') ? undefined : '_blank'}
+                  rel={link.url.startsWith('/') ? undefined : 'noopener noreferrer'}
+                  onClick={(e) => handleWorkflowLink(e, link.url)}
                   className="inline-flex items-center gap-2 self-start text-sm type-manifesto text-neutral-700 hover:text-neutral-900 transition-colors pt-1"
                 >
                   {link.label}

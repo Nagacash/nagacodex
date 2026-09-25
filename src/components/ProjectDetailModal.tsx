@@ -102,8 +102,8 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
               {project.externalUrl && (
                 <a
                   href={project.externalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={project.externalUrl.startsWith('/') ? undefined : '_blank'}
+                  rel={project.externalUrl.startsWith('/') ? undefined : 'noopener noreferrer'}
                   onClick={() => sound.playClick()}
                   className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2.5 text-sm font-mono font-bold border border-culture/40 hover:border-culture text-culture hover:bg-culture hover:text-black rounded-md transition-ui active:scale-95 cursor-pointer"
                 >
