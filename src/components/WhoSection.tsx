@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Shield, Film, Shirt, ArrowRight, Award, Code, ZoomIn, Scale } from 'lucide-react';
+import { Shield, Film, Shirt, ArrowRight, Code, Scale } from 'lucide-react';
 import { SectionTheme, PillarData } from '../types';
 import VideoBackground from './VideoBackground';
-import CertificationLightbox from './CertificationLightbox';
 import sound from '../lib/sound';
 import { mandeFilm } from '../lib/films/mande';
-import { certifications } from '../lib/certifications';
-import type { Certification } from '../lib/certifications';
 import { scrollToSection } from '../lib/scrollNav';
 import {
   euAiActExplainerPosterUrl,
@@ -18,7 +14,6 @@ import {
 export default function WhoSection() {
   const [activePillar, setActivePillar] = useState<SectionTheme>('none');
   const [hoveredPillar, setHoveredPillar] = useState<SectionTheme>('none');
-  const [activeCertification, setActiveCertification] = useState<Certification | null>(null);
 
   const handlePillarClick = (theme: SectionTheme) => {
     if (activePillar === theme) {
@@ -36,11 +31,6 @@ export default function WhoSection() {
     e.stopPropagation();
     sound.playClick();
     scrollToSection(2);
-  };
-
-  const handleOpenCertification = (cert: Certification) => {
-    sound.playClick();
-    setActiveCertification(cert);
   };
 
   const pillars: PillarData[] = [
@@ -257,73 +247,7 @@ export default function WhoSection() {
             </video>
           </div>
         </div>
-
-        <div className="pt-10 border-t border-neutral-200 text-left">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div className="flex flex-col gap-3 max-w-xl">
-              <div className="flex items-center gap-2 text-culture font-mono text-[9px] tracking-[0.3em] uppercase">
-                <Award className="w-3.5 h-3.5 text-culture" />
-                <span>Certifications</span>
-              </div>
-              <h3 className="font-display font-black text-2xl md:text-3xl tracking-tight text-neutral-900 uppercase leading-none">
-                Verified <span className="text-neutral-500">credentials</span>
-              </h3>
-              <p className="type-manifesto text-sm text-neutral-700 leading-relaxed max-w-md">
-                Cert-IT, Masterschool, and DCI programs on file.
-              </p>
-            </div>
-            <Link
-              to="/certificates"
-              onClick={() => sound.playClick()}
-              className="inline-flex items-center gap-2 self-start md:self-auto font-mono text-[10px] uppercase tracking-wider text-culture hover:text-neutral-900 border border-culture/40 hover:border-neutral-400 px-4 py-2.5 rounded-md transition-colors min-h-[44px]"
-            >
-              Full certificates page
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {certifications.map((cert) => (
-              <button
-                key={cert.id}
-                type="button"
-                onClick={() => handleOpenCertification(cert)}
-                className={`group text-left flex flex-col rounded-xl bg-white border ${cert.borderColor} shadow-xs hover:shadow-md hover:border-neutral-300 transition-ui overflow-hidden cursor-pointer`}
-              >
-                <div className="relative aspect-[3/4] bg-neutral-100 border-b border-neutral-200 overflow-hidden">
-                  <img
-                    src={cert.image}
-                    alt={`${cert.title} certificate — ${cert.issuer}`}
-                    className="w-full h-full object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider bg-white text-neutral-900 px-3 py-2 rounded-full border border-neutral-200 shadow-sm">
-                      <ZoomIn className="w-3.5 h-3.5" />
-                      View certificate
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 flex flex-col gap-2">
-                  <span className="text-[10px] text-neutral-500 type-manifesto">{cert.issuer}</span>
-                  <h4 className={`font-display font-extrabold text-lg text-neutral-900 tracking-tight ${cert.accentClass}`}>
-                    {cert.title}
-                  </h4>
-                  <span className="font-mono text-xs text-neutral-500">{cert.completed}</span>
-                  <p className="type-manifesto text-xs text-neutral-600 leading-relaxed pt-1">{cert.detail}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
-
-      <CertificationLightbox
-        certification={activeCertification}
-        onClose={() => setActiveCertification(null)}
-      />
     </section>
   );
 }
