@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Shield, Film, Shirt, ArrowRight, Award, Code, ZoomIn, Scale } from 'lucide-react';
 import { SectionTheme, PillarData } from '../types';
@@ -271,6 +272,14 @@ export default function WhoSection() {
                 Cert-IT, Masterschool, and DCI programs on file.
               </p>
             </div>
+            <Link
+              to="/certificates"
+              onClick={() => sound.playClick()}
+              className="inline-flex items-center gap-2 self-start md:self-auto font-mono text-[10px] uppercase tracking-wider text-culture hover:text-neutral-900 border border-culture/40 hover:border-neutral-400 px-4 py-2.5 rounded-md transition-colors min-h-[44px]"
+            >
+              Full certificates page
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

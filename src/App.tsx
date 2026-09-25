@@ -3,12 +3,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 
 const SkillsPage = lazy(() => import('./pages/SkillsPage'));
+const CertificatesPage = lazy(() => import('./pages/CertificatesPage'));
 
-function SkillsFallback() {
+function PageFallback({ label }: { label: string }) {
   return (
     <div className="min-h-dvh w-full bg-bg-dark flex items-center justify-center">
       <span className="font-mono text-[10px] text-[#8B9BB4] uppercase tracking-widest animate-pulse">
-        Loading skills…
+        Loading {label}…
       </span>
     </div>
   );
@@ -22,8 +23,16 @@ export default function App() {
         <Route
           path="/skills"
           element={
-            <Suspense fallback={<SkillsFallback />}>
+            <Suspense fallback={<PageFallback label="skills" />}>
               <SkillsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/certificates"
+          element={
+            <Suspense fallback={<PageFallback label="certificates" />}>
+              <CertificatesPage />
             </Suspense>
           }
         />
