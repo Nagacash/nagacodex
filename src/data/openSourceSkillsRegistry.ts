@@ -4,6 +4,7 @@ import narrativeFilmImg from '../assets/images/skills/narrative-film-direction.j
 import proveItImg from '../assets/images/skills/prove-it.jpg';
 import socialPostForgeImg from '../assets/images/skills/social-post-forge.jpg';
 import searchVisibilityImg from '../assets/images/skills/search-visibility.jpg';
+import openSeoLiteImg from '../assets/images/skills/openseo-lite.jpg';
 
 const CYBER_SECURITY_IMG = 'https://raw.githubusercontent.com/Nagacash/NagaCodex-cyber-security/main/assets/og-card-photo.svg';
 
@@ -91,5 +92,17 @@ export const nagaRepos: NagaRepo[] = [
     updatedLabel: 'today',
     accent: '#00FF88',
     image: searchVisibilityImg,
+  },
+  {
+    id: 'openseo-lite',
+    name: 'OpenSEO-Lite',
+    description:
+      'Agent-native SEO toolkit for Claude, Cursor & Hermes. Four MCP skills — SERP search, page audit, site audit, AI visibility — returning structured JSON and a 3-step action plan. Zero Docker, zero database, MIT.',
+    tags: ['seo', 'mcp', 'serp', 'page-audit', 'ai-visibility', 'playwright', 'agent-skills', 'claude', 'cursor'],
+    githubUrl: 'https://github.com/Nagacash/-OpenSEO-Lite',
+    license: 'MIT',
+    updatedLabel: 'today',
+    accent: '#D4A843',
+    image: openSeoLiteImg,
   },
 ];

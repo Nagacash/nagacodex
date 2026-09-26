@@ -19,6 +19,7 @@ import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
 import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
 import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
 import nagaCodexSkillsImg from '../assets/images/showcase/naga-codex-skills.jpg';
+import openSeoLiteImg from '../assets/images/showcase/openseo-lite.jpg';
 
 interface ShowcaseProject {
   id: string;
@@ -77,6 +78,13 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     shortDesc: 'Native AI code editor — agents, LSP, git, under 20 MB',
     url: 'https://github.com/Nagacash/naga-IT-creator',
     image: nagaItCreatorImg,
+  },
+  {
+    id: 'openseo-lite',
+    name: 'OpenSEO-Lite',
+    shortDesc: 'MCP SEO toolkit — SERP, audits & AI visibility',
+    url: 'https://openseo-lite-blush.vercel.app/',
+    image: openSeoLiteImg,
   },
   // ── CLIENT WORK ──────────────────────────────────────────────────────────
   {

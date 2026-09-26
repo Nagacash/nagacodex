@@ -78,6 +78,16 @@ Turn any source into platform-native LinkedIn, Instagram, X and TikTok posts. Ru
 `agent-skills` `content-marketing` `ai-writing` `anti-slop`
 
 </td>
+<td width="25%">
+
+### [OpenSEO-Lite](https://github.com/Nagacash/-OpenSEO-Lite)
+![openseo-lite](https://raw.githubusercontent.com/Nagacash/-OpenSEO-Lite/main/public/images/og-social.jpg)
+
+Agent-native SEO for Claude, Cursor & Hermes. Four MCP skills: SERP search, page audit, site audit, AI visibility.
+
+`seo` `mcp` `serp` `ai-visibility`
+
+</td>
 </tr>
 </table>
 

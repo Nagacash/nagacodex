@@ -14,6 +14,7 @@ import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
 import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
 import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
 import nagaCodexSkillsImg from '../assets/images/showcase/naga-codex-skills.jpg';
+import openSeoLiteImg from '../assets/images/showcase/openseo-lite.jpg';
 // Images hosted on CDN — not bundled as local assets
 const mandeStill = 'https://pub.hyperagent.com/api/published/pbf01KZPTQR5E_N8HNQHXVBJ54QZ3W/5fb370d7-c2a2-472b-b5d5-067c04a7c926.png';
 const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEWN07GNEFC0VST8/1336563c-9871-4352-ac84-80077109751c.png';
@@ -39,13 +40,14 @@ const workflowAreas: WorkflowArea[] = [
     title: 'AI Agents & Automation',
     description:
       'Agent systems, Naga Pilot automation, and the Naga Codex engineering skill pipeline — scope → architect → develop → ship.',
-    tags: ['Naga Pilot', 'Engineering Skills', 'Factory Skill', 'MCP'],
+    tags: ['Naga Pilot', 'Engineering Skills', 'OpenSEO-Lite', 'MCP'],
     accentClass: 'text-cyber',
     projectLinks: [
       { label: 'Naga Pilot', url: 'https://www.nagapilot.cloud/' },
       { label: 'Engineering Skills', url: '/skills' },
       { label: 'Factory Skill', url: 'https://github.com/Nagacash/nagacodex-factory-skill' },
       { label: 'Naga IT Creator', url: 'https://github.com/Nagacash/naga-IT-creator' },
+      { label: 'OpenSEO-Lite', url: 'https://openseo-lite-blush.vercel.app/' },
     ],
   },
   {
@@ -155,6 +157,18 @@ const projects: ProjectItem[] = [
       'Lightweight editor on the biscuit engine — agentic edits, code intelligence, source control, and DAP debugging. Install with pip or uv and open a project in seconds.',
     ctaLabel: 'View repo',
     externalUrl: 'https://github.com/Nagacash/naga-IT-creator',
+  },
+  {
+    id: 'p0f',
+    title: 'OpenSEO-Lite',
+    category: 'Open source',
+    tags: ['MCP', 'SERP', 'Page audit', 'AI visibility'],
+    thumbnail: openSeoLiteImg,
+    tagline: 'Agent-native SEO — rankings, audits, and AI mention checks.',
+    detailLine:
+      'Four MCP tools for Claude, Cursor, Hermes, and Grok: live SERP search, on-page audit, site health score, and AI visibility. No Docker, no database — pip install and go.',
+    ctaLabel: 'Open playground',
+    externalUrl: 'https://openseo-lite-blush.vercel.app/',
   },
   {
     id: 'p1',
