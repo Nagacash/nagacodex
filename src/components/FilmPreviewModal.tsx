@@ -1,12 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 import sound from '../lib/sound';
 import { ProjectItem } from '../types';
 
 interface FilmPreviewModalProps {
   project: ProjectItem | null;
   onClose: () => void;
+}
+
+function videoMime(src: string): string {
+  return src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
 }
 
 export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalProps) {
@@ -37,6 +41,8 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
 
   if (!project?.videoSrc) return null;
 
+  const productUrl = project.externalUrl;
+
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-modal-elevated flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-lg">
@@ -57,17 +63,31 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
               {project.title}
             </h2>
 
-            <button
-              type="button"
-              onClick={() => {
-                sound.playClick();
-                onClose();
-              }}
-              className="p-2 min-h-[44px] min-w-[44px] border border-neutral-800 hover:border-neutral-600 bg-neutral-950 text-neutral-400 hover:text-white rounded-lg transition-ui active:scale-90 cursor-pointer shrink-0 flex items-center justify-center"
-              aria-label="Close film preview"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              {productUrl ? (
+                <a
+                  href={productUrl}
+                  target={productUrl.startsWith('/') ? undefined : '_blank'}
+                  rel={productUrl.startsWith('/') ? undefined : 'noopener noreferrer'}
+                  onClick={() => sound.playClick()}
+                  className="inline-flex items-center gap-2 px-3 py-2 min-h-[44px] border border-neutral-700 hover:border-film/50 bg-neutral-950 text-[#E8EDF5] hover:text-white rounded-lg transition-ui font-mono text-[10px] uppercase tracking-wider"
+                >
+                  Open product
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              ) : null}
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playClick();
+                  onClose();
+                }}
+                className="p-2 min-h-[44px] min-w-[44px] border border-neutral-800 hover:border-neutral-600 bg-neutral-950 text-neutral-400 hover:text-white rounded-lg transition-ui active:scale-90 cursor-pointer flex items-center justify-center"
+                aria-label="Close film preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           <div className="relative w-full aspect-video bg-black">
@@ -79,11 +99,15 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
               autoPlay
               preload="auto"
               poster={project.thumbnail}
+              onEnded={() => sound.resumeFromContent()}
             >
-              <source src={project.videoSrc} type="video/webm" />
-              {project.videoFallbackSrc && (
-                <source src={project.videoFallbackSrc} type="video/mp4" />
-              )}
+              <source src={project.videoSrc} type={videoMime(project.videoSrc)} />
+              {project.videoFallbackSrc && project.videoFallbackSrc !== project.videoSrc ? (
+                <source
+                  src={project.videoFallbackSrc}
+                  type={videoMime(project.videoFallbackSrc)}
+                />
+              ) : null}
             </video>
           </div>
         </motion.div>

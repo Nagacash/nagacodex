@@ -3,6 +3,8 @@ import { Grid, ArrowRight, Workflow, Play, ExternalLink } from 'lucide-react';
 import { ProjectItem } from '../types';
 import sound from '../lib/sound';
 import { mandeFilm } from '../lib/films/mande';
+import { chessTalkFilm } from '../lib/films/chessTalk';
+import { nagaFilmsPromo } from '../lib/films/nagaFilmsPromo';
 import { apparelUrl } from '../lib/seo';
 import baggyJpg from '../assets/images/baggy.jpg';
 import baggyWebp from '../assets/images/baggy.webp';
@@ -10,7 +12,6 @@ import cyberCert from '../assets/certifications/cyber certi.png';
 import sounddropImg from '../assets/images/showcase/sounddrop.jpg';
 import nagapilotImg from '../assets/images/showcase/nagapilot.jpg';
 import nagaAdsImg from '../assets/images/showcase/naga-ads.jpg';
-import nagaIqImg from '../assets/images/showcase/naga-iq.jpg';
 import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
 import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
 import nagaCodexSkillsImg from '../assets/images/showcase/naga-codex-skills.jpg';
@@ -21,6 +22,10 @@ const agentsVisual = 'https://pub.hyperagent.com/api/published/pbf01KZPTRDDV_TEW
 import ProjectDetailModal from './ProjectDetailModal';
 import FilmPreviewModal from './FilmPreviewModal';
 import { useNavigate } from 'react-router-dom';
+
+function videoMime(src: string): string {
+  return src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+}
 
 interface WorkflowArea {
   id: string;
@@ -115,12 +120,28 @@ const projects: ProjectItem[] = [
     title: 'NAGA IQ',
     category: 'Games',
     tags: ['3D chess', 'Rated matchmaking', 'AI opponents', 'Stockfish'],
-    thumbnail: nagaIqImg,
+    thumbnail: chessTalkFilm.poster,
+    videoSrc: chessTalkFilm.h264,
+    videoFallbackSrc: chessTalkFilm.h264,
     tagline: 'Chess you can step into — rooms, rated play, and talking AI.',
     detailLine:
       'Browser chess club with mood rooms, rated matchmaking, pass-and-play, and five AI opponents that explain their moves. Free to play.',
-    ctaLabel: 'Play now',
+    ctaLabel: 'Watch demo',
     externalUrl: 'https://naga-iq.vercel.app/',
+  },
+  {
+    id: 'p0films',
+    title: 'Naga Films Studio',
+    category: 'AI film',
+    tags: ['Image gen', 'Video synth', 'Cinema workflows', 'Lip-sync'],
+    thumbnail: nagaFilmsPromo.poster,
+    videoSrc: nagaFilmsPromo.h264,
+    videoFallbackSrc: nagaFilmsPromo.h264,
+    tagline: 'Self-hostable AI video tools for cinema workflows.',
+    detailLine:
+      'Image generation, video synthesis, lip-sync, and production pipelines you can run yourself. Promo walkthrough of the studio.',
+    ctaLabel: 'Watch promo',
+    externalUrl: 'https://www.naga-films.com/',
   },
   {
     id: 'p0skills',
@@ -253,17 +274,18 @@ export default function WorkGrid() {
 
   const handleCardClick = (proj: ProjectItem) => {
     sound.playClick();
+    // Prefer in-page demo clip when present; product link stays in the film modal.
+    if (proj.videoSrc) {
+      sound.pauseForContent();
+      setFilmPreview(proj);
+      return;
+    }
     if (proj.externalUrl) {
       if (proj.externalUrl.startsWith('/')) {
         navigate(proj.externalUrl);
         return;
       }
       window.open(proj.externalUrl, '_blank', 'noopener,noreferrer');
-      return;
-    }
-    if (proj.videoSrc) {
-      sound.pauseForContent();
-      setFilmPreview(proj);
       return;
     }
     setSelectedProject(proj);
@@ -428,12 +450,12 @@ export default function WorkGrid() {
                       playsInline
                       autoPlay
                       loop
-                      preload="auto"
+                      preload="metadata"
                       poster={proj.thumbnail}
                     >
-                      <source src={proj.videoSrc} type="video/webm" />
-                      {proj.videoFallbackSrc && (
-                        <source src={proj.videoFallbackSrc} type="video/mp4" />
+                      <source src={proj.videoSrc} type={videoMime(proj.videoSrc)} />
+                      {proj.videoFallbackSrc && proj.videoFallbackSrc !== proj.videoSrc && (
+                        <source src={proj.videoFallbackSrc} type={videoMime(proj.videoFallbackSrc)} />
                       )}
                     </video>
                   )}
