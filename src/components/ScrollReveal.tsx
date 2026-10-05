@@ -56,8 +56,8 @@ export default function ScrollReveal({ children, sectionIndex, className }: Scro
       variants={variants}
       transition={
         reduceMotion
-          ? { duration: 0.15, ease: 'ease' }
-          : { duration: 0.45, ease: [0.16, 1, 0.3, 1] }
+          ? { duration: 0.15, ease: 'easeOut' as const }
+          : { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const }
       }
     >
       {children}

@@ -34,7 +34,7 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.3, cubicBezier: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full max-w-3xl bg-[#090909] border border-neutral-800 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] z-10 flex flex-col my-4"
         >
           <div className={`h-[2px] w-full ${project.id === 'p4' ? 'bg-dev' : 'bg-culture'}`} />

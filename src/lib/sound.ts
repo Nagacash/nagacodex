@@ -31,7 +31,9 @@ class SoundManager {
 
   onChange(listener: SoundChangeListener) {
     this.listeners.add(listener);
-    return () => this.listeners.delete(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
   }
 
   private notify() {

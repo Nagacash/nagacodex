@@ -4,8 +4,9 @@ import { SectionTheme } from '../types';
 import { useIsSectionActive } from '../lib/activeSection';
 
 type LazyVideoSources = { webm: string; h264: string };
+type LazyVideoLoader = () => Promise<LazyVideoSources>;
 
-const lazySectionVideos = {
+const lazySectionVideos: Partial<Record<number, LazyVideoLoader>> = {
   3: () => import('../lib/films/who').then(m => ({ webm: m.whoAmbient.webm, h264: m.whoAmbient.h264 })),
   5: () => import('../lib/films/philosophy').then(m => ({ webm: m.philosophyAmbient.webm, h264: m.philosophyAmbient.h264 })),
 };
@@ -14,10 +15,11 @@ function cloneWithIsActive(children: React.ReactNode, isActive: boolean): React.
   if (!React.isValidElement(children)) return children;
 
   if (children.type === Suspense) {
+    const suspenseChildren = (children.props as { children?: React.ReactNode }).children;
     return React.cloneElement(
       children,
       {},
-      cloneWithIsActive(children.props.children, isActive),
+      cloneWithIsActive(suspenseChildren, isActive),
     );
   }
 

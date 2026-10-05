@@ -23,7 +23,7 @@ export default function Philosophy() {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         damping: 18,
         stiffness: 140,
       },

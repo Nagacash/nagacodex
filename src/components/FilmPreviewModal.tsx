@@ -52,7 +52,7 @@ export default function FilmPreviewModal({ project, onClose }: FilmPreviewModalP
           initial={{ opacity: 0, scale: 0.92, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
-          transition={{ duration: 0.35, cubicBezier: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full max-w-6xl bg-[#080808] border border-neutral-800 rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(255,107,53,0.12)] z-10"
           onClick={(e) => e.stopPropagation()}
         >
