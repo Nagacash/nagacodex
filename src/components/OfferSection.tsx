@@ -1,4 +1,6 @@
 import { homepageOffer } from '../content/homepageOffer';
+import { crmDemoFilm } from '../lib/films/crmDemo';
+import sound from '../lib/sound';
 import { BookingCta } from './BookingCta';
 
 const workflowSteps = [
@@ -97,6 +99,35 @@ export default function OfferSection() {
             <BookingCta fullWidth />
           </div>
         </header>
+
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1.5">
+            <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-cyber">
+              Live demo
+            </p>
+            <h3 className="font-display font-bold text-lg sm:text-xl tracking-tight text-neutral-900">
+              Building a CRM on open-source AI models
+            </h3>
+            <p className="text-sm text-neutral-700 leading-relaxed">
+              A real build walkthrough: how I wire a CRM that runs on open-source AI models —
+              the kind of inquiry-to-proposal system the Sprint delivers.
+            </p>
+          </div>
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-neutral-200 bg-neutral-900 shadow-sm">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              playsInline
+              preload="metadata"
+              poster={crmDemoFilm.poster}
+              onPlay={() => sound.pauseForContent()}
+              onPause={() => sound.resumeFromContent()}
+              onEnded={() => sound.resumeFromContent()}
+            >
+              <source src={crmDemoFilm.h264} type="video/mp4" />
+            </video>
+          </div>
+        </div>
 
         <div className="flex flex-col gap-6 text-sm text-neutral-700 leading-relaxed">
           <div>
