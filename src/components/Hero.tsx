@@ -172,9 +172,9 @@ export default function Hero() {
           {/* Card 1: Avatar / Identity Badge */}
           <div className="lg:col-span-4 glass rounded-xl p-5 flex flex-col gap-4 relative overflow-hidden group hover:border-culture/40 transition-colors duration-300">
             {/* Status Indicator */}
-            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/90 px-2 py-0.5 rounded-full border border-neutral-200">
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-[#0F1929]/95 px-2 py-0.5 rounded-full border border-white/15">
               <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse shadow-[0_0_8px_#00FF88]" />
-              <span className="font-mono text-[7px] text-neutral-600 tracking-wider uppercase">Available for projects</span>
+              <span className="font-mono text-[7px] text-[#C5CEDC] tracking-wider uppercase">Available for projects</span>
             </div>
             
             {/* Portrait frame with tech HUD accents */}
@@ -216,11 +216,11 @@ export default function Hero() {
 
           {/* Card 2: Offer-led hero copy */}
           <div className="lg:col-span-8 flex flex-col gap-5 justify-center">
-            <div className="flex flex-col gap-4 rounded-xl border border-neutral-200 bg-white/90 p-5 sm:p-7">
-              <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight text-neutral-900 leading-tight">
+            <div className="flex flex-col gap-4 rounded-xl glass p-5 sm:p-7">
+              <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight text-[#E8EDF5] leading-tight">
                 AI workflows and web products for teams with work to get done.
               </h1>
-              <p className="type-manifesto text-sm sm:text-base text-neutral-700 leading-relaxed max-w-xl">
+              <p className="type-manifesto text-sm sm:text-base text-[#C5CEDC] leading-relaxed max-w-xl">
                 I build inquiry-to-proposal workflows and custom web tools for agencies, studios and small businesses. You work directly with me, from scope to handover.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-1 w-full">
@@ -234,7 +234,7 @@ export default function Hero() {
                     sound.playClick();
                     scrollToHashOrSection('offer', OFFER_SECTION_INDEX);
                   }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-11 px-5 py-3 rounded-lg border border-neutral-300 font-display font-extrabold text-[11px] tracking-widest uppercase text-neutral-800 hover:border-cyber/50 hover:text-neutral-900 transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-11 px-5 py-3 rounded-lg border border-white/20 font-display font-extrabold text-[11px] tracking-widest uppercase text-[#E8EDF5] hover:border-cyber/50 hover:text-white transition-colors"
                 >
                   See the offer ↓
                 </a>
@@ -245,7 +245,7 @@ export default function Hero() {
               {['AI Agents', 'React', 'Security', 'AI Film', 'MCP', 'LLMs'].map((sk) => (
                 <span
                   key={sk}
-                  className="font-mono text-[8px] text-neutral-500 bg-white border border-neutral-200 px-2.5 py-1 rounded uppercase"
+                  className="font-mono text-[8px] text-[#8B9BB4] bg-[#162035] border border-white/10 px-2.5 py-1 rounded uppercase"
                 >
                   #{sk}
                 </span>
@@ -258,7 +258,7 @@ export default function Hero() {
                 sound.playClick();
                 scrollToSection(WORK_SECTION_INDEX);
               }}
-              className="self-start font-mono text-[9px] tracking-widest uppercase text-neutral-500 hover:text-cyber transition-colors min-h-11"
+              className="self-start font-mono text-[9px] tracking-widest uppercase text-[#8B9BB4] hover:text-cyber transition-colors min-h-11"
             >
               View work →
             </button>

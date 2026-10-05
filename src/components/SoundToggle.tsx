@@ -26,21 +26,24 @@ export default function SoundToggle() {
     <button
       id="sound-toggle-btn"
       onClick={handleToggle}
-      className="group relative flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200 bg-white/80 backdrop-blur-md text-[10px] tracking-[0.2em] font-mono text-neutral-800 hover:text-black hover:border-neutral-300 transition-ui pointer-events-auto cursor-pointer shadow-xs"
+      className="group relative flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 bg-[#0F1929] text-[10px] tracking-[0.2em] font-mono text-[#E8EDF5] hover:text-white hover:border-white/30 transition-ui pointer-events-auto cursor-pointer shadow-xs overflow-hidden"
       aria-label="Toggle ambient atmospheric drone"
     >
-      {/* Decorative pulse glow background */}
+      {/* Decorative pulse glow background — behind label */}
       {active && (
-        <span className="absolute inset-0 rounded-full bg-cyber/10 blur-[6px] animate-pulse" />
+        <span
+          aria-hidden
+          className="absolute inset-0 rounded-full bg-cyber/15 animate-pulse pointer-events-none"
+        />
       )}
 
       {/* Interactive Sound Wave Graphic */}
-      <div className="flex items-center gap-[2px] h-3 w-4">
+      <div className="relative z-10 flex items-center gap-[2px] h-3 w-4">
         {[2, 4, 1, 3].map((heightMulti, idx) => (
           <motion.span
             key={idx}
             className={`w-[1.5px] rounded-full ${
-              active ? 'bg-cyber' : 'bg-neutral-600'
+              active ? 'bg-cyber' : 'bg-[#8B9BB4]'
             }`}
             animate={
               active
@@ -58,14 +61,14 @@ export default function SoundToggle() {
         ))}
       </div>
 
-      <span className="uppercase select-none">
+      <span className="relative z-10 uppercase select-none text-[#E8EDF5]">
         {active ? 'AUDIO_ON' : 'AUDIO_OFF'}
       </span>
 
       {active ? (
-        <Volume2 className="w-3.5 h-3.5 text-cyber ml-1 animate-pulse" />
+        <Volume2 className="relative z-10 w-3.5 h-3.5 text-cyber ml-1" />
       ) : (
-        <VolumeX className="w-3.5 h-3.5 text-neutral-500 ml-1" />
+        <VolumeX className="relative z-10 w-3.5 h-3.5 text-[#8B9BB4] ml-1" />
       )}
     </button>
   );
