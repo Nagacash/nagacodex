@@ -7,47 +7,39 @@ export const sectionTimelineLabels = {
   4: 2800,
   5: 3500,
   6: 4200,
-   7: 4900,
-   8: 5600,
-   9: 6300,
-   10: 7000,
-   11: 7700,
-   12: 8400,
+  7: 4900,
+  8: 5600,
+  9: 6300,
 } as const;
 
-export const sectionCount = 13;
+/** Matches HomePage TransitionSection children count. */
+export const sectionCount = 10;
 
 /** Static accent colors — avoids DOM reads on every sidebar render */
 export const sectionAccentColors = [
-  '#00FF88',
-  '#FF6B35',
-  '#BD00FF',
-  '#D4A843',
-  '#D4A843',
-  '#D4A843',
-  '#3B82F6',
-  '#00FF88',
-  '#FF6B35',
-  '#D4A843',
-  '#BD00FF',
-  '#00FF88',
-  '#D4A843',
+  '#00FF88', // hero
+  '#00FF88', // offer
+  '#BD00FF', // case studies
+  '#FF6B35', // who
+  '#BD00FF', // work
+  '#D4A843', // philosophy
+  '#D4A843', // showcase
+  '#D4A843', // ecosystem
+  '#D4A843', // woodland360
+  '#3B82F6', // contact
 ] as const;
 
 export const sectionNavLabels = [
   '01 // HERO',
-  '02 // WHO',
-  '03 // WORK',
-  '04 // PHILOSOPHY',
-  '05 // SHOWCASE',
-  '06 // WOODLAND360',
-  '07 // CONTACT',
-  '08 // PROOF',
-  '09 // SERVICES',
-  '10 // CASE STUDIES',
-  '11 // HOW IT WORKS',
-  '12 // BOOK A CALL',
-  '13 // FAQ',
+  '02 // OFFER',
+  '03 // CASES',
+  '04 // WHO',
+  '05 // WORK',
+  '06 // PHILOSOPHY',
+  '07 // SHOWCASE',
+  '08 // ECOSYSTEM',
+  '09 // PODCAST',
+  '10 // CONTACT',
 ] as const;
 
 export function getSectionAccentColor(index: number): string {

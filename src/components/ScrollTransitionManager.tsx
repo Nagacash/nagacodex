@@ -57,7 +57,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const numSections = sections.length;
 
   // Scroll distance mapped 1:1 to the GSAP timeline (pin starts at scroll 0)
-  const scrollDistance = 4800;
+  const scrollDistance = 7000;
   const maxWindowScroll = scrollDistance;
 
   const getIndexFromScroll = (scrollY: number) =>
@@ -252,46 +252,35 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
 
     // Pin off-screen start positions only — visibility handled by React isActive
     gsap.set('#transition-section-0', { opacity: 1, scale: 1, y: 0, x: 0 });
-    gsap.set('#transition-section-1', { y: '100vh', x: 0, opacity: 1 });
-    gsap.set('#transition-section-2', { x: '100vw', scale: 1, opacity: 1, y: 0 });
-    gsap.set('#transition-section-3', { scale: 0.88, opacity: 0, x: 0, y: 0 });
-    gsap.set('#transition-section-4', { scale: 0.92, opacity: 0, y: 0, x: 0 });
-    gsap.set('#transition-section-5', { x: '100vw', opacity: 0 });
-    gsap.set('#transition-section-6', { scale: 0.92, opacity: 0, y: 0 });
+    gsap.set('#transition-section-1', { y: '100vh', x: 0, opacity: 1 }); // offer
+    gsap.set('#transition-section-2', { scale: 0.92, opacity: 0, y: 0, x: 0 }); // cases
+    gsap.set('#transition-section-3', { x: '100vw', scale: 1, opacity: 1, y: 0 }); // who
+    gsap.set('#transition-section-4', { scale: 0.88, opacity: 0, x: 0, y: 0 }); // work
+    gsap.set('#transition-section-5', { scale: 0.88, opacity: 0, x: 0, y: 0 }); // philosophy
+    gsap.set('#transition-section-6', { scale: 0.92, opacity: 0, y: 0, x: 0 }); // showcase
+    gsap.set('#transition-section-7', { x: '100vw', opacity: 0 }); // ecosystem
+    gsap.set('#transition-section-8', { x: '100vw', opacity: 0 }); // woodland
+    gsap.set('#transition-section-9', { scale: 0.92, opacity: 0, y: 0 }); // contact
 
-    // We can define the individual transition phases along the timeline scroll distance!
-    
-    // --- PHASE 1: HERO (0) -> WHO (1) [Scroll 0 -> 800] ---
-    masterTimeline.to({}, { duration: 800 }, 0); // anchor spacer
+    // --- PHASE 1: HERO (0) -> OFFER (1) [0 -> 800] ---
+    masterTimeline.to({}, { duration: 800 }, 0);
 
-    // HERO exits — transform only; never fade the content wrapper
     masterTimeline.fromTo(
       '#transition-section-0',
       { scale: 1, y: 0 },
       { scale: 0.98, y: -20, ease: 'power1.out', duration: 800, immediateRender: false },
       0,
     );
-
-    // Hero backdrop video fades and slows down
     masterTimeline.fromTo('#transition-section-0 .video-wrap',
       { opacity: 1 },
       { opacity: 0.3, ease: 'power1.out', duration: 800 },
       0
     );
-
-    // WHO enters (Push Up from below)
     masterTimeline.fromTo('#transition-section-1',
       { y: '100vh' },
       { y: '0vh', ease: 'power2.inOut', duration: 700 },
       100
     );
-    masterTimeline.fromTo('#transition-section-1 .video-wrap',
-      { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out', duration: 500 },
-      200
-    );
-
-    // Active midpoint effects (approx scroll 400): Gradient Sweep & Scanline sweep, Particle flash
     masterTimeline.fromTo('#overlay-gradient-0',
       { x: '-100vw' },
       { x: '100vw', ease: 'none' },
@@ -312,43 +301,19 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       250
     );
 
-
-    // --- PHASE 2: WHO (1) -> WORK (2) [Scroll 800 -> 1400] ---
-    masterTimeline.to({}, { duration: 600 }, 800); // Anchor
-
-    // WHO exits (Horizontal Slide Left)
+    // --- PHASE 2: OFFER (1) -> CASES (2) [800 -> 1400] ---
+    masterTimeline.to({}, { duration: 600 }, 800);
     masterTimeline.to('#transition-section-1', {
-      x: '-100vw',
+      y: '-40vh',
+      opacity: 0,
       ease: 'power2.inOut',
       duration: 600,
     }, 800);
-    masterTimeline.fromTo('#transition-section-1 .video-wrap',
-      { opacity: 1 },
-      { opacity: 0.3, ease: 'power1.out', duration: 600 },
-      800
-    );
-
-    // WORK enters (Horizontal Slide from right)
     masterTimeline.fromTo('#transition-section-2',
-      { x: '100vw' },
-      { x: '0vw', ease: 'power2.inOut', duration: 600 },
-      800
+      { scale: 0.92, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 600 },
+      820
     );
-    masterTimeline.fromTo('#transition-section-2 .video-wrap',
-      { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out', duration: 500 },
-      900
-    );
-
-    // Glitch trigger near midpoint 1100
-    masterTimeline.to({}, {
-      duration: 150,
-      onStart: () => pinWrapperRef.current?.classList.add("glitch-screen"),
-      onComplete: () => pinWrapperRef.current?.classList.remove("glitch-screen"),
-      onReverseComplete: () => pinWrapperRef.current?.classList.remove("glitch-screen"),
-    }, 1025);
-
-    // Midpoint: Gradient 1, Scanline 1, Vignette pulse
     masterTimeline.fromTo('#overlay-gradient-1',
       { x: '-100vw' },
       { x: '100vw', ease: 'none' },
@@ -364,26 +329,16 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       1000
     );
 
-
-    // --- PHASE 3: WORK (2) -> PHILOSOPHY (3) [Scroll 1400 -> 2100] ---
-    masterTimeline.to({}, { duration: 700 }, 1400); // Anchor
-
-    // WORK exits (scale + fade — avoid filter blur during scrub for compositor perf)
+    // --- PHASE 3: CASES (2) -> WHO (3) [1400 -> 2100] ---
+    masterTimeline.to({}, { duration: 700 }, 1400);
     masterTimeline.fromTo('#transition-section-2',
       { scale: 1, opacity: 1 },
       { scale: 0.88, opacity: 0, ease: 'power2.inOut', duration: 700, force3D: true },
       1400
     );
-    masterTimeline.fromTo('#transition-section-2 .video-wrap',
-      { opacity: 1 },
-      { opacity: 0.25, ease: 'power1.out', duration: 700 },
-      1400
-    );
-
-    // PHILOSOPHY enters (scale up + fade)
     masterTimeline.fromTo('#transition-section-3',
-      { scale: 0.88, opacity: 0 },
-      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 680, force3D: true },
+      { x: '100vw' },
+      { x: '0vw', ease: 'power2.inOut', duration: 650 },
       1420
     );
     masterTimeline.fromTo('#transition-section-3 .video-wrap',
@@ -391,8 +346,6 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { opacity: 1.0, ease: 'power1.out', duration: 500 },
       1500
     );
-
-    // Midpoint: Gradient 2, Scanline 2, Flash 2
     masterTimeline.fromTo('#overlay-gradient-2',
       { x: '-100vw' },
       { x: '100vw', ease: 'none' },
@@ -408,44 +361,19 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { opacity: 0.9, yoyo: true, repeat: 1, ease: 'power1.in' },
       1700
     );
-    masterTimeline.to('#vignette-pulse',
-      { opacity: 0.85, yoyo: true, repeat: 1, duration: 250 },
-      1700
-    );
 
-
-    // --- PHASE 4: PHILOSOPHY (3) -> SHOWCASE (4) [Scroll 2100 -> 2800] ---
-    masterTimeline.to({}, { duration: 700 }, 2100); // Anchor
-
-    // PHILOSOPHY exits (Split Reveal)
-    masterTimeline.to('#split-top-part', {
-      y: '-55vh',
-      opacity: 0,
-      ease: 'power2.in',
+    // --- PHASE 4: WHO (3) -> WORK (4) [2100 -> 2800] ---
+    masterTimeline.to({}, { duration: 700 }, 2100);
+    masterTimeline.to('#transition-section-3', {
+      x: '-100vw',
+      ease: 'power2.inOut',
+      duration: 600,
     }, 2100);
-    masterTimeline.to('#split-bottom-part', {
-      y: '55vh',
-      opacity: 0,
-      ease: 'power2.in',
-    }, 2100);
-    masterTimeline.to('#transition-section-3 .video-wrap', {
-      opacity: 0.1,
-      ease: 'power1.out',
-    }, 2100);
-
-    // SHOWCASE enters (Zoom/Fade in)
     masterTimeline.fromTo('#transition-section-4',
-      { scale: 0.92, opacity: 0 },
-      { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650 },
+      { scale: 0.88, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 650, force3D: true },
       2150
     );
-    masterTimeline.fromTo('#transition-section-4 .video-wrap',
-      { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out' },
-      2200
-    );
-
-    // Midpoint: Gradient 3, Scanline 3
     masterTimeline.fromTo('#overlay-gradient-3',
       { x: '-100vw' },
       { x: '100vw', ease: 'none' },
@@ -456,39 +384,24 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { y: '110vh', opacity: 1, ease: 'power1.inOut' },
       2400
     );
-    masterTimeline.to('#vignette-pulse',
-      { opacity: 0.8, yoyo: true, repeat: 1, duration: 200 },
-      2400
+
+    // --- PHASE 5: WORK (4) -> PHILOSOPHY (5) [2800 -> 3500] ---
+    masterTimeline.to({}, { duration: 700 }, 2800);
+    masterTimeline.fromTo('#transition-section-4',
+      { scale: 1, opacity: 1 },
+      { scale: 0.88, opacity: 0, ease: 'power2.inOut', duration: 700, force3D: true },
+      2800
     );
-
-    // --- PHASE 5: SHOWCASE (4) -> WOODLAND360 (5) [Scroll 2800 -> 3500] ---
-    masterTimeline.to({}, { duration: 700 }, 2800); // Anchor
-
-    // SHOWCASE exits (Scale-down & fade)
-    masterTimeline.to('#transition-section-4', {
-      scale: 0.85,
-      opacity: 0,
-      y: -50,
-      ease: 'power2.inOut',
-    }, 2800);
-    masterTimeline.to('#transition-section-4 .video-wrap', {
-      opacity: 0.1,
-      ease: 'power1.out',
-    }, 2800);
-
-    // WOODLAND360 enters (Slide from right)
     masterTimeline.fromTo('#transition-section-5',
-      { x: '100vw', opacity: 0 },
-      { x: '0vw', opacity: 1.0, ease: 'power2.inOut', duration: 650 },
-      2850
+      { scale: 0.88, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 680, force3D: true },
+      2820
     );
     masterTimeline.fromTo('#transition-section-5 .video-wrap',
       { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out' },
+      { opacity: 1.0, ease: 'power1.out', duration: 500 },
       2900
     );
-
-    // Midpoint: Gradient 4, Scanline 4
     masterTimeline.fromTo('#overlay-gradient-4',
       { x: '-100vw' },
       { x: '100vw', ease: 'none' },
@@ -499,38 +412,28 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { y: '110vh', opacity: 1, ease: 'power1.inOut' },
       3100
     );
-    masterTimeline.to('#vignette-pulse',
-      { opacity: 0.8, yoyo: true, repeat: 1, duration: 200 },
-      3100
-    );
 
-    // --- PHASE 6: WOODLAND360 (5) -> CONTACT (6) [Scroll 3500 -> 4200] ---
-    masterTimeline.to({}, { duration: 700 }, 3500); // Anchor
-
-    // WOODLAND360 exits (Slide left)
-    masterTimeline.to('#transition-section-5', {
-      x: '-100vw',
+    // --- PHASE 6: PHILOSOPHY (5) -> SHOWCASE (6) [3500 -> 4200] ---
+    masterTimeline.to({}, { duration: 700 }, 3500);
+    masterTimeline.to('#split-top-part', {
+      y: '-55vh',
       opacity: 0,
-      ease: 'power2.inOut',
+      ease: 'power2.in',
+    }, 3500);
+    masterTimeline.to('#split-bottom-part', {
+      y: '55vh',
+      opacity: 0,
+      ease: 'power2.in',
     }, 3500);
     masterTimeline.to('#transition-section-5 .video-wrap', {
       opacity: 0.1,
       ease: 'power1.out',
     }, 3500);
-
-    // CONTACT enters (Zoom/Fade in)
     masterTimeline.fromTo('#transition-section-6',
       { scale: 0.92, opacity: 0 },
       { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650 },
       3550
     );
-    masterTimeline.fromTo('#transition-section-6 .video-wrap',
-      { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out' },
-      3600
-    );
-
-    // Midpoint: Gradient 5, Scanline 5
     masterTimeline.fromTo('#overlay-gradient-5',
       { x: '-100vw' },
       { x: '100vw', ease: 'none' },
@@ -541,9 +444,45 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       { y: '110vh', opacity: 1, ease: 'power1.inOut' },
       3800
     );
-    masterTimeline.to('#vignette-pulse',
-      { opacity: 0.8, yoyo: true, repeat: 1, duration: 200 },
-      3800
+
+    // --- PHASE 7: SHOWCASE (6) -> ECOSYSTEM (7) [4200 -> 4900] ---
+    masterTimeline.to({}, { duration: 700 }, 4200);
+    masterTimeline.to('#transition-section-6', {
+      scale: 0.85,
+      opacity: 0,
+      y: -50,
+      ease: 'power2.inOut',
+    }, 4200);
+    masterTimeline.fromTo('#transition-section-7',
+      { x: '100vw', opacity: 0 },
+      { x: '0vw', opacity: 1.0, ease: 'power2.inOut', duration: 650 },
+      4250
+    );
+
+    // --- PHASE 8: ECOSYSTEM (7) -> WOODLAND (8) [4900 -> 5600] ---
+    masterTimeline.to({}, { duration: 700 }, 4900);
+    masterTimeline.to('#transition-section-7', {
+      x: '-100vw',
+      opacity: 0,
+      ease: 'power2.inOut',
+    }, 4900);
+    masterTimeline.fromTo('#transition-section-8',
+      { x: '100vw', opacity: 0 },
+      { x: '0vw', opacity: 1.0, ease: 'power2.inOut', duration: 650 },
+      4950
+    );
+
+    // --- PHASE 9: WOODLAND (8) -> CONTACT (9) [5600 -> 6300] ---
+    masterTimeline.to({}, { duration: 700 }, 5600);
+    masterTimeline.to('#transition-section-8', {
+      x: '-100vw',
+      opacity: 0,
+      ease: 'power2.inOut',
+    }, 5600);
+    masterTimeline.fromTo('#transition-section-9',
+      { scale: 0.92, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650 },
+      5650
     );
 
     ScrollTrigger.refresh();
@@ -653,8 +592,8 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
           
           {/* Render individual TransitionSections */}
           {sections.map((child, idx) => {
-            // Keep split-reveal DOM mounted so GSAP can finish exit animations
-            if (idx === 3 && !prefersReducedMotion) {
+            // Philosophy uses split-reveal shell (index 5 after offer + case studies)
+            if (idx === 5 && !prefersReducedMotion) {
               return (
                 <div key={`split-shell-${idx}`} className="absolute inset-0 w-full h-full z-[13]">
                   

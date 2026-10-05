@@ -6,6 +6,7 @@ import VideoBackground from './VideoBackground';
 import sound from '../lib/sound';
 import { mandeFilm } from '../lib/films/mande';
 import { scrollToSection } from '../lib/scrollNav';
+import { WORK_SECTION_INDEX } from '../content/homepageOffer';
 import {
   euAiActExplainerPosterUrl,
   euAiActExplainerVideoUrl,
@@ -30,7 +31,7 @@ export default function WhoSection() {
   const handleSeeWork = (e: React.MouseEvent) => {
     e.stopPropagation();
     sound.playClick();
-    scrollToSection(2);
+    scrollToSection(WORK_SECTION_INDEX);
   };
 
   const pillars: PillarData[] = [
@@ -41,7 +42,6 @@ export default function WhoSection() {
       accentClass: 'text-cyber',
       glowClass: 'glow-cyber border-cyber bg-[#00FF88]/[0.02]',
       description: 'Offensive security, smart-contract auditing, and cloud hardening for enterprise and decentralized systems.',
-      headlineStat: { label: 'Pentests completed', value: '140+' },
     },
     {
       id: 'film',
@@ -50,7 +50,6 @@ export default function WhoSection() {
       accentClass: 'text-film',
       glowClass: 'glow-film border-film bg-[#FF6B35]/[0.02]',
       description: 'Text-to-video for shorts, loops, and layered sound.',
-      headlineStat: { label: 'Generated scenes', value: '18k+' },
     },
     {
       id: 'dev',
@@ -59,7 +58,6 @@ export default function WhoSection() {
       accentClass: 'text-dev',
       glowClass: 'glow-dev border-dev bg-[#BD00FF]/[0.02]',
       description: 'React apps, PWAs, and serverless APIs built for performance and clean interfaces.',
-      headlineStat: { label: 'Deployments', value: '280+' },
     },
     {
       id: 'culture',
@@ -192,12 +190,14 @@ export default function WhoSection() {
                           {pillar.description}
                         </p>
 
-                        <div className="flex justify-between items-center type-manifesto text-sm">
-                          <span className="text-neutral-500">{pillar.headlineStat.label}</span>
-                          <span className={`font-semibold ${pillar.accentClass}`}>
-                            {pillar.headlineStat.value}
-                          </span>
-                        </div>
+                        {pillar.headlineStat ? (
+                          <div className="flex justify-between items-center type-manifesto text-sm">
+                            <span className="text-neutral-500">{pillar.headlineStat.label}</span>
+                            <span className={`font-semibold ${pillar.accentClass}`}>
+                              {pillar.headlineStat.value}
+                            </span>
+                          </div>
+                        ) : null}
 
                         <button
                           type="button"

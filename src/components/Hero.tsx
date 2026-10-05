@@ -3,10 +3,12 @@ import { motion } from 'motion/react';
 import { ChevronDown, Shield, Layers, Github } from 'lucide-react';
 import FloatingClips from './FloatingClips';
 import SoundToggle from './SoundToggle';
+import { BookingCta } from './BookingCta';
 import sound from '../lib/sound';
 const SkillsManualModal = lazy(() => import('./SkillsManualModal'));
 import { brandLogo } from '../lib/brand';
-import { scrollToSection } from '../lib/scrollNav';
+import { OFFER_SECTION_INDEX, WORK_SECTION_INDEX } from '../content/homepageOffer';
+import { scrollToHashOrSection, scrollToSection } from '../lib/scrollNav';
 import operatorPortrait from '../assets/images/maurice-portrait.jpg';
 import operatorPortraitWebp from '../assets/images/maurice-portrait.webp';
 
@@ -212,142 +214,54 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Card 2: AI Chat Interface */}
-          <div className="lg:col-span-8 flex flex-col gap-4">
-
-            {/* ChatGPT-style conversation window */}
-            <div className="flex flex-col rounded-xl overflow-hidden border border-white/10 bg-[#08111E]">
-
-              {/* Window chrome bar */}
-              <div className="flex items-center gap-3 px-4 py-2.5 border-b border-white/10 bg-[#050C17]">
-                <div className="flex gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-                </div>
-                <div className="flex items-center gap-2 mx-auto">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse shadow-[0_0_8px_#00FF88]" />
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#E8EDF5] font-bold uppercase">AI ASSISTANT</span>
-                </div>
-                <span className="shrink-0 font-mono text-[7px] text-[#8B9BB4] border border-white/10 px-2 py-0.5 rounded">GPT-4.1 • LIVE</span>
-              </div>
-
-              {/* Thread */}
-              <div className="flex flex-col gap-4 p-4">
-
-                {/* User Q */}
-                <div className="flex justify-end">
-                  <div className="max-w-[76%] bg-[#162035] border border-white/10 rounded-xl rounded-tr-sm px-3.5 py-2.5">
-                    <p className="font-sans text-[11.5px] text-[#E8EDF5] leading-relaxed">What can Naga Codex actually ship?</p>
-                  </div>
-                </div>
-
-                {/* AI A */}
-                <div className="flex items-start gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-cyber/10 border border-cyber/25 flex items-center justify-center shrink-0 mt-0.5">
-                    <img src={brandLogo} alt="NC" className="w-5 h-5 object-contain" />
-                  </div>
-                  <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
-                    <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
-                      Agent workflows, React sites, AI short films, and security audits. You work with me directly, not through an agency layer.
-                    </p>
-                  </div>
-                </div>
-
-                {/* User Q */}
-                <div className="flex justify-end">
-                  <div className="max-w-[76%] bg-[#162035] border border-white/10 rounded-xl rounded-tr-sm px-3.5 py-2.5">
-                    <p className="font-sans text-[11.5px] text-[#E8EDF5] leading-relaxed">What's the edge over an agency?</p>
-                  </div>
-                </div>
-
-                {/* AI A */}
-                <div className="flex items-start gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-cyber/10 border border-cyber/25 flex items-center justify-center shrink-0 mt-0.5">
-                    <img src={brandLogo} alt="NC" className="w-5 h-5 object-contain" />
-                  </div>
-                  <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
-                    <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
-                      One person covers{' '}
-                      <span className="text-cyber">agents</span>,{' '}
-                      <span className="text-film">film</span>,{' '}
-                      <span className="text-dev">web</span>, and{' '}
-                      <span className="text-[#E8EDF5]">security</span>.
-                      {' '}140+ audits, 280+ deployments, 18K+ generated scenes. Based in Hamburg, working with clients elsewhere too.
-                    </p>
-                  </div>
-                </div>
-
-                {/* User Q */}
-                <div className="flex justify-end">
-                  <div className="max-w-[76%] bg-[#162035] border border-white/10 rounded-xl rounded-tr-sm px-3.5 py-2.5">
-                    <p className="font-sans text-[11.5px] text-[#E8EDF5] leading-relaxed">How fast can you move?</p>
-                  </div>
-                </div>
-
-                {/* AI A — last, with blinking cursor */}
-                <div className="flex items-start gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-cyber/10 border border-cyber/25 flex items-center justify-center shrink-0 mt-0.5">
-                    <img src={brandLogo} alt="NC" className="w-5 h-5 object-contain" />
-                  </div>
-                  <div className="flex-1 bg-[#0D1A2A] border border-white/8 rounded-xl rounded-tl-sm px-3.5 py-2.5">
-                    <p className="font-sans text-[11.5px] text-[#C5CEDC] leading-relaxed">
-                      Agent build:{' '}<span className="text-cyber font-medium">2–4 weeks</span>.{' '}
-                      Web build:{' '}<span className="text-dev font-medium">1–3 weeks</span>.{' '}
-                      Security audit:{' '}<span className="text-film font-medium">48h</span> for the first report.
-                      {' '}First call is 20 minutes, free, and mostly about what you actually need built.
-                      <span className="inline-block w-[2px] h-3.5 bg-cyber ml-0.5 animate-pulse align-text-bottom rounded-sm" />
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Fake input bar */}
-              <div className="flex items-center gap-2 px-3 py-2.5 border-t border-white/10 bg-[#050C17]">
-                <div className="flex-1 bg-[#0F1929] border border-white/8 rounded-lg px-3 py-2 font-sans text-[11px] text-[#4A5A72]">
-                  Ask Naga Codex anything...
+          {/* Card 2: Offer-led hero copy */}
+          <div className="lg:col-span-8 flex flex-col gap-5 justify-center">
+            <div className="flex flex-col gap-4 rounded-xl border border-neutral-200 bg-white/90 p-5 sm:p-7">
+              <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight text-neutral-900 leading-tight">
+                AI workflows and web products for teams with work to get done.
+              </h1>
+              <p className="type-manifesto text-sm sm:text-base text-neutral-700 leading-relaxed max-w-xl">
+                I build inquiry-to-proposal workflows and custom web tools for agencies, studios and small businesses. You work directly with me, from scope to handover.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 pt-1 w-full">
+                <div className="w-full sm:flex-1 min-w-0">
+                  <BookingCta fullWidth />
                 </div>
                 <a
-                  href="https://calendly.com/sonic13-ch"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => sound.playClick()}
-                  className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-cyber text-[#050C17] font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-[#00DD77] transition-colors active:scale-95 cursor-pointer"
+                  href="#offer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    sound.playClick();
+                    scrollToHashOrSection('offer', OFFER_SECTION_INDEX);
+                  }}
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-11 px-5 py-3 rounded-lg border border-neutral-300 font-display font-extrabold text-[11px] tracking-widest uppercase text-neutral-800 hover:border-cyber/50 hover:text-neutral-900 transition-colors"
                 >
-                  Book Call ↗
+                  See the offer ↓
                 </a>
               </div>
             </div>
 
-            {/* Tags + CTAs */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-              <div className="sm:col-span-7 flex flex-wrap gap-1.5">
-                {['AI Agents', 'React', 'Security', 'AI Film', 'MCP', 'LLMs'].map((sk) => (
-                  <span
-                    key={sk}
-                    className="font-mono text-[8px] text-[#8B9BB4] bg-[#162035] border border-white/10 px-2.5 py-1 rounded uppercase hover:border-cyber/40 hover:text-cyber transition-colors duration-200 cursor-default"
-                  >
-                    #{sk}
-                  </span>
-                ))}
-              </div>
-              <div className="sm:col-span-5 flex gap-2">
-                <button
-                  onClick={() => { sound.playClick(); scrollToSection(1); }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase bg-cyber text-[#050C17] py-3 px-3 min-h-11 rounded-lg hover:bg-[#00DD77] transition-colors duration-200 active:scale-95"
+            <div className="flex flex-wrap gap-1.5">
+              {['AI Agents', 'React', 'Security', 'AI Film', 'MCP', 'LLMs'].map((sk) => (
+                <span
+                  key={sk}
+                  className="font-mono text-[8px] text-neutral-500 bg-white border border-neutral-200 px-2.5 py-1 rounded uppercase"
                 >
-                  START A BUILD
-                </button>
-                <button
-                  onClick={() => { sound.playClick(); scrollToSection(2); }}
-                  className="flex-1 font-display font-extrabold text-[9.5px] tracking-widest text-center uppercase border border-white/20 hover:border-white/40 text-[#E8EDF5] py-3 px-3 min-h-11 rounded-lg transition-colors duration-200 active:scale-95"
-                >
-                  VIEW WORK
-                </button>
-              </div>
+                  #{sk}
+                </span>
+              ))}
             </div>
 
+            <button
+              type="button"
+              onClick={() => {
+                sound.playClick();
+                scrollToSection(WORK_SECTION_INDEX);
+              }}
+              className="self-start font-mono text-[9px] tracking-widest uppercase text-neutral-500 hover:text-cyber transition-colors min-h-11"
+            >
+              View work →
+            </button>
           </div>
 
         </div>
@@ -365,9 +279,9 @@ export default function Hero() {
           className="flex flex-col items-center gap-1 group mx-auto min-h-11 py-1 cursor-pointer order-first sm:order-none"
           onClick={() => {
             sound.playClick();
-            scrollToSection(1);
+            scrollToHashOrSection('offer', OFFER_SECTION_INDEX);
           }}
-          aria-label="Scroll to next section"
+          aria-label="Scroll to offer"
         >
           <span className="text-[8px] font-semibold text-neutral-700 group-hover:text-neutral-900 group-active:text-neutral-900 transition-colors tracking-[0.2em] uppercase">
             Scroll

@@ -20,7 +20,7 @@ export interface PillarData {
   id: SectionTheme;
   title: string;
   tagline: string;
-  headlineStat: { label: string; value: string };
+  headlineStat?: { label: string; value: string };
   description: string;
   accentClass: string;
   glowClass: string;

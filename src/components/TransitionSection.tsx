@@ -6,8 +6,8 @@ import { useIsSectionActive } from '../lib/activeSection';
 type LazyVideoSources = { webm: string; h264: string };
 
 const lazySectionVideos = {
-  1: () => import('../lib/films/who').then(m => ({ webm: m.whoAmbient.webm, h264: m.whoAmbient.h264 })),
-  3: () => import('../lib/films/philosophy').then(m => ({ webm: m.philosophyAmbient.webm, h264: m.philosophyAmbient.h264 })),
+  3: () => import('../lib/films/who').then(m => ({ webm: m.whoAmbient.webm, h264: m.whoAmbient.h264 })),
+  5: () => import('../lib/films/philosophy').then(m => ({ webm: m.philosophyAmbient.webm, h264: m.philosophyAmbient.h264 })),
 };
 
 function cloneWithIsActive(children: React.ReactNode, isActive: boolean): React.ReactNode {
@@ -38,13 +38,16 @@ export interface TransitionSectionProps {
 
 function getThemeFallback(idx: number): SectionTheme {
   switch (idx) {
-    case 0: return 'none';
-    case 1: return 'cyber';
-    case 2: return 'dev';
-    case 3: return 'film';
-    case 4: return 'culture';
-    case 5: return 'culture';
-    case 6: return 'cyber';
+    case 0: return 'none'; // hero
+    case 1: return 'none'; // offer
+    case 2: return 'dev'; // case studies
+    case 3: return 'cyber'; // who
+    case 4: return 'dev'; // work
+    case 5: return 'film'; // philosophy
+    case 6: return 'culture'; // showcase
+    case 7: return 'culture'; // ecosystem
+    case 8: return 'culture'; // woodland360
+    case 9: return 'none'; // contact
     default: return 'none';
   }
 }
@@ -63,7 +66,7 @@ export default function TransitionSection({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const storeActive = useIsSectionActive(index);
   const isActive = stacked ? isActiveProp : storeActive;
-  const isDarkSection = index === 3;
+  const isDarkSection = index === 5;
   const bgTone = isDarkSection ? 'dark' : 'light';
   const isHero = index === 0;
   const [lazyVideos, setLazyVideos] = useState<LazyVideoSources | null>(null);

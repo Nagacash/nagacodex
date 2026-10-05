@@ -3,18 +3,19 @@ import sound from '../lib/sound';
 import { useActiveSectionIndex } from '../lib/activeSection';
 import { getSectionAccentColor } from '../lib/sections';
 import { scrollToSection } from '../lib/scrollNav';
+import { CONTACT_SECTION_INDEX } from '../content/homepageOffer';
 
 const sectionLinks = [
   ['HOME', 0],
-  ['WHO', 1],
-  ['WORK', 2],
-  ['PHILOSOPHY', 3],
-  ['SHOWCASE', 4],
-  ['ECOSYSTEM', 5],
-  ['PODCAST', 6],
+  ['OFFER', 1],
+  ['CASES', 2],
+  ['WHO', 3],
+  ['WORK', 4],
+  ['PHILOSOPHY', 5],
+  ['SHOWCASE', 6],
+  ['ECOSYSTEM', 7],
+  ['PODCAST', 8],
 ] as const;
-
-const CONTACT_INDEX = 7;
 
 export default function FixedNavbar() {
   const activeIndex = useActiveSectionIndex();
@@ -76,25 +77,25 @@ export default function FixedNavbar() {
             type="button"
             onClick={() => {
               sound.playClick();
-              scrollToSection(CONTACT_INDEX);
+              scrollToSection(CONTACT_SECTION_INDEX);
             }}
-            aria-current={activeIndex === CONTACT_INDEX ? 'true' : undefined}
+            aria-current={activeIndex === CONTACT_SECTION_INDEX ? 'true' : undefined}
             className={`relative snap-center font-mono text-[9px] tracking-widest uppercase transition-colors cursor-pointer px-2.5 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 ${
-              activeIndex === CONTACT_INDEX
+              activeIndex === CONTACT_SECTION_INDEX
                 ? 'font-semibold'
                 : 'text-[#8B9BB4] hover:text-[#E8EDF5]'
             }`}
             style={
-              activeIndex === CONTACT_INDEX
-                ? { color: getSectionAccentColor(CONTACT_INDEX) }
+              activeIndex === CONTACT_SECTION_INDEX
+                ? { color: getSectionAccentColor(CONTACT_SECTION_INDEX) }
                 : undefined
             }
           >
             CONTACT
-            {activeIndex === CONTACT_INDEX && (
+            {activeIndex === CONTACT_SECTION_INDEX && (
               <span
                 className="absolute -bottom-[11px] left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-sm"
-                style={{ backgroundColor: getSectionAccentColor(CONTACT_INDEX) }}
+                style={{ backgroundColor: getSectionAccentColor(CONTACT_SECTION_INDEX) }}
               />
             )}
           </button>

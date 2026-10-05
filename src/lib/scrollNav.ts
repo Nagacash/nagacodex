@@ -137,3 +137,37 @@ export function getSectionIndexFromScroll(scrollY: number, sectionCount: number)
   }
   return 0;
 }
+
+/**
+ * Prefer section-index scroll (works with GSAP pin). Falls back to element id.
+ * Also updates the URL hash without a native jump when possible.
+ */
+export function scrollToHashOrSection(
+  elementId: string,
+  sectionIndex: number,
+  behavior: ScrollBehavior = 'smooth',
+) {
+  if (typeof window === 'undefined') return;
+
+  scrollToSection(sectionIndex, behavior);
+
+  const el = document.getElementById(elementId);
+  if (el && (isTouchLikeDevice() || !pinnedScrollTrigger)) {
+    // Native/mobile: ensure the named anchor is in view after section scroll
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior, block: 'start' });
+    });
+  }
+
+  if (window.location.hash !== `#${elementId}`) {
+    history.replaceState(null, '', `#${elementId}`);
+  }
+}
+
+/** Resolve initial / hashchange navigation to #offer (and other known hashes). */
+export function resolveKnownHash(hash: string): { id: string; index: number } | null {
+  const id = hash.replace(/^#/, '');
+  if (id === 'offer') return { id: 'offer', index: 1 };
+  if (id === 'case-studies') return { id: 'case-studies', index: 2 };
+  return null;
+}
