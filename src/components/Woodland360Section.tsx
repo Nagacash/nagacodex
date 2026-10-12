@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mic2, Radio, ExternalLink, Play, Headphones, MapPin } from 'lucide-react';
 import sound from '../lib/sound';
-import { woodland360, woodland360EmbedUrl } from '../lib/podcast';
+import { woodland360, woodland360EmbedUrl, woodland360Episodes } from '../lib/podcast';
 
 interface Woodland360SectionProps {
   isActive?: boolean;
@@ -10,7 +10,11 @@ interface Woodland360SectionProps {
 
 export default function Woodland360Section({ isActive = false }: Woodland360SectionProps) {
   const [playerReady, setPlayerReady] = useState(false);
-  const hasVideo = Boolean(woodland360.youtubeVideoId);
+  const [episodeId, setEpisodeId] = useState<(typeof woodland360Episodes)[number]['id']>(
+    woodland360Episodes[0].id,
+  );
+  const episode = woodland360Episodes.find((item) => item.id === episodeId) ?? woodland360Episodes[0];
+  const hasVideo = Boolean(episode.id);
 
   const openChannel = () => {
     sound.pauseForContent();
@@ -85,12 +89,32 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
 
         <div className="lg:col-span-7 order-1 lg:order-2 w-full">
           <div className="relative w-full rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-950/80 glass shadow-[0_40px_90px_rgba(0,0,0,0.75)]">
-            <div className="flex items-center justify-between px-4 py-2.5 border-b border-neutral-200 bg-neutral-100 font-mono text-[8px] text-neutral-500 uppercase tracking-widest">
-              <span className="flex items-center gap-1.5 text-culture">
-                <Play className="w-3 h-3" />
-                Featured_Episode
-              </span>
-              <span>WOODLAND360 // YT_FEED</span>
+            <div className="flex items-center justify-between gap-3 px-4 py-2.5 border-b border-neutral-200 bg-neutral-100 font-mono text-[8px] text-neutral-500 uppercase tracking-widest">
+              <div className="flex items-center gap-1.5 min-w-0">
+                <Play className="w-3 h-3 text-culture shrink-0" />
+                {woodland360Episodes.map((item) => {
+                  const selected = item.id === episode.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      aria-pressed={selected}
+                      onClick={() => {
+                        if (item.id === episode.id) return;
+                        sound.playClick();
+                        setPlayerReady(false);
+                        setEpisodeId(item.id);
+                      }}
+                      className={`px-2 py-1 rounded cursor-pointer transition-colors ${
+                        selected ? 'bg-culture text-black' : 'text-neutral-600 hover:text-neutral-900'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <span className="shrink-0">WOODLAND360 // YT_FEED</span>
             </div>
 
             <div className="relative aspect-video bg-black">
@@ -121,11 +145,12 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
 
               {hasVideo && isActive && (
                 <motion.iframe
+                  key={episode.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: playerReady ? 1 : 0.4 }}
                   transition={{ duration: 0.4 }}
-                  title={`${woodland360.name} featured episode`}
-                  src={woodland360EmbedUrl(woodland360.youtubeVideoId)}
+                  title={episode.title}
+                  src={woodland360EmbedUrl(episode.id)}
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -137,9 +162,9 @@ export default function Woodland360Section({ isActive = false }: Woodland360Sect
               <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
             </div>
 
-            <div className="px-4 py-3 flex justify-between items-center font-mono text-[7px] text-neutral-600 uppercase tracking-wider border-t border-neutral-200">
-              <span>Signal: stereo // 48kHz</span>
-              <span className="text-culture">LIVE_ARCHIVE</span>
+            <div className="px-4 py-3 flex justify-between items-center gap-3 font-mono text-[7px] text-neutral-600 uppercase tracking-wider border-t border-neutral-200">
+              <span className="normal-case tracking-normal text-neutral-700">{episode.title}</span>
+              <span className="text-culture shrink-0">LIVE_ARCHIVE</span>
             </div>
           </div>
         </div>

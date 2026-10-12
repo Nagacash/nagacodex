@@ -1,5 +1,18 @@
-/** Replace with your featured Woodland360 YouTube video ID (from youtube.com/watch?v=THIS_PART) */
-export const woodland360FeaturedVideoId = 'kFymYp734yk';
+/** Lyn T on Woodland 360. Part 1 stays the default player. */
+export const woodland360Episodes = [
+  {
+    id: 'kFymYp734yk',
+    label: 'Part 1',
+    title: "Lyn T: Born in Liberia & Raised a Diplomat's Son, The Untold Story (Part 1)",
+  },
+  {
+    id: 'qJ9Ev0X5D2g',
+    label: 'Part 2',
+    title: 'Woodland 360 - Podcast: Lyn T (2nd Part)',
+  },
+] as const;
+
+export const woodland360FeaturedVideoId = woodland360Episodes[0].id;
 
 export const woodland360 = {
   name: 'Woodland360',
