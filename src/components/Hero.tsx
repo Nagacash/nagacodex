@@ -166,8 +166,26 @@ export default function Hero() {
           </div>
         )}
 
+        <a
+          href="https://www.naga-films.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => sound.playClick()}
+          className="relative z-30 mt-10 mb-1 w-full max-w-5xl pointer-events-auto flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between rounded-xl border border-film/50 bg-[#0F1929]/95 px-4 py-3 sm:px-5 hover:border-film transition-colors"
+        >
+          <span className="flex min-w-0 flex-1 flex-col gap-1">
+            <span className="font-mono text-[9px] tracking-[0.28em] uppercase text-film">Studio // Naga Films</span>
+            <span className="block font-display font-extrabold text-base sm:text-lg text-[#E8EDF5] tracking-tight">
+              Self-hostable AI video tools for cinema workflows.
+            </span>
+          </span>
+          <span className="shrink-0 self-start font-mono text-[10px] tracking-widest uppercase text-film lg:self-center">
+            Open the studio →
+          </span>
+        </a>
+
         {/* Operator Profile Credentials Hub */}
-        <div className="mt-12 w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 pointer-events-auto text-left relative z-30">
+        <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 pointer-events-auto text-left relative z-30">
           
           {/* Card 1: Avatar / Identity Badge */}
           <div className="lg:col-span-4 glass rounded-xl p-5 flex flex-col gap-4 relative overflow-hidden group hover:border-culture/40 transition-colors duration-300">

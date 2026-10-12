@@ -60,10 +60,13 @@ const workflowAreas: WorkflowArea[] = [
     number: '02',
     title: 'AI Cinema & Media',
     description:
-      'Text-to-video pipelines, brand films, and Sonic Micro-Ads — 5–10s musical spots with jingle, animation, and a clear CTA.',
-    tags: ['Sonic Micro-Ads', 'Sora AI', 'Kling', 'Sound design', 'FFmpeg'],
+      'Naga Films Studio: image generation, video synthesis, lip-sync, and cinema workflows you run yourself. Brand films and Sonic Micro-Ads sit beside it.',
+    tags: ['Naga Films', 'Sonic Micro-Ads', 'Lip-sync', 'Cinema workflows'],
     accentClass: 'text-film',
-    projectUrl: 'https://www.naga-ads.shop/',
+    projectLinks: [
+      { label: 'Naga Films Studio', url: 'https://www.naga-films.com/' },
+      { label: 'Sonic Micro-Ads', url: 'https://www.naga-ads.shop/' },
+    ],
   },
   {
     id: 'product',
@@ -91,6 +94,20 @@ const workflowAreas: WorkflowArea[] = [
 ];
 
 const projects: ProjectItem[] = [
+  {
+    id: 'p0films',
+    title: 'Naga Films Studio',
+    category: 'AI film',
+    tags: ['Image gen', 'Video synth', 'Cinema workflows', 'Lip-sync'],
+    thumbnail: nagaFilmsPromo.poster,
+    videoSrc: nagaFilmsPromo.h264,
+    videoFallbackSrc: nagaFilmsPromo.h264,
+    tagline: 'Self-hostable AI video tools for cinema workflows.',
+    detailLine:
+      'Image generation, video synthesis, lip-sync, and production pipelines you can run yourself. Promo walkthrough of the studio.',
+    ctaLabel: 'Watch promo',
+    externalUrl: 'https://www.naga-films.com/',
+  },
   {
     id: 'p0',
     title: 'Naga Pilot',
@@ -128,20 +145,6 @@ const projects: ProjectItem[] = [
       'Browser chess club with mood rooms, rated matchmaking, pass-and-play, and five AI opponents that explain their moves. Free to play.',
     ctaLabel: 'Watch demo',
     externalUrl: 'https://naga-iq.vercel.app/',
-  },
-  {
-    id: 'p0films',
-    title: 'Naga Films Studio',
-    category: 'AI film',
-    tags: ['Image gen', 'Video synth', 'Cinema workflows', 'Lip-sync'],
-    thumbnail: nagaFilmsPromo.poster,
-    videoSrc: nagaFilmsPromo.h264,
-    videoFallbackSrc: nagaFilmsPromo.h264,
-    tagline: 'Self-hostable AI video tools for cinema workflows.',
-    detailLine:
-      'Image generation, video synthesis, lip-sync, and production pipelines you can run yourself. Promo walkthrough of the studio.',
-    ctaLabel: 'Watch promo',
-    externalUrl: 'https://www.naga-films.com/',
   },
   {
     id: 'p0skills',

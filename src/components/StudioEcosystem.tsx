@@ -17,6 +17,15 @@ interface StudioProduct {
 
 const products: StudioProduct[] = [
   {
+    id: 'films',
+    title: 'Naga Films Studio',
+    description: 'Self-hostable AI video tools: image gen, video synthesis, cinema workflows, lip-sync.',
+    url: 'https://www.naga-films.com/',
+    accent: '#FF6B35',
+    image: nagafilmsImg,
+    imageAlt: 'Naga Films Studio production still',
+  },
+  {
     id: 'sonic-ads',
     title: 'Sonic Micro-Ads',
     description:
@@ -25,15 +34,6 @@ const products: StudioProduct[] = [
     accent: '#D4A843',
     image: nagaAdsImg,
     imageAlt: 'Sonic Micro-Ads campaign still',
-  },
-  {
-    id: 'films',
-    title: 'Naga Films Studio',
-    description: 'Self-hostable AI video tools: image gen, video synthesis, cinema workflows, lip-sync.',
-    url: 'https://www.naga-films.com/',
-    accent: '#FF6B35',
-    image: nagafilmsImg,
-    imageAlt: 'Naga Films Studio production still',
   },
   {
     id: 'apparel',

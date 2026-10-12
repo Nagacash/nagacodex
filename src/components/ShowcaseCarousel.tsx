@@ -37,6 +37,13 @@ interface ShowcaseCarouselProps {
 const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   // ── FEATURED ─────────────────────────────────────────────────────────────
   {
+    id: 'nagafilms',
+    name: 'Naga Films Studio',
+    shortDesc: 'Self-hostable AI video production suite',
+    url: 'https://www.naga-films.com/',
+    image: nagafilmsImg,
+  },
+  {
     id: 'naga-codex-skills',
     name: 'Naga Codex Skills',
     shortDesc: 'Nine-phase engineering workflow — scope → ship',
@@ -164,13 +171,6 @@ const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     shortDesc: 'Ed25519-signed MP3 publishing — private keys stay in the browser',
     url: 'https://sounddrop-nu.vercel.app/',
     image: sounddropImg,
-  },
-  {
-    id: 'nagafilms',
-    name: 'Naga Films Studio',
-    shortDesc: 'Self-hostable AI video production suite',
-    url: 'https://www.naga-films.com/',
-    image: nagafilmsImg,
   },
 ];
 
