@@ -69,10 +69,10 @@ export default function Hero() {
             className="w-9 h-9 sm:w-10 sm:h-10 object-contain shrink-0"
           />
           <div className="flex flex-col min-w-0">
-          <span className="font-display font-extrabold tracking-tight text-base sm:text-xl text-black truncate">
+          <span className="font-display font-extrabold tracking-tight text-base sm:text-xl text-[#E8EDF5] truncate">
             NAGA <span className="text-culture">CODEX</span>
           </span>
-          <span className="hidden sm:block font-mono text-[8px] text-cyber uppercase tracking-widest mt-0.5">HAMBURG // HQ</span>
+          <span className="hidden sm:block font-mono text-[8px] text-[#8B9BB4] uppercase tracking-widest mt-0.5">HAMBURG // HQ</span>
         </div>
         </div>
         
@@ -103,11 +103,11 @@ export default function Hero() {
               <span className="underline decoration-neutral-300 hover:decoration-[#D4A843] transition-ui">EXPLORE WORK</span>
             </button>
             <div className="flex items-center gap-1.5">
-              <Shield className="w-3 h-3 text-cyber animate-pulse" />
+              <Shield className="w-3 h-3 text-[#8B9BB4]" />
               <span>SEC_SYSTEM_ACTIVE</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-film" />
+              <Layers className="w-3.5 h-3.5 text-[#8B9BB4]" />
               <span>FILM_RENDER_CORE_0</span>
             </div>
           </div>
@@ -135,11 +135,11 @@ export default function Hero() {
               }}
             >
               {/* Energy shield outer ring */}
-              <div className="absolute inset-0 rounded-full border border-cyber/15 animate-ping opacity-60 pointer-events-none" />
-              <div className="absolute inset-2 rounded-full border border-film/10 animate-pulse pointer-events-none" />
+              <div className="absolute inset-0 rounded-full border border-culture/25 animate-ping opacity-60 pointer-events-none" />
+              <div className="absolute inset-2 rounded-full border border-culture/20 animate-pulse pointer-events-none" />
 
               {/* Pulsing core shadow glowing */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyber/15 via-film/10 to-culture/15 blur-xl group-hover:scale-125 transition-transform duration-500" />
+              <div className="absolute inset-0 rounded-full bg-culture/20 blur-xl group-hover:scale-125 transition-transform duration-500" />
 
               {/* Brand core */}
               <div className="relative w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_28px_rgba(212,168,67,0.35)] border border-culture/40 bg-white/90">
@@ -157,7 +157,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: [0.3, 0.8, 0.3], y: 0 }}
                   transition={{ repeat: Infinity, duration: 2.5 }}
-                  className="absolute top-26 bg-white/90 backdrop-blur-md px-2.5 py-1 border border-neutral-200 rounded-sm font-mono text-[7.5px] text-cyber tracking-widest uppercase text-center whitespace-nowrap"
+                  className="absolute top-26 bg-[#0F1929]/95 backdrop-blur-md px-2.5 py-1 border border-culture/30 rounded-sm font-mono text-[7.5px] text-culture tracking-widest uppercase text-center whitespace-nowrap"
                 >
                   ◄ DRAG_ORB_TO_REFLOW ►
                 </motion.div>
@@ -234,7 +234,7 @@ export default function Hero() {
                     sound.playClick();
                     scrollToHashOrSection('offer', OFFER_SECTION_INDEX);
                   }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-11 px-5 py-3 rounded-lg border border-white/20 font-display font-extrabold text-[11px] tracking-widest uppercase text-[#E8EDF5] hover:border-cyber/50 hover:text-white transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-11 px-5 py-3 rounded-lg border border-white/20 font-display font-extrabold text-[11px] tracking-widest uppercase text-[#E8EDF5] hover:border-culture/50 hover:text-white transition-colors"
                 >
                   See the offer ↓
                 </a>
@@ -258,7 +258,7 @@ export default function Hero() {
                 sound.playClick();
                 scrollToSection(WORK_SECTION_INDEX);
               }}
-              className="self-start font-mono text-[9px] tracking-widest uppercase text-[#8B9BB4] hover:text-cyber transition-colors min-h-11"
+              className="self-start font-mono text-[9px] tracking-widest uppercase text-[#8B9BB4] hover:text-culture transition-colors min-h-11"
             >
               View work →
             </button>
@@ -286,7 +286,7 @@ export default function Hero() {
           <span className="text-[8px] font-semibold text-neutral-700 group-hover:text-neutral-900 group-active:text-neutral-900 transition-colors tracking-[0.2em] uppercase">
             Scroll
           </span>
-          <ChevronDown className="w-5 h-5 text-cyber animate-bounce" />
+          <ChevronDown className="w-5 h-5 text-culture animate-bounce" />
         </button>
 
         <div className="hidden sm:flex flex-col items-end text-right gap-0.5">

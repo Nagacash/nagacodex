@@ -9,12 +9,13 @@ const sectionLinks = [
   ['HOME', 0],
   ['OFFER', 1],
   ['CASES', 2],
-  ['WHO', 3],
-  ['WORK', 4],
-  ['PHILOSOPHY', 5],
-  ['SHOWCASE', 6],
-  ['ECOSYSTEM', 7],
-  ['PODCAST', 8],
+  ['TRUEQUILL', 3],
+  ['WHO', 4],
+  ['WORK', 5],
+  ['PHILOSOPHY', 6],
+  ['SHOWCASE', 7],
+  ['ECOSYSTEM', 8],
+  ['PODCAST', 9],
 ] as const;
 
 export default function FixedNavbar() {
@@ -25,8 +26,8 @@ export default function FixedNavbar() {
       aria-label="Primary"
       className="fixed top-0 inset-x-0 z-fixed safe-top pointer-events-auto border-b border-white/10 bg-[#070D1A]/95 backdrop-blur-md transition-colors duration-300"
     >
-      <div className="mx-auto w-full max-w-full overflow-x-auto hide-scrollbar snap-x snap-mandatory safe-x px-3 md:px-6">
-        <div className="flex min-w-max md:min-w-0 items-center justify-center gap-0.5 sm:gap-2 md:gap-6 py-2 md:py-3 pr-4 md:pr-0">
+      <div className="mx-auto w-full overflow-x-auto hide-scrollbar safe-x">
+        <div className="flex w-max min-w-full items-center justify-center gap-0.5 px-3 py-2 md:px-4">
           {sectionLinks.map(([label, idx]) => {
             const isActive = activeIndex === idx;
             const accent = getSectionAccentColor(idx);
@@ -40,7 +41,7 @@ export default function FixedNavbar() {
                   scrollToSection(idx);
                 }}
                 aria-current={isActive ? 'true' : undefined}
-                className={`relative snap-center font-mono text-[9px] sm:text-[9px] tracking-widest uppercase transition-colors cursor-pointer px-2.5 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 ${
+                className={`relative font-mono text-[9px] tracking-[0.14em] uppercase transition-colors cursor-pointer px-2 py-2 min-h-[44px] flex items-center justify-center shrink-0 ${
                   isActive
                     ? 'font-semibold'
                     : 'text-[#8B9BB4] hover:text-[#E8EDF5]'
@@ -61,14 +62,14 @@ export default function FixedNavbar() {
           <Link
             to="/certificates"
             onClick={() => sound.playClick()}
-            className="relative snap-center font-mono text-[9px] tracking-widest uppercase transition-colors cursor-pointer px-2.5 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 text-culture hover:text-white"
+            className="relative font-mono text-[9px] tracking-[0.14em] uppercase transition-colors cursor-pointer px-2 py-2 min-h-[44px] flex items-center justify-center shrink-0 text-[#8B9BB4] hover:text-[#E8EDF5]"
           >
             CERTS
           </Link>
           <Link
             to="/skills"
             onClick={() => sound.playClick()}
-            className="relative snap-center font-mono text-[9px] tracking-widest uppercase transition-colors cursor-pointer px-2.5 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 text-cyber hover:text-white"
+            className="relative font-mono text-[9px] tracking-[0.14em] uppercase transition-colors cursor-pointer px-2 py-2 min-h-[44px] flex items-center justify-center shrink-0 text-[#8B9BB4] hover:text-[#E8EDF5]"
           >
             SKILLS
           </Link>
@@ -80,7 +81,7 @@ export default function FixedNavbar() {
               scrollToSection(CONTACT_SECTION_INDEX);
             }}
             aria-current={activeIndex === CONTACT_SECTION_INDEX ? 'true' : undefined}
-            className={`relative snap-center font-mono text-[9px] tracking-widest uppercase transition-colors cursor-pointer px-2.5 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 ${
+            className={`relative font-mono text-[9px] tracking-[0.14em] uppercase transition-colors cursor-pointer px-2 py-2 min-h-[44px] flex items-center justify-center shrink-0 ${
               activeIndex === CONTACT_SECTION_INDEX
                 ? 'font-semibold'
                 : 'text-[#8B9BB4] hover:text-[#E8EDF5]'

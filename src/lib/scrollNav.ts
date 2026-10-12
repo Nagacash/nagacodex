@@ -169,5 +169,6 @@ export function resolveKnownHash(hash: string): { id: string; index: number } | 
   const id = hash.replace(/^#/, '');
   if (id === 'offer') return { id: 'offer', index: 1 };
   if (id === 'case-studies') return { id: 'case-studies', index: 2 };
+  if (id === 'truequill') return { id: 'truequill', index: 3 };
   return null;
 }

@@ -9,6 +9,7 @@ import LegalFooter from '../components/LegalFooter';
 import Hero from '../components/Hero';
 import OfferSection from '../components/OfferSection';
 import CaseStudiesSection from '../components/CaseStudiesSection';
+import TrueQuillSection from '../components/TrueQuillSection';
 import sound from '../lib/sound';
 import { heroIntro, philosophyAmbient, whoAmbient } from '../lib/films';
 import { resolveKnownHash, scrollToHashOrSection } from '../lib/scrollNav';
@@ -127,10 +128,19 @@ export default function HomePage() {
                 </TransitionSection>
 
                 <TransitionSection
+                  id="truequill"
+                  transitionType="scale-blur"
+                  accentColor="#D4A843"
+                  index={3}
+                >
+                  <TrueQuillSection />
+                </TransitionSection>
+
+                <TransitionSection
                   id="who"
                   transitionType="horizontal-slide"
                   accentColor="#FF6B35"
-                  index={3}
+                  index={4}
                   bgVideoWebm={whoAmbient.webm}
                   bgVideoMp4={whoAmbient.h264}
                 >
@@ -139,7 +149,7 @@ export default function HomePage() {
                   </Suspense>
                 </TransitionSection>
 
-                <TransitionSection id="work" transitionType="scale-blur" accentColor="#BD00FF" index={4}>
+                <TransitionSection id="work" transitionType="scale-blur" accentColor="#BD00FF" index={5}>
                   <Suspense fallback={<SectionFallback />}>
                     <WorkGrid />
                   </Suspense>
@@ -149,7 +159,7 @@ export default function HomePage() {
                   id="philosophy"
                   transitionType="split-reveal"
                   accentColor="#D4A843"
-                  index={5}
+                  index={6}
                   bgVideoWebm={philosophyAmbient.webm}
                   bgVideoMp4={philosophyAmbient.h264}
                 >
@@ -158,25 +168,25 @@ export default function HomePage() {
                   </Suspense>
                 </TransitionSection>
 
-                <TransitionSection id="showcase" transitionType="scale-blur" accentColor="#D4A843" index={6}>
+                <TransitionSection id="showcase" transitionType="scale-blur" accentColor="#D4A843" index={7}>
                   <Suspense fallback={<SectionFallback />}>
                     <ShowcaseCarousel />
                   </Suspense>
                 </TransitionSection>
 
-                <TransitionSection id="ecosystem" transitionType="horizontal-slide" accentColor="#D4A843" index={7}>
+                <TransitionSection id="ecosystem" transitionType="horizontal-slide" accentColor="#D4A843" index={8}>
                   <Suspense fallback={<SectionFallback />}>
                     <StudioEcosystem />
                   </Suspense>
                 </TransitionSection>
 
-                <TransitionSection id="woodland360" transitionType="horizontal-slide" accentColor="#D4A843" index={8}>
+                <TransitionSection id="woodland360" transitionType="horizontal-slide" accentColor="#D4A843" index={9}>
                   <Suspense fallback={<SectionFallback />}>
                     <Woodland360Section />
                   </Suspense>
                 </TransitionSection>
 
-                <TransitionSection id="contact" transitionType="push-fade" accentColor="#3B82F6" index={9}>
+                <TransitionSection id="contact" transitionType="push-fade" accentColor="#3B82F6" index={10}>
                   <Suspense fallback={<SectionFallback />}>
                     <Contact />
                   </Suspense>

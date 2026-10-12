@@ -10,16 +10,18 @@ export const sectionTimelineLabels = {
   7: 4900,
   8: 5600,
   9: 6300,
+  10: 7000,
 } as const;
 
 /** Matches HomePage TransitionSection children count. */
-export const sectionCount = 10;
+export const sectionCount = 11;
 
 /** Static accent colors — avoids DOM reads on every sidebar render */
 export const sectionAccentColors = [
   '#00FF88', // hero
   '#00FF88', // offer
   '#BD00FF', // case studies
+  '#D4A843', // truequill
   '#FF6B35', // who
   '#BD00FF', // work
   '#D4A843', // philosophy
@@ -33,13 +35,14 @@ export const sectionNavLabels = [
   '01 // HERO',
   '02 // OFFER',
   '03 // CASES',
-  '04 // WHO',
-  '05 // WORK',
-  '06 // PHILOSOPHY',
-  '07 // SHOWCASE',
-  '08 // ECOSYSTEM',
-  '09 // PODCAST',
-  '10 // CONTACT',
+  '04 // TRUEQUILL',
+  '05 // WHO',
+  '06 // WORK',
+  '07 // PHILOSOPHY',
+  '08 // SHOWCASE',
+  '09 // ECOSYSTEM',
+  '10 // PODCAST',
+  '11 // CONTACT',
 ] as const;
 
 export function getSectionAccentColor(index: number): string {

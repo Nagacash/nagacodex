@@ -57,7 +57,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
   const numSections = sections.length;
 
   // Scroll distance mapped 1:1 to the GSAP timeline (pin starts at scroll 0)
-  const scrollDistance = 7000;
+  const scrollDistance = 7700;
   const maxWindowScroll = scrollDistance;
 
   const getIndexFromScroll = (scrollY: number) =>
@@ -254,13 +254,14 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
     gsap.set('#transition-section-0', { opacity: 1, scale: 1, y: 0, x: 0 });
     gsap.set('#transition-section-1', { y: '100vh', x: 0, opacity: 1 }); // offer
     gsap.set('#transition-section-2', { scale: 0.92, opacity: 0, y: 0, x: 0 }); // cases
-    gsap.set('#transition-section-3', { x: '100vw', scale: 1, opacity: 1, y: 0 }); // who
-    gsap.set('#transition-section-4', { scale: 0.88, opacity: 0, x: 0, y: 0 }); // work
-    gsap.set('#transition-section-5', { scale: 0.88, opacity: 0, x: 0, y: 0 }); // philosophy
-    gsap.set('#transition-section-6', { scale: 0.92, opacity: 0, y: 0, x: 0 }); // showcase
-    gsap.set('#transition-section-7', { x: '100vw', opacity: 0 }); // ecosystem
-    gsap.set('#transition-section-8', { x: '100vw', opacity: 0 }); // woodland
-    gsap.set('#transition-section-9', { scale: 0.92, opacity: 0, y: 0 }); // contact
+    gsap.set('#transition-section-3', { scale: 0.92, opacity: 0, y: 0, x: 0 }); // truequill
+    gsap.set('#transition-section-4', { x: '100vw', scale: 1, opacity: 1, y: 0 }); // who
+    gsap.set('#transition-section-5', { scale: 0.88, opacity: 0, x: 0, y: 0 }); // work
+    gsap.set('#transition-section-6', { scale: 0.88, opacity: 0, x: 0, y: 0 }); // philosophy
+    gsap.set('#transition-section-7', { scale: 0.92, opacity: 0, y: 0, x: 0 }); // showcase
+    gsap.set('#transition-section-8', { x: '100vw', opacity: 0 }); // ecosystem
+    gsap.set('#transition-section-9', { x: '100vw', opacity: 0 }); // woodland
+    gsap.set('#transition-section-10', { scale: 0.92, opacity: 0, y: 0 }); // contact
 
     // --- PHASE 1: HERO (0) -> OFFER (1) [0 -> 800] ---
     masterTimeline.to({}, { duration: 800 }, 0);
@@ -329,7 +330,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       1000
     );
 
-    // --- PHASE 3: CASES (2) -> WHO (3) [1400 -> 2100] ---
+    // --- PHASE 3: CASES (2) -> TRUEQUILL (3) [1400 -> 2100] ---
     masterTimeline.to({}, { duration: 700 }, 1400);
     masterTimeline.fromTo('#transition-section-2',
       { scale: 1, opacity: 1 },
@@ -337,14 +338,9 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       1400
     );
     masterTimeline.fromTo('#transition-section-3',
-      { x: '100vw' },
-      { x: '0vw', ease: 'power2.inOut', duration: 650 },
+      { scale: 0.92, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650, force3D: true },
       1420
-    );
-    masterTimeline.fromTo('#transition-section-3 .video-wrap',
-      { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out', duration: 500 },
-      1500
     );
     masterTimeline.fromTo('#overlay-gradient-2',
       { x: '-100vw' },
@@ -362,17 +358,22 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       1700
     );
 
-    // --- PHASE 4: WHO (3) -> WORK (4) [2100 -> 2800] ---
+    // --- PHASE 4: TRUEQUILL (3) -> WHO (4) [2100 -> 2800] ---
     masterTimeline.to({}, { duration: 700 }, 2100);
-    masterTimeline.to('#transition-section-3', {
-      x: '-100vw',
-      ease: 'power2.inOut',
-      duration: 600,
-    }, 2100);
+    masterTimeline.fromTo('#transition-section-3',
+      { scale: 1, opacity: 1 },
+      { scale: 0.88, opacity: 0, ease: 'power2.inOut', duration: 700, force3D: true },
+      2100
+    );
     masterTimeline.fromTo('#transition-section-4',
-      { scale: 0.88, opacity: 0 },
-      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 650, force3D: true },
-      2150
+      { x: '100vw' },
+      { x: '0vw', ease: 'power2.inOut', duration: 650 },
+      2120
+    );
+    masterTimeline.fromTo('#transition-section-4 .video-wrap',
+      { opacity: 0.3 },
+      { opacity: 1.0, ease: 'power1.out', duration: 500 },
+      2200
     );
     masterTimeline.fromTo('#overlay-gradient-3',
       { x: '-100vw' },
@@ -385,22 +386,17 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       2400
     );
 
-    // --- PHASE 5: WORK (4) -> PHILOSOPHY (5) [2800 -> 3500] ---
+    // --- PHASE 5: WHO (4) -> WORK (5) [2800 -> 3500] ---
     masterTimeline.to({}, { duration: 700 }, 2800);
-    masterTimeline.fromTo('#transition-section-4',
-      { scale: 1, opacity: 1 },
-      { scale: 0.88, opacity: 0, ease: 'power2.inOut', duration: 700, force3D: true },
-      2800
-    );
+    masterTimeline.to('#transition-section-4', {
+      x: '-100vw',
+      ease: 'power2.inOut',
+      duration: 600,
+    }, 2800);
     masterTimeline.fromTo('#transition-section-5',
       { scale: 0.88, opacity: 0 },
-      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 680, force3D: true },
-      2820
-    );
-    masterTimeline.fromTo('#transition-section-5 .video-wrap',
-      { opacity: 0.3 },
-      { opacity: 1.0, ease: 'power1.out', duration: 500 },
-      2900
+      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 650, force3D: true },
+      2850
     );
     masterTimeline.fromTo('#overlay-gradient-4',
       { x: '-100vw' },
@@ -413,26 +409,22 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       3100
     );
 
-    // --- PHASE 6: PHILOSOPHY (5) -> SHOWCASE (6) [3500 -> 4200] ---
+    // --- PHASE 6: WORK (5) -> PHILOSOPHY (6) [3500 -> 4200] ---
     masterTimeline.to({}, { duration: 700 }, 3500);
-    masterTimeline.to('#split-top-part', {
-      y: '-55vh',
-      opacity: 0,
-      ease: 'power2.in',
-    }, 3500);
-    masterTimeline.to('#split-bottom-part', {
-      y: '55vh',
-      opacity: 0,
-      ease: 'power2.in',
-    }, 3500);
-    masterTimeline.to('#transition-section-5 .video-wrap', {
-      opacity: 0.1,
-      ease: 'power1.out',
-    }, 3500);
+    masterTimeline.fromTo('#transition-section-5',
+      { scale: 1, opacity: 1 },
+      { scale: 0.88, opacity: 0, ease: 'power2.inOut', duration: 700, force3D: true },
+      3500
+    );
     masterTimeline.fromTo('#transition-section-6',
-      { scale: 0.92, opacity: 0 },
-      { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650 },
-      3550
+      { scale: 0.88, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.inOut', duration: 680, force3D: true },
+      3520
+    );
+    masterTimeline.fromTo('#transition-section-6 .video-wrap',
+      { opacity: 0.3 },
+      { opacity: 1.0, ease: 'power1.out', duration: 500 },
+      3600
     );
     masterTimeline.fromTo('#overlay-gradient-5',
       { x: '-100vw' },
@@ -445,25 +437,34 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       3800
     );
 
-    // --- PHASE 7: SHOWCASE (6) -> ECOSYSTEM (7) [4200 -> 4900] ---
+    // --- PHASE 7: PHILOSOPHY (6) -> SHOWCASE (7) [4200 -> 4900] ---
     masterTimeline.to({}, { duration: 700 }, 4200);
-    masterTimeline.to('#transition-section-6', {
-      scale: 0.85,
+    masterTimeline.to('#split-top-part', {
+      y: '-55vh',
       opacity: 0,
-      y: -50,
-      ease: 'power2.inOut',
+      ease: 'power2.in',
+    }, 4200);
+    masterTimeline.to('#split-bottom-part', {
+      y: '55vh',
+      opacity: 0,
+      ease: 'power2.in',
+    }, 4200);
+    masterTimeline.to('#transition-section-6 .video-wrap', {
+      opacity: 0.1,
+      ease: 'power1.out',
     }, 4200);
     masterTimeline.fromTo('#transition-section-7',
-      { x: '100vw', opacity: 0 },
-      { x: '0vw', opacity: 1.0, ease: 'power2.inOut', duration: 650 },
+      { scale: 0.92, opacity: 0 },
+      { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650 },
       4250
     );
 
-    // --- PHASE 8: ECOSYSTEM (7) -> WOODLAND (8) [4900 -> 5600] ---
+    // --- PHASE 8: SHOWCASE (7) -> ECOSYSTEM (8) [4900 -> 5600] ---
     masterTimeline.to({}, { duration: 700 }, 4900);
     masterTimeline.to('#transition-section-7', {
-      x: '-100vw',
+      scale: 0.85,
       opacity: 0,
+      y: -50,
       ease: 'power2.inOut',
     }, 4900);
     masterTimeline.fromTo('#transition-section-8',
@@ -472,7 +473,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       4950
     );
 
-    // --- PHASE 9: WOODLAND (8) -> CONTACT (9) [5600 -> 6300] ---
+    // --- PHASE 9: ECOSYSTEM (8) -> WOODLAND (9) [5600 -> 6300] ---
     masterTimeline.to({}, { duration: 700 }, 5600);
     masterTimeline.to('#transition-section-8', {
       x: '-100vw',
@@ -480,9 +481,22 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
       ease: 'power2.inOut',
     }, 5600);
     masterTimeline.fromTo('#transition-section-9',
+      { x: '100vw', opacity: 0 },
+      { x: '0vw', opacity: 1.0, ease: 'power2.inOut', duration: 650 },
+      5650
+    );
+
+    // --- PHASE 10: WOODLAND (9) -> CONTACT (10) [6300 -> 7000] ---
+    masterTimeline.to({}, { duration: 700 }, 6300);
+    masterTimeline.to('#transition-section-9', {
+      x: '-100vw',
+      opacity: 0,
+      ease: 'power2.inOut',
+    }, 6300);
+    masterTimeline.fromTo('#transition-section-10',
       { scale: 0.92, opacity: 0 },
       { scale: 1.0, opacity: 1.0, ease: 'power2.out', duration: 650 },
-      5650
+      6350
     );
 
     ScrollTrigger.refresh();
@@ -593,7 +607,7 @@ export default function ScrollTransitionManager({ children }: ScrollTransitionMa
           {/* Render individual TransitionSections */}
           {sections.map((child, idx) => {
             // Philosophy uses split-reveal shell (index 5 after offer + case studies)
-            if (idx === 5 && !prefersReducedMotion) {
+            if (idx === 6 && !prefersReducedMotion) {
               return (
                 <div key={`split-shell-${idx}`} className="absolute inset-0 w-full h-full z-[13]">
                   

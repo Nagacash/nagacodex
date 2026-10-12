@@ -28,8 +28,8 @@ export const OFFER_SECTION_INDEX = 1;
 /** Section index of case studies. */
 export const CASE_STUDIES_SECTION_INDEX = 2;
 
-/** Contact section index after adding offer + case studies. */
-export const CONTACT_SECTION_INDEX = 9;
+/** Contact section index after TrueQuill insert (hero…contact = 11 sections). */
+export const CONTACT_SECTION_INDEX = 10;
 
-/** Work grid section index (was 2, now 4). */
-export const WORK_SECTION_INDEX = 4;
+/** Work grid section index (shifted after TrueQuill at index 3). */
+export const WORK_SECTION_INDEX = 5;

@@ -1,0 +1,13 @@
+import p0 from './truequillLogoParts/part0';
+import p1 from './truequillLogoParts/part1';
+import p2 from './truequillLogoParts/part2';
+import p3 from './truequillLogoParts/part3';
+import p4 from './truequillLogoParts/part4';
+import p5 from './truequillLogoParts/part5';
+import p6 from './truequillLogoParts/part6';
+import p7 from './truequillLogoParts/part7';
+import p8 from './truequillLogoParts/part8';
+import p9 from './truequillLogoParts/part9';
+import p10 from './truequillLogoParts/part10';
+const truequillLogo = ('data:image/png;base64,' + p0 + p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9 + p10) as const;
+export default truequillLogo;
