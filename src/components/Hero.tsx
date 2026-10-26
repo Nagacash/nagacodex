@@ -115,6 +115,25 @@ export default function Hero() {
         </div>
       </div>
 
+      <a
+        href="https://punani.agency"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => sound.playClick()}
+        className="relative z-30 mt-3 w-full max-w-5xl mx-auto shrink-0 pointer-events-auto flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-culture/70 bg-[#0F1929]/95 px-4 py-3 sm:px-5 shadow-[0_0_36px_-10px_rgba(212,168,67,0.9)] hover:border-culture transition-colors"
+      >
+        <span className="flex min-w-0 flex-1 flex-col gap-1">
+          <span className="font-mono text-[9px] tracking-[0.28em] uppercase text-culture">Product // Punani AI</span>
+          <span className="block font-display font-extrabold text-base sm:text-lg text-[#E8EDF5] tracking-tight">
+            Cursor-level coding agent for the CLI and the browser. Free. $0 lock-in.
+          </span>
+          <span className="font-mono text-[10px] text-[#C5CEDC]">npm i -g punani-powerd</span>
+        </span>
+        <span className="shrink-0 self-start font-mono text-[10px] tracking-widest uppercase text-culture sm:self-center">
+          Open Punani →
+        </span>
+      </a>
+
       {/* 3. Central Core: Draggable Orb & Profile Hub */}
       <div className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center w-full max-w-5xl mx-auto overflow-y-auto overflow-x-hidden overscroll-contain py-4 sm:py-6">
 
@@ -181,25 +200,6 @@ export default function Hero() {
           </span>
           <span className="shrink-0 self-start font-mono text-[10px] tracking-widest uppercase text-film lg:self-center">
             Open the studio →
-          </span>
-        </a>
-
-        <a
-          href="https://punani.agency"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => sound.playClick()}
-          className="relative z-30 mb-2 w-full max-w-5xl pointer-events-auto flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between rounded-xl border border-culture/60 bg-[#0F1929]/95 px-4 py-3 sm:px-5 shadow-[0_0_32px_-12px_rgba(212,168,67,0.85)] hover:border-culture transition-colors"
-        >
-          <span className="flex min-w-0 flex-1 flex-col gap-1">
-            <span className="font-mono text-[9px] tracking-[0.28em] uppercase text-culture">Product // Punani AI</span>
-            <span className="block font-display font-extrabold text-base sm:text-lg text-[#E8EDF5] tracking-tight">
-              Cursor-level coding agent for the CLI and the browser. Free. $0 lock-in.
-            </span>
-            <span className="font-mono text-[10px] text-[#C5CEDC]">npm i -g punani-powerd</span>
-          </span>
-          <span className="shrink-0 self-start font-mono text-[10px] tracking-widest uppercase text-culture lg:self-center">
-            Open Punani →
           </span>
         </a>
 
