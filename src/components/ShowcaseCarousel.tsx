@@ -20,6 +20,7 @@ import factorySkillImg from '../assets/images/showcase/nagacodex-factory.svg';
 import nagaItCreatorImg from '../assets/images/showcase/naga-it-creator.svg';
 import nagaCodexSkillsImg from '../assets/images/showcase/naga-codex-skills.jpg';
 import openSeoLiteImg from '../assets/images/showcase/openseo-lite.jpg';
+import punaniImg from '../assets/images/showcase/punani.png';
 
 interface ShowcaseProject {
   id: string;
@@ -36,6 +37,13 @@ interface ShowcaseCarouselProps {
 
 const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   // ── FEATURED ─────────────────────────────────────────────────────────────
+  {
+    id: 'punani-ai',
+    name: 'Punani AI',
+    shortDesc: 'Free coding agent for the CLI and the browser — $0 lock-in',
+    url: 'https://punani.agency',
+    image: punaniImg,
+  },
   {
     id: 'nagafilms',
     name: 'Naga Films Studio',
@@ -285,7 +293,7 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
               <img
                 src={currentShot}
                 alt={currentProj.name}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${currentProj.id === 'punani-ai' ? 'object-contain bg-[#070605] p-10' : 'object-cover'}`}
                 onLoad={() => {
                   setPreviewLoaded(true);
                   setShowLoadingUi(false);
@@ -360,7 +368,11 @@ export default function ShowcaseCarousel({ isActive = false }: ShowcaseCarouselP
               className="flex items-center justify-between p-4 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition-colors cursor-pointer group"
             >
               <span className="font-display font-semibold text-sm tracking-tight">
-                {currentProj.internal ? 'Open skills page' : 'Visit project'}
+                {currentProj.id === 'punani-ai'
+                  ? 'Open Punani'
+                  : currentProj.internal
+                    ? 'Open skills page'
+                    : 'Visit project'}
               </span>
               <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
